@@ -91,7 +91,7 @@ When is it generated: Audio is converted to text from audio
         "error": {
             "type": "string"
         },
-        "timeTaken": {
+        "timeElapsed": {
             "type": "number"
         },
         "spellCheckTimeTaken": {
@@ -116,7 +116,7 @@ When is it generated: Audio is converted to text from audio
         "text",
         "spellCorrectedText",
         "error",
-        "timeTaken",
+        "timeElapsed",
         "spellCheckTimeTaken",
         "phoneNumber",
         "createdAt"
@@ -168,7 +168,7 @@ When is it generated: AudioId is mapped to QueryId
         "error": {
             "type": "string"
         },
-        "timeTaken": {
+        "timeElapsed": {
             "type": "number"
         },
         "spellCheckTimeTaken": {
@@ -197,7 +197,7 @@ When is it generated: AudioId is mapped to QueryId
         "text",
         "spellCorrectedText",
         "error",
-        "timeTaken",
+        "timeElapsed",
         "spellCheckTimeTaken",
         "phoneNumber",
         "createdAt",
@@ -294,7 +294,7 @@ When is it generated: Fetching user history at inbound
         "text": {
             "type": "string"
         },
-        "timeTaken": {
+        "timeElapsed": {
             "type": "number"
         },
         "phoneNumber": {
@@ -315,7 +315,7 @@ When is it generated: Fetching user history at inbound
         "conversationId",
         "messageId",
         "text",
-        "timeTaken",
+        "timeElapsed",
         "queryId",
         "userHistory"
     ],
@@ -352,7 +352,7 @@ When is it generated: Fetching user info - transformer
         "text": {
             "type": "string"
         },
-        "timeTaken": {
+        "timeElapsed": {
             "type": "number"
         },
         "queryId": {
@@ -373,7 +373,7 @@ When is it generated: Fetching user info - transformer
         "conversationId",
         "messageId",
         "text",
-        "timeTaken",
+        "timeElapsed",
         "queryId",
         "block",
         "district"
@@ -411,7 +411,7 @@ When is it generated: translate - transformer
         "text": {
             "type": "string"
         },
-        "timeTaken": {
+        "timeElapsed": {
             "type": "number"
         },
         "phoneNumber": {
@@ -432,7 +432,7 @@ When is it generated: translate - transformer
         "conversationId",
         "messageId",
         "text",
-        "timeTaken",
+        "timeElapsed",
         "queryId",
         "textInEnglish"
     ],
@@ -469,7 +469,7 @@ When is it generated: nuralCoref - transformer
         "text": {
             "type": "string"
         },
-        "timeTaken": {
+        "timeElapsed": {
             "type": "number"
         },
         "phoneNumber": {
@@ -493,7 +493,7 @@ When is it generated: nuralCoref - transformer
         "conversationId",
         "messageId",
         "text",
-        "timeTaken",
+        "timeElapsed",
         "queryId",
         "textInEnglish",
         "coreferencedText"
@@ -531,7 +531,7 @@ When is it generated: classifier - transformer
         "text": {
             "type": "string"
         },
-        "timeTaken": {
+        "timeElapsed": {
             "type": "number"
         },
         "phoneNumber": {
@@ -555,7 +555,7 @@ When is it generated: classifier - transformer
         "conversationId",
         "messageId",
         "text",
-        "timeTaken",
+        "timeElapsed",
         "queryId",
         "textInEnglish",
         "queryClass"
@@ -593,7 +593,7 @@ When is it generated: retieveDocs - transformer
         "text": {
             "type": "string"
         },
-        "timeTaken": {
+        "timeElapsed": {
             "type": "number"
         },
         "phoneNumber": {
@@ -617,7 +617,7 @@ When is it generated: retieveDocs - transformer
         "conversationId",
         "messageId",
         "text",
-        "timeTaken",
+        "timeElapsed",
         "queryId",
         "textInEnglish",
         "similarChunks"
@@ -655,7 +655,7 @@ When is it generated: ner - transformer
         "text": {
             "type": "string"
         },
-        "timeTaken": {
+        "timeElapsed": {
             "type": "number"
         },
         "phoneNumber": {
@@ -679,7 +679,7 @@ When is it generated: ner - transformer
         "conversationId",
         "messageId",
         "text",
-        "timeTaken",
+        "timeElapsed",
         "queryId",
         "textInEnglish",
         "NER"
@@ -717,7 +717,7 @@ When is it generated: llm - transformer
         "text": {
             "type": "string"
         },
-        "timeTaken": {
+        "timeElapsed": {
             "type": "number"
         },
         "phoneNumber": {
@@ -744,7 +744,7 @@ When is it generated: llm - transformer
         "conversationId",
         "messageId",
         "text",
-        "timeTaken",
+        "timeElapsed",
         "queryId",
         "textInEnglish",
         "responseInEnglish"
@@ -782,7 +782,7 @@ When is it generated: translate - transformer
         "text": {
             "type": "string"
         },
-        "timeTaken": {
+        "timeElapsed": {
             "type": "number"
         },
         "phoneNumber": {
@@ -809,7 +809,7 @@ When is it generated: translate - transformer
         "conversationId",
         "messageId",
         "text",
-        "timeTaken",
+        "timeElapsed",
         "queryId",
         "textInEnglish",
         "responseInEnglish",
@@ -856,7 +856,7 @@ When is it generated: textToSpeech - transformer
         "text": {
             "type": "string"
         },
-        "timeTaken": {
+        "timeElapsed": {
             "type": "number"
         },
         "phoneNumber": {
@@ -885,7 +885,7 @@ When is it generated: textToSpeech - transformer
         "audiourl",
         "audioId",
         "text",
-        "timeTaken",
+        "timeElapsed",
         "queryId",
         "textInEnglish",
         "responseInEnglish",
@@ -924,7 +924,7 @@ When is it generated: When user plays audio at app
         "text": {
             "type": "string"
         },
-        "timeTaken": {
+        "timeElapsed": {
             "type": "number"
         },
         "phoneNumber": {
@@ -945,7 +945,7 @@ When is it generated: When user plays audio at app
         "conversationId",
         "messageId",
         "text",
-        "timeTaken",
+        "timeElapsed",
         "queryId"
     ],
     "description": "When user plays audio at app"
@@ -981,7 +981,7 @@ When is it generated: When user gets the response at app
         "text": {
             "type": "string"
         },
-        "timeTaken": {
+        "timeElapsed": {
             "type": "number"
         },
         "phoneNumber": {
@@ -1005,7 +1005,7 @@ When is it generated: When user gets the response at app
         "conversationId",
         "messageId",
         "text",
-        "timeTaken",
+        "timeElapsed",
         "queryId",
         "responseInEnglish",
         "response"
@@ -1047,7 +1047,7 @@ When is it generated: A message was sent to user
         "mediaIds": {
             "type": "array"
         },
-        "timeTaken": {
+        "timeElapsed": {
             "type": "number"
         },
         "createdAt": {
@@ -1064,7 +1064,7 @@ When is it generated: A message was sent to user
         "orgId",
         "conversationId",
         "messageId",
-        "timeTaken",
+        "timeElapsed",
         "createdAt",
         "deviceId"
     ],
@@ -1305,6 +1305,9 @@ When is it generated: A user sent a feedback on a message
             "format": "iso-date-time"
         },
         "deviceId": {
+            "type": "string"
+        },
+        "feedback": {
             "type": "string"
         },
         "reaction": {

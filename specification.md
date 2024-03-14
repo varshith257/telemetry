@@ -24,7 +24,4 @@ Specification for v1 is defined as such.
 }
 ```
 
-## Event Data
-
-### BFF
-<!-- TO BE AUTO GENERATED -->
+Generated [`eventData`](./event-schema-docs.md) events schema.

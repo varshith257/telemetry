@@ -29,7 +29,13 @@ const ajvTypeObjectMapping = {
 }
 
 const ajvClickhouseTypeMapping = {
-
+    number: 'UInt32',
+    string: 'String',
+    url: 'String',
+    uuid: 'UUID',
+    date: 'DateTime',
+    json: 'String',
+    array: 'String'
 }
 
 const schemaDraft = "http://json-schema.org/draft-07/schema#";
@@ -86,8 +92,8 @@ fs.createReadStream('events.csv')
     })
   })
   .on('end', () => {
-    generateDocs(schemaList)
-    // console.log(header, header.length)
+    generateDocs(schemaList);
+    generateMigrationSql(header, '1');
   });
 
 function h1(text) {
@@ -111,7 +117,6 @@ function codeChunk(text, type) {
 }
 
 function convertToIndentedJson(jsonObject) {
-    // Use JSON.stringify with a space parameter to convert JSON object to indented JSON text
     const indentedJsonText = JSON.stringify(jsonObject, null, 4);
     return indentedJsonText;
 }
@@ -137,6 +142,31 @@ function generateDocs(schemaList) {
             docs = docs + codeChunk(schema.eventSchema, 'json')
         }
     }
-    console.log(docs);
     fs.writeFileSync('event-schema-docs.md', docs);
+}
+
+function generateMigrationSql(headers, version) {
+    let sql = '';
+    sql = sql + `CREATE TABLE IF NOT EXISTS events_v${version}\n`;
+    sql = sql + `(\n`
+    sql = sql + `\tgenerator String,\n`
+    sql = sql + `\ttimestamp DateTime,\n`
+    sql = sql + `\tname String,\n`
+    sql = sql + `\tactorId String,\n`
+    sql = sql + `\tactorType String,\n`
+    sql = sql + `\tenv String,\n`
+    sql = sql + `\teventId String,\n`
+    sql = sql + `\tevent String,\n`
+    sql = sql + `\tsubEvent String,\n`
+    sql = sql + `\ttimeTaken UInt32`    
+    for (let i = 6; i < headers.length; i++) {
+        sql = sql + `,\n`
+        const field = headers[i].split(' | ')[0].trim();
+        const type = headers[i].split(' | ')[1].trim();
+        sql = sql + `\t${field} ${ajvClickhouseTypeMapping[type]}`
+    }
+    sql = sql + `\n)\n`
+    sql = sql + `ENGINE = MergeTree\n`
+    sql = sql + `ORDER BY timestamp;\n`
+    fs.writeFileSync('clickhouse.migration.sql', sql);
 }
