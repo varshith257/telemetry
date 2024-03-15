@@ -1,4 +1,5 @@
-import { IsDateString, IsJSON, IsNumber, IsString } from "class-validator";
+import { Type } from "class-transformer";
+import { IsArray, IsDateString, IsEmail, IsJSON, IsNumber, IsObject, IsOptional, IsString, ValidateNested } from "class-validator";
 
 export class MetricsV1Dto {
   @IsString()
@@ -16,12 +17,19 @@ export class MetricsV1Dto {
   @IsString()
   actorType: string;
 
-  sid: string;
+  @IsOptional()
+  @IsString()
+  sessionId: string;
   
-  did: string;
-
+  @IsOptional()
+  @IsString()
+  deviceId: string;
+  
   @IsString()
   env: string;
+
+  @IsString()
+  eventId: string;
 
   @IsString()
   event: string;
@@ -32,6 +40,37 @@ export class MetricsV1Dto {
   @IsNumber()
   timeTaken: number;
 
-  @IsJSON()
+  @IsOptional()
+  @IsString()
+  os: string;
+
+  @IsOptional()
+  @IsString()
+  browser: string;
+
+  @IsOptional()
+  @IsString()
+  browserVersion: string;
+
+  @IsOptional()
+  @IsString()
+  deviceType: string;
+
+  @IsOptional()
+  @IsString()
+  platform: string;
+
+  @IsOptional()
+  @IsString()
+  ip: string;
+
+  @IsObject()
   eventData: any; 
+}
+
+export class MetricsV1ListDto {
+  @IsArray()
+  @ValidateNested({ each: true })
+  @Type(() => MetricsV1Dto)
+  metrics: MetricsV1Dto[];
 }

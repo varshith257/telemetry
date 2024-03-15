@@ -16,8 +16,10 @@ async function bootstrap() {
   );
   // bind pipes and interceptors
   await app.register(multipart);
-  app.useGlobalInterceptors(new ResponseFormatInterceptor()); // response-formatting out of the box
-  app.useGlobalPipes(new ValidationPipe());
+  // app.useGlobalInterceptors(new ResponseFormatInterceptor()); // response-formatting out of the box
+  new ValidationPipe({
+    transform: true,
+  }),
 
   // start the server
   await app.listen(3000);

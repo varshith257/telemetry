@@ -3,10 +3,9 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { PrismaService } from './prisma/prisma.service';
 import { MetricsModule } from './metrics/metrics.module';
-import { ClickhouseModule } from './clickhouse/clickhouse.module';
 
 @Module({
-  imports: [MetricsModule, ClickhouseModule],
+  imports: [MetricsModule],
   controllers: [AppController],
   providers: [AppService, PrismaService],
 })

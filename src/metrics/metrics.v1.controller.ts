@@ -1,6 +1,6 @@
-import { Body, Controller, Post } from "@nestjs/common";
+import { Body, Controller, ParseArrayPipe, Post } from "@nestjs/common";
 import { MetricsService } from "./metrics.service";
-import { MetricsV1Dto } from "./dto/metrics.v1.dto";
+import { MetricsV1ListDto, MetricsV1Dto } from "./dto/metrics.v1.dto";
 
 @Controller('/metrics/v1')
 export class MetricsV1Controller {
@@ -8,8 +8,9 @@ export class MetricsV1Controller {
 
   @Post('save')
   async saveMetrics(
-    @Body() metrics: MetricsV1Dto
+    @Body(new ParseArrayPipe({ items: MetricsV1Dto })) 
+    metricList: MetricsV1Dto[]
   ) {
-    return await this.metricsService.saveMetrics(metrics);
+    return await this.metricsService.saveMetrics(metricList);
   }
 }

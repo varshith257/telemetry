@@ -158,7 +158,13 @@ function generateMigrationSql(headers, version) {
     sql = sql + `\teventId String,\n`
     sql = sql + `\tevent String,\n`
     sql = sql + `\tsubEvent String,\n`
-    sql = sql + `\ttimeTaken UInt32`    
+    sql = sql + `\ttimeTaken UInt32,\n`
+    sql = sql + `\tos String,\n`
+    sql = sql + `\tbrowser String,\n`
+    sql = sql + `\tbrowserVersion String,\n`
+    sql = sql + `\tdeviceType String,\n`
+    sql = sql + `\tplatform String,\n`
+    sql = sql + `\tip String`
     for (let i = 6; i < headers.length; i++) {
         sql = sql + `,\n`
         const field = headers[i].split(' | ')[0].trim();
