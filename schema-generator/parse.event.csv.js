@@ -13,6 +13,7 @@ const schemaDraft = "http://json-schema.org/draft-07/schema#";
 let header = null;
 const schemaList = [];
 let lastEventName = '';
+const HEADER_START_INDEX = 8;
 
 fs.createReadStream('events.csv')
   .pipe(csv())
@@ -36,7 +37,7 @@ fs.createReadStream('events.csv')
     };
 
     const keys = Object.keys(row)
-    for (let i = 7; i < keys.length; i++) {
+    for (let i = HEADER_START_INDEX; i < keys.length; i++) {
         if (row[keys[i]] === '') continue;
         let key = keys[i].split(' | ')[0];
         let dataType = keys[i].split(' | ')[1];
@@ -135,7 +136,7 @@ function generateMigrationSql(headers, version) {
     sql = sql + `\tdeviceType Nullable(String),\n`
     sql = sql + `\tplatform Nullable(String),\n`
     sql = sql + `\tip String`
-    for (let i = 7; i < headers.length; i++) {
+    for (let i = HEADER_START_INDEX; i < headers.length; i++) {
         sql = sql + `,\n`
         const field = headers[i].split(' | ')[0].trim();
         const type = headers[i].split(' | ')[1].trim();
