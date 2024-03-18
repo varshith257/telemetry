@@ -1,0 +1,1652 @@
+[
+    {
+        "eventProperties": {
+            "eventId": "E001",
+            "eventName": "speechToText",
+            "subEventName": "receivedAudio"
+        },
+        "eventSchema": {
+            "$schema": "http://json-schema.org/draft-07/schema#",
+            "type": "object",
+            "properties": {
+                "botId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "userId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "orgId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "conversationId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "messageId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "audiourl": {
+                    "type": "string",
+                    "format": "url"
+                },
+                "audioId": {
+                    "type": "string",
+                    "format": "uuid"
+                }
+            },
+            "required": [
+                "botId",
+                "userId",
+                "orgId",
+                "audiourl"
+            ],
+            "description": "BFF received audio from a bot"
+        }
+    },
+    {
+        "eventProperties": {
+            "eventId": "E002",
+            "eventName": "speechToText",
+            "subEventName": "speechToTextResponse"
+        },
+        "eventSchema": {
+            "$schema": "http://json-schema.org/draft-07/schema#",
+            "type": "object",
+            "properties": {
+                "botId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "userId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "orgId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "conversationId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "messageId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "audiourl": {
+                    "type": "string",
+                    "format": "url"
+                },
+                "audioId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "text": {
+                    "type": "string"
+                },
+                "spellCorrectedText": {
+                    "type": "string"
+                },
+                "error": {
+                    "type": "string"
+                },
+                "timeTaken": {
+                    "type": "number"
+                },
+                "spellCheckTimeTaken": {
+                    "type": "number"
+                },
+                "phoneNumber": {
+                    "type": "string"
+                },
+                "createdAt": {
+                    "type": "string",
+                    "format": "date-time"
+                }
+            },
+            "required": [
+                "botId",
+                "userId",
+                "orgId",
+                "conversationId",
+                "messageId",
+                "audiourl",
+                "text",
+                "spellCorrectedText",
+                "error",
+                "timeTaken",
+                "spellCheckTimeTaken",
+                "phoneNumber",
+                "createdAt"
+            ],
+            "description": "Audio is converted to text from audio"
+        }
+    },
+    {
+        "eventProperties": {
+            "eventId": "E003",
+            "eventName": "speechToText",
+            "subEventName": "mapQueryIdToAudio"
+        },
+        "eventSchema": {
+            "$schema": "http://json-schema.org/draft-07/schema#",
+            "type": "object",
+            "properties": {
+                "botId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "userId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "orgId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "conversationId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "messageId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "audiourl": {
+                    "type": "string",
+                    "format": "url"
+                },
+                "audioId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "text": {
+                    "type": "string"
+                },
+                "spellCorrectedText": {
+                    "type": "string"
+                },
+                "error": {
+                    "type": "string"
+                },
+                "timeTaken": {
+                    "type": "number"
+                },
+                "spellCheckTimeTaken": {
+                    "type": "number"
+                },
+                "phoneNumber": {
+                    "type": "string"
+                },
+                "createdAt": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "queryId": {
+                    "type": "string",
+                    "format": "uuid"
+                }
+            },
+            "required": [
+                "botId",
+                "userId",
+                "orgId",
+                "conversationId",
+                "messageId",
+                "audiourl",
+                "text",
+                "spellCorrectedText",
+                "error",
+                "timeTaken",
+                "spellCheckTimeTaken",
+                "phoneNumber",
+                "createdAt",
+                "queryId"
+            ],
+            "description": "AudioId is mapped to QueryId"
+        }
+    },
+    {
+        "eventProperties": {
+            "eventId": "E004",
+            "eventName": "userQuery",
+            "subEventName": "incomingMessage"
+        },
+        "eventSchema": {
+            "$schema": "http://json-schema.org/draft-07/schema#",
+            "type": "object",
+            "properties": {
+                "botId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "userId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "orgId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "conversationId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "messageId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "text": {
+                    "type": "string"
+                },
+                "mediaIds": {
+                    "type": "array"
+                },
+                "phoneNumber": {
+                    "type": "string"
+                },
+                "createdAt": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "did": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "botId",
+                "userId",
+                "orgId",
+                "conversationId",
+                "messageId",
+                "text",
+                "createdAt",
+                "did"
+            ],
+            "description": "User sent a message to a bot"
+        }
+    },
+    {
+        "eventProperties": {
+            "eventId": "E005",
+            "eventName": "userQuery",
+            "subEventName": "userHistory"
+        },
+        "eventSchema": {
+            "$schema": "http://json-schema.org/draft-07/schema#",
+            "type": "object",
+            "properties": {
+                "botId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "userId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "orgId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "conversationId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "messageId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "text": {
+                    "type": "string"
+                },
+                "timeTaken": {
+                    "type": "number"
+                },
+                "phoneNumber": {
+                    "type": "string"
+                },
+                "queryId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "textInEnglish": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "botId",
+                "userId",
+                "orgId",
+                "conversationId",
+                "messageId",
+                "text",
+                "timeTaken",
+                "queryId",
+                "textInEnglish"
+            ],
+            "description": "Fetching user history at inbound"
+        }
+    },
+    {
+        "eventProperties": {
+            "eventId": "E006",
+            "eventName": "userQuery",
+            "subEventName": "userInfo"
+        },
+        "eventSchema": {
+            "$schema": "http://json-schema.org/draft-07/schema#",
+            "type": "object",
+            "properties": {
+                "botId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "userId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "orgId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "conversationId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "messageId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "text": {
+                    "type": "string"
+                },
+                "timeTaken": {
+                    "type": "number"
+                },
+                "queryId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "block": {
+                    "type": "string"
+                },
+                "district": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "botId",
+                "userId",
+                "orgId",
+                "conversationId",
+                "messageId",
+                "text",
+                "timeTaken",
+                "queryId",
+                "block",
+                "district"
+            ],
+            "description": "Fetching user info - transformer"
+        }
+    },
+    {
+        "eventProperties": {
+            "eventId": "E007",
+            "eventName": "userQuery",
+            "subEventName": "translateInput"
+        },
+        "eventSchema": {
+            "$schema": "http://json-schema.org/draft-07/schema#",
+            "type": "object",
+            "properties": {
+                "botId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "userId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "orgId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "conversationId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "messageId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "text": {
+                    "type": "string"
+                },
+                "phoneNumber": {
+                    "type": "string"
+                },
+                "queryId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "userManagementUrl": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "botId",
+                "userId",
+                "orgId",
+                "conversationId",
+                "messageId",
+                "text",
+                "queryId",
+                "userManagementUrl"
+            ],
+            "description": "translate - transformer"
+        }
+    },
+    {
+        "eventProperties": {
+            "eventId": "E008",
+            "eventName": "userQuery",
+            "subEventName": "nuralCoreference"
+        },
+        "eventSchema": {
+            "$schema": "http://json-schema.org/draft-07/schema#",
+            "type": "object",
+            "properties": {
+                "botId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "userId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "orgId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "conversationId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "messageId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "text": {
+                    "type": "string"
+                },
+                "timeTaken": {
+                    "type": "number"
+                },
+                "phoneNumber": {
+                    "type": "string"
+                },
+                "queryId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "coreferencedText": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "botId",
+                "userId",
+                "orgId",
+                "conversationId",
+                "messageId",
+                "text",
+                "timeTaken",
+                "queryId",
+                "coreferencedText"
+            ],
+            "description": "nuralCoref - transformer"
+        }
+    },
+    {
+        "eventProperties": {
+            "eventId": "E009",
+            "eventName": "userQuery",
+            "subEventName": "classifyQuestion"
+        },
+        "eventSchema": {
+            "$schema": "http://json-schema.org/draft-07/schema#",
+            "type": "object",
+            "properties": {
+                "botId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "userId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "orgId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "conversationId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "messageId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "text": {
+                    "type": "string"
+                },
+                "timeTaken": {
+                    "type": "number"
+                },
+                "phoneNumber": {
+                    "type": "string"
+                },
+                "queryId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "queryClass": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "botId",
+                "userId",
+                "orgId",
+                "conversationId",
+                "messageId",
+                "text",
+                "timeTaken",
+                "queryId",
+                "queryClass"
+            ],
+            "description": "classifier - transformer"
+        }
+    },
+    {
+        "eventProperties": {
+            "eventId": "E010",
+            "eventName": "userQuery",
+            "subEventName": "retreiveSimilarChunks"
+        },
+        "eventSchema": {
+            "$schema": "http://json-schema.org/draft-07/schema#",
+            "type": "object",
+            "properties": {
+                "botId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "userId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "orgId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "conversationId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "messageId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "text": {
+                    "type": "string"
+                },
+                "timeTaken": {
+                    "type": "number"
+                },
+                "phoneNumber": {
+                    "type": "string"
+                },
+                "queryId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "similarChunks": {
+                    "type": "object"
+                }
+            },
+            "required": [
+                "botId",
+                "userId",
+                "orgId",
+                "conversationId",
+                "messageId",
+                "text",
+                "timeTaken",
+                "queryId",
+                "similarChunks"
+            ],
+            "description": "retieveDocs - transformer"
+        }
+    },
+    {
+        "eventProperties": {
+            "eventId": "E011",
+            "eventName": "userQuery",
+            "subEventName": "NER"
+        },
+        "eventSchema": {
+            "$schema": "http://json-schema.org/draft-07/schema#",
+            "type": "object",
+            "properties": {
+                "botId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "userId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "orgId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "conversationId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "messageId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "text": {
+                    "type": "string"
+                },
+                "timeTaken": {
+                    "type": "number"
+                },
+                "phoneNumber": {
+                    "type": "string"
+                },
+                "queryId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "NER": {
+                    "type": "object"
+                }
+            },
+            "required": [
+                "botId",
+                "userId",
+                "orgId",
+                "conversationId",
+                "messageId",
+                "text",
+                "timeTaken",
+                "queryId",
+                "NER"
+            ],
+            "description": "ner - transformer"
+        }
+    },
+    {
+        "eventProperties": {
+            "eventId": "E012",
+            "eventName": "userQuery",
+            "subEventName": "llmResponse"
+        },
+        "eventSchema": {
+            "$schema": "http://json-schema.org/draft-07/schema#",
+            "type": "object",
+            "properties": {
+                "botId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "userId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "orgId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "conversationId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "messageId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "text": {
+                    "type": "string"
+                },
+                "timeTaken": {
+                    "type": "number"
+                },
+                "phoneNumber": {
+                    "type": "string"
+                },
+                "queryId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "responseInEnglish": {
+                    "type": "string"
+                },
+                "response": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "botId",
+                "userId",
+                "orgId",
+                "conversationId",
+                "messageId",
+                "text",
+                "timeTaken",
+                "queryId",
+                "responseInEnglish"
+            ],
+            "description": "llm - transformer"
+        }
+    },
+    {
+        "eventProperties": {
+            "eventId": "E013",
+            "eventName": "userQuery",
+            "subEventName": "translateOutput"
+        },
+        "eventSchema": {
+            "$schema": "http://json-schema.org/draft-07/schema#",
+            "type": "object",
+            "properties": {
+                "botId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "userId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "orgId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "conversationId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "messageId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "text": {
+                    "type": "string"
+                },
+                "timeTaken": {
+                    "type": "number"
+                },
+                "phoneNumber": {
+                    "type": "string"
+                },
+                "queryId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "responseInEnglish": {
+                    "type": "string"
+                },
+                "response": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "botId",
+                "userId",
+                "orgId",
+                "conversationId",
+                "messageId",
+                "text",
+                "timeTaken",
+                "queryId",
+                "responseInEnglish",
+                "response"
+            ],
+            "description": "translate - transformer"
+        }
+    },
+    {
+        "eventProperties": {
+            "eventId": "E014",
+            "eventName": "userQuery",
+            "subEventName": "textToSpeech"
+        },
+        "eventSchema": {
+            "$schema": "http://json-schema.org/draft-07/schema#",
+            "type": "object",
+            "properties": {
+                "botId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "userId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "orgId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "conversationId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "messageId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "audiourl": {
+                    "type": "string",
+                    "format": "url"
+                },
+                "audioId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "text": {
+                    "type": "string"
+                },
+                "timeTaken": {
+                    "type": "number"
+                },
+                "phoneNumber": {
+                    "type": "string"
+                },
+                "queryId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "responseInEnglish": {
+                    "type": "string"
+                },
+                "response": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "botId",
+                "userId",
+                "orgId",
+                "conversationId",
+                "messageId",
+                "audiourl",
+                "text",
+                "timeTaken",
+                "queryId",
+                "responseInEnglish",
+                "response"
+            ],
+            "description": "textToSpeech - transformer"
+        }
+    },
+    {
+        "eventProperties": {
+            "eventId": "E015",
+            "eventName": "userQuery",
+            "subEventName": "audioPlayed"
+        },
+        "eventSchema": {
+            "$schema": "http://json-schema.org/draft-07/schema#",
+            "type": "object",
+            "properties": {
+                "botId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "userId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "orgId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "conversationId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "messageId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "text": {
+                    "type": "string"
+                },
+                "timeTaken": {
+                    "type": "number"
+                },
+                "phoneNumber": {
+                    "type": "string"
+                },
+                "queryId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "timesAudioUsed": {
+                    "type": "number"
+                }
+            },
+            "required": [
+                "botId",
+                "userId",
+                "orgId",
+                "conversationId",
+                "messageId",
+                "text",
+                "timeTaken",
+                "queryId"
+            ],
+            "description": "When user plays audio at app"
+        }
+    },
+    {
+        "eventProperties": {
+            "eventId": "E016",
+            "eventName": "userQuery",
+            "subEventName": "responseReceivedAtApp"
+        },
+        "eventSchema": {
+            "$schema": "http://json-schema.org/draft-07/schema#",
+            "type": "object",
+            "properties": {
+                "botId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "userId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "orgId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "conversationId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "messageId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "text": {
+                    "type": "string"
+                },
+                "timeTaken": {
+                    "type": "number"
+                },
+                "phoneNumber": {
+                    "type": "string"
+                },
+                "queryId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "responseInEnglish": {
+                    "type": "string"
+                },
+                "response": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "botId",
+                "userId",
+                "orgId",
+                "conversationId",
+                "messageId",
+                "text",
+                "timeTaken",
+                "queryId",
+                "responseInEnglish",
+                "response"
+            ],
+            "description": "When user gets the response at app"
+        }
+    },
+    {
+        "eventProperties": {
+            "eventId": "E017",
+            "eventName": "userQueryInbound",
+            "subEventName": "outgoingMessage"
+        },
+        "eventSchema": {
+            "$schema": "http://json-schema.org/draft-07/schema#",
+            "type": "object",
+            "properties": {
+                "botId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "userId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "orgId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "conversationId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "messageId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "text": {
+                    "type": "string"
+                },
+                "mediaIds": {
+                    "type": "array"
+                },
+                "timeTaken": {
+                    "type": "number"
+                },
+                "createdAt": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "did": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "botId",
+                "userId",
+                "orgId",
+                "conversationId",
+                "messageId",
+                "timeTaken",
+                "createdAt",
+                "did"
+            ],
+            "description": "A message was sent to user"
+        }
+    },
+    {
+        "eventProperties": {
+            "eventId": "E018",
+            "eventName": "userQueryInbound",
+            "subEventName": "convertXmsgFailed"
+        },
+        "eventSchema": {
+            "$schema": "http://json-schema.org/draft-07/schema#",
+            "type": "object",
+            "properties": {
+                "botId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "userId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "orgId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "conversationId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "messageId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "text": {
+                    "type": "string"
+                },
+                "mediaIds": {
+                    "type": "array"
+                },
+                "createdAt": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "did": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "botId",
+                "userId",
+                "orgId",
+                "conversationId",
+                "messageId",
+                "createdAt",
+                "did"
+            ],
+            "description": "XMessage to raw message conversion failed"
+        }
+    },
+    {
+        "eventProperties": {
+            "eventId": "E019",
+            "eventName": "userQueryInbound",
+            "subEventName": "convertMsgFailed"
+        },
+        "eventSchema": {
+            "$schema": "http://json-schema.org/draft-07/schema#",
+            "type": "object",
+            "properties": {
+                "botId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "orgId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "conversationId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "messageId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "text": {
+                    "type": "string"
+                },
+                "mediaIds": {
+                    "type": "array"
+                },
+                "createdAt": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "did": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "botId",
+                "orgId",
+                "createdAt",
+                "did"
+            ],
+            "description": "Raw message conversion to XMessage failed"
+        }
+    },
+    {
+        "eventProperties": {
+            "eventId": "E020",
+            "eventName": "userQueryInbound",
+            "subEventName": "registrationRequest"
+        },
+        "eventSchema": {
+            "$schema": "http://json-schema.org/draft-07/schema#",
+            "type": "object",
+            "properties": {
+                "botId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "orgId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "conversationId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "messageId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "text": {
+                    "type": "string"
+                },
+                "mediaIds": {
+                    "type": "array"
+                },
+                "createdAt": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "did": {
+                    "type": "string"
+                },
+                "userManagementUrl": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "botId",
+                "orgId",
+                "conversationId",
+                "messageId",
+                "createdAt",
+                "did",
+                "userManagementUrl"
+            ],
+            "description": "A registration request was sent to the bot"
+        }
+    },
+    {
+        "eventProperties": {
+            "eventId": "E021",
+            "eventName": "userQueryInbound",
+            "subEventName": "registrationFailed"
+        },
+        "eventSchema": {
+            "$schema": "http://json-schema.org/draft-07/schema#",
+            "type": "object",
+            "properties": {
+                "botId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "orgId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "conversationId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "messageId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "text": {
+                    "type": "string"
+                },
+                "mediaIds": {
+                    "type": "array"
+                },
+                "createdAt": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "did": {
+                    "type": "string"
+                },
+                "userManagementUrl": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "botId",
+                "orgId",
+                "conversationId",
+                "messageId",
+                "createdAt",
+                "did",
+                "userManagementUrl"
+            ],
+            "description": "A registration request failed"
+        }
+    },
+    {
+        "eventProperties": {
+            "eventId": "E022",
+            "eventName": "userQueryInbound",
+            "subEventName": "feedbackRequest"
+        },
+        "eventSchema": {
+            "$schema": "http://json-schema.org/draft-07/schema#",
+            "type": "object",
+            "properties": {
+                "botId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "orgId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "conversationId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "messageId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "text": {
+                    "type": "string"
+                },
+                "createdAt": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "did": {
+                    "type": "string"
+                },
+                "feedback": {
+                    "type": "string"
+                },
+                "reaction": {
+                    "type": "number"
+                }
+            },
+            "required": [
+                "botId",
+                "orgId",
+                "conversationId",
+                "messageId",
+                "createdAt",
+                "did",
+                "reaction"
+            ],
+            "description": "A user sent a feedback on a message"
+        }
+    },
+    {
+        "eventProperties": {
+            "eventId": "E023",
+            "eventName": "userQueryInbound",
+            "subEventName": "messageRead"
+        },
+        "eventSchema": {
+            "$schema": "http://json-schema.org/draft-07/schema#",
+            "type": "object",
+            "properties": {
+                "botId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "orgId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "conversationId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "messageId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "text": {
+                    "type": "string"
+                },
+                "mediaIds": {
+                    "type": "array"
+                },
+                "createdAt": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "did": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "botId",
+                "orgId",
+                "conversationId",
+                "messageId",
+                "createdAt",
+                "did"
+            ],
+            "description": "User read the message sent by a bot"
+        }
+    },
+    {
+        "eventProperties": {
+            "eventId": "E024",
+            "eventName": "AI-Tools",
+            "subEventName": "speechToText"
+        },
+        "eventSchema": {
+            "$schema": "http://json-schema.org/draft-07/schema#",
+            "type": "object",
+            "properties": {
+                "botId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "userId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "orgId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "conversationId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "messageId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "audiourl": {
+                    "type": "string",
+                    "format": "url"
+                },
+                "audioId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "text": {
+                    "type": "string"
+                },
+                "error": {
+                    "type": "string"
+                },
+                "timeTaken": {
+                    "type": "number"
+                },
+                "createdAt": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "queryId": {
+                    "type": "string",
+                    "format": "uuid"
+                }
+            },
+            "required": [
+                "audiourl",
+                "text",
+                "timeTaken"
+            ],
+            "description": "On return of this API call"
+        }
+    },
+    {
+        "eventProperties": {
+            "eventId": "E025",
+            "eventName": "AI-Tools",
+            "subEventName": "textToSpeech"
+        },
+        "eventSchema": {
+            "$schema": "http://json-schema.org/draft-07/schema#",
+            "type": "object",
+            "properties": {
+                "botId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "userId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "orgId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "conversationId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "messageId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "audiourl": {
+                    "type": "string",
+                    "format": "url"
+                },
+                "audioId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "text": {
+                    "type": "string"
+                },
+                "error": {
+                    "type": "string"
+                },
+                "timeTaken": {
+                    "type": "number"
+                },
+                "createdAt": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "queryId": {
+                    "type": "string",
+                    "format": "uuid"
+                }
+            },
+            "required": [
+                "audiourl",
+                "text",
+                "timeTaken"
+            ],
+            "description": "On return of this API call"
+        }
+    },
+    {
+        "eventProperties": {
+            "eventId": "E026",
+            "eventName": "AI-Tools",
+            "subEventName": "translate"
+        },
+        "eventSchema": {
+            "$schema": "http://json-schema.org/draft-07/schema#",
+            "type": "object",
+            "properties": {
+                "botId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "userId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "orgId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "conversationId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "messageId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "text": {
+                    "type": "string"
+                },
+                "error": {
+                    "type": "string"
+                },
+                "timeTaken": {
+                    "type": "number"
+                },
+                "createdAt": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "queryId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "outputText": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "text",
+                "timeTaken",
+                "outputText"
+            ],
+            "description": "On return of this API call"
+        }
+    },
+    {
+        "eventProperties": {
+            "eventId": "E027",
+            "eventName": "AI-Tools",
+            "subEventName": "transliterate"
+        },
+        "eventSchema": {
+            "$schema": "http://json-schema.org/draft-07/schema#",
+            "type": "object",
+            "properties": {
+                "botId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "userId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "orgId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "conversationId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "messageId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "text": {
+                    "type": "string"
+                },
+                "error": {
+                    "type": "string"
+                },
+                "timeTaken": {
+                    "type": "number"
+                },
+                "createdAt": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "queryId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "outputText": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "text",
+                "timeTaken",
+                "outputText"
+            ],
+            "description": "On return of this API call"
+        }
+    }
+]

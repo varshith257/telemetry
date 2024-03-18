@@ -1,0 +1,26 @@
+{
+  "string": {
+    "type": "string"
+  },
+  "uuid": {
+    "type": "string",
+    "format": "uuid"
+  },
+  "url": {
+    "type": "string",
+    "format": "url"
+  },
+  "date": {
+    "type": "string",
+    "format": "date-time"
+  },
+  "json": {
+    "type": "object"
+  },
+  "array": {
+    "type": "array"
+  },
+  "number": {
+    "type": "number"
+  }
+}

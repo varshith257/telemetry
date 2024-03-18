@@ -4,7 +4,9 @@ export declare class MetricsService {
     private readonly prismaService;
     constructor(prismaService: PrismaService);
     private ajv;
+    private validateMap;
     private clickhouse;
+    updateValidateMap(): Promise<void>;
     saveMetrics(eventData: MetricsV1Dto[]): Promise<{
         error: boolean;
         message: string;
@@ -14,9 +16,13 @@ export declare class MetricsService {
         message: string;
         errorData?: undefined;
     }>;
-    validateEventData(eventData: any): Promise<{
+    validateEventData(eventData: MetricsV1Dto): Promise<{
+        error: boolean;
+        errorList: string[];
+    } | {
         error: boolean;
         errorList: import("ajv").ErrorObject<string, Record<string, any>, unknown>[];
     }>;
+    convertDatetime(jsonData: any): any;
     processData(eventDataList: MetricsV1Dto[]): Promise<void>;
 }

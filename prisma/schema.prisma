@@ -15,10 +15,8 @@ datasource db {
 
 model EventSchemaV1 {
   id       Int    @id @default(autoincrement())
-  event_id Int
+  event_id String @unique
   event    String
   subEvent String
   schema   Json
-
-  @@unique([event, subEvent], name: "EventSubEventCompositeKey")
 }

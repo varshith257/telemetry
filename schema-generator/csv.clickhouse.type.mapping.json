@@ -1,0 +1,9 @@
+{
+  "number": "UInt32",
+  "string": "String",
+  "url": "String",
+  "uuid": "UUID",
+  "date": "DateTime",
+  "json": "String",
+  "array": "String"
+}

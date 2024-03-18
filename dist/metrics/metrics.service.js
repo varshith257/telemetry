@@ -13,25 +13,36 @@ exports.MetricsService = void 0;
 const common_1 = require("@nestjs/common");
 const ajv_1 = require("ajv");
 const ajv_formats_1 = require("ajv-formats");
-const clickhouse_1 = require("clickhouse");
 const prisma_service_1 = require("../prisma/prisma.service");
+const client_1 = require("@clickhouse/client");
 let MetricsService = class MetricsService {
     constructor(prismaService) {
         this.prismaService = prismaService;
         this.ajv = new ajv_1.default();
         (0, ajv_formats_1.default)(this.ajv);
-        this.clickhouse = new clickhouse_1.ClickHouse({
-            host: 'localhost',
-            port: 18123,
-            database: 'default',
-            user: '',
-            password: '',
-            basicAuth: null
+        this.clickhouse = (0, client_1.createClient)({
+            host: process.env.CLICKHOUSE_HOST,
+            username: process.env.CLICKHOUSE_USER,
+            password: process.env.CLICKHOUSE_PASSWORD,
+            database: process.env.CLICKHOUSE_DB
+        });
+        this.validateMap = new Map();
+        this.updateValidateMap();
+    }
+    async updateValidateMap() {
+        const schemeSchema = await this.prismaService.eventSchemaV1.findMany();
+        if (schemeSchema.length === this.validateMap.size)
+            return;
+        schemeSchema.forEach((event) => {
+            if (!this.validateMap.has(event.event_id)) {
+                this.validateMap.set(event.event_id, this.ajv.compile(JSON.parse(JSON.stringify(event.schema))));
+            }
         });
     }
     async saveMetrics(eventData) {
         let isRequestValid = true;
         let errorData = {};
+        await this.updateValidateMap();
         for (let i = 0; i < eventData.length; i++) {
             const validationResponse = await this.validateEventData(eventData[i]);
             if (validationResponse.error) {
@@ -53,15 +64,13 @@ let MetricsService = class MetricsService {
         };
     }
     async validateEventData(eventData) {
-        const eventSchema = await this.prismaService.eventSchemaV1.findUnique({
-            where: {
-                EventSubEventCompositeKey: {
-                    subEvent: eventData.subEvent,
-                    event: eventData.event,
-                }
-            }
-        });
-        const validator = this.ajv.compile(JSON.parse(JSON.stringify(eventSchema.schema)));
+        if (!this.validateMap.has(eventData.eventId)) {
+            return {
+                error: true,
+                errorList: [`No event found with eventId: ${eventData.eventId}`]
+            };
+        }
+        const validator = this.validateMap.get(eventData.eventId);
         validator(eventData.eventData);
         if (validator.errors !== null) {
             return {
@@ -74,6 +83,20 @@ let MetricsService = class MetricsService {
             errorList: []
         };
     }
+    convertDatetime(jsonData) {
+        const pattern = /\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}\.\d{3}/;
+        for (const key in jsonData) {
+            if (Object.prototype.hasOwnProperty.call(jsonData, key)) {
+                if (typeof jsonData[key] === 'object') {
+                    jsonData[key] = this.convertDatetime(jsonData[key]);
+                }
+                else if (typeof jsonData[key] === 'string' && pattern.test(jsonData[key])) {
+                    jsonData[key] = jsonData[key].split('.')[0];
+                }
+            }
+        }
+        return jsonData;
+    }
     async processData(eventDataList) {
         const formattedEventData = eventDataList.map((event) => {
             const { eventData, ...otherMetric } = event;
@@ -82,14 +105,12 @@ let MetricsService = class MetricsService {
                 ...eventData,
             };
         });
-        const formattedData = formattedEventData.map(row => JSON.stringify(row)).join('\n');
-        const insertQuery = `
-      INSERT INTO events_v1
-      FORMAT JSONEachRow
-      ${formattedData}
-    `;
-        const res = await this.clickhouse.query(insertQuery).toPromise();
-        console.log(res);
+        this.convertDatetime(formattedEventData);
+        await this.clickhouse.insert({
+            table: 'events_v1',
+            values: formattedEventData,
+            format: 'JSONEachRow'
+        });
     }
 };
 exports.MetricsService = MetricsService;
