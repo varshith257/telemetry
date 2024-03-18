@@ -38,7 +38,7 @@ export class MetricsV1Dto {
   subEvent: string;
 
   @IsNumber()
-  timeTaken: number;
+  timeElapsed: number;
 
   @IsOptional()
   @IsString()
