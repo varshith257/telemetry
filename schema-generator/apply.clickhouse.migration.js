@@ -35,23 +35,13 @@ async function runSQLFile(filePath, client) {
 }
 
 async function main() {
-  // const client = new clickhouse.ClickHouse({
-  //   host: process.env.CLICKHOUSE_HOST,
-  //   port: process.env.CLICKHOUSE_PORT,
-  //   database: process.env.CLICKHOUSE_DB,
-  //   basicAuth: {
-  //     username: process.env.CLICKHOUSE_USER,
-  //     password: process.env.CLICKHOUSE_PASSWORD,
-  //   },
-  //   format: 'json'
-  // });
   const client = new clickhouse.ClickHouse({
-    host: 'localhost',
-    port: '18123',
-    database: 'my_database',
+    host: process.env.CLICKHOUSE_HOST,
+    port: process.env.CLICKHOUSE_PORT,
+    database: process.env.CLICKHOUSE_DB,
     basicAuth: {
-      username: 'username',
-      password: 'password',
+      username: process.env.CLICKHOUSE_USER,
+      password: process.env.CLICKHOUSE_PASSWORD,
     },
     format: 'json'
   });

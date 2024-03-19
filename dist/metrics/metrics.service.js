@@ -84,13 +84,14 @@ let MetricsService = class MetricsService {
         };
     }
     convertDatetime(jsonData) {
-        const pattern = /\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}\.\d{3}/;
+        const p1 = /\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z/;
+        const p2 = /\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}\.\d{3}/;
         for (const key in jsonData) {
             if (Object.prototype.hasOwnProperty.call(jsonData, key)) {
                 if (typeof jsonData[key] === 'object') {
                     jsonData[key] = this.convertDatetime(jsonData[key]);
                 }
-                else if (typeof jsonData[key] === 'string' && pattern.test(jsonData[key])) {
+                else if (typeof jsonData[key] === 'string' && (p1.test(jsonData[key]) || p2.test(jsonData[key]))) {
                     jsonData[key] = jsonData[key].split('.')[0];
                 }
             }
@@ -106,6 +107,7 @@ let MetricsService = class MetricsService {
             };
         });
         this.convertDatetime(formattedEventData);
+        console.log(formattedEventData);
         await this.clickhouse.insert({
             table: 'events_v1',
             values: formattedEventData,

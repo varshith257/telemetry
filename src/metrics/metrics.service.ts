@@ -19,20 +19,6 @@ export class MetricsService {
       password: process.env.CLICKHOUSE_PASSWORD,
       database: process.env.CLICKHOUSE_DB
     });
-    // this.clickhouse = new ClickHouse({
-    //   host: process.env.CLICKHOUSE_HOST,
-    //   port: process.env.CLICKHOUSE_PORT,
-    //   database: process.env.CLICKHOUSE_DB,
-    //   basicAuth: {
-    //     username: process.env.CLICKHOUSE_USER,
-    //     password: process.env.CLICKHOUSE_PASSWORD,
-    //   },
-    //   format: 'json'
-    // });
-    // this.clickhouse.query('SELECT * FROM events_v1').exec((err, rows) => {
-    //   console.error(err);
-    //   console.log(rows);
-    // });
     this.validateMap = new Map();
     this.updateValidateMap();
   }
@@ -103,13 +89,14 @@ export class MetricsService {
   // Clickhouse doesn't take 2020-07-10 15:00:00.000 for some reason, feeding 2020-07-10 15:00:00 instead
   // TODO: Fix this
   convertDatetime(jsonData) {
-    const pattern = /\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}\.\d{3}/;
+    const p1 = /\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z/;
+    const p2 = /\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}\.\d{3}/;
     for (const key in jsonData) {
       if (Object.prototype.hasOwnProperty.call(jsonData, key)) {
         if (typeof jsonData[key] === 'object') {
           jsonData[key] = this.convertDatetime(jsonData[key]);
-        } else if (typeof jsonData[key] === 'string' && pattern.test(jsonData[key])) {
-          jsonData[key] = jsonData[key].split('.')[0]; // Remove milliseconds
+        } else if (typeof jsonData[key] === 'string' && (p1.test(jsonData[key]) || p2.test(jsonData[key]))) {
+          jsonData[key] = jsonData[key].split('.')[0];
         }
       }
     }
@@ -125,6 +112,7 @@ export class MetricsService {
       }
     });
     this.convertDatetime(formattedEventData);
+    console.log(formattedEventData);
     await this.clickhouse.insert({
       table: 'events_v1',
       values: formattedEventData,

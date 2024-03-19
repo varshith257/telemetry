@@ -40,6 +40,8 @@ services:
       interval: 5s
       timeout: 5s
       retries: 5
+    networks:
+      - default
 
   shadow-postgres:
     image: postgres:15.3-alpine
@@ -61,12 +63,18 @@ services:
     volumes:
       - cache:/data
 
-  # api:
-  #   build:
-  #     context: .
-  #     dockerfile: Dockerfile
-  #   ports:
-  #     - 3000:3000
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 4000:3000
+    env_file:
+      - .env.docker
+    networks:
+      - default
+
+
 volumes:
   fa-config:
   cache:
