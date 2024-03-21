@@ -37,7 +37,6 @@ async function runSQLFile(filePath, client) {
 async function main() {
   const client = new clickhouse.ClickHouse({
     host: process.env.CLICKHOUSE_HOST,
-    port: process.env.CLICKHOUSE_PORT,
     database: process.env.CLICKHOUSE_DB,
     basicAuth: {
       username: process.env.CLICKHOUSE_USER,
@@ -45,6 +44,24 @@ async function main() {
     },
     format: 'json'
   });
+  // const client = new clickhouse.ClickHouse({
+  //   host: 'http://localhost:18123',
+  //   database: 'my_database',
+  //   basicAuth: {
+  //     username: 'username',
+  //     password: 'password',
+  //   },
+  //   format: 'json'
+  // });
+  // const client = new clickhouse.ClickHouse({
+  //   host: 'https://clickhouse.devops.bhasai.samagra.io/',
+  //   database: "default",
+  //   basicAuth: {
+  //     username: "default",
+  //     password: "",
+  //   },
+  //   format: 'json'
+  // });
   runSQLFile('clickhouse.migration.sql', client);
 }
 

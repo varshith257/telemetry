@@ -3,7 +3,7 @@
   "string": "String",
   "url": "String",
   "uuid": "UUID",
-  "date": "DateTime",
+  "unix-time": "DateTime",
   "json": "String",
   "array": "String"
 }

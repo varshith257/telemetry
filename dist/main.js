@@ -10,8 +10,9 @@ async function bootstrap() {
     await app.register(multipart);
     new common_1.ValidationPipe({
         transform: true,
-    }),
-        await app.listen(3000);
+    });
+    app.enableCors();
+    await app.listen(3000);
 }
 bootstrap();
 //# sourceMappingURL=main.js.map

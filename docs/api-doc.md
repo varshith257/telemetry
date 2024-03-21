@@ -7,7 +7,7 @@ These fields are common for every event. The table below describes the fields fo
 |------------------|-----------|-------------|------------------------------|-----------------------------------------------------------------------------------------------------------|
 | generator        | String    | Required    | bff                          | The service/PWA that generated this event.                                                                |
 | version          | String    | Required    | 0.1.0                        | Version of the generator service/PWA.                                                                     |
-| timestamp        | DateTime  | Required    | 2020-07-10 15:00:00.000      | Timestamp when the event is generated.                                                                    |
+| timestamp        | Number  | Required    | 1710997763      | Epoch Unix Timestamp when the event is generated.                                                                    |
 | actorId          | String    | Required    | 550e8400-e29b-41d4-a716-446655440000 | ID of the actor who initiated the event. For example, UID in case of a user.                      |
 | actorType        | String    | Required    | user                         | Type of the actor initiating the event, whether it's a User or System.                                    |
 | sessionId        | String    | Optional    | 550e8400-e29b-41d4-a716-441234123541 | Session ID to identify the session.                                                               |

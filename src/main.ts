@@ -6,7 +6,6 @@ import {
   NestFastifyApplication,
 } from '@nestjs/platform-fastify';
 import * as multipart from 'fastify-multipart';
-import { ResponseFormatInterceptor } from '@samagra-x/stencil';
 
 
 async function bootstrap() {
@@ -19,8 +18,8 @@ async function bootstrap() {
   // app.useGlobalInterceptors(new ResponseFormatInterceptor()); // response-formatting out of the box
   new ValidationPipe({
     transform: true,
-  }),
-
+  });
+  app.enableCors();
   // start the server
   await app.listen(3000);
 }

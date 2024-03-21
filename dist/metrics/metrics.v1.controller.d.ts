@@ -1,15 +1,19 @@
 import { MetricsService } from "./metrics.service";
 import { MetricsV1Dto } from "./dto/metrics.v1.dto";
+import { UpdateSchemaDto } from "./dto/update.schema.dto";
 export declare class MetricsV1Controller {
     private readonly metricsService;
     constructor(metricsService: MetricsService);
-    saveMetrics(metricList: MetricsV1Dto[]): Promise<{
+    saveMetrics(metricList: MetricsV1Dto[]): Promise<Response>;
+    updateSchema(updateSchemaDto: UpdateSchemaDto): Promise<{
         error: boolean;
         message: string;
-        errorData: {};
+        errorData: any;
+        data?: undefined;
     } | {
         error: boolean;
         message: string;
+        data: any;
         errorData?: undefined;
     }>;
 }

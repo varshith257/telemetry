@@ -1,10 +1,10 @@
-import { Injectable } from "@nestjs/common";
+import { Injectable, Logger } from "@nestjs/common";
 import Ajv, { ValidateFunction } from "ajv";
 import addFormats from "ajv-formats";
-import { ClickHouse } from "clickhouse";
 import { PrismaService } from "src/prisma/prisma.service";
 import { MetricsV1Dto } from "./dto/metrics.v1.dto";
 import { ClickHouseClient, createClient } from "@clickhouse/client";
+import { UpdateSchemaDto } from "./dto/update.schema.dto";
 
 @Injectable()
 export class MetricsService {
@@ -20,16 +20,17 @@ export class MetricsService {
       database: process.env.CLICKHOUSE_DB
     });
     this.validateMap = new Map();
-    this.updateValidateMap();
+    this.updateValidateMap(true);
   }
   
   private ajv: Ajv;
   private validateMap: Map<string, ValidateFunction>;
   private clickhouse: ClickHouseClient;
+  private logger = new Logger(MetricsService.name);
 
-  async updateValidateMap() {
+  async updateValidateMap(force: boolean) {
     const schemeSchema = await this.prismaService.eventSchemaV1.findMany();
-    if (schemeSchema.length === this.validateMap.size) return;
+    if (schemeSchema.length === this.validateMap.size && !force) return;
     schemeSchema.forEach((event) => {
       if (!this.validateMap.has(event.event_id)) {
         this.validateMap.set(
@@ -40,11 +41,25 @@ export class MetricsService {
     });
   }
 
+  removeNullKeys(obj: any): any {
+    if (obj && typeof obj === 'object') {
+      Object.keys(obj).forEach(key => {
+        if (obj[key] === null) {
+          delete obj[key];
+        } else if (typeof obj[key] === 'object') {
+          this.removeNullKeys(obj[key]);
+        }
+      });
+    }
+    return obj;
+  }
+
   async saveMetrics(eventData: MetricsV1Dto[]) {
     let isRequestValid = true;
     let errorData = {};
-    await this.updateValidateMap();
+    await this.updateValidateMap(false);
     for (let i = 0; i < eventData.length; i++) {
+      eventData[i] = this.removeNullKeys(eventData[i]);
       const validationResponse = await this.validateEventData(eventData[i]);
       if (validationResponse.error) {
         isRequestValid = false;
@@ -52,17 +67,19 @@ export class MetricsService {
       }
     }
     if (!isRequestValid) {
-      return {
+      const response = {
         error: true,
         message: 'Request body does not satisfies the schema',
         errorData: errorData
-      };
+      }
+      this.logger.error(response);
+      return Response.json(response, { status: 400 });
     }
     this.processData(eventData);
-    return {
+    return Response.json({
       error: false,
-      message: 'Metric stored successfully'
-    }
+      message: 'Metric stored succesfully'
+    }, { status: 200 })
   }
   
   async validateEventData(eventData: MetricsV1Dto) {
@@ -85,23 +102,6 @@ export class MetricsService {
       errorList: []
     }
   }
-
-  // Clickhouse doesn't take 2020-07-10 15:00:00.000 for some reason, feeding 2020-07-10 15:00:00 instead
-  // TODO: Fix this
-  convertDatetime(jsonData) {
-    const p1 = /\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z/;
-    const p2 = /\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}\.\d{3}/;
-    for (const key in jsonData) {
-      if (Object.prototype.hasOwnProperty.call(jsonData, key)) {
-        if (typeof jsonData[key] === 'object') {
-          jsonData[key] = this.convertDatetime(jsonData[key]);
-        } else if (typeof jsonData[key] === 'string' && (p1.test(jsonData[key]) || p2.test(jsonData[key]))) {
-          jsonData[key] = jsonData[key].split('.')[0];
-        }
-      }
-    }
-    return jsonData;
-}
   
   async processData(eventDataList: MetricsV1Dto[]) {
     const formattedEventData = eventDataList.map((event) => {
@@ -109,14 +109,47 @@ export class MetricsService {
       return { 
         ...otherMetric,
         ...eventData,
-      }
+      };
     });
-    this.convertDatetime(formattedEventData);
-    console.log(formattedEventData);
     await this.clickhouse.insert({
-      table: 'events_v1',
+      table: 'poc_events',
       values: formattedEventData,
       format: 'JSONEachRow'
     });
+  }
+
+  async updateSchema(updateSchemaDto: UpdateSchemaDto) {
+    let schema;
+    try {
+      schema = await this.prismaService.eventSchemaV1.upsert({
+        where: {
+          event_id: updateSchemaDto.eventId
+        },
+        create: {
+          event_id: updateSchemaDto.eventId,
+          event: updateSchemaDto.event,
+          subEvent: updateSchemaDto.subEvent,
+          schema: updateSchemaDto.schema
+        },
+        update: {
+          event: updateSchemaDto.event,
+          subEvent: updateSchemaDto.subEvent,
+          schema: updateSchemaDto.schema
+        }
+      })
+    } catch(error) {
+      this.logger.error(error);
+      return {
+        error: true,
+        message: 'Error updating/adding event schema',
+        errorData: error
+      }
+    }
+    this.updateValidateMap(true);
+    return {
+      error: false,
+      message: 'Created/Updated Event schema',
+      data: schema,
+    }
   }
 }

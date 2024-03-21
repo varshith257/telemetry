@@ -9,31 +9,31 @@
             "$schema": "http://json-schema.org/draft-07/schema#",
             "type": "object",
             "properties": {
-                "botId": {
+                "botId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "userId": {
+                "userId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "orgId": {
+                "orgId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "conversationId": {
+                "conversationId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "messageId": {
+                "messageId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "audiourl": {
+                "audioUrl ": {
                     "type": "string",
                     "format": "url"
                 },
-                "audioId": {
+                "audioId ": {
                     "type": "string",
                     "format": "uuid"
                 }
@@ -42,7 +42,7 @@
                 "botId",
                 "userId",
                 "orgId",
-                "audiourl"
+                "audioUrl"
             ],
             "description": "BFF received audio from a bot"
         }
@@ -57,70 +57,66 @@
             "$schema": "http://json-schema.org/draft-07/schema#",
             "type": "object",
             "properties": {
-                "botId": {
+                "botId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "userId": {
+                "userId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "orgId": {
+                "orgId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "conversationId": {
+                "conversationId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "messageId": {
+                "messageId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "audiourl": {
+                "audioUrl ": {
                     "type": "string",
                     "format": "url"
                 },
-                "audioId": {
+                "audioId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "text": {
+                "text ": {
                     "type": "string"
                 },
-                "spellCorrectedText": {
+                "spellCorrectedText ": {
                     "type": "string"
                 },
-                "error": {
+                "error ": {
                     "type": "string"
                 },
-                "timeTaken": {
+                "timeTaken ": {
                     "type": "number"
                 },
-                "spellCheckTimeTaken": {
+                "spellCheckTimeTaken ": {
                     "type": "number"
                 },
-                "phoneNumber": {
+                "phoneNumber ": {
                     "type": "string"
                 },
-                "createdAt": {
-                    "type": "string",
-                    "format": "date-time"
+                "createdAt ": {
+                    "type": "number"
                 }
             },
             "required": [
                 "botId",
                 "userId",
                 "orgId",
-                "conversationId",
                 "messageId",
-                "audiourl",
+                "audioUrl",
                 "text",
                 "spellCorrectedText",
-                "error",
                 "timeTaken",
                 "spellCheckTimeTaken",
-                "phoneNumber",
                 "createdAt"
             ],
             "description": "Audio is converted to text from audio"
@@ -136,57 +132,56 @@
             "$schema": "http://json-schema.org/draft-07/schema#",
             "type": "object",
             "properties": {
-                "botId": {
+                "botId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "userId": {
+                "userId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "orgId": {
+                "orgId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "conversationId": {
+                "conversationId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "messageId": {
+                "messageId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "audiourl": {
+                "audioUrl ": {
                     "type": "string",
                     "format": "url"
                 },
-                "audioId": {
+                "audioId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "text": {
+                "text ": {
                     "type": "string"
                 },
-                "spellCorrectedText": {
+                "spellCorrectedText ": {
                     "type": "string"
                 },
-                "error": {
+                "error ": {
                     "type": "string"
                 },
-                "timeTaken": {
+                "timeTaken ": {
                     "type": "number"
                 },
-                "spellCheckTimeTaken": {
+                "spellCheckTimeTaken ": {
                     "type": "number"
                 },
-                "phoneNumber": {
+                "phoneNumber ": {
                     "type": "string"
                 },
-                "createdAt": {
-                    "type": "string",
-                    "format": "date-time"
+                "createdAt ": {
+                    "type": "number"
                 },
-                "queryId": {
+                "queryId ": {
                     "type": "string",
                     "format": "uuid"
                 }
@@ -195,15 +190,12 @@
                 "botId",
                 "userId",
                 "orgId",
-                "conversationId",
                 "messageId",
-                "audiourl",
+                "audioUrl",
                 "text",
                 "spellCorrectedText",
-                "error",
                 "timeTaken",
                 "spellCheckTimeTaken",
-                "phoneNumber",
                 "createdAt",
                 "queryId"
             ],
@@ -220,40 +212,39 @@
             "$schema": "http://json-schema.org/draft-07/schema#",
             "type": "object",
             "properties": {
-                "botId": {
+                "botId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "userId": {
+                "userId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "orgId": {
+                "orgId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "conversationId": {
+                "conversationId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "messageId": {
+                "messageId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "text": {
+                "text ": {
                     "type": "string"
                 },
-                "mediaIds": {
+                "mediaIds ": {
                     "type": "array"
                 },
-                "phoneNumber": {
+                "phoneNumber ": {
                     "type": "string"
                 },
-                "createdAt": {
-                    "type": "string",
-                    "format": "date-time"
+                "createdAt ": {
+                    "type": "number"
                 },
-                "did": {
+                "did ": {
                     "type": "string"
                 }
             },
@@ -261,11 +252,9 @@
                 "botId",
                 "userId",
                 "orgId",
-                "conversationId",
                 "messageId",
                 "text",
-                "createdAt",
-                "did"
+                "createdAt"
             ],
             "description": "User sent a message to a bot"
         }
@@ -280,40 +269,40 @@
             "$schema": "http://json-schema.org/draft-07/schema#",
             "type": "object",
             "properties": {
-                "botId": {
+                "botId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "userId": {
+                "userId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "orgId": {
+                "orgId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "conversationId": {
+                "conversationId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "messageId": {
+                "messageId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "text": {
+                "text ": {
                     "type": "string"
                 },
-                "timeTaken": {
+                "timeTaken ": {
                     "type": "number"
                 },
-                "phoneNumber": {
+                "phoneNumber ": {
                     "type": "string"
                 },
-                "queryId": {
+                "queryId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "textInEnglish": {
+                "textInEnglish ": {
                     "type": "string"
                 }
             },
@@ -321,7 +310,6 @@
                 "botId",
                 "userId",
                 "orgId",
-                "conversationId",
                 "messageId",
                 "text",
                 "timeTaken",
@@ -341,40 +329,40 @@
             "$schema": "http://json-schema.org/draft-07/schema#",
             "type": "object",
             "properties": {
-                "botId": {
+                "botId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "userId": {
+                "userId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "orgId": {
+                "orgId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "conversationId": {
+                "conversationId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "messageId": {
+                "messageId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "text": {
+                "text ": {
                     "type": "string"
                 },
-                "timeTaken": {
+                "timeTaken ": {
                     "type": "number"
                 },
-                "queryId": {
+                "queryId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "block": {
+                "block ": {
                     "type": "string"
                 },
-                "district": {
+                "district ": {
                     "type": "string"
                 }
             },
@@ -382,10 +370,8 @@
                 "botId",
                 "userId",
                 "orgId",
-                "conversationId",
                 "messageId",
                 "text",
-                "timeTaken",
                 "queryId",
                 "block",
                 "district"
@@ -403,40 +389,40 @@
             "$schema": "http://json-schema.org/draft-07/schema#",
             "type": "object",
             "properties": {
-                "botId": {
+                "botId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "userId": {
+                "userId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "orgId": {
+                "orgId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "conversationId": {
+                "conversationId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "messageId": {
+                "messageId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "text": {
+                "text ": {
                     "type": "string"
                 },
-                "phoneNumber": {
+                "phoneNumber ": {
                     "type": "string"
                 },
-                "queryId": {
+                "queryId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "userManagementUrl": {
+                "userManagementUrl ": {
                     "type": "string"
                 },
-                "textInEnglish": {
+                "textInEnglish ": {
                     "type": "string"
                 }
             },
@@ -444,11 +430,9 @@
                 "botId",
                 "userId",
                 "orgId",
-                "conversationId",
                 "messageId",
                 "text",
                 "queryId",
-                "userManagementUrl",
                 "textInEnglish"
             ],
             "description": "translate - transformer"
@@ -464,43 +448,43 @@
             "$schema": "http://json-schema.org/draft-07/schema#",
             "type": "object",
             "properties": {
-                "botId": {
+                "botId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "userId": {
+                "userId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "orgId": {
+                "orgId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "conversationId": {
+                "conversationId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "messageId": {
+                "messageId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "text": {
+                "text ": {
                     "type": "string"
                 },
-                "timeTaken": {
+                "timeTaken ": {
                     "type": "number"
                 },
-                "phoneNumber": {
+                "phoneNumber ": {
                     "type": "string"
                 },
-                "queryId": {
+                "queryId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "textInEnglish": {
+                "textInEnglish ": {
                     "type": "string"
                 },
-                "coreferencedText": {
+                "coreferencedText ": {
                     "type": "string"
                 }
             },
@@ -508,13 +492,11 @@
                 "botId",
                 "userId",
                 "orgId",
-                "conversationId",
                 "messageId",
                 "text",
                 "timeTaken",
                 "queryId",
-                "textInEnglish",
-                "coreferencedText"
+                "textInEnglish"
             ],
             "description": "nuralCoref - transformer"
         }
@@ -529,43 +511,43 @@
             "$schema": "http://json-schema.org/draft-07/schema#",
             "type": "object",
             "properties": {
-                "botId": {
+                "botId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "userId": {
+                "userId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "orgId": {
+                "orgId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "conversationId": {
+                "conversationId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "messageId": {
+                "messageId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "text": {
+                "text ": {
                     "type": "string"
                 },
-                "timeTaken": {
+                "timeTaken ": {
                     "type": "number"
                 },
-                "phoneNumber": {
+                "phoneNumber ": {
                     "type": "string"
                 },
-                "queryId": {
+                "queryId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "textInEnglish": {
+                "textInEnglish ": {
                     "type": "string"
                 },
-                "queryClass": {
+                "queryClass ": {
                     "type": "string"
                 }
             },
@@ -573,13 +555,11 @@
                 "botId",
                 "userId",
                 "orgId",
-                "conversationId",
                 "messageId",
                 "text",
                 "timeTaken",
                 "queryId",
-                "textInEnglish",
-                "queryClass"
+                "textInEnglish"
             ],
             "description": "classifier - transformer"
         }
@@ -594,43 +574,43 @@
             "$schema": "http://json-schema.org/draft-07/schema#",
             "type": "object",
             "properties": {
-                "botId": {
+                "botId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "userId": {
+                "userId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "orgId": {
+                "orgId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "conversationId": {
+                "conversationId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "messageId": {
+                "messageId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "text": {
+                "text ": {
                     "type": "string"
                 },
-                "timeTaken": {
+                "timeTaken ": {
                     "type": "number"
                 },
-                "phoneNumber": {
+                "phoneNumber ": {
                     "type": "string"
                 },
-                "queryId": {
+                "queryId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "textInEnglish": {
+                "textInEnglish ": {
                     "type": "string"
                 },
-                "similarChunks": {
+                "similarChunks ": {
                     "type": "object"
                 }
             },
@@ -638,13 +618,11 @@
                 "botId",
                 "userId",
                 "orgId",
-                "conversationId",
                 "messageId",
                 "text",
                 "timeTaken",
                 "queryId",
-                "textInEnglish",
-                "similarChunks"
+                "textInEnglish"
             ],
             "description": "retieveDocs - transformer"
         }
@@ -659,43 +637,43 @@
             "$schema": "http://json-schema.org/draft-07/schema#",
             "type": "object",
             "properties": {
-                "botId": {
+                "botId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "userId": {
+                "userId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "orgId": {
+                "orgId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "conversationId": {
+                "conversationId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "messageId": {
+                "messageId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "text": {
+                "text ": {
                     "type": "string"
                 },
-                "timeTaken": {
+                "timeTaken ": {
                     "type": "number"
                 },
-                "phoneNumber": {
+                "phoneNumber ": {
                     "type": "string"
                 },
-                "queryId": {
+                "queryId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "textInEnglish": {
+                "textInEnglish ": {
                     "type": "string"
                 },
-                "NER": {
+                "NER ": {
                     "type": "object"
                 }
             },
@@ -703,7 +681,6 @@
                 "botId",
                 "userId",
                 "orgId",
-                "conversationId",
                 "messageId",
                 "text",
                 "timeTaken",
@@ -724,46 +701,46 @@
             "$schema": "http://json-schema.org/draft-07/schema#",
             "type": "object",
             "properties": {
-                "botId": {
+                "botId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "userId": {
+                "userId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "orgId": {
+                "orgId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "conversationId": {
+                "conversationId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "messageId": {
+                "messageId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "text": {
+                "text ": {
                     "type": "string"
                 },
-                "timeTaken": {
+                "timeTaken ": {
                     "type": "number"
                 },
-                "phoneNumber": {
+                "phoneNumber ": {
                     "type": "string"
                 },
-                "queryId": {
+                "queryId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "textInEnglish": {
+                "textInEnglish ": {
                     "type": "string"
                 },
-                "responseInEnglish": {
+                "responseInEnglish ": {
                     "type": "string"
                 },
-                "response": {
+                "response ": {
                     "type": "string"
                 }
             },
@@ -771,13 +748,11 @@
                 "botId",
                 "userId",
                 "orgId",
-                "conversationId",
                 "messageId",
                 "text",
                 "timeTaken",
                 "queryId",
-                "textInEnglish",
-                "responseInEnglish"
+                "textInEnglish"
             ],
             "description": "llm - transformer"
         }
@@ -792,46 +767,46 @@
             "$schema": "http://json-schema.org/draft-07/schema#",
             "type": "object",
             "properties": {
-                "botId": {
+                "botId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "userId": {
+                "userId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "orgId": {
+                "orgId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "conversationId": {
+                "conversationId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "messageId": {
+                "messageId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "text": {
+                "text ": {
                     "type": "string"
                 },
-                "timeTaken": {
+                "timeTaken ": {
                     "type": "number"
                 },
-                "phoneNumber": {
+                "phoneNumber ": {
                     "type": "string"
                 },
-                "queryId": {
+                "queryId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "textInEnglish": {
+                "textInEnglish ": {
                     "type": "string"
                 },
-                "responseInEnglish": {
+                "responseInEnglish ": {
                     "type": "string"
                 },
-                "response": {
+                "response ": {
                     "type": "string"
                 }
             },
@@ -839,13 +814,10 @@
                 "botId",
                 "userId",
                 "orgId",
-                "conversationId",
                 "messageId",
                 "text",
-                "timeTaken",
                 "queryId",
                 "textInEnglish",
-                "responseInEnglish",
                 "response"
             ],
             "description": "translate - transformer"
@@ -861,54 +833,54 @@
             "$schema": "http://json-schema.org/draft-07/schema#",
             "type": "object",
             "properties": {
-                "botId": {
+                "botId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "userId": {
+                "userId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "orgId": {
+                "orgId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "conversationId": {
+                "conversationId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "messageId": {
+                "messageId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "audiourl": {
+                "audioUrl ": {
                     "type": "string",
                     "format": "url"
                 },
-                "audioId": {
+                "audioId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "text": {
+                "text ": {
                     "type": "string"
                 },
-                "timeTaken": {
+                "timeTaken ": {
                     "type": "number"
                 },
-                "phoneNumber": {
+                "phoneNumber ": {
                     "type": "string"
                 },
-                "queryId": {
+                "queryId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "textInEnglish": {
+                "textInEnglish ": {
                     "type": "string"
                 },
-                "responseInEnglish": {
+                "responseInEnglish ": {
                     "type": "string"
                 },
-                "response": {
+                "response ": {
                     "type": "string"
                 }
             },
@@ -916,14 +888,12 @@
                 "botId",
                 "userId",
                 "orgId",
-                "conversationId",
                 "messageId",
-                "audiourl",
+                "audioUrl",
                 "text",
                 "timeTaken",
                 "queryId",
                 "textInEnglish",
-                "responseInEnglish",
                 "response"
             ],
             "description": "textToSpeech - transformer"
@@ -939,40 +909,43 @@
             "$schema": "http://json-schema.org/draft-07/schema#",
             "type": "object",
             "properties": {
-                "botId": {
+                "botId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "userId": {
+                "userId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "orgId": {
+                "orgId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "conversationId": {
+                "conversationId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "messageId": {
+                "messageId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "text": {
+                "text ": {
                     "type": "string"
                 },
-                "timeTaken": {
+                "timeTaken ": {
                     "type": "number"
                 },
-                "phoneNumber": {
+                "phoneNumber ": {
                     "type": "string"
                 },
-                "queryId": {
+                "queryId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "timesAudioUsed": {
+                "responseInEnglish ": {
+                    "type": "string"
+                },
+                "timesAudioUsed ": {
                     "type": "number"
                 }
             },
@@ -980,10 +953,8 @@
                 "botId",
                 "userId",
                 "orgId",
-                "conversationId",
                 "messageId",
                 "text",
-                "timeTaken",
                 "queryId"
             ],
             "description": "When user plays audio at app"
@@ -999,43 +970,43 @@
             "$schema": "http://json-schema.org/draft-07/schema#",
             "type": "object",
             "properties": {
-                "botId": {
+                "botId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "userId": {
+                "userId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "orgId": {
+                "orgId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "conversationId": {
+                "conversationId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "messageId": {
+                "messageId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "text": {
+                "text ": {
                     "type": "string"
                 },
-                "timeTaken": {
+                "timeTaken ": {
                     "type": "number"
                 },
-                "phoneNumber": {
+                "phoneNumber ": {
                     "type": "string"
                 },
-                "queryId": {
+                "queryId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "responseInEnglish": {
+                "responseInEnglish ": {
                     "type": "string"
                 },
-                "response": {
+                "response ": {
                     "type": "string"
                 }
             },
@@ -1043,12 +1014,10 @@
                 "botId",
                 "userId",
                 "orgId",
-                "conversationId",
                 "messageId",
                 "text",
                 "timeTaken",
                 "queryId",
-                "responseInEnglish",
                 "response"
             ],
             "description": "When user gets the response at app"
@@ -1064,40 +1033,39 @@
             "$schema": "http://json-schema.org/draft-07/schema#",
             "type": "object",
             "properties": {
-                "botId": {
+                "botId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "userId": {
+                "userId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "orgId": {
+                "orgId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "conversationId": {
+                "conversationId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "messageId": {
+                "messageId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "text": {
+                "text ": {
                     "type": "string"
                 },
-                "mediaIds": {
+                "mediaIds ": {
                     "type": "array"
                 },
-                "timeTaken": {
+                "timeTaken ": {
                     "type": "number"
                 },
-                "createdAt": {
-                    "type": "string",
-                    "format": "date-time"
+                "createdAt ": {
+                    "type": "number"
                 },
-                "did": {
+                "did ": {
                     "type": "string"
                 }
             },
@@ -1124,37 +1092,36 @@
             "$schema": "http://json-schema.org/draft-07/schema#",
             "type": "object",
             "properties": {
-                "botId": {
+                "botId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "userId": {
+                "userId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "orgId": {
+                "orgId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "conversationId": {
+                "conversationId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "messageId": {
+                "messageId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "text": {
+                "text ": {
                     "type": "string"
                 },
-                "mediaIds": {
+                "mediaIds ": {
                     "type": "array"
                 },
-                "createdAt": {
-                    "type": "string",
-                    "format": "date-time"
+                "createdAt ": {
+                    "type": "number"
                 },
-                "did": {
+                "did ": {
                     "type": "string"
                 }
             },
@@ -1180,33 +1147,32 @@
             "$schema": "http://json-schema.org/draft-07/schema#",
             "type": "object",
             "properties": {
-                "botId": {
+                "botId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "orgId": {
+                "orgId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "conversationId": {
+                "conversationId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "messageId": {
+                "messageId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "text": {
+                "text ": {
                     "type": "string"
                 },
-                "mediaIds": {
+                "mediaIds ": {
                     "type": "array"
                 },
-                "createdAt": {
-                    "type": "string",
-                    "format": "date-time"
+                "createdAt ": {
+                    "type": "number"
                 },
-                "did": {
+                "did ": {
                     "type": "string"
                 }
             },
@@ -1229,36 +1195,35 @@
             "$schema": "http://json-schema.org/draft-07/schema#",
             "type": "object",
             "properties": {
-                "botId": {
+                "botId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "orgId": {
+                "orgId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "conversationId": {
+                "conversationId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "messageId": {
+                "messageId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "text": {
+                "text ": {
                     "type": "string"
                 },
-                "mediaIds": {
+                "mediaIds ": {
                     "type": "array"
                 },
-                "createdAt": {
-                    "type": "string",
-                    "format": "date-time"
+                "createdAt ": {
+                    "type": "number"
                 },
-                "did": {
+                "did ": {
                     "type": "string"
                 },
-                "userManagementUrl": {
+                "userManagementUrl ": {
                     "type": "string"
                 }
             },
@@ -1284,36 +1249,35 @@
             "$schema": "http://json-schema.org/draft-07/schema#",
             "type": "object",
             "properties": {
-                "botId": {
+                "botId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "orgId": {
+                "orgId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "conversationId": {
+                "conversationId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "messageId": {
+                "messageId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "text": {
+                "text ": {
                     "type": "string"
                 },
-                "mediaIds": {
+                "mediaIds ": {
                     "type": "array"
                 },
-                "createdAt": {
-                    "type": "string",
-                    "format": "date-time"
+                "createdAt ": {
+                    "type": "number"
                 },
-                "did": {
+                "did ": {
                     "type": "string"
                 },
-                "userManagementUrl": {
+                "userManagementUrl ": {
                     "type": "string"
                 }
             },
@@ -1339,33 +1303,32 @@
             "$schema": "http://json-schema.org/draft-07/schema#",
             "type": "object",
             "properties": {
-                "botId": {
+                "botId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "orgId": {
+                "orgId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "conversationId": {
+                "conversationId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "messageId": {
+                "messageId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "text": {
+                "text ": {
                     "type": "string"
                 },
-                "createdAt": {
-                    "type": "string",
-                    "format": "date-time"
+                "createdAt ": {
+                    "type": "number"
                 },
-                "did": {
+                "did ": {
                     "type": "string"
                 },
-                "feedback": {
+                "feedback ": {
                     "type": "string"
                 }
             },
@@ -1390,33 +1353,32 @@
             "$schema": "http://json-schema.org/draft-07/schema#",
             "type": "object",
             "properties": {
-                "botId": {
+                "botId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "orgId": {
+                "orgId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "conversationId": {
+                "conversationId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "messageId": {
+                "messageId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "text": {
+                "text ": {
                     "type": "string"
                 },
-                "mediaIds": {
+                "mediaIds ": {
                     "type": "array"
                 },
-                "createdAt": {
-                    "type": "string",
-                    "format": "date-time"
+                "createdAt ": {
+                    "type": "number"
                 },
-                "did": {
+                "did ": {
                     "type": "string"
                 }
             },
@@ -1441,54 +1403,53 @@
             "$schema": "http://json-schema.org/draft-07/schema#",
             "type": "object",
             "properties": {
-                "botId": {
+                "botId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "userId": {
+                "userId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "orgId": {
+                "orgId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "conversationId": {
+                "conversationId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "messageId": {
+                "messageId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "audiourl": {
+                "audioUrl ": {
                     "type": "string",
                     "format": "url"
                 },
-                "audioId": {
+                "audioId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "text": {
+                "text ": {
                     "type": "string"
                 },
-                "error": {
+                "error ": {
                     "type": "string"
                 },
-                "timeTaken": {
+                "timeTaken ": {
                     "type": "number"
                 },
-                "createdAt": {
-                    "type": "string",
-                    "format": "date-time"
+                "createdAt ": {
+                    "type": "number"
                 },
-                "queryId": {
+                "queryId ": {
                     "type": "string",
                     "format": "uuid"
                 }
             },
             "required": [
-                "audiourl",
+                "audioUrl",
                 "text",
                 "timeTaken"
             ],
@@ -1505,54 +1466,53 @@
             "$schema": "http://json-schema.org/draft-07/schema#",
             "type": "object",
             "properties": {
-                "botId": {
+                "botId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "userId": {
+                "userId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "orgId": {
+                "orgId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "conversationId": {
+                "conversationId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "messageId": {
+                "messageId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "audiourl": {
+                "audioUrl ": {
                     "type": "string",
                     "format": "url"
                 },
-                "audioId": {
+                "audioId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "text": {
+                "text ": {
                     "type": "string"
                 },
-                "error": {
+                "error ": {
                     "type": "string"
                 },
-                "timeTaken": {
+                "timeTaken ": {
                     "type": "number"
                 },
-                "createdAt": {
-                    "type": "string",
-                    "format": "date-time"
+                "createdAt ": {
+                    "type": "number"
                 },
-                "queryId": {
+                "queryId ": {
                     "type": "string",
                     "format": "uuid"
                 }
             },
             "required": [
-                "audiourl",
+                "audioUrl",
                 "text",
                 "timeTaken"
             ],
@@ -1569,44 +1529,43 @@
             "$schema": "http://json-schema.org/draft-07/schema#",
             "type": "object",
             "properties": {
-                "botId": {
+                "botId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "userId": {
+                "userId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "orgId": {
+                "orgId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "conversationId": {
+                "conversationId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "messageId": {
+                "messageId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "text": {
+                "text ": {
                     "type": "string"
                 },
-                "error": {
+                "error ": {
                     "type": "string"
                 },
-                "timeTaken": {
+                "timeTaken ": {
                     "type": "number"
                 },
-                "createdAt": {
-                    "type": "string",
-                    "format": "date-time"
+                "createdAt ": {
+                    "type": "number"
                 },
-                "queryId": {
+                "queryId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "outputText": {
+                "outputText ": {
                     "type": "string"
                 }
             },
@@ -1628,44 +1587,43 @@
             "$schema": "http://json-schema.org/draft-07/schema#",
             "type": "object",
             "properties": {
-                "botId": {
+                "botId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "userId": {
+                "userId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "orgId": {
+                "orgId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "conversationId": {
+                "conversationId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "messageId": {
+                "messageId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "text": {
+                "text ": {
                     "type": "string"
                 },
-                "error": {
+                "error ": {
                     "type": "string"
                 },
-                "timeTaken": {
+                "timeTaken ": {
                     "type": "number"
                 },
-                "createdAt": {
-                    "type": "string",
-                    "format": "date-time"
+                "createdAt ": {
+                    "type": "number"
                 },
-                "queryId": {
+                "queryId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "outputText": {
+                "outputText ": {
                     "type": "string"
                 }
             },
@@ -1687,11 +1645,11 @@
             "$schema": "http://json-schema.org/draft-07/schema#",
             "type": "object",
             "properties": {
-                "userId": {
+                "userId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "orgId": {
+                "orgId ": {
                     "type": "string",
                     "format": "uuid"
                 }
@@ -1713,11 +1671,11 @@
             "$schema": "http://json-schema.org/draft-07/schema#",
             "type": "object",
             "properties": {
-                "userId": {
+                "userId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "orgId": {
+                "orgId ": {
                     "type": "string",
                     "format": "uuid"
                 }
@@ -1739,11 +1697,11 @@
             "$schema": "http://json-schema.org/draft-07/schema#",
             "type": "object",
             "properties": {
-                "userId": {
+                "userId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "orgId": {
+                "orgId ": {
                     "type": "string",
                     "format": "uuid"
                 }
@@ -1765,11 +1723,11 @@
             "$schema": "http://json-schema.org/draft-07/schema#",
             "type": "object",
             "properties": {
-                "userId": {
+                "userId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "orgId": {
+                "orgId ": {
                     "type": "string",
                     "format": "uuid"
                 }
@@ -1791,11 +1749,11 @@
             "$schema": "http://json-schema.org/draft-07/schema#",
             "type": "object",
             "properties": {
-                "userId": {
+                "userId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "orgId": {
+                "orgId ": {
                     "type": "string",
                     "format": "uuid"
                 }
@@ -1817,11 +1775,11 @@
             "$schema": "http://json-schema.org/draft-07/schema#",
             "type": "object",
             "properties": {
-                "userId": {
+                "userId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "orgId": {
+                "orgId ": {
                     "type": "string",
                     "format": "uuid"
                 }
@@ -1871,40 +1829,39 @@
             "$schema": "http://json-schema.org/draft-07/schema#",
             "type": "object",
             "properties": {
-                "botId": {
+                "botId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "userId": {
+                "userId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "orgId": {
+                "orgId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "conversationId": {
+                "conversationId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "messageId": {
+                "messageId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "text": {
+                "text ": {
                     "type": "string"
                 },
-                "error": {
+                "error ": {
                     "type": "string"
                 },
-                "phoneNumber": {
+                "phoneNumber ": {
                     "type": "string"
                 },
-                "createdAt": {
-                    "type": "string",
-                    "format": "date-time"
+                "createdAt ": {
+                    "type": "number"
                 },
-                "textInEnglish": {
+                "textInEnglish ": {
                     "type": "string"
                 }
             },
@@ -1929,46 +1886,45 @@
             "$schema": "http://json-schema.org/draft-07/schema#",
             "type": "object",
             "properties": {
-                "botId": {
+                "botId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "userId": {
+                "userId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "orgId": {
+                "orgId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "conversationId": {
+                "conversationId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "messageId": {
+                "messageId ": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "text": {
+                "text ": {
                     "type": "string"
                 },
-                "error": {
+                "error ": {
                     "type": "string"
                 },
-                "timeTaken": {
+                "timeTaken ": {
                     "type": "number"
                 },
-                "phoneNumber": {
+                "phoneNumber ": {
                     "type": "string"
                 },
-                "createdAt": {
-                    "type": "string",
-                    "format": "date-time"
+                "createdAt ": {
+                    "type": "number"
                 },
-                "textInEnglish": {
+                "textInEnglish ": {
                     "type": "string"
                 },
-                "responseInEnglish": {
+                "responseInEnglish ": {
                     "type": "string"
                 }
             },
@@ -1978,8 +1934,7 @@
                 "conversationId",
                 "messageId",
                 "text",
-                "timeTaken",
-                "createdAt"
+                "timeTaken"
             ],
             "description": "When user receives back a response for sent message"
         }

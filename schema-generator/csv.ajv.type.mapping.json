@@ -10,9 +10,8 @@
     "type": "string",
     "format": "url"
   },
-  "date": {
-    "type": "string",
-    "format": "date-time"
+  "unix-time": {
+    "type": "number"
   },
   "json": {
     "type": "object"

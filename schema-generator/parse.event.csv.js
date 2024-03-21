@@ -13,6 +13,7 @@ const schemaDraft = "http://json-schema.org/draft-07/schema#";
 let header = null;
 const schemaList = [];
 let lastEventName = '';
+const indexList = [];
 const HEADER_START_INDEX = 8;
 
 fs.createReadStream('events.csv')
@@ -39,11 +40,11 @@ fs.createReadStream('events.csv')
     const keys = Object.keys(row)
     for (let i = HEADER_START_INDEX; i < keys.length; i++) {
         if (row[keys[i]] === '') continue;
-        let key = keys[i].split(' | ')[0];
-        let dataType = keys[i].split(' | ')[1];
+        let key = keys[i].split('|')[0];
+        let dataType = keys[i].split('|')[1];
         let value = row[keys[i]];
         if (value.trim().toLowerCase() === 'required') {
-            schema.required.push(key);
+            schema.required.push(key.trim());
         }
         schema.properties[key] = csvToAjvTypeMapping[dataType.trim().toLowerCase()];
     }
@@ -116,7 +117,7 @@ function outputSchemaJson(schemaList) {
 
 function generateMigrationSql(headers, version) {
     let sql = '';
-    sql = sql + `CREATE TABLE IF NOT EXISTS events_v${version}\n`;
+    sql = sql + `CREATE TABLE IF NOT EXISTS poc_events\n`;
     sql = sql + `(\n`
     sql = sql + `\tgenerator String,\n`
     sql = sql + `\tversion String,\n`
@@ -138,12 +139,19 @@ function generateMigrationSql(headers, version) {
     sql = sql + `\tip String`
     for (let i = HEADER_START_INDEX; i < headers.length; i++) {
         sql = sql + `,\n`
-        const field = headers[i].split(' | ')[0].trim();
-        const type = headers[i].split(' | ')[1].trim();
+        const field = headers[i].split('|')[0].trim();
+        const type = headers[i].split('|')[1].trim();
         sql = sql + `\t${field} Nullable(${csvToClickhouseTypeMapping[type]})`
+        // let thirdSplit = headers[i].split('|')[2];
+        // if (thirdSplit !== undefined) {
+        //     indexList.push(field.trim());
+        // }
     }
     sql = sql + `\n)\n`
     sql = sql + `ENGINE = MergeTree\n`
     sql = sql + `ORDER BY timestamp;\n`
+    // for (const colName of indexList) {
+    //     sql = sql + `ALTER TABLE events_v${version} ADD INDEX idx_${colName} (${colName});\n`;
+    // }
     fs.writeFileSync('clickhouse.migration.sql', sql);
 }

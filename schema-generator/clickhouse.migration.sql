@@ -1,4 +1,4 @@
-CREATE TABLE IF NOT EXISTS events_v1
+CREATE TABLE IF NOT EXISTS poc_events
 (
 	generator String,
 	version String,
@@ -23,7 +23,7 @@ CREATE TABLE IF NOT EXISTS events_v1
 	orgId Nullable(UUID),
 	conversationId Nullable(UUID),
 	messageId Nullable(UUID),
-	audiourl Nullable(String),
+	audioUrl Nullable(String),
 	audioId Nullable(UUID),
 	text Nullable(String),
 	mediaIds Nullable(String),
