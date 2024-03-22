@@ -1,4 +1,4 @@
-CREATE TABLE IF NOT EXISTS events
+CREATE TABLE IF NOT EXISTS event
 (
 	generator String,
 	version String,
@@ -48,7 +48,8 @@ CREATE TABLE IF NOT EXISTS events
 	feedback Nullable(String),
 	reaction Nullable(UInt32),
 	timesAudioUsed Nullable(UInt32),
-	outputText Nullable(String)
+	outputText Nullable(String),
+	errorRate Nullable(UInt32)
 )
 ENGINE = MergeTree
 ORDER BY timestamp;

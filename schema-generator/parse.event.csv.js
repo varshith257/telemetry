@@ -116,7 +116,7 @@ function outputSchemaJson(schemaList) {
 
 function generateMigrationSql(headers, version) {
     let sql = '';
-    sql = sql + `CREATE TABLE IF NOT EXISTS ${process.env.CLICKHOUSE_TABLENAME}\n`;
+    sql = sql + `CREATE TABLE IF NOT EXISTS event\n`;
     sql = sql + `(\n`
     sql = sql + `\tgenerator String,\n`
     sql = sql + `\tversion String,\n`

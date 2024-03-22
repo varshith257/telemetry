@@ -112,7 +112,7 @@ export class MetricsService {
       };
     });
     await this.clickhouse.insert({
-      table: `${process.env.CLICKHOUSE_TABLENAME}`,
+      table: `event`,
       values: formattedEventData,
       format: 'JSONEachRow'
     });

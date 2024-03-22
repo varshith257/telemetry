@@ -110,7 +110,7 @@ let MetricsService = MetricsService_1 = class MetricsService {
             };
         });
         await this.clickhouse.insert({
-            table: 'poc_events',
+            table: `event`,
             values: formattedEventData,
             format: 'JSONEachRow'
         });

@@ -372,9 +372,7 @@
                 "orgId",
                 "messageId",
                 "text",
-                "queryId",
-                "block",
-                "district"
+                "queryId"
             ],
             "description": "Fetching user info - transformer"
         }
@@ -432,8 +430,7 @@
                 "orgId",
                 "messageId",
                 "text",
-                "queryId",
-                "textInEnglish"
+                "queryId"
             ],
             "description": "translate - transformer"
         }
@@ -964,6 +961,52 @@
         "eventProperties": {
             "eventId": "E016",
             "eventName": "userQuery",
+            "subEventName": "queryError"
+        },
+        "eventSchema": {
+            "$schema": "http://json-schema.org/draft-07/schema#",
+            "type": "object",
+            "properties": {
+                "botId ": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "userId ": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "orgId ": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "conversationId ": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "messageId ": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "error ": {
+                    "type": "string"
+                },
+                "errorRate ": {
+                    "type": "number"
+                }
+            },
+            "required": [
+                "botId",
+                "userId",
+                "orgId",
+                "messageId"
+            ],
+            "description": "When an error is occured during query process"
+        }
+    },
+    {
+        "eventProperties": {
+            "eventId": "E017",
+            "eventName": "userQuery",
             "subEventName": "responseReceivedAtApp"
         },
         "eventSchema": {
@@ -1024,7 +1067,7 @@
     },
     {
         "eventProperties": {
-            "eventId": "E017",
+            "eventId": "E018",
             "eventName": "userQueryInbound",
             "subEventName": "outgoingMessage"
         },
@@ -1083,7 +1126,7 @@
     },
     {
         "eventProperties": {
-            "eventId": "E018",
+            "eventId": "E019",
             "eventName": "userQueryInbound",
             "subEventName": "convertXmsgFailed"
         },
@@ -1138,7 +1181,7 @@
     },
     {
         "eventProperties": {
-            "eventId": "E019",
+            "eventId": "E020",
             "eventName": "userQueryInbound",
             "subEventName": "convertMsgFailed"
         },
@@ -1186,7 +1229,7 @@
     },
     {
         "eventProperties": {
-            "eventId": "E020",
+            "eventId": "E021",
             "eventName": "userQueryInbound",
             "subEventName": "registrationRequest"
         },
@@ -1240,7 +1283,7 @@
     },
     {
         "eventProperties": {
-            "eventId": "E021",
+            "eventId": "E022",
             "eventName": "userQueryInbound",
             "subEventName": "registrationFailed"
         },
@@ -1294,7 +1337,7 @@
     },
     {
         "eventProperties": {
-            "eventId": "E022",
+            "eventId": "E023",
             "eventName": "userQueryInbound",
             "subEventName": "feedbackRequest"
         },
@@ -1344,7 +1387,7 @@
     },
     {
         "eventProperties": {
-            "eventId": "E023",
+            "eventId": "E024",
             "eventName": "userQueryInbound",
             "subEventName": "messageRead"
         },
@@ -1394,7 +1437,7 @@
     },
     {
         "eventProperties": {
-            "eventId": "E024",
+            "eventId": "E025",
             "eventName": "AI-Tools",
             "subEventName": "speechToText"
         },
@@ -1457,7 +1500,7 @@
     },
     {
         "eventProperties": {
-            "eventId": "E025",
+            "eventId": "E026",
             "eventName": "AI-Tools",
             "subEventName": "textToSpeech"
         },
@@ -1520,7 +1563,7 @@
     },
     {
         "eventProperties": {
-            "eventId": "E026",
+            "eventId": "E027",
             "eventName": "AI-Tools",
             "subEventName": "translate"
         },
@@ -1578,7 +1621,7 @@
     },
     {
         "eventProperties": {
-            "eventId": "E027",
+            "eventId": "E028",
             "eventName": "AI-Tools",
             "subEventName": "transliterate"
         },
@@ -1636,32 +1679,6 @@
     },
     {
         "eventProperties": {
-            "eventId": "E028",
-            "eventName": "datasetInjestion",
-            "subEventName": "todo"
-        },
-        "eventSchema": {
-            "$schema": "http://json-schema.org/draft-07/schema#",
-            "type": "object",
-            "properties": {
-                "userId ": {
-                    "type": "string",
-                    "format": "uuid"
-                },
-                "orgId ": {
-                    "type": "string",
-                    "format": "uuid"
-                }
-            },
-            "required": [
-                "userId",
-                "orgId"
-            ],
-            "description": "todo"
-        }
-    },
-    {
-        "eventProperties": {
             "eventId": "E029",
             "eventName": "datasetInjestion",
             "subEventName": "todo"
@@ -1670,7 +1687,7 @@
             "$schema": "http://json-schema.org/draft-07/schema#",
             "type": "object",
             "properties": {
-                "userId ": {
+                "botId ": {
                     "type": "string",
                     "format": "uuid"
                 },
@@ -1680,7 +1697,7 @@
                 }
             },
             "required": [
-                "userId",
+                "botId",
                 "orgId"
             ],
             "description": "todo"
@@ -1696,7 +1713,7 @@
             "$schema": "http://json-schema.org/draft-07/schema#",
             "type": "object",
             "properties": {
-                "userId ": {
+                "botId ": {
                     "type": "string",
                     "format": "uuid"
                 },
@@ -1706,7 +1723,7 @@
                 }
             },
             "required": [
-                "userId",
+                "botId",
                 "orgId"
             ],
             "description": "todo"
@@ -1722,7 +1739,7 @@
             "$schema": "http://json-schema.org/draft-07/schema#",
             "type": "object",
             "properties": {
-                "userId ": {
+                "botId ": {
                     "type": "string",
                     "format": "uuid"
                 },
@@ -1732,7 +1749,7 @@
                 }
             },
             "required": [
-                "userId",
+                "botId",
                 "orgId"
             ],
             "description": "todo"
@@ -1741,14 +1758,14 @@
     {
         "eventProperties": {
             "eventId": "E032",
-            "eventName": "documentService",
+            "eventName": "datasetInjestion",
             "subEventName": "todo"
         },
         "eventSchema": {
             "$schema": "http://json-schema.org/draft-07/schema#",
             "type": "object",
             "properties": {
-                "userId ": {
+                "botId ": {
                     "type": "string",
                     "format": "uuid"
                 },
@@ -1758,7 +1775,7 @@
                 }
             },
             "required": [
-                "userId",
+                "botId",
                 "orgId"
             ],
             "description": "todo"
@@ -1774,7 +1791,7 @@
             "$schema": "http://json-schema.org/draft-07/schema#",
             "type": "object",
             "properties": {
-                "userId ": {
+                "botId ": {
                     "type": "string",
                     "format": "uuid"
                 },
@@ -1784,7 +1801,7 @@
                 }
             },
             "required": [
-                "userId",
+                "botId",
                 "orgId"
             ],
             "description": "todo"
@@ -1799,8 +1816,20 @@
         "eventSchema": {
             "$schema": "http://json-schema.org/draft-07/schema#",
             "type": "object",
-            "properties": {},
-            "required": [],
+            "properties": {
+                "botId ": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "orgId ": {
+                    "type": "string",
+                    "format": "uuid"
+                }
+            },
+            "required": [
+                "botId",
+                "orgId"
+            ],
             "description": "todo"
         }
     },
@@ -1813,14 +1842,52 @@
         "eventSchema": {
             "$schema": "http://json-schema.org/draft-07/schema#",
             "type": "object",
-            "properties": {},
-            "required": [],
+            "properties": {
+                "botId ": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "orgId ": {
+                    "type": "string",
+                    "format": "uuid"
+                }
+            },
+            "required": [
+                "botId",
+                "orgId"
+            ],
             "description": "todo"
         }
     },
     {
         "eventProperties": {
             "eventId": "E036",
+            "eventName": "documentService",
+            "subEventName": "todo"
+        },
+        "eventSchema": {
+            "$schema": "http://json-schema.org/draft-07/schema#",
+            "type": "object",
+            "properties": {
+                "botId ": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "orgId ": {
+                    "type": "string",
+                    "format": "uuid"
+                }
+            },
+            "required": [
+                "botId",
+                "orgId"
+            ],
+            "description": "todo"
+        }
+    },
+    {
+        "eventProperties": {
+            "eventId": "E037",
             "eventName": "messageQuery",
             "subEventName": "messageSent"
         },
@@ -1877,7 +1944,7 @@
     },
     {
         "eventProperties": {
-            "eventId": "E037",
+            "eventId": "E038",
             "eventName": "messageQuery",
             "subEventName": "messageReceived"
         },

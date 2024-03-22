@@ -357,9 +357,7 @@ When is it generated: Fetching user info - transformer
         "orgId",
         "messageId",
         "text",
-        "queryId",
-        "block",
-        "district"
+        "queryId"
     ],
     "description": "Fetching user info - transformer"
 }
@@ -414,8 +412,7 @@ When is it generated: translate - transformer
         "orgId",
         "messageId",
         "text",
-        "queryId",
-        "textInEnglish"
+        "queryId"
     ],
     "description": "translate - transformer"
 }
@@ -916,6 +913,49 @@ When is it generated: When user plays audio at app
         "queryId"
     ],
     "description": "When user plays audio at app"
+}
+```
+### queryError
+When is it generated: When an error is occured during query process
+```json
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "properties": {
+        "botId ": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "userId ": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "orgId ": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "conversationId ": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "messageId ": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "error ": {
+            "type": "string"
+        },
+        "errorRate ": {
+            "type": "number"
+        }
+    },
+    "required": [
+        "botId",
+        "userId",
+        "orgId",
+        "messageId"
+    ],
+    "description": "When an error is occured during query process"
 }
 ```
 ### responseReceivedAtApp
@@ -1566,7 +1606,7 @@ When is it generated: todo
     "$schema": "http://json-schema.org/draft-07/schema#",
     "type": "object",
     "properties": {
-        "userId ": {
+        "botId ": {
             "type": "string",
             "format": "uuid"
         },
@@ -1576,7 +1616,7 @@ When is it generated: todo
         }
     },
     "required": [
-        "userId",
+        "botId",
         "orgId"
     ],
     "description": "todo"
@@ -1589,7 +1629,7 @@ When is it generated: todo
     "$schema": "http://json-schema.org/draft-07/schema#",
     "type": "object",
     "properties": {
-        "userId ": {
+        "botId ": {
             "type": "string",
             "format": "uuid"
         },
@@ -1599,7 +1639,7 @@ When is it generated: todo
         }
     },
     "required": [
-        "userId",
+        "botId",
         "orgId"
     ],
     "description": "todo"
@@ -1612,7 +1652,7 @@ When is it generated: todo
     "$schema": "http://json-schema.org/draft-07/schema#",
     "type": "object",
     "properties": {
-        "userId ": {
+        "botId ": {
             "type": "string",
             "format": "uuid"
         },
@@ -1622,7 +1662,7 @@ When is it generated: todo
         }
     },
     "required": [
-        "userId",
+        "botId",
         "orgId"
     ],
     "description": "todo"
@@ -1635,7 +1675,7 @@ When is it generated: todo
     "$schema": "http://json-schema.org/draft-07/schema#",
     "type": "object",
     "properties": {
-        "userId ": {
+        "botId ": {
             "type": "string",
             "format": "uuid"
         },
@@ -1645,7 +1685,7 @@ When is it generated: todo
         }
     },
     "required": [
-        "userId",
+        "botId",
         "orgId"
     ],
     "description": "todo"
@@ -1659,7 +1699,7 @@ When is it generated: todo
     "$schema": "http://json-schema.org/draft-07/schema#",
     "type": "object",
     "properties": {
-        "userId ": {
+        "botId ": {
             "type": "string",
             "format": "uuid"
         },
@@ -1669,7 +1709,7 @@ When is it generated: todo
         }
     },
     "required": [
-        "userId",
+        "botId",
         "orgId"
     ],
     "description": "todo"
@@ -1682,7 +1722,7 @@ When is it generated: todo
     "$schema": "http://json-schema.org/draft-07/schema#",
     "type": "object",
     "properties": {
-        "userId ": {
+        "botId ": {
             "type": "string",
             "format": "uuid"
         },
@@ -1692,7 +1732,7 @@ When is it generated: todo
         }
     },
     "required": [
-        "userId",
+        "botId",
         "orgId"
     ],
     "description": "todo"
@@ -1704,8 +1744,20 @@ When is it generated: todo
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "type": "object",
-    "properties": {},
-    "required": [],
+    "properties": {
+        "botId ": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "orgId ": {
+            "type": "string",
+            "format": "uuid"
+        }
+    },
+    "required": [
+        "botId",
+        "orgId"
+    ],
     "description": "todo"
 }
 ```
@@ -1715,8 +1767,20 @@ When is it generated: todo
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "type": "object",
-    "properties": {},
-    "required": [],
+    "properties": {
+        "botId ": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "orgId ": {
+            "type": "string",
+            "format": "uuid"
+        }
+    },
+    "required": [
+        "botId",
+        "orgId"
+    ],
     "description": "todo"
 }
 ```
