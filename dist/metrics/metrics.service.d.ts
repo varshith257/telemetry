@@ -30,4 +30,5 @@ export declare class MetricsService {
         data: any;
         errorData?: undefined;
     }>;
+    searchContent(limit: number, page: number, orderBy?: string, order?: string): Promise<Response>;
 }

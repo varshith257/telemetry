@@ -152,4 +152,80 @@ export class MetricsService {
       data: schema,
     }
   }
+
+  async searchContent(limit: number, page: number, orderBy?: string, order?: string) {
+    const offset = limit * (page - 1);
+    console.log(limit, page, offset)
+    const queryColumns = [
+      'subEvent',
+      'createdAt',
+      'phoneNumber',
+      'timeTaken',
+      'text',
+      'spellCorrectedText',
+      'spellCheckTimeTaken',
+      'audioUrl',
+      'queryId',
+      'error'
+    ]
+
+    const searchColumns = [
+      'queryId',
+      'phoneNumber',
+      'textInEnglish',
+      'spellCorrectedText',
+      'comment',
+      'feedback',
+      'reaction'
+    ]
+
+    const filterColumns = [
+      'createdAt',
+      'feedback',
+      'reaction',
+      'comment',
+      'botId',
+      'orgId'
+    ]
+
+    let query = `SELECT ${queryColumns.join(', ')} FROM event`
+    query += `\nWHERE event='speechToText'`
+    if (orderBy) {
+      if (!queryColumns.includes(orderBy)) {
+        return Response.json({
+          error: true,
+          message: 'Invalid orderBy column name'
+        }, { status: 400 })
+      }
+      if (order) {
+        query += `\nORDER BY ${orderBy} ${order}`
+      } else {
+        query += `\nORDER BY ${orderBy}`
+      }
+    }
+    query += `\nLIMIT ${limit} OFFSET ${offset};`;
+    const content = await this.clickhouse.query({
+      query: query,
+      format: 'JSONEachRow'
+    });
+    const selectQueryResponse = await content.json();
+
+    // getting count
+    const countQuery = await this.clickhouse.query({
+      query: `SELECT COUNT(*) FROM event WHERE event='speechToText'`,
+    });
+    const countQueryJsonRes = await countQuery.json();
+    const count = countQueryJsonRes['data'][0]['count()'];
+    
+    const totalPages = Math.ceil(count / limit);
+    return Response.json({
+      error: false,
+      messaeg: 'Event data fetched successfully',
+      data: {
+        page: page,
+        totalPages: totalPages,
+        pageList: selectQueryResponse
+      }
+    }, { status: 200 })
+  }
 }

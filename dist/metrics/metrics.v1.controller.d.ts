@@ -16,4 +16,5 @@ export declare class MetricsV1Controller {
         data: any;
         errorData?: undefined;
     }>;
+    searchContent(limit: string, page: string, orderBy?: string, order?: string, : any): Promise<Response>;
 }

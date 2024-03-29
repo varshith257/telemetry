@@ -28,6 +28,25 @@ let MetricsV1Controller = class MetricsV1Controller {
     async updateSchema(updateSchemaDto) {
         return await this.metricsService.updateSchema(updateSchemaDto);
     }
+    async searchContent(limit, page, orderBy, order, ) {
+        const validatedLimit = parseInt(limit) || 10;
+        const validatedPage = parseInt(page) || 1;
+        if (isNaN(validatedLimit) || isNaN(validatedPage)) {
+            return Response.json({
+                error: true,
+                message: 'Invalid type for limit or page'
+            }, { status: 400 });
+        }
+        if (order) {
+            if (order.toUpperCase() !== 'ASC' && order.toUpperCase() !== 'DESC') {
+                return Response.json({
+                    error: true,
+                    message: 'Invalid order type. Should be ASC or DESC'
+                }, { status: 400 });
+            }
+        }
+        return await this.metricsService.searchContent(validatedLimit, validatedPage, orderBy, order);
+    }
 };
 exports.MetricsV1Controller = MetricsV1Controller;
 __decorate([
@@ -44,6 +63,17 @@ __decorate([
     __metadata("design:paramtypes", [update_schema_dto_1.UpdateSchemaDto]),
     __metadata("design:returntype", Promise)
 ], MetricsV1Controller.prototype, "updateSchema", null);
+__decorate([
+    (0, common_1.Get)('s2t'),
+    __param(0, (0, common_1.Query)('limit')),
+    __param(1, (0, common_1.Query)('page')),
+    __param(2, (0, common_1.Query)('orderBy')),
+    __param(3, (0, common_1.Query)('order')),
+    __param(4, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, String, String, String, Object]),
+    __metadata("design:returntype", Promise)
+], MetricsV1Controller.prototype, "searchContent", null);
 exports.MetricsV1Controller = MetricsV1Controller = __decorate([
     (0, throttler_decorator_1.SkipThrottle)(),
     (0, common_1.Controller)('/metrics/v1'),
