@@ -25,34 +25,17 @@ export class MetricsV1Controller {
     return await this.metricsService.updateSchema(updateSchemaDto);
   }
 
-  @Get('s2t')
+  @Post('s2t')
   async searchContent(
-    @Query('limit') limit: string,
-    @Query('page') page: string,
-    @Query('orderBy') orderBy?: string,
-    @Query('order') order?: string,
     @Body() queryBody: GetS2TDto
   ) {
-    
-    const validatedLimit = parseInt(limit) || 10;
-    const validatedPage = parseInt(page) || 1;
-
-    if (isNaN(validatedLimit) || isNaN(validatedPage)) {
-      return Response.json({
-        error: true,
-        message: 'Invalid type for limit or page'
-      }, { status: 400 })
-    }
-
-    if (order) {
-      if (order.toUpperCase() !== 'ASC' && order.toUpperCase() !== 'DESC'){
-        return Response.json({
-          error: true,
-          message: 'Invalid order type. Should be ASC or DESC'
-        }, { status: 400 })
-      }
-    }
-
-    return await this.metricsService.searchContent(validatedLimit, validatedPage, orderBy, order);
+    return await this.metricsService.searchContent(
+      queryBody.limit, 
+      queryBody.page, 
+      queryBody.sortBy,
+      queryBody.sort.toUpperCase(),
+      queryBody.filterObj,
+      queryBody.searchObj
+    );
   }
 }

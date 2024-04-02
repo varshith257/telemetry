@@ -18,6 +18,7 @@ const metrics_service_1 = require("./metrics.service");
 const metrics_v1_dto_1 = require("./dto/metrics.v1.dto");
 const update_schema_dto_1 = require("./dto/update.schema.dto");
 const throttler_decorator_1 = require("@nestjs/throttler/dist/throttler.decorator");
+const get_s2t_dto_1 = require("./dto/get.s2t.dto");
 let MetricsV1Controller = class MetricsV1Controller {
     constructor(metricsService) {
         this.metricsService = metricsService;
@@ -28,24 +29,8 @@ let MetricsV1Controller = class MetricsV1Controller {
     async updateSchema(updateSchemaDto) {
         return await this.metricsService.updateSchema(updateSchemaDto);
     }
-    async searchContent(limit, page, orderBy, order, ) {
-        const validatedLimit = parseInt(limit) || 10;
-        const validatedPage = parseInt(page) || 1;
-        if (isNaN(validatedLimit) || isNaN(validatedPage)) {
-            return Response.json({
-                error: true,
-                message: 'Invalid type for limit or page'
-            }, { status: 400 });
-        }
-        if (order) {
-            if (order.toUpperCase() !== 'ASC' && order.toUpperCase() !== 'DESC') {
-                return Response.json({
-                    error: true,
-                    message: 'Invalid order type. Should be ASC or DESC'
-                }, { status: 400 });
-            }
-        }
-        return await this.metricsService.searchContent(validatedLimit, validatedPage, orderBy, order);
+    async searchContent(queryBody) {
+        return await this.metricsService.searchContent(queryBody.limit, queryBody.page, queryBody.sortBy, queryBody.sort.toUpperCase(), queryBody.filterObj, queryBody.searchObj);
     }
 };
 exports.MetricsV1Controller = MetricsV1Controller;
@@ -64,14 +49,10 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], MetricsV1Controller.prototype, "updateSchema", null);
 __decorate([
-    (0, common_1.Get)('s2t'),
-    __param(0, (0, common_1.Query)('limit')),
-    __param(1, (0, common_1.Query)('page')),
-    __param(2, (0, common_1.Query)('orderBy')),
-    __param(3, (0, common_1.Query)('order')),
-    __param(4, (0, common_1.Body)()),
+    (0, common_1.Post)('s2t'),
+    __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, String, String, String, Object]),
+    __metadata("design:paramtypes", [get_s2t_dto_1.GetS2TDto]),
     __metadata("design:returntype", Promise)
 ], MetricsV1Controller.prototype, "searchContent", null);
 exports.MetricsV1Controller = MetricsV1Controller = __decorate([

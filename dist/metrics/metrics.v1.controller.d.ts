@@ -1,6 +1,7 @@
 import { MetricsService } from "./metrics.service";
 import { MetricsV1Dto } from "./dto/metrics.v1.dto";
 import { UpdateSchemaDto } from "./dto/update.schema.dto";
+import { GetS2TDto } from "./dto/get.s2t.dto";
 export declare class MetricsV1Controller {
     private readonly metricsService;
     constructor(metricsService: MetricsService);
@@ -16,5 +17,5 @@ export declare class MetricsV1Controller {
         data: any;
         errorData?: undefined;
     }>;
-    searchContent(limit: string, page: string, orderBy?: string, order?: string, : any): Promise<Response>;
+    searchContent(queryBody: GetS2TDto): Promise<string | Response>;
 }

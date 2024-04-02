@@ -153,43 +153,78 @@ export class MetricsService {
     }
   }
 
-  async searchContent(limit: number, page: number, orderBy?: string, order?: string) {
-    const offset = limit * (page - 1);
-    console.log(limit, page, offset)
+  async searchContent(
+      limit: number, 
+      page: number, 
+      orderBy?: string, 
+      order?: string,
+      filterObj?: any,
+      searchObj?: any
+    ) {
+    
+    let selectClause = '';
+		let whereClause = '';
+		let rangeClause = '';
+
     const queryColumns = [
-      'subEvent',
+      'queryId',
       'createdAt',
       'phoneNumber',
       'timeTaken',
+      'feedback',
+      'error',
+      'subEvent',
+      'audioUrl',
       'text',
       'spellCorrectedText',
       'spellCheckTimeTaken',
-      'audioUrl',
-      'queryId',
-      'error'
+      'textInEnglish',
+      'response',
+      'responseInEnglish',
+      'reaction'
     ]
+		selectClause += `SELECT ${queryColumns.join(', ')} FROM event`;
 
-    const searchColumns = [
+    const offset = limit * (page - 1);
+
+		whereClause = `\nWHERE eventId='E003'`;
+		const searchColumns = [
       'queryId',
       'phoneNumber',
       'textInEnglish',
       'spellCorrectedText',
-      'comment',
       'feedback',
       'reaction'
     ]
 
+    if (searchObj) {
+      if (!searchColumns.includes(searchObj.column)) {
+        return Response.json({
+          error: true,
+          message: `No column found with name: ${searchObj.column} to search`
+        }, { status: 400 })
+      }
+			whereClause += `\nAND ${searchObj.column}='${searchObj.searchQuery}'`
+    }   
+    
     const filterColumns = [
       'createdAt',
       'feedback',
       'reaction',
-      'comment',
       'botId',
       'orgId'
     ]
 
-    let query = `SELECT ${queryColumns.join(', ')} FROM event`
-    query += `\nWHERE event='speechToText'`
+    if (filterObj) {
+      if (!filterColumns.includes(filterObj.column)) {
+        return Response.json({
+          error: true,
+          message: `No column found with name: ${filterObj.column} to filter`
+        }, { status: 400 })
+      }
+			whereClause += `\nAND ${filterObj.column}='${filterObj.filterQuery}'`;
+    }
+
     if (orderBy) {
       if (!queryColumns.includes(orderBy)) {
         return Response.json({
@@ -198,12 +233,13 @@ export class MetricsService {
         }, { status: 400 })
       }
       if (order) {
-        query += `\nORDER BY ${orderBy} ${order}`
+        rangeClause += `\nORDER BY ${orderBy} ${order}`
       } else {
-        query += `\nORDER BY ${orderBy}`
+        rangeClause += `\nORDER BY ${orderBy}`
       }
     }
-    query += `\nLIMIT ${limit} OFFSET ${offset};`;
+    rangeClause += `\nLIMIT ${limit} OFFSET ${offset};`;
+		const query = selectClause + whereClause + rangeClause;
     const content = await this.clickhouse.query({
       query: query,
       format: 'JSONEachRow'
@@ -212,7 +248,7 @@ export class MetricsService {
 
     // getting count
     const countQuery = await this.clickhouse.query({
-      query: `SELECT COUNT(*) FROM event WHERE event='speechToText'`,
+      query: selectClause + whereClause,
     });
     const countQueryJsonRes = await countQuery.json();
     const count = countQueryJsonRes['data'][0]['count()'];
