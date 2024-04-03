@@ -17,5 +17,5 @@ export declare class MetricsV1Controller {
         data: any;
         errorData?: undefined;
     }>;
-    searchContent(queryBody: GetS2TDto): Promise<string | Response>;
+    searchContent(queryBody: GetS2TDto): Promise<Response>;
 }

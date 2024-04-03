@@ -248,7 +248,7 @@ export class MetricsService {
 
     // getting count
     const countQuery = await this.clickhouse.query({
-      query: selectClause + whereClause,
+      query: `SELECT COUNT(*) FROM event` + whereClause,
     });
     const countQueryJsonRes = await countQuery.json();
     const count = countQueryJsonRes['data'][0]['count()'];

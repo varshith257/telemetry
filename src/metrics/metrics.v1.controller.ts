@@ -33,7 +33,7 @@ export class MetricsV1Controller {
       queryBody.limit, 
       queryBody.page, 
       queryBody.sortBy,
-      queryBody.sort.toUpperCase(),
+      queryBody.sort?.toUpperCase(),
       queryBody.filterObj,
       queryBody.searchObj
     );

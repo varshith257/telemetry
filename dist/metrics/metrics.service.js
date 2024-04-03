@@ -223,7 +223,26 @@ let MetricsService = MetricsService_1 = class MetricsService {
         }
         rangeClause += `\nLIMIT ${limit} OFFSET ${offset};`;
         const query = selectClause + whereClause + rangeClause;
-        return query;
+        const content = await this.clickhouse.query({
+            query: query,
+            format: 'JSONEachRow'
+        });
+        const selectQueryResponse = await content.json();
+        const countQuery = await this.clickhouse.query({
+            query: `SELECT COUNT(*) FROM event` + whereClause,
+        });
+        const countQueryJsonRes = await countQuery.json();
+        const count = countQueryJsonRes['data'][0]['count()'];
+        const totalPages = Math.ceil(count / limit);
+        return Response.json({
+            error: false,
+            messaeg: 'Event data fetched successfully',
+            data: {
+                page: page,
+                totalPages: totalPages,
+                pageList: selectQueryResponse
+            }
+        }, { status: 200 });
     }
 };
 exports.MetricsService = MetricsService;

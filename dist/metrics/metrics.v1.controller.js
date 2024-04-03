@@ -30,7 +30,7 @@ let MetricsV1Controller = class MetricsV1Controller {
         return await this.metricsService.updateSchema(updateSchemaDto);
     }
     async searchContent(queryBody) {
-        return await this.metricsService.searchContent(queryBody.limit, queryBody.page, queryBody.sortBy, queryBody.sort.toUpperCase(), queryBody.filterObj, queryBody.searchObj);
+        return await this.metricsService.searchContent(queryBody.limit, queryBody.page, queryBody.sortBy, queryBody.sort?.toUpperCase(), queryBody.filterObj, queryBody.searchObj);
     }
 };
 exports.MetricsV1Controller = MetricsV1Controller;
