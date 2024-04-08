@@ -49,7 +49,16 @@ CREATE TABLE IF NOT EXISTS event
 	reaction Nullable(UInt32),
 	timesAudioUsed Nullable(UInt32),
 	outputText Nullable(String),
-	errorRate Nullable(UInt32)
+	errorRate Nullable(UInt32),
+	schemaId Nullable(UUID),
+	datasetId Nullable(UUID),
+	question Nullable(String),
+	field Nullable(String),
+	threshold Nullable(UInt32),
+	sqlQuery Nullable(String),
+	result Nullable(String),
+	documentId Nullable(String),
+	requestId Nullable(UUID)
 )
 ENGINE = MergeTree
 ORDER BY timestamp;

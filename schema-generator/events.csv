@@ -39,5 +39,5 @@ sno,eventName,subEventName,When is it generated,Status,eventId,Event Desc (JSON)
 38,,insertDataset,On return of this API call,,E038,,dataset-service,Required,,Required,Optional,Optional,,,,,,Optional,Required,,,,,,,,,,,,,,,,,,,,,Required,,,,,,,,optional
 39,documentService,upload,On return of this API call,,E039,,document-service,Required,,Required,Optional,Optional,,,,,,Optional,Optional,,,,,,,,,,,,,,,,,,,,,,,Required,,,,Required,Optional,optional
 40,,retrieve,On return of this API call,,E040,,document-service,Required,,Required,Optional,Optional,,,,,,Optional,Optional,,,,,,,,,,,,,,,,,,,,,,,,,,Required,,,
-41,Transformer Execution ,Initialization,When the transformer execution begins  ,,E041,,Transformer,Required,Required,Required,Required,Required,,,,,,Optional,,,Required,,,,,,,,,,,,,,,,,Required,,,,Required,,,,,,
-42,,Completion,When the transformer execution completes,,E042,,Transformer,Required,Required,Required,Required,Required,,,,,,Optional,Optional,,Required,,,,,,,,,,,,,,,,,Required,,,,Required,,,,,,
+41,Transformer Execution ,Initialization,When the transformer execution begins  ,,E041,,Transformer,Required,Required,Required,,Required,,,,,,Optional,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+42,,Completion,When the transformer execution completes,,E042,,Transformer,Required,Required,Required,,Required,,,,,,Optional,Optional,,,,,,,,,,,,,,,,,,,,,,,,,,,,,

@@ -2165,24 +2165,11 @@ When is it generated: When the transformer execution begins
             "type": "string",
             "format": "uuid"
         },
-        "conversationId ": {
-            "type": "string",
-            "format": "uuid"
-        },
         "messageId ": {
             "type": "string",
             "format": "uuid"
         },
         "error ": {
-            "type": "string"
-        },
-        "phoneNumber ": {
-            "type": "string"
-        },
-        "outputText ": {
-            "type": "string"
-        },
-        "question ": {
             "type": "string"
         }
     },
@@ -2190,11 +2177,7 @@ When is it generated: When the transformer execution begins
         "botId",
         "userId",
         "orgId",
-        "conversationId",
-        "messageId",
-        "phoneNumber",
-        "outputText",
-        "question"
+        "messageId"
     ],
     "description": "When the transformer execution begins  "
 }
@@ -2218,10 +2201,6 @@ When is it generated: When the transformer execution completes
             "type": "string",
             "format": "uuid"
         },
-        "conversationId ": {
-            "type": "string",
-            "format": "uuid"
-        },
         "messageId ": {
             "type": "string",
             "format": "uuid"
@@ -2231,26 +2210,13 @@ When is it generated: When the transformer execution completes
         },
         "timeTaken ": {
             "type": "number"
-        },
-        "phoneNumber ": {
-            "type": "string"
-        },
-        "outputText ": {
-            "type": "string"
-        },
-        "question ": {
-            "type": "string"
         }
     },
     "required": [
         "botId",
         "userId",
         "orgId",
-        "conversationId",
-        "messageId",
-        "phoneNumber",
-        "outputText",
-        "question"
+        "messageId"
     ],
     "description": "When the transformer execution completes"
 }

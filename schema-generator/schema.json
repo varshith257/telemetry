@@ -2277,24 +2277,11 @@
                     "type": "string",
                     "format": "uuid"
                 },
-                "conversationId ": {
-                    "type": "string",
-                    "format": "uuid"
-                },
                 "messageId ": {
                     "type": "string",
                     "format": "uuid"
                 },
                 "error ": {
-                    "type": "string"
-                },
-                "phoneNumber ": {
-                    "type": "string"
-                },
-                "outputText ": {
-                    "type": "string"
-                },
-                "question ": {
                     "type": "string"
                 }
             },
@@ -2302,11 +2289,7 @@
                 "botId",
                 "userId",
                 "orgId",
-                "conversationId",
-                "messageId",
-                "phoneNumber",
-                "outputText",
-                "question"
+                "messageId"
             ],
             "description": "When the transformer execution begins  "
         }
@@ -2333,10 +2316,6 @@
                     "type": "string",
                     "format": "uuid"
                 },
-                "conversationId ": {
-                    "type": "string",
-                    "format": "uuid"
-                },
                 "messageId ": {
                     "type": "string",
                     "format": "uuid"
@@ -2346,26 +2325,13 @@
                 },
                 "timeTaken ": {
                     "type": "number"
-                },
-                "phoneNumber ": {
-                    "type": "string"
-                },
-                "outputText ": {
-                    "type": "string"
-                },
-                "question ": {
-                    "type": "string"
                 }
             },
             "required": [
                 "botId",
                 "userId",
                 "orgId",
-                "conversationId",
-                "messageId",
-                "phoneNumber",
-                "outputText",
-                "question"
+                "messageId"
             ],
             "description": "When the transformer execution completes"
         }

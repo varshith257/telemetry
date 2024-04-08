@@ -145,5 +145,5 @@ function generateMigrationSql(headers, version) {
     sql = sql + `\n)\n`
     sql = sql + `ENGINE = MergeTree\n`
     sql = sql + `ORDER BY timestamp;\n`
-    // fs.writeFileSync('01.clickhouse.migration.sql', sql);
+    fs.writeFileSync('01.clickhouse.migration.sql', sql);
 }
