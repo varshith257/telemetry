@@ -141,16 +141,9 @@ function generateMigrationSql(headers, version) {
         const field = headers[i].split('|')[0].trim();
         const type = headers[i].split('|')[1].trim();
         sql = sql + `\t${field} Nullable(${csvToClickhouseTypeMapping[type]})`
-        // let thirdSplit = headers[i].split('|')[2];
-        // if (thirdSplit !== undefined) {
-        //     indexList.push(field.trim());
-        // }
     }
     sql = sql + `\n)\n`
     sql = sql + `ENGINE = MergeTree\n`
     sql = sql + `ORDER BY timestamp;\n`
-    // for (const colName of indexList) {
-    //     sql = sql + `ALTER TABLE events_v${version} ADD INDEX idx_${colName} (${colName});\n`;
-    // }
-    fs.writeFileSync('clickhouse.migration.sql', sql);
+    // fs.writeFileSync('01.clickhouse.migration.sql', sql);
 }

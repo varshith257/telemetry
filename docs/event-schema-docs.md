@@ -1599,8 +1599,8 @@ When is it generated: On return of this API call
 }
 ```
 ## datasetInjestion
-### todo
-When is it generated: todo
+### translationDictionary
+When is it generated: migration of data
 ```json
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
@@ -1619,11 +1619,11 @@ When is it generated: todo
         "botId",
         "orgId"
     ],
-    "description": "todo"
+    "description": "migration of data"
 }
 ```
-### todo
-When is it generated: todo
+### officials
+When is it generated: migration of data
 ```json
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
@@ -1642,58 +1642,12 @@ When is it generated: todo
         "botId",
         "orgId"
     ],
-    "description": "todo"
-}
-```
-### todo
-When is it generated: todo
-```json
-{
-    "$schema": "http://json-schema.org/draft-07/schema#",
-    "type": "object",
-    "properties": {
-        "botId ": {
-            "type": "string",
-            "format": "uuid"
-        },
-        "orgId ": {
-            "type": "string",
-            "format": "uuid"
-        }
-    },
-    "required": [
-        "botId",
-        "orgId"
-    ],
-    "description": "todo"
-}
-```
-### todo
-When is it generated: todo
-```json
-{
-    "$schema": "http://json-schema.org/draft-07/schema#",
-    "type": "object",
-    "properties": {
-        "botId ": {
-            "type": "string",
-            "format": "uuid"
-        },
-        "orgId ": {
-            "type": "string",
-            "format": "uuid"
-        }
-    },
-    "required": [
-        "botId",
-        "orgId"
-    ],
-    "description": "todo"
+    "description": "migration of data"
 }
 ```
 ## documentService
-### todo
-When is it generated: todo
+### document
+When is it generated: migration of data
 ```json
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
@@ -1712,11 +1666,11 @@ When is it generated: todo
         "botId",
         "orgId"
     ],
-    "description": "todo"
+    "description": "migration of data"
 }
 ```
-### todo
-When is it generated: todo
+### upload
+When is it generated: On return of this API call
 ```json
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
@@ -1729,17 +1683,46 @@ When is it generated: todo
         "orgId ": {
             "type": "string",
             "format": "uuid"
+        },
+        "conversationId ": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "messageId ": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "error ": {
+            "type": "string"
+        },
+        "timeTaken ": {
+            "type": "number"
+        },
+        "question ": {
+            "type": "string"
+        },
+        "result ": {
+            "type": "object"
+        },
+        "documentId ": {
+            "type": "array"
+        },
+        "requestId ": {
+            "type": "string",
+            "format": "uuid"
         }
     },
     "required": [
         "botId",
-        "orgId"
+        "orgId",
+        "question",
+        "result"
     ],
-    "description": "todo"
+    "description": "On return of this API call"
 }
 ```
-### todo
-When is it generated: todo
+### retrieve
+When is it generated: On return of this API call
 ```json
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
@@ -1752,36 +1735,31 @@ When is it generated: todo
         "orgId ": {
             "type": "string",
             "format": "uuid"
-        }
-    },
-    "required": [
-        "botId",
-        "orgId"
-    ],
-    "description": "todo"
-}
-```
-### todo
-When is it generated: todo
-```json
-{
-    "$schema": "http://json-schema.org/draft-07/schema#",
-    "type": "object",
-    "properties": {
-        "botId ": {
+        },
+        "conversationId ": {
             "type": "string",
             "format": "uuid"
         },
-        "orgId ": {
+        "messageId ": {
             "type": "string",
             "format": "uuid"
+        },
+        "error ": {
+            "type": "string"
+        },
+        "timeTaken ": {
+            "type": "number"
+        },
+        "sqlQuery ": {
+            "type": "string"
         }
     },
     "required": [
         "botId",
-        "orgId"
+        "orgId",
+        "sqlQuery"
     ],
-    "description": "todo"
+    "description": "On return of this API call"
 }
 ```
 ## messageQuery
@@ -1897,5 +1875,383 @@ When is it generated: When user receives back a response for sent message
         "timeTaken"
     ],
     "description": "When user receives back a response for sent message"
+}
+```
+## search
+### fuzzy search
+When is it generated: On return of this API call
+```json
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "properties": {
+        "botId ": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "orgId ": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "conversationId ": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "messageId ": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "error ": {
+            "type": "string"
+        },
+        "timeTaken ": {
+            "type": "number"
+        },
+        "datasetId ": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "question ": {
+            "type": "string"
+        },
+        "field": {
+            "type": "string"
+        },
+        "threshold ": {
+            "type": "number"
+        },
+        "result ": {
+            "type": "object"
+        },
+        "requestId ": {
+            "type": "string",
+            "format": "uuid"
+        }
+    },
+    "required": [
+        "botId",
+        "orgId",
+        "timeTaken",
+        "datasetId",
+        "question",
+        "field",
+        "threshold",
+        "result"
+    ],
+    "description": "On return of this API call"
+}
+```
+### vector search
+When is it generated: On return of this API call
+```json
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "properties": {
+        "botId ": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "orgId ": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "conversationId ": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "messageId ": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "error ": {
+            "type": "string"
+        },
+        "timeTaken ": {
+            "type": "number"
+        },
+        "datasetId ": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "question ": {
+            "type": "string"
+        },
+        "field": {
+            "type": "string"
+        },
+        "result ": {
+            "type": "object"
+        },
+        "requestId ": {
+            "type": "string",
+            "format": "uuid"
+        }
+    },
+    "required": [
+        "botId",
+        "orgId",
+        "timeTaken",
+        "datasetId",
+        "question",
+        "field",
+        "result"
+    ],
+    "description": "On return of this API call"
+}
+```
+### execute-query 
+When is it generated: On return of this API call
+```json
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "properties": {
+        "botId ": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "orgId ": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "conversationId ": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "messageId ": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "error ": {
+            "type": "string"
+        },
+        "timeTaken ": {
+            "type": "number"
+        },
+        "datasetId ": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "sqlQuery ": {
+            "type": "string"
+        },
+        "result ": {
+            "type": "object"
+        },
+        "requestId ": {
+            "type": "string",
+            "format": "uuid"
+        }
+    },
+    "required": [
+        "botId",
+        "orgId",
+        "timeTaken",
+        "datasetId",
+        "sqlQuery",
+        "result"
+    ],
+    "description": "On return of this API call"
+}
+```
+## Data Insertion
+### create schema
+When is it generated: On return of this API call
+```json
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "properties": {
+        "botId ": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "orgId ": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "conversationId ": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "messageId ": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "error ": {
+            "type": "string"
+        },
+        "timeTaken ": {
+            "type": "number"
+        },
+        "requestId ": {
+            "type": "string",
+            "format": "uuid"
+        }
+    },
+    "required": [
+        "botId",
+        "orgId",
+        "timeTaken"
+    ],
+    "description": "On return of this API call"
+}
+```
+### insertDataset
+When is it generated: On return of this API call
+```json
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "properties": {
+        "botId ": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "orgId ": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "conversationId ": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "messageId ": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "error ": {
+            "type": "string"
+        },
+        "timeTaken ": {
+            "type": "number"
+        },
+        "schemaId ": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "requestId ": {
+            "type": "string",
+            "format": "uuid"
+        }
+    },
+    "required": [
+        "botId",
+        "orgId",
+        "timeTaken",
+        "schemaId"
+    ],
+    "description": "On return of this API call"
+}
+```
+## Transformer Execution 
+### Initialization
+When is it generated: When the transformer execution begins  
+```json
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "properties": {
+        "botId ": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "userId ": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "orgId ": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "conversationId ": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "messageId ": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "error ": {
+            "type": "string"
+        },
+        "phoneNumber ": {
+            "type": "string"
+        },
+        "outputText ": {
+            "type": "string"
+        },
+        "question ": {
+            "type": "string"
+        }
+    },
+    "required": [
+        "botId",
+        "userId",
+        "orgId",
+        "conversationId",
+        "messageId",
+        "phoneNumber",
+        "outputText",
+        "question"
+    ],
+    "description": "When the transformer execution begins  "
+}
+```
+### Completion
+When is it generated: When the transformer execution completes
+```json
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "properties": {
+        "botId ": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "userId ": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "orgId ": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "conversationId ": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "messageId ": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "error ": {
+            "type": "string"
+        },
+        "timeTaken ": {
+            "type": "number"
+        },
+        "phoneNumber ": {
+            "type": "string"
+        },
+        "outputText ": {
+            "type": "string"
+        },
+        "question ": {
+            "type": "string"
+        }
+    },
+    "required": [
+        "botId",
+        "userId",
+        "orgId",
+        "conversationId",
+        "messageId",
+        "phoneNumber",
+        "outputText",
+        "question"
+    ],
+    "description": "When the transformer execution completes"
 }
 ```
