@@ -21,7 +21,7 @@ sno,eventName,subEventName,When is it generated,Status,eventId,Event Desc (JSON)
 20,,convertMsgFailed,Raw message conversion to XMessage failed,New Data,E020,,Inbound,Required,,Required,Optional,Optional,,,Optional,Optional,,,,,,Required,,Required,,,,,,,,,,,,,,,,,,,,,,,,
 21,,registrationRequest,A registration request was sent to the bot,New Data,E021,,Inbound,Required,,Required,Required,Required,,,Optional,Optional,,,,,,Required,,Required,Required,,,,,,,,,,,,,,,,,,,,,,,
 22,,registrationFailed,A registration request failed,New Data,E022,,Inbound,Required,,Required,Required,Required,,,Optional,Optional,,,,,,Required,,Required,Required,,,,,,,,,,,,,,,,,,,,,,,
-23,,feedbackRequest,A user sent a feedback on a message,New Data,E023,,Inbound,Required,,Required,Required,Required,,,Optional,,,,,,,Required,,Required,,,,,,,,,,,Optonal,,,,,,,,,,,,,
+23,,feedbackRequest,A user sent a feedback on a message,New Data,E023,,Inbound,Required,,Required,Required,Required,,,Optional,,,,,,,Required,,Required,,,,,,,,,,,Optonal,Optional,,,,,,,,,,,,
 24,,messageRead,User read the message sent by a bot,New Data,E024,,Inbound,Required,,Required,Required,Required,,,Optional,Optional,,,,,,Required,,Required,,,,,,,,,,,,,,,,,,,,,,,,
 25,AI-Tools,speechToText,On return of this API call,,E025,,AI-Tools-Proxy,Optional,Optional,Optional,Optional,Optional,Required,Optional,Required,,,Optional,Required,,,Optional,Optional,,,,,,,,,,,,,,,,,,,,,,,,,
 26,,textToSpeech,On return of this API call,,E026,,AI-Tools-Proxy,Optional,Optional,Optional,Optional,Optional,Required,Optional,Required,,,Optional,Required,,,Optional,Optional,,,,,,,,,,,,,,,,,,,,,,,,,
@@ -39,5 +39,5 @@ sno,eventName,subEventName,When is it generated,Status,eventId,Event Desc (JSON)
 38,,insertDataset,On return of this API call,,E038,,dataset-service,Required,,Required,Optional,Optional,,,,,,Optional,Required,,,,,,,,,,,,,,,,,,,,,Required,,,,,,,,optional
 39,documentService,upload,On return of this API call,,E039,,document-service,Required,,Required,Optional,Optional,,,,,,Optional,Optional,,,,,,,,,,,,,,,,,,,,,,,Required,,,,Required,Optional,optional
 40,,retrieve,On return of this API call,,E040,,document-service,Required,,Required,Optional,Optional,,,,,,Optional,Optional,,,,,,,,,,,,,,,,,,,,,,,,,,Required,,,
-41,Transformer Execution ,Initialization,When the transformer execution begins  ,,E041,,Transformer,Required,Required,Required,,Required,,,,,,Optional,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-42,,Completion,When the transformer execution completes,,E042,,Transformer,Required,Required,Required,,Required,,,,,,Optional,Optional,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+41,Transformer Execution ,DEFAULT_TRANSFORMER_START_EVENT,When the transformer execution begins  ,,E041,,Transformer,Required,,Required,,Required,,,,,,Optional,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+42,,DEFAULT_TRANSFORMER_END_EVENT,When the transformer execution completes,,E042,,Transformer,Required,,Required,,Required,,,,,,Optional,Optional,,,,,,,,,,,,,,,,,,,,,,,,,,,,,

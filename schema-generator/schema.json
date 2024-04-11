@@ -1372,6 +1372,9 @@
                 },
                 "feedback ": {
                     "type": "string"
+                },
+                "reaction ": {
+                    "type": "number"
                 }
             },
             "required": [
@@ -2259,17 +2262,13 @@
         "eventProperties": {
             "eventId": "E041",
             "eventName": "Transformer Execution ",
-            "subEventName": "Initialization"
+            "subEventName": "DEFAULT_TRANSFORMER_START_EVENT"
         },
         "eventSchema": {
             "$schema": "http://json-schema.org/draft-07/schema#",
             "type": "object",
             "properties": {
                 "botId ": {
-                    "type": "string",
-                    "format": "uuid"
-                },
-                "userId ": {
                     "type": "string",
                     "format": "uuid"
                 },
@@ -2287,7 +2286,6 @@
             },
             "required": [
                 "botId",
-                "userId",
                 "orgId",
                 "messageId"
             ],
@@ -2298,17 +2296,13 @@
         "eventProperties": {
             "eventId": "E042",
             "eventName": "Transformer Execution ",
-            "subEventName": "Completion"
+            "subEventName": "DEFAULT_TRANSFORMER_END_EVENT"
         },
         "eventSchema": {
             "$schema": "http://json-schema.org/draft-07/schema#",
             "type": "object",
             "properties": {
                 "botId ": {
-                    "type": "string",
-                    "format": "uuid"
-                },
-                "userId ": {
                     "type": "string",
                     "format": "uuid"
                 },
@@ -2329,7 +2323,6 @@
             },
             "required": [
                 "botId",
-                "userId",
                 "orgId",
                 "messageId"
             ],

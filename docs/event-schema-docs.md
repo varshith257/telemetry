@@ -1307,6 +1307,9 @@ When is it generated: A user sent a feedback on a message
         },
         "feedback ": {
             "type": "string"
+        },
+        "reaction ": {
+            "type": "number"
         }
     },
     "required": [
@@ -2146,7 +2149,7 @@ When is it generated: On return of this API call
 }
 ```
 ## Transformer Execution 
-### Initialization
+### DEFAULT_TRANSFORMER_START_EVENT
 When is it generated: When the transformer execution begins  
 ```json
 {
@@ -2154,10 +2157,6 @@ When is it generated: When the transformer execution begins
     "type": "object",
     "properties": {
         "botId ": {
-            "type": "string",
-            "format": "uuid"
-        },
-        "userId ": {
             "type": "string",
             "format": "uuid"
         },
@@ -2175,14 +2174,13 @@ When is it generated: When the transformer execution begins
     },
     "required": [
         "botId",
-        "userId",
         "orgId",
         "messageId"
     ],
     "description": "When the transformer execution begins  "
 }
 ```
-### Completion
+### DEFAULT_TRANSFORMER_END_EVENT
 When is it generated: When the transformer execution completes
 ```json
 {
@@ -2190,10 +2188,6 @@ When is it generated: When the transformer execution completes
     "type": "object",
     "properties": {
         "botId ": {
-            "type": "string",
-            "format": "uuid"
-        },
-        "userId ": {
             "type": "string",
             "format": "uuid"
         },
@@ -2214,7 +2208,6 @@ When is it generated: When the transformer execution completes
     },
     "required": [
         "botId",
-        "userId",
         "orgId",
         "messageId"
     ],
