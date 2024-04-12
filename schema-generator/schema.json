@@ -352,6 +352,9 @@
                 "text ": {
                     "type": "string"
                 },
+                "error ": {
+                    "type": "string"
+                },
                 "timeTaken ": {
                     "type": "number"
                 },
@@ -364,6 +367,12 @@
                 },
                 "district ": {
                     "type": "string"
+                },
+                "eventLog ": {
+                    "type": "string"
+                },
+                "transformerId ": {
+                    "type": "string"
                 }
             },
             "required": [
@@ -372,7 +381,7 @@
                 "orgId",
                 "messageId",
                 "text",
-                "queryId"
+                "transformerId"
             ],
             "description": "Fetching user info - transformer"
         }
@@ -410,6 +419,12 @@
                 "text ": {
                     "type": "string"
                 },
+                "error ": {
+                    "type": "string"
+                },
+                "timeTaken ": {
+                    "type": "number"
+                },
                 "phoneNumber ": {
                     "type": "string"
                 },
@@ -422,6 +437,12 @@
                 },
                 "textInEnglish ": {
                     "type": "string"
+                },
+                "eventLog ": {
+                    "type": "string"
+                },
+                "transformerId ": {
+                    "type": "string"
                 }
             },
             "required": [
@@ -430,7 +451,7 @@
                 "orgId",
                 "messageId",
                 "text",
-                "queryId"
+                "transformerId"
             ],
             "description": "translate - transformer"
         }
@@ -468,6 +489,9 @@
                 "text ": {
                     "type": "string"
                 },
+                "error ": {
+                    "type": "string"
+                },
                 "timeTaken ": {
                     "type": "number"
                 },
@@ -483,6 +507,12 @@
                 },
                 "coreferencedText ": {
                     "type": "string"
+                },
+                "eventLog ": {
+                    "type": "string"
+                },
+                "transformerId ": {
+                    "type": "string"
                 }
             },
             "required": [
@@ -491,9 +521,8 @@
                 "orgId",
                 "messageId",
                 "text",
-                "timeTaken",
-                "queryId",
-                "textInEnglish"
+                "textInEnglish",
+                "transformerId"
             ],
             "description": "nuralCoref - transformer"
         }
@@ -531,6 +560,9 @@
                 "text ": {
                     "type": "string"
                 },
+                "error ": {
+                    "type": "string"
+                },
                 "timeTaken ": {
                     "type": "number"
                 },
@@ -546,6 +578,12 @@
                 },
                 "queryClass ": {
                     "type": "string"
+                },
+                "eventLog ": {
+                    "type": "string"
+                },
+                "transformerId ": {
+                    "type": "string"
                 }
             },
             "required": [
@@ -554,9 +592,8 @@
                 "orgId",
                 "messageId",
                 "text",
-                "timeTaken",
-                "queryId",
-                "textInEnglish"
+                "textInEnglish",
+                "transformerId"
             ],
             "description": "classifier - transformer"
         }
@@ -594,6 +631,9 @@
                 "text ": {
                     "type": "string"
                 },
+                "error ": {
+                    "type": "string"
+                },
                 "timeTaken ": {
                     "type": "number"
                 },
@@ -609,6 +649,12 @@
                 },
                 "similarChunks ": {
                     "type": "object"
+                },
+                "eventLog ": {
+                    "type": "string"
+                },
+                "transformerId ": {
+                    "type": "string"
                 }
             },
             "required": [
@@ -617,9 +663,8 @@
                 "orgId",
                 "messageId",
                 "text",
-                "timeTaken",
-                "queryId",
-                "textInEnglish"
+                "textInEnglish",
+                "transformerId"
             ],
             "description": "retieveDocs - transformer"
         }
@@ -657,6 +702,9 @@
                 "text ": {
                     "type": "string"
                 },
+                "error ": {
+                    "type": "string"
+                },
                 "timeTaken ": {
                     "type": "number"
                 },
@@ -672,6 +720,12 @@
                 },
                 "NER ": {
                     "type": "object"
+                },
+                "eventLog ": {
+                    "type": "string"
+                },
+                "transformerId ": {
+                    "type": "string"
                 }
             },
             "required": [
@@ -680,10 +734,9 @@
                 "orgId",
                 "messageId",
                 "text",
-                "timeTaken",
-                "queryId",
                 "textInEnglish",
-                "NER"
+                "NER",
+                "transformerId"
             ],
             "description": "ner - transformer"
         }
@@ -721,6 +774,9 @@
                 "text ": {
                     "type": "string"
                 },
+                "error ": {
+                    "type": "string"
+                },
                 "timeTaken ": {
                     "type": "number"
                 },
@@ -739,6 +795,12 @@
                 },
                 "response ": {
                     "type": "string"
+                },
+                "eventLog ": {
+                    "type": "string"
+                },
+                "transformerId ": {
+                    "type": "string"
                 }
             },
             "required": [
@@ -747,9 +809,8 @@
                 "orgId",
                 "messageId",
                 "text",
-                "timeTaken",
-                "queryId",
-                "textInEnglish"
+                "textInEnglish",
+                "transformerId"
             ],
             "description": "llm - transformer"
         }
@@ -787,6 +848,9 @@
                 "text ": {
                     "type": "string"
                 },
+                "error ": {
+                    "type": "string"
+                },
                 "timeTaken ": {
                     "type": "number"
                 },
@@ -805,6 +869,12 @@
                 },
                 "response ": {
                     "type": "string"
+                },
+                "eventLog ": {
+                    "type": "string"
+                },
+                "transformerId ": {
+                    "type": "string"
                 }
             },
             "required": [
@@ -813,9 +883,9 @@
                 "orgId",
                 "messageId",
                 "text",
-                "queryId",
                 "textInEnglish",
-                "response"
+                "response",
+                "transformerId"
             ],
             "description": "translate - transformer"
         }
@@ -2282,12 +2352,16 @@
                 },
                 "error ": {
                     "type": "string"
+                },
+                "transformerId ": {
+                    "type": "string"
                 }
             },
             "required": [
                 "botId",
                 "orgId",
-                "messageId"
+                "messageId",
+                "transformerId"
             ],
             "description": "When the transformer execution begins  "
         }
@@ -2319,12 +2393,16 @@
                 },
                 "timeTaken ": {
                     "type": "number"
+                },
+                "transformerId ": {
+                    "type": "string"
                 }
             },
             "required": [
                 "botId",
                 "orgId",
-                "messageId"
+                "messageId",
+                "transformerId"
             ],
             "description": "When the transformer execution completes"
         }

@@ -337,6 +337,9 @@ When is it generated: Fetching user info - transformer
         "text ": {
             "type": "string"
         },
+        "error ": {
+            "type": "string"
+        },
         "timeTaken ": {
             "type": "number"
         },
@@ -349,6 +352,12 @@ When is it generated: Fetching user info - transformer
         },
         "district ": {
             "type": "string"
+        },
+        "eventLog ": {
+            "type": "string"
+        },
+        "transformerId ": {
+            "type": "string"
         }
     },
     "required": [
@@ -357,7 +366,7 @@ When is it generated: Fetching user info - transformer
         "orgId",
         "messageId",
         "text",
-        "queryId"
+        "transformerId"
     ],
     "description": "Fetching user info - transformer"
 }
@@ -392,6 +401,12 @@ When is it generated: translate - transformer
         "text ": {
             "type": "string"
         },
+        "error ": {
+            "type": "string"
+        },
+        "timeTaken ": {
+            "type": "number"
+        },
         "phoneNumber ": {
             "type": "string"
         },
@@ -404,6 +419,12 @@ When is it generated: translate - transformer
         },
         "textInEnglish ": {
             "type": "string"
+        },
+        "eventLog ": {
+            "type": "string"
+        },
+        "transformerId ": {
+            "type": "string"
         }
     },
     "required": [
@@ -412,7 +433,7 @@ When is it generated: translate - transformer
         "orgId",
         "messageId",
         "text",
-        "queryId"
+        "transformerId"
     ],
     "description": "translate - transformer"
 }
@@ -447,6 +468,9 @@ When is it generated: nuralCoref - transformer
         "text ": {
             "type": "string"
         },
+        "error ": {
+            "type": "string"
+        },
         "timeTaken ": {
             "type": "number"
         },
@@ -462,6 +486,12 @@ When is it generated: nuralCoref - transformer
         },
         "coreferencedText ": {
             "type": "string"
+        },
+        "eventLog ": {
+            "type": "string"
+        },
+        "transformerId ": {
+            "type": "string"
         }
     },
     "required": [
@@ -470,9 +500,8 @@ When is it generated: nuralCoref - transformer
         "orgId",
         "messageId",
         "text",
-        "timeTaken",
-        "queryId",
-        "textInEnglish"
+        "textInEnglish",
+        "transformerId"
     ],
     "description": "nuralCoref - transformer"
 }
@@ -507,6 +536,9 @@ When is it generated: classifier - transformer
         "text ": {
             "type": "string"
         },
+        "error ": {
+            "type": "string"
+        },
         "timeTaken ": {
             "type": "number"
         },
@@ -522,6 +554,12 @@ When is it generated: classifier - transformer
         },
         "queryClass ": {
             "type": "string"
+        },
+        "eventLog ": {
+            "type": "string"
+        },
+        "transformerId ": {
+            "type": "string"
         }
     },
     "required": [
@@ -530,9 +568,8 @@ When is it generated: classifier - transformer
         "orgId",
         "messageId",
         "text",
-        "timeTaken",
-        "queryId",
-        "textInEnglish"
+        "textInEnglish",
+        "transformerId"
     ],
     "description": "classifier - transformer"
 }
@@ -567,6 +604,9 @@ When is it generated: retieveDocs - transformer
         "text ": {
             "type": "string"
         },
+        "error ": {
+            "type": "string"
+        },
         "timeTaken ": {
             "type": "number"
         },
@@ -582,6 +622,12 @@ When is it generated: retieveDocs - transformer
         },
         "similarChunks ": {
             "type": "object"
+        },
+        "eventLog ": {
+            "type": "string"
+        },
+        "transformerId ": {
+            "type": "string"
         }
     },
     "required": [
@@ -590,9 +636,8 @@ When is it generated: retieveDocs - transformer
         "orgId",
         "messageId",
         "text",
-        "timeTaken",
-        "queryId",
-        "textInEnglish"
+        "textInEnglish",
+        "transformerId"
     ],
     "description": "retieveDocs - transformer"
 }
@@ -627,6 +672,9 @@ When is it generated: ner - transformer
         "text ": {
             "type": "string"
         },
+        "error ": {
+            "type": "string"
+        },
         "timeTaken ": {
             "type": "number"
         },
@@ -642,6 +690,12 @@ When is it generated: ner - transformer
         },
         "NER ": {
             "type": "object"
+        },
+        "eventLog ": {
+            "type": "string"
+        },
+        "transformerId ": {
+            "type": "string"
         }
     },
     "required": [
@@ -650,10 +704,9 @@ When is it generated: ner - transformer
         "orgId",
         "messageId",
         "text",
-        "timeTaken",
-        "queryId",
         "textInEnglish",
-        "NER"
+        "NER",
+        "transformerId"
     ],
     "description": "ner - transformer"
 }
@@ -688,6 +741,9 @@ When is it generated: llm - transformer
         "text ": {
             "type": "string"
         },
+        "error ": {
+            "type": "string"
+        },
         "timeTaken ": {
             "type": "number"
         },
@@ -706,6 +762,12 @@ When is it generated: llm - transformer
         },
         "response ": {
             "type": "string"
+        },
+        "eventLog ": {
+            "type": "string"
+        },
+        "transformerId ": {
+            "type": "string"
         }
     },
     "required": [
@@ -714,9 +776,8 @@ When is it generated: llm - transformer
         "orgId",
         "messageId",
         "text",
-        "timeTaken",
-        "queryId",
-        "textInEnglish"
+        "textInEnglish",
+        "transformerId"
     ],
     "description": "llm - transformer"
 }
@@ -751,6 +812,9 @@ When is it generated: translate - transformer
         "text ": {
             "type": "string"
         },
+        "error ": {
+            "type": "string"
+        },
         "timeTaken ": {
             "type": "number"
         },
@@ -769,6 +833,12 @@ When is it generated: translate - transformer
         },
         "response ": {
             "type": "string"
+        },
+        "eventLog ": {
+            "type": "string"
+        },
+        "transformerId ": {
+            "type": "string"
         }
     },
     "required": [
@@ -777,9 +847,9 @@ When is it generated: translate - transformer
         "orgId",
         "messageId",
         "text",
-        "queryId",
         "textInEnglish",
-        "response"
+        "response",
+        "transformerId"
     ],
     "description": "translate - transformer"
 }
@@ -2170,12 +2240,16 @@ When is it generated: When the transformer execution begins
         },
         "error ": {
             "type": "string"
+        },
+        "transformerId ": {
+            "type": "string"
         }
     },
     "required": [
         "botId",
         "orgId",
-        "messageId"
+        "messageId",
+        "transformerId"
     ],
     "description": "When the transformer execution begins  "
 }
@@ -2204,12 +2278,16 @@ When is it generated: When the transformer execution completes
         },
         "timeTaken ": {
             "type": "number"
+        },
+        "transformerId ": {
+            "type": "string"
         }
     },
     "required": [
         "botId",
         "orgId",
-        "messageId"
+        "messageId",
+        "transformerId"
     ],
     "description": "When the transformer execution completes"
 }

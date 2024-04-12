@@ -58,7 +58,9 @@ CREATE TABLE IF NOT EXISTS event
 	sqlQuery Nullable(String),
 	result Nullable(String),
 	documentId Nullable(String),
-	requestId Nullable(UUID)
+	requestId Nullable(UUID),
+	eventLog Nullable(String),
+	transformerId Nullable(String)
 )
 ENGINE = MergeTree
 ORDER BY timestamp;
