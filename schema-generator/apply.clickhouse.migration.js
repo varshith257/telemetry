@@ -35,24 +35,24 @@ async function runSQLFile(filePath, client) {
 }
 
 async function main() {
-  // const client = new clickhouse.ClickHouse({
-  //   host: process.env.CLICKHOUSE_HOST,
-  //   database: process.env.CLICKHOUSE_DB,
-  //   basicAuth: {
-  //     username: process.env.CLICKHOUSE_USER,
-  //     password: process.env.CLICKHOUSE_PASSWORD,
-  //   },
-  //   format: 'json'
-  // });
   const client = new clickhouse.ClickHouse({
-    host: 'http://localhost:18123',
-    database: 'my_database',
+    host: process.env.CLICKHOUSE_HOST,
+    database: process.env.CLICKHOUSE_DB,
     basicAuth: {
-      username: 'username',
-      password: 'password',
+      username: process.env.CLICKHOUSE_USER,
+      password: process.env.CLICKHOUSE_PASSWORD,
     },
     format: 'json'
   });
+  // const client = new clickhouse.ClickHouse({
+  //   host: 'http://localhost:18123',
+  //   database: 'my_database',
+  //   basicAuth: {
+  //     username: 'username',
+  //     password: 'password',
+  //   },
+  //   format: 'json'
+  // });
   // const client = new clickhouse.ClickHouse({
   //   host: 'https://clickhouse.staging.bhasai.samagra.io/',
   //   database: "default",
@@ -62,8 +62,8 @@ async function main() {
   //   },
   //   format: 'json'
   // });
-  runSQLFile('01.clickhouse.migration.sql', client);
-  // runSQLFile('02.clickhouse.migration.sql', client);
+  // runSQLFile('01.clickhouse.migration.sql', client);
+  runSQLFile('02.clickhouse.migration.sql', client);
   // runSQLFile('add.combined.view.clickhouse.sql', client)
 }
 

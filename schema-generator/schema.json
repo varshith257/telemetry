@@ -731,7 +731,6 @@
                 "orgId",
                 "messageId",
                 "text",
-                "NER",
                 "transformerId"
             ],
             "description": "ner - transformer"
@@ -814,7 +813,7 @@
         "eventProperties": {
             "eventId": "E013",
             "eventName": "userQuery",
-            "subEventName": "translateOutput"
+            "subEventName": "userQuery"
         },
         "eventSchema": {
             "$schema": "http://json-schema.org/draft-07/schema#",
@@ -888,7 +887,7 @@
         "eventProperties": {
             "eventId": "E014",
             "eventName": "userQuery",
-            "subEventName": "textToSpeech"
+            "subEventName": ""
         },
         "eventSchema": {
             "$schema": "http://json-schema.org/draft-07/schema#",
@@ -963,7 +962,7 @@
         "eventProperties": {
             "eventId": "E015",
             "eventName": "userQuery",
-            "subEventName": "audioPlayed"
+            "subEventName": ""
         },
         "eventSchema": {
             "$schema": "http://json-schema.org/draft-07/schema#",
@@ -1024,7 +1023,7 @@
         "eventProperties": {
             "eventId": "E016",
             "eventName": "userQuery",
-            "subEventName": "queryError"
+            "subEventName": ""
         },
         "eventSchema": {
             "$schema": "http://json-schema.org/draft-07/schema#",
@@ -1070,7 +1069,7 @@
         "eventProperties": {
             "eventId": "E017",
             "eventName": "userQuery",
-            "subEventName": "responseReceivedAtApp"
+            "subEventName": ""
         },
         "eventSchema": {
             "$schema": "http://json-schema.org/draft-07/schema#",
@@ -1132,7 +1131,7 @@
         "eventProperties": {
             "eventId": "E018",
             "eventName": "userQueryInbound",
-            "subEventName": "outgoingMessage"
+            "subEventName": ""
         },
         "eventSchema": {
             "$schema": "http://json-schema.org/draft-07/schema#",
@@ -1191,7 +1190,7 @@
         "eventProperties": {
             "eventId": "E019",
             "eventName": "userQueryInbound",
-            "subEventName": "convertXmsgFailed"
+            "subEventName": ""
         },
         "eventSchema": {
             "$schema": "http://json-schema.org/draft-07/schema#",
@@ -1246,7 +1245,7 @@
         "eventProperties": {
             "eventId": "E020",
             "eventName": "userQueryInbound",
-            "subEventName": "convertMsgFailed"
+            "subEventName": ""
         },
         "eventSchema": {
             "$schema": "http://json-schema.org/draft-07/schema#",
@@ -1294,7 +1293,7 @@
         "eventProperties": {
             "eventId": "E021",
             "eventName": "userQueryInbound",
-            "subEventName": "registrationRequest"
+            "subEventName": ""
         },
         "eventSchema": {
             "$schema": "http://json-schema.org/draft-07/schema#",
@@ -1348,7 +1347,7 @@
         "eventProperties": {
             "eventId": "E022",
             "eventName": "userQueryInbound",
-            "subEventName": "registrationFailed"
+            "subEventName": ""
         },
         "eventSchema": {
             "$schema": "http://json-schema.org/draft-07/schema#",
@@ -1402,7 +1401,7 @@
         "eventProperties": {
             "eventId": "E023",
             "eventName": "userQueryInbound",
-            "subEventName": "feedbackRequest"
+            "subEventName": ""
         },
         "eventSchema": {
             "$schema": "http://json-schema.org/draft-07/schema#",
@@ -1455,7 +1454,7 @@
         "eventProperties": {
             "eventId": "E024",
             "eventName": "userQueryInbound",
-            "subEventName": "messageRead"
+            "subEventName": ""
         },
         "eventSchema": {
             "$schema": "http://json-schema.org/draft-07/schema#",
@@ -1505,7 +1504,7 @@
         "eventProperties": {
             "eventId": "E025",
             "eventName": "AI-Tools",
-            "subEventName": "speechToText"
+            "subEventName": ""
         },
         "eventSchema": {
             "$schema": "http://json-schema.org/draft-07/schema#",
@@ -1568,7 +1567,7 @@
         "eventProperties": {
             "eventId": "E026",
             "eventName": "AI-Tools",
-            "subEventName": "textToSpeech"
+            "subEventName": ""
         },
         "eventSchema": {
             "$schema": "http://json-schema.org/draft-07/schema#",
@@ -2394,10 +2393,50 @@
             "required": [
                 "botId",
                 "orgId",
-                "messageId",
                 "transformerId"
             ],
             "description": "When the transformer execution completes"
+        }
+    },
+    {
+        "eventProperties": {
+            "eventId": "E043",
+            "eventName": "userQuery",
+            "subEventName": "detectLanguage"
+        },
+        "eventSchema": {
+            "$schema": "http://json-schema.org/draft-07/schema#",
+            "type": "object",
+            "properties": {
+                "botId ": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "orgId ": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "conversationId ": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "messageId ": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "timeTaken ": {
+                    "type": "number"
+                },
+                "language ": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "botId",
+                "orgId",
+                "language"
+            ],
+            "description": ""
         }
     }
 ]

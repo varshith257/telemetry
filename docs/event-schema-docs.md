@@ -701,7 +701,6 @@ When is it generated: ner - transformer
         "orgId",
         "messageId",
         "text",
-        "NER",
         "transformerId"
     ],
     "description": "ner - transformer"
@@ -777,7 +776,7 @@ When is it generated: llm - transformer
     "description": "llm - transformer"
 }
 ```
-### translateOutput
+### userQuery
 When is it generated: translate - transformer
 ```json
 {
@@ -848,7 +847,7 @@ When is it generated: translate - transformer
     "description": "translate - transformer"
 }
 ```
-### textToSpeech
+### 
 When is it generated: textToSpeech - transformer
 ```json
 {
@@ -920,7 +919,7 @@ When is it generated: textToSpeech - transformer
     "description": "textToSpeech - transformer"
 }
 ```
-### audioPlayed
+### 
 When is it generated: When user plays audio at app
 ```json
 {
@@ -978,7 +977,7 @@ When is it generated: When user plays audio at app
     "description": "When user plays audio at app"
 }
 ```
-### queryError
+### 
 When is it generated: When an error is occured during query process
 ```json
 {
@@ -1021,7 +1020,7 @@ When is it generated: When an error is occured during query process
     "description": "When an error is occured during query process"
 }
 ```
-### responseReceivedAtApp
+### 
 When is it generated: When user gets the response at app
 ```json
 {
@@ -1080,8 +1079,46 @@ When is it generated: When user gets the response at app
     "description": "When user gets the response at app"
 }
 ```
+### detectLanguage
+When is it generated: 
+```json
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "properties": {
+        "botId ": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "orgId ": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "conversationId ": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "messageId ": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "timeTaken ": {
+            "type": "number"
+        },
+        "language ": {
+            "type": "string"
+        }
+    },
+    "required": [
+        "botId",
+        "orgId",
+        "language"
+    ],
+    "description": ""
+}
+```
 ## userQueryInbound
-### outgoingMessage
+### 
 When is it generated: A message was sent to user
 ```json
 {
@@ -1137,7 +1174,7 @@ When is it generated: A message was sent to user
     "description": "A message was sent to user"
 }
 ```
-### convertXmsgFailed
+### 
 When is it generated: XMessage to raw message conversion failed
 ```json
 {
@@ -1189,7 +1226,7 @@ When is it generated: XMessage to raw message conversion failed
     "description": "XMessage to raw message conversion failed"
 }
 ```
-### convertMsgFailed
+### 
 When is it generated: Raw message conversion to XMessage failed
 ```json
 {
@@ -1234,7 +1271,7 @@ When is it generated: Raw message conversion to XMessage failed
     "description": "Raw message conversion to XMessage failed"
 }
 ```
-### registrationRequest
+### 
 When is it generated: A registration request was sent to the bot
 ```json
 {
@@ -1285,7 +1322,7 @@ When is it generated: A registration request was sent to the bot
     "description": "A registration request was sent to the bot"
 }
 ```
-### registrationFailed
+### 
 When is it generated: A registration request failed
 ```json
 {
@@ -1336,7 +1373,7 @@ When is it generated: A registration request failed
     "description": "A registration request failed"
 }
 ```
-### feedbackRequest
+### 
 When is it generated: A user sent a feedback on a message
 ```json
 {
@@ -1386,7 +1423,7 @@ When is it generated: A user sent a feedback on a message
     "description": "A user sent a feedback on a message"
 }
 ```
-### messageRead
+### 
 When is it generated: User read the message sent by a bot
 ```json
 {
@@ -1434,7 +1471,7 @@ When is it generated: User read the message sent by a bot
 }
 ```
 ## AI-Tools
-### speechToText
+### 
 When is it generated: On return of this API call
 ```json
 {
@@ -1494,7 +1531,7 @@ When is it generated: On return of this API call
     "description": "On return of this API call"
 }
 ```
-### textToSpeech
+### 
 When is it generated: On return of this API call
 ```json
 {
@@ -2279,7 +2316,6 @@ When is it generated: When the transformer execution completes
     "required": [
         "botId",
         "orgId",
-        "messageId",
         "transformerId"
     ],
     "description": "When the transformer execution completes"
