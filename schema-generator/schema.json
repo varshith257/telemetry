@@ -521,7 +521,6 @@
                 "orgId",
                 "messageId",
                 "text",
-                "textInEnglish",
                 "transformerId"
             ],
             "description": "nuralCoref - transformer"
@@ -592,7 +591,6 @@
                 "orgId",
                 "messageId",
                 "text",
-                "textInEnglish",
                 "transformerId"
             ],
             "description": "classifier - transformer"
@@ -663,7 +661,6 @@
                 "orgId",
                 "messageId",
                 "text",
-                "textInEnglish",
                 "transformerId"
             ],
             "description": "retieveDocs - transformer"
@@ -734,7 +731,6 @@
                 "orgId",
                 "messageId",
                 "text",
-                "textInEnglish",
                 "NER",
                 "transformerId"
             ],
@@ -809,7 +805,6 @@
                 "orgId",
                 "messageId",
                 "text",
-                "textInEnglish",
                 "transformerId"
             ],
             "description": "llm - transformer"
@@ -883,7 +878,6 @@
                 "orgId",
                 "messageId",
                 "text",
-                "textInEnglish",
                 "response",
                 "transformerId"
             ],
@@ -960,7 +954,6 @@
                 "text",
                 "timeTaken",
                 "queryId",
-                "textInEnglish",
                 "response"
             ],
             "description": "textToSpeech - transformer"

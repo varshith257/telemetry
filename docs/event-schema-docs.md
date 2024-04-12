@@ -500,7 +500,6 @@ When is it generated: nuralCoref - transformer
         "orgId",
         "messageId",
         "text",
-        "textInEnglish",
         "transformerId"
     ],
     "description": "nuralCoref - transformer"
@@ -568,7 +567,6 @@ When is it generated: classifier - transformer
         "orgId",
         "messageId",
         "text",
-        "textInEnglish",
         "transformerId"
     ],
     "description": "classifier - transformer"
@@ -636,7 +634,6 @@ When is it generated: retieveDocs - transformer
         "orgId",
         "messageId",
         "text",
-        "textInEnglish",
         "transformerId"
     ],
     "description": "retieveDocs - transformer"
@@ -704,7 +701,6 @@ When is it generated: ner - transformer
         "orgId",
         "messageId",
         "text",
-        "textInEnglish",
         "NER",
         "transformerId"
     ],
@@ -776,7 +772,6 @@ When is it generated: llm - transformer
         "orgId",
         "messageId",
         "text",
-        "textInEnglish",
         "transformerId"
     ],
     "description": "llm - transformer"
@@ -847,7 +842,6 @@ When is it generated: translate - transformer
         "orgId",
         "messageId",
         "text",
-        "textInEnglish",
         "response",
         "transformerId"
     ],
@@ -921,7 +915,6 @@ When is it generated: textToSpeech - transformer
         "text",
         "timeTaken",
         "queryId",
-        "textInEnglish",
         "response"
     ],
     "description": "textToSpeech - transformer"
