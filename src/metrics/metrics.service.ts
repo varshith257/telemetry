@@ -255,13 +255,13 @@ export class MetricsService {
     
     const totalPages = Math.ceil(count / limit);
     return Response.json({
-      error: false,
-      messaeg: 'Event data fetched successfully',
-      data: {
+      pagination: {
         page: page,
+        perPage: limit,
         totalPages: totalPages,
-        pageList: selectQueryResponse
-      }
+        totalCount: count
+      },
+      data: selectQueryResponse
     }, { status: 200 })
   }
 }
