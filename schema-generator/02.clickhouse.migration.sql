@@ -9,5 +9,5 @@ ADD COLUMN result Nullable(String) AFTER sqlQuery,
 ADD COLUMN documentId Nullable(String) AFTER result,
 ADD COLUMN requestId Nullable(UUID) AFTER documentId,
 ADD COLUMN eventLog Nullable(String) AFTER requestId,
-ADD COLUMN transformerId Nullable(String) AFTER eventLog
+ADD COLUMN transformerId Nullable(String) AFTER eventLog,
 ADD COLUMN language Nullable(String) AFTER transformerId;
