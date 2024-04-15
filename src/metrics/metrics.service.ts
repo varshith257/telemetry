@@ -5,6 +5,7 @@ import { PrismaService } from "src/prisma/prisma.service";
 import { MetricsV1Dto } from "./dto/metrics.v1.dto";
 import { ClickHouseClient, createClient } from "@clickhouse/client";
 import { UpdateSchemaDto } from "./dto/update.schema.dto";
+import { UserData } from "src/interceptors/addUserDetails.interceptor";
 
 @Injectable()
 export class MetricsService {
@@ -154,6 +155,7 @@ export class MetricsService {
   }
 
   async searchContent(
+      userData: UserData,
       limit: number, 
       page: number, 
       orderBy?: string, 
@@ -187,7 +189,7 @@ export class MetricsService {
 
     const offset = limit * (page - 1);
 
-		whereClause = `\nWHERE eventId='E003'`;
+		whereClause = `\nWHERE eventId='E003' \nAND orgId='${userData.orgId}'`;
 		const searchColumns = [
       'queryId',
       'phoneNumber',
@@ -211,8 +213,7 @@ export class MetricsService {
       'createdAt',
       'feedback',
       'reaction',
-      'botId',
-      'orgId'
+      'botId'
     ]
 
     if (filterObj) {
@@ -259,7 +260,7 @@ export class MetricsService {
         page: page,
         perPage: limit,
         totalPages: totalPages,
-        totalCount: count
+        totalCount: +count
       },
       data: selectQueryResponse
     }, { status: 200 })

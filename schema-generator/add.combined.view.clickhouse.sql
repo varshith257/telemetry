@@ -43,8 +43,3 @@ FROM
     event
 GROUP BY
     messageId;
-
-detectedLanguage, // NULL
-responseType, // NULL
-detectedLatency, // NULL - was blank
-feedback // NULL was blank
