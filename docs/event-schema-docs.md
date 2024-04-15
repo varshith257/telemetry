@@ -1912,6 +1912,7 @@ When is it generated: When user sends a message
     "required": [
         "botId",
         "userId",
+        "orgId",
         "conversationId",
         "messageId",
         "text",
@@ -1972,6 +1973,7 @@ When is it generated: When user receives back a response for sent message
     "required": [
         "botId",
         "userId",
+        "orgId",
         "conversationId",
         "messageId",
         "text",
@@ -2319,5 +2321,142 @@ When is it generated: When the transformer execution completes
         "transformerId"
     ],
     "description": "When the transformer execution completes"
+}
+```
+## micAction
+### micTap
+When is it generated: When user taps on mic to speak something
+```json
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "properties": {
+        "botId ": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "userId ": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "orgId ": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "conversationId ": {
+            "type": "string",
+            "format": "uuid"
+        }
+    },
+    "required": [
+        "botId",
+        "userId",
+        "orgId",
+        "conversationId"
+    ],
+    "description": "When user taps on mic to speak something"
+}
+```
+## aiToolProxyToolLatency
+### t2sLatency
+When is it generated: Time taken by T2S API
+```json
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "properties": {
+        "botId ": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "userId ": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "orgId ": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "conversationId ": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "messageId ": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "audioUrl ": {
+            "type": "string",
+            "format": "url"
+        },
+        "text ": {
+            "type": "string"
+        },
+        "error ": {
+            "type": "string"
+        },
+        "timeTaken ": {
+            "type": "number"
+        },
+        "createdAt ": {
+            "type": "number"
+        }
+    },
+    "required": [
+        "botId",
+        "userId",
+        "orgId",
+        "conversationId",
+        "messageId",
+        "text",
+        "timeTaken"
+    ],
+    "description": "Time taken by T2S API"
+}
+```
+### s2tLatency
+When is it generated: Time taken by S2T API
+```json
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "properties": {
+        "botId ": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "userId ": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "orgId ": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "conversationId ": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "text ": {
+            "type": "string"
+        },
+        "error ": {
+            "type": "string"
+        },
+        "timeTaken ": {
+            "type": "number"
+        },
+        "createdAt ": {
+            "type": "number"
+        }
+    },
+    "required": [
+        "botId",
+        "userId",
+        "orgId",
+        "conversationId",
+        "timeTaken"
+    ],
+    "description": "Time taken by S2T API"
 }
 ```

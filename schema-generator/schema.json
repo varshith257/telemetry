@@ -1869,6 +1869,7 @@
             "required": [
                 "botId",
                 "userId",
+                "orgId",
                 "conversationId",
                 "messageId",
                 "text",
@@ -1932,6 +1933,7 @@
             "required": [
                 "botId",
                 "userId",
+                "orgId",
                 "conversationId",
                 "messageId",
                 "text",
@@ -2437,6 +2439,150 @@
                 "language"
             ],
             "description": ""
+        }
+    },
+    {
+        "eventProperties": {
+            "eventId": "E044",
+            "eventName": "micAction",
+            "subEventName": "micTap"
+        },
+        "eventSchema": {
+            "$schema": "http://json-schema.org/draft-07/schema#",
+            "type": "object",
+            "properties": {
+                "botId ": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "userId ": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "orgId ": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "conversationId ": {
+                    "type": "string",
+                    "format": "uuid"
+                }
+            },
+            "required": [
+                "botId",
+                "userId",
+                "orgId",
+                "conversationId"
+            ],
+            "description": "When user taps on mic to speak something"
+        }
+    },
+    {
+        "eventProperties": {
+            "eventId": "E045",
+            "eventName": "aiToolProxyToolLatency",
+            "subEventName": "t2sLatency"
+        },
+        "eventSchema": {
+            "$schema": "http://json-schema.org/draft-07/schema#",
+            "type": "object",
+            "properties": {
+                "botId ": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "userId ": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "orgId ": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "conversationId ": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "messageId ": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "audioUrl ": {
+                    "type": "string",
+                    "format": "url"
+                },
+                "text ": {
+                    "type": "string"
+                },
+                "error ": {
+                    "type": "string"
+                },
+                "timeTaken ": {
+                    "type": "number"
+                },
+                "createdAt ": {
+                    "type": "number"
+                }
+            },
+            "required": [
+                "botId",
+                "userId",
+                "orgId",
+                "conversationId",
+                "messageId",
+                "text",
+                "timeTaken"
+            ],
+            "description": "Time taken by T2S API"
+        }
+    },
+    {
+        "eventProperties": {
+            "eventId": "E046",
+            "eventName": "aiToolProxyToolLatency",
+            "subEventName": "s2tLatency"
+        },
+        "eventSchema": {
+            "$schema": "http://json-schema.org/draft-07/schema#",
+            "type": "object",
+            "properties": {
+                "botId ": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "userId ": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "orgId ": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "conversationId ": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "text ": {
+                    "type": "string"
+                },
+                "error ": {
+                    "type": "string"
+                },
+                "timeTaken ": {
+                    "type": "number"
+                },
+                "createdAt ": {
+                    "type": "number"
+                }
+            },
+            "required": [
+                "botId",
+                "userId",
+                "orgId",
+                "conversationId",
+                "timeTaken"
+            ],
+            "description": "Time taken by S2T API"
         }
     }
 ]
