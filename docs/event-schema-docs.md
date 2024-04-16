@@ -116,7 +116,6 @@ When is it generated: Audio is converted to text from audio
         "userId",
         "orgId",
         "messageId",
-        "text",
         "timeTaken",
         "createdAt"
     ],
@@ -879,6 +878,9 @@ When is it generated: textToSpeech - transformer
             "type": "string",
             "format": "uuid"
         },
+        "audioFileName ": {
+            "type": "string"
+        },
         "audioUrl ": {
             "type": "string",
             "format": "url"
@@ -888,6 +890,9 @@ When is it generated: textToSpeech - transformer
             "format": "uuid"
         },
         "text ": {
+            "type": "string"
+        },
+        "error ": {
             "type": "string"
         },
         "timeTaken ": {
@@ -908,6 +913,9 @@ When is it generated: textToSpeech - transformer
         },
         "response ": {
             "type": "string"
+        },
+        "language ": {
+            "type": "string"
         }
     },
     "required": [
@@ -915,7 +923,6 @@ When is it generated: textToSpeech - transformer
         "userId",
         "orgId",
         "messageId",
-        "audioUrl",
         "text",
         "timeTaken",
         "queryId",
