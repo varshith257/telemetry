@@ -5,6 +5,7 @@ import { UpdateSchemaDto } from "./dto/update.schema.dto";
 import { SkipThrottle } from "@nestjs/throttler/dist/throttler.decorator";
 import { GetS2TDto } from "./dto/get.s2t.dto";
 import { AddUserDetails, NoAuth } from "src/interceptors/addUserDetails.interceptor";
+import { GetCombinedData } from "./dto/get.combined.data.dto";
 
 @SkipThrottle()
 @UseInterceptors(AddUserDetails)
@@ -34,12 +35,25 @@ export class MetricsV1Controller {
   ) {
     return await this.metricsService.searchContent(
       (queryBody as any).userData,
-      queryBody.limit, 
+      queryBody.perPage, 
       queryBody.page, 
       queryBody.sortBy,
       queryBody.sort?.toUpperCase(),
-      queryBody.filterObj,
-      queryBody.searchObj
+      queryBody.filter
     );
+  }
+
+  @Post('combined-view')
+  async getCombinedView(
+    @Body() queryBody: GetCombinedData
+  ) {
+    return await this.metricsService.combinedView(
+      (queryBody as any).userData,
+      queryBody.perPage, 
+      queryBody.page, 
+      queryBody.sortBy,
+      queryBody.sort?.toUpperCase(),
+      queryBody.filter
+    )
   }
 }

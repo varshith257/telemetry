@@ -1,7 +1,7 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { IsIn, IsNumber, IsOptional } from "class-validator";
 
-export class GetS2TDto {
+export class GetCombinedData {
   @IsNumber()
   @ApiProperty()
   page: number = 1;
