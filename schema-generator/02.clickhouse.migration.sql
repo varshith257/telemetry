@@ -1,2 +1,2 @@
 ALTER TABLE event
-ADD COLUMN audioFileName Nullable(String) AFTER audioUrl;
+ADD COLUMN prompt Nullable(String) AFTER language;

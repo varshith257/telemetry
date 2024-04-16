@@ -767,6 +767,9 @@ When is it generated: llm - transformer
         },
         "transformerId ": {
             "type": "string"
+        },
+        "prompt ": {
+            "type": "string"
         }
     },
     "required": [
@@ -932,7 +935,7 @@ When is it generated: textToSpeech - transformer
 }
 ```
 ### userQuery
-When is it generated: When user plays audio at app
+When is it generated: When user plays audio at app (timesAudioUsed)
 ```json
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
@@ -967,10 +970,6 @@ When is it generated: When user plays audio at app
         "phoneNumber ": {
             "type": "string"
         },
-        "queryId ": {
-            "type": "string",
-            "format": "uuid"
-        },
         "responseInEnglish ": {
             "type": "string"
         },
@@ -983,10 +982,9 @@ When is it generated: When user plays audio at app
         "userId",
         "orgId",
         "messageId",
-        "text",
-        "queryId"
+        "text"
     ],
-    "description": "When user plays audio at app"
+    "description": "When user plays audio at app (timesAudioUsed)"
 }
 ```
 ### userQuery
@@ -1033,7 +1031,7 @@ When is it generated: When an error is occured during query process
 }
 ```
 ### userQuery
-When is it generated: When user gets the response at app
+When is it generated: When user gets the response at app (responseAt)
 ```json
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
@@ -1068,10 +1066,6 @@ When is it generated: When user gets the response at app
         "phoneNumber ": {
             "type": "string"
         },
-        "queryId ": {
-            "type": "string",
-            "format": "uuid"
-        },
         "responseInEnglish ": {
             "type": "string"
         },
@@ -1085,10 +1079,9 @@ When is it generated: When user gets the response at app
         "orgId",
         "messageId",
         "text",
-        "timeTaken",
-        "queryId"
+        "timeTaken"
     ],
-    "description": "When user gets the response at app"
+    "description": "When user gets the response at app (responseAt)"
 }
 ```
 ### detectLanguage
@@ -1879,7 +1872,7 @@ When is it generated: On return of this API call
 ```
 ## messageQuery
 ### messageSent
-When is it generated: When user sends a message
+When is it generated: When user sends a message (send phoneNumber also)
 ```json
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
@@ -1930,7 +1923,7 @@ When is it generated: When user sends a message
         "text",
         "createdAt"
     ],
-    "description": "When user sends a message"
+    "description": "When user sends a message (send phoneNumber also)"
 }
 ```
 ### messageReceived
@@ -2475,5 +2468,59 @@ When is it generated: Time taken by S2T API
         "timeTaken"
     ],
     "description": "Time taken by S2T API"
+}
+```
+### detectedLatency
+When is it generated: Time taken in detecting latency
+```json
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "properties": {
+        "botId ": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "userId ": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "orgId ": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "conversationId ": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "messageId ": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "text ": {
+            "type": "string"
+        },
+        "timeTaken ": {
+            "type": "number"
+        },
+        "language ": {
+            "type": "string"
+        },
+        "prompt ": {
+            "type": "string"
+        }
+    },
+    "required": [
+        "botId",
+        "userId",
+        "orgId",
+        "conversationId",
+        "messageId",
+        "text",
+        "timeTaken",
+        "language",
+        "prompt"
+    ],
+    "description": "Time taken in detecting latency"
 }
 ```

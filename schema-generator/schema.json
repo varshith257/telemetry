@@ -800,6 +800,9 @@
                 },
                 "transformerId ": {
                     "type": "string"
+                },
+                "prompt ": {
+                    "type": "string"
                 }
             },
             "required": [
@@ -1009,10 +1012,6 @@
                 "phoneNumber ": {
                     "type": "string"
                 },
-                "queryId ": {
-                    "type": "string",
-                    "format": "uuid"
-                },
                 "responseInEnglish ": {
                     "type": "string"
                 },
@@ -1025,10 +1024,9 @@
                 "userId",
                 "orgId",
                 "messageId",
-                "text",
-                "queryId"
+                "text"
             ],
-            "description": "When user plays audio at app"
+            "description": "When user plays audio at app (timesAudioUsed)"
         }
     },
     {
@@ -1116,10 +1114,6 @@
                 "phoneNumber ": {
                     "type": "string"
                 },
-                "queryId ": {
-                    "type": "string",
-                    "format": "uuid"
-                },
                 "responseInEnglish ": {
                     "type": "string"
                 },
@@ -1133,10 +1127,9 @@
                 "orgId",
                 "messageId",
                 "text",
-                "timeTaken",
-                "queryId"
+                "timeTaken"
             ],
-            "description": "When user gets the response at app"
+            "description": "When user gets the response at app (responseAt)"
         }
     },
     {
@@ -1887,7 +1880,7 @@
                 "text",
                 "createdAt"
             ],
-            "description": "When user sends a message"
+            "description": "When user sends a message (send phoneNumber also)"
         }
     },
     {
@@ -2600,6 +2593,63 @@
                 "timeTaken"
             ],
             "description": "Time taken by S2T API"
+        }
+    },
+    {
+        "eventProperties": {
+            "eventId": "E047",
+            "eventName": "aiToolProxyToolLatency",
+            "subEventName": "detectedLatency"
+        },
+        "eventSchema": {
+            "$schema": "http://json-schema.org/draft-07/schema#",
+            "type": "object",
+            "properties": {
+                "botId ": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "userId ": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "orgId ": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "conversationId ": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "messageId ": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "text ": {
+                    "type": "string"
+                },
+                "timeTaken ": {
+                    "type": "number"
+                },
+                "language ": {
+                    "type": "string"
+                },
+                "prompt ": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "botId",
+                "userId",
+                "orgId",
+                "conversationId",
+                "messageId",
+                "text",
+                "timeTaken",
+                "language",
+                "prompt"
+            ],
+            "description": "Time taken in detecting latency"
         }
     }
 ]

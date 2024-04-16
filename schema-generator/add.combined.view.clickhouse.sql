@@ -5,14 +5,17 @@ ORDER BY timestamp
 SETTINGS allow_nullable_key = 1 AS
 SELECT
     e1.messageId AS messageId,
-    e1.timestamp AS timestamp,
     e1.spellCheckLatency AS spellCheckLatency,
+    e1.timestamp AS timestamp,
     e2.userId AS userId,
     e2.orgId AS orgId,
     e2.botId AS botId,
+    e2.audioFileName AS audioFileName,
     e2.conversationId AS conversationId,
-    e2.s2tInput AS s2tInput,
+    e2.s2tOutput AS s2tOutput,
     e2.spellCorrectedText AS spellCorrectedText,
+    e2.query AS query,
+    e2.responseAt AS responseAt,
     e2.finalQuery AS finalQuery,
     e2.queryInEnglish AS queryInEnglish,
     e2.coreferencedText AS coreferencedText,
@@ -34,7 +37,6 @@ SELECT
     e8.NERLatency AS NERLatency,
     e9.T2SLatency AS T2SLatency,
     e10.S2TLatency AS S2TLatency,
-    e10.similarChunks AS similarChunks,
     e11.detectedLanguage AS detectedLanguage,
     e11.detectedLatency AS detectedLatency,
     e12.translateInputLatency AS translateInputLatency,
@@ -48,7 +50,8 @@ SELECT
     COALESCE(T2SLatency, 0) +
     COALESCE(S2TLatency, 0) +
     COALESCE(detectedLatency, 0) +
-    COALESCE(translateInputLatency, 0) AS totalLatency
+    COALESCE(translateInputLatency, 0) AS totalLatency,
+    e10.similarChunks AS similarChunks
 FROM
     (
         SELECT
@@ -68,9 +71,10 @@ FROM
             maxIf(botId, eventId = 'E032') AS botId,
             maxIf(audioFileName, eventId = 'E002') as audioFileName,
             maxIf(conversationId, eventId = 'E032') AS conversationId,
-            maxIf(audioUrl, eventId = 'E002') AS s2tInput,
+            maxIf(audioUrl, eventId = 'E002') AS s2tOutput,
             maxIf(spellCorrectedText, eventId = 'E047') AS spellCorrectedText,
             maxIf(text, eventId = 'E032') AS query,
+            maxIf(timestamp, eventId = 'E033') AS responseAt,
             maxIf(
                 text,
                 eventId = 'E007'
@@ -97,7 +101,7 @@ FROM
                 AND timeTaken > 0
             ) AS NER,
             maxIf(
-                response,
+                text,
                 eventId = 'E012'
                 AND timeTaken > 0
             ) AS response,
@@ -109,7 +113,7 @@ FROM
             groupArray(tuple(eventId, subEvent, error)) AS error,
             maxIf(reaction, eventId = 'E023') AS reaction,
             maxIf(timesAudioUsed, eventId = 'E015') AS timesAudioUsed,
-            maxIf(phoneNumber, eventId = 'E004') AS phoneNumber,
+            maxIf(phoneNumber, eventId = 'E032theke ') AS phoneNumber,
             maxIf(district, eventId = 'E006') AS district,
             maxIf(block, eventId = 'E006') AS block
         FROM
@@ -250,3 +254,5 @@ FROM
             messageId
     ) AS e12 ON e1.messageId = e12.messageId;
  
+
+-- What all latency to add for totalLatency

@@ -62,7 +62,8 @@ CREATE TABLE IF NOT EXISTS event
 	requestId Nullable(UUID),
 	eventLog Nullable(String),
 	transformerId Nullable(String),
-	language Nullable(String)
+	language Nullable(String),
+	prompt Nullable(String)
 )
 ENGINE = MergeTree
 ORDER BY timestamp;
