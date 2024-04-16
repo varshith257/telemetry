@@ -25,7 +25,7 @@ export class GetCombinedData {
     example: 'createdAt',
   })
   @IsOptional()
-  sortBy: string = 'createdAt';
+  sortBy: string = 'timestamp';
 
   @IsIn(['asc', 'desc'])
   @ApiProperty({

@@ -25,7 +25,7 @@ export class GetS2TDto {
     example: 'createdAt',
   })
   @IsOptional()
-  sortBy: string = 'createdAt';
+  sortBy: string = 'timestamp';
 
   @IsIn(['asc', 'desc'])
   @ApiProperty({

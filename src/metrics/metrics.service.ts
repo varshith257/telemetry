@@ -160,7 +160,8 @@ export class MetricsService {
       page: number, 
       orderBy?: string, 
       order?: string,
-      filter?: any    ) {
+      filter?: any
+  ) {
     if (!(userData.role == UserRole.ORG_ADMIN || userData.role == UserRole.OWNER || userData.role == UserRole.SUPER_ADMIN)) {
       throw new UnauthorizedException();
     }
@@ -170,7 +171,7 @@ export class MetricsService {
 
     const queryColumns = [
       'queryId',
-      'createdAt',
+      'timestamp',
       'phoneNumber',
       'timeTaken',
       'feedback',
@@ -189,10 +190,11 @@ export class MetricsService {
 
     const offset = limit * (page - 1);
 
-		whereClause = `\nWHERE eventId='E003' \nAND orgId='${userData.orgId}'`;
-		whereClause = `\nWHERE AND orgId='${userData.orgId}'`;
-    for(const column of Object.keys(filter)) {
-      whereClause += `\nAND ${column}='${filter[column]}'`
+		whereClause = `\nWHERE eventId='E002' \nAND orgId='${userData.orgId}'`;
+    if (filter) {
+      for(const column of Object.keys(filter)) {
+        whereClause += `\nAND ${column}='${filter[column]}'`
+      }
     }
 
     if (orderBy) {
@@ -204,6 +206,7 @@ export class MetricsService {
     }
     rangeClause += `\nLIMIT ${limit} OFFSET ${offset};`;
 		const query = selectClause + whereClause + rangeClause;
+    console.log(query);
     const content = await this.clickhouse.query({
       query: query,
       format: 'JSONEachRow'
@@ -249,8 +252,10 @@ export class MetricsService {
     const offset = limit * (page - 1);
 
 		whereClause = `\nWHERE AND orgId='${userData.orgId}'`;
-    for(const column of Object.keys(filter)) {
-      whereClause += `\nAND ${column}='${filter[column]}'`
+    if (filter) {
+      for(const column of Object.keys(filter)) {
+        whereClause += `\nAND ${column}='${filter[column]}'`
+      }
     }
 
     if (orderBy) {
