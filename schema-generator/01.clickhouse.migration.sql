@@ -23,6 +23,7 @@ CREATE TABLE IF NOT EXISTS event
 	orgId Nullable(UUID),
 	conversationId Nullable(UUID),
 	messageId Nullable(UUID),
+	audioFileName Nullable(String),
 	audioUrl Nullable(String),
 	audioId Nullable(UUID),
 	text Nullable(String),

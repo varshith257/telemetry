@@ -35,13 +35,15 @@ When is it generated: BFF received audio from a bot
         "audioId ": {
             "type": "string",
             "format": "uuid"
+        },
+        "language ": {
+            "type": "string"
         }
     },
     "required": [
         "botId",
         "userId",
-        "orgId",
-        "audioUrl"
+        "orgId"
     ],
     "description": "BFF received audio from a bot"
 }
@@ -73,6 +75,9 @@ When is it generated: Audio is converted to text from audio
             "type": "string",
             "format": "uuid"
         },
+        "audioFileName ": {
+            "type": "string"
+        },
         "audioUrl ": {
             "type": "string",
             "format": "url"
@@ -101,6 +106,9 @@ When is it generated: Audio is converted to text from audio
         },
         "createdAt ": {
             "type": "number"
+        },
+        "language ": {
+            "type": "string"
         }
     },
     "required": [
@@ -108,11 +116,8 @@ When is it generated: Audio is converted to text from audio
         "userId",
         "orgId",
         "messageId",
-        "audioUrl",
         "text",
-        "spellCorrectedText",
         "timeTaken",
-        "spellCheckTimeTaken",
         "createdAt"
     ],
     "description": "Audio is converted to text from audio"
@@ -847,7 +852,7 @@ When is it generated: translate - transformer
     "description": "translate - transformer"
 }
 ```
-### 
+### userQuery
 When is it generated: textToSpeech - transformer
 ```json
 {
@@ -919,7 +924,7 @@ When is it generated: textToSpeech - transformer
     "description": "textToSpeech - transformer"
 }
 ```
-### 
+### userQuery
 When is it generated: When user plays audio at app
 ```json
 {
@@ -977,7 +982,7 @@ When is it generated: When user plays audio at app
     "description": "When user plays audio at app"
 }
 ```
-### 
+### userQuery
 When is it generated: When an error is occured during query process
 ```json
 {
@@ -1020,7 +1025,7 @@ When is it generated: When an error is occured during query process
     "description": "When an error is occured during query process"
 }
 ```
-### 
+### userQuery
 When is it generated: When user gets the response at app
 ```json
 {
@@ -1118,7 +1123,7 @@ When is it generated:
 }
 ```
 ## userQueryInbound
-### 
+### userQuery
 When is it generated: A message was sent to user
 ```json
 {
@@ -1174,7 +1179,7 @@ When is it generated: A message was sent to user
     "description": "A message was sent to user"
 }
 ```
-### 
+### userQuery
 When is it generated: XMessage to raw message conversion failed
 ```json
 {
@@ -1226,7 +1231,7 @@ When is it generated: XMessage to raw message conversion failed
     "description": "XMessage to raw message conversion failed"
 }
 ```
-### 
+### userQuery
 When is it generated: Raw message conversion to XMessage failed
 ```json
 {
@@ -1271,7 +1276,7 @@ When is it generated: Raw message conversion to XMessage failed
     "description": "Raw message conversion to XMessage failed"
 }
 ```
-### 
+### userQuery
 When is it generated: A registration request was sent to the bot
 ```json
 {
@@ -1322,7 +1327,7 @@ When is it generated: A registration request was sent to the bot
     "description": "A registration request was sent to the bot"
 }
 ```
-### 
+### userQuery
 When is it generated: A registration request failed
 ```json
 {
@@ -1373,7 +1378,7 @@ When is it generated: A registration request failed
     "description": "A registration request failed"
 }
 ```
-### 
+### userQuery
 When is it generated: A user sent a feedback on a message
 ```json
 {
@@ -1423,7 +1428,7 @@ When is it generated: A user sent a feedback on a message
     "description": "A user sent a feedback on a message"
 }
 ```
-### 
+### userQuery
 When is it generated: User read the message sent by a bot
 ```json
 {
@@ -1471,7 +1476,7 @@ When is it generated: User read the message sent by a bot
 }
 ```
 ## AI-Tools
-### 
+### userQuery
 When is it generated: On return of this API call
 ```json
 {
@@ -1531,7 +1536,7 @@ When is it generated: On return of this API call
     "description": "On return of this API call"
 }
 ```
-### 
+### userQuery
 When is it generated: On return of this API call
 ```json
 {
@@ -2437,6 +2442,10 @@ When is it generated: Time taken by S2T API
             "type": "string",
             "format": "uuid"
         },
+        "messageId ": {
+            "type": "string",
+            "format": "uuid"
+        },
         "text ": {
             "type": "string"
         },
@@ -2455,6 +2464,7 @@ When is it generated: Time taken by S2T API
         "userId",
         "orgId",
         "conversationId",
+        "messageId",
         "timeTaken"
     ],
     "description": "Time taken by S2T API"
