@@ -770,6 +770,12 @@ When is it generated: llm - transformer
         },
         "prompt ": {
             "type": "string"
+        },
+        "translatedResponse ": {
+            "type": "string"
+        },
+        "streamStartLatency ": {
+            "type": "number"
         }
     },
     "required": [
@@ -2505,9 +2511,6 @@ When is it generated: Time taken in detecting latency
         },
         "language ": {
             "type": "string"
-        },
-        "prompt ": {
-            "type": "string"
         }
     },
     "required": [
@@ -2518,8 +2521,7 @@ When is it generated: Time taken in detecting latency
         "messageId",
         "text",
         "timeTaken",
-        "language",
-        "prompt"
+        "language"
     ],
     "description": "Time taken in detecting latency"
 }

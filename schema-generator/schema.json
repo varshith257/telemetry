@@ -803,6 +803,12 @@
                 },
                 "prompt ": {
                     "type": "string"
+                },
+                "translatedResponse ": {
+                    "type": "string"
+                },
+                "streamStartLatency ": {
+                    "type": "number"
                 }
             },
             "required": [
@@ -2633,9 +2639,6 @@
                 },
                 "language ": {
                     "type": "string"
-                },
-                "prompt ": {
-                    "type": "string"
                 }
             },
             "required": [
@@ -2646,8 +2649,7 @@
                 "messageId",
                 "text",
                 "timeTaken",
-                "language",
-                "prompt"
+                "language"
             ],
             "description": "Time taken in detecting latency"
         }
