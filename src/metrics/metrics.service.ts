@@ -251,7 +251,7 @@ export class MetricsService {
     
     const offset = limit * (page - 1);
 
-		whereClause = `\nWHERE AND orgId='${userData.orgId}'`;
+		whereClause = `\nWHERE orgId='${userData.orgId}'`;
     if (filter) {
       for(const column of Object.keys(filter)) {
         whereClause += `\nAND ${column}='${filter[column]}'`
