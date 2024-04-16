@@ -1,50 +1,196 @@
-DROP TABLE IF EXISTS combined_data;
-
-SET allow_experimental_refreshable_materialized_view = 1;
-
-CREATE MATERIALIZED VIEW IF NOT EXISTS combined_data
-REFRESH EVERY 30 SECONDS
+CREATE MATERIALIZED VIEW IF NOT EXISTS combined_data 
+REFRESH EVERY 10 SECONDS 
 ENGINE = MergeTree
-ORDER BY createdAt
-SETTINGS allow_nullable_key = 1
-AS
+ORDER BY timestamp 
+SETTINGS allow_nullable_key = 1 AS
 SELECT
-    messageId,
-a    (SELECT createdAt FROM event WHERE messageId = event.messageId AND eventId = 'E002'  LIMIT 1) AS createdAt,
-a    (SELECT userId FROM event WHERE messageId = event.messageId AND eventId = 'E001'  LIMIT 1) AS userId,
-a    (SELECT conversationId FROM event WHERE messageId = event.messageId AND eventId = 'E002'  LIMIT 1) AS conversationId,
-a    (SELECT audioUrl FROM event WHERE messageId = event.messageId AND eventId = 'E002'  LIMIT 1) AS s2tInput,
-a    (SELECT spellCorrectedText FROM event WHERE messageId = event.messageId AND eventId = 'E002' LIMIT 1) AS spell_corrected_text,
-a    (SELECT text FROM event WHERE messageId = event.messageId AND eventId = 'E002' LIMIT 1) AS finalQuery,
-a    (SELECT textInEnglish FROM event WHERE messageId = event.messageId AND eventId = 'E007' LIMIT 1) AS queryInEnglish,
-a    (SELECT coreferencedText FROM event WHERE messageId = event.messageId AND eventId = 'E008' LIMIT 1) AS coreferencedQuery,
-a    (SELECT queryClass FROM event WHERE messageId = event.messageId AND eventId = 'E009' LIMIT 1) AS queryClass,
-a    (SELECT similarChunks FROM event WHERE messageId = event.messageId AND eventId = 'E010' LIMIT 1) AS contentUsed,
-a    (SELECT responseInEnglish FROM event WHERE messageId = event.messageId AND eventId = 'E013' LIMIT 1) AS responseInEnglish,
-a    (SELECT NER FROM event WHERE messageId = event.messageId AND eventId = 'E011' LIMIT 1) AS NER,
-b    (SELECT text FROM event WHERE messageId = event.messageId AND eventId = 'E008' LIMIT 1) AS neuralCoreference,
-    (SELECT text FROM event WHERE messageId = event.messageId AND eventId = 'E012' LIMIT 1) AS response,
-a    groupArray(tuple(eventId, subEvent, error)) as error,
-    (SELECT createdAt FROM event WHERE messageId = event.messageId AND eventId = 'E012' LIMIT 1) AS responseAt,
-a    (SELECT reaction FROM event WHERE messageId = event.messageId AND eventId = 'E023' LIMIT 1) AS reaction,
-a    (SELECT timeTaken FROM event WHERE messageId = event.messageId AND eventId = 'E002' LIMIT 1) AS s2tLatency,
-b    (SELECT timeTaken FROM event WHERE messageId = event.messageId AND eventId = 'E002' LIMIT 1) AS spellCheckLatency,
-b    (SELECT timeTaken FROM event WHERE messageId = event.messageId AND eventId = 'E007' LIMIT 1) AS translateInputLatency,
-b    (SELECT timeTaken FROM event WHERE messageId = event.messageId AND eventId = 'E005' LIMIT 1) AS getUserHistoryLatency,
-b    (SELECT timeTaken FROM event WHERE messageId = event.messageId AND eventId = 'E008' LIMIT 1) AS getNeuralCoreferenceLatency,
-a    (SELECT timeTaken FROM event WHERE messageId = event.messageId AND eventId = 'E009' LIMIT 1) AS classifiedQuestionLatency,
-a    (SELECT timeTaken FROM event WHERE messageId = event.messageId AND eventId = 'E010' LIMIT 1) AS getSimilarDocsLatency,
-a    (SELECT timeTaken FROM event WHERE messageId = event.messageId AND eventId = 'E012' LIMIT 1) AS getResponseLatency,
-a    (SELECT timeTaken FROM event WHERE messageId = event.messageId AND eventId = 'E011' LIMIT 1) AS NERLatency,
-a    (SELECT timeTaken FROM event WHERE messageId = event.messageId AND eventId = 'E045' LIMIT 1) AS T2SLatency,
-a    (SELECT timeTaken FROM event WHERE messageId = event.messageId AND eventId = 'E046' LIMIT 1) AS S2TLatency,
-    (SELECT CASE WHEN (SELECT text FROM event WHERE messageId = event.messageId AND eventId = 'E004' LIMIT 1) != (SELECT text FROM event WHERE messageId = event.messageId AND eventId = 'E002' LIMIT 1) THEN 1 ELSE 0 END) AS isFinalQueryEdited,
-a    (SELECT audioUrl FROM event WHERE messageId = event.messageId AND eventId = 'E001' LIMIT 1) AS audioURL,
-a    (SELECT timesAudioUsed FROM event WHERE messageId = event.messageId AND eventId = 'E015' LIMIT 1) AS timesAudioUsed,
-a    (SELECT phoneNumber FROM event WHERE messageId = event.messageId AND eventId = 'E004' LIMIT 1) AS phoneNumber,
-a    (SELECT district FROM event WHERE messageId = event.messageId AND eventId = 'E006' LIMIT 1) AS district,
-a    (SELECT block FROM event WHERE messageId = event.messageId AND eventId = 'E006' LIMIT 1) AS block
+    e1.timestamp AS timestamp,
+    e1.spellCheckLatency AS spellCheckLatency,
+    e2.userId AS userId,
+    e2.orgId AS orgId,
+    e2.botId AS botId,
+    e2.conversationId AS conversationId,
+    e2.s2tInput AS s2tInput,
+    e2.spellCorrectedText AS spellCorrectedText,
+    e2.finalQuery AS finalQuery,
+    e2.queryInEnglish AS queryInEnglish,
+    e2.coreferencedText AS coreferencedText,
+    e2.queryClass AS queryClass,
+    e2.NER AS NER,
+    e2.error AS error,
+    e2.reaction AS reaction,
+    e2.timesAudioUsed AS timesAudioUsed,
+    e2.phoneNumber AS phoneNumber,
+    e2.district AS district,
+    e2.block AS block,
+    e3.getUserHistoryLatency AS getUserHistoryLatency,
+    e4.getNeuralCoreferenceLatency AS getNeuralCoreferenceLatency,
+    e5.clASsifiedQuestionLatency AS clASsifiedQuestionLatency,
+    e6.getSimilarDocsLatency AS getSimilarDocsLatency,
+    e7.getResponseLatency AS getResponseLatency,
+    e8.NERLatency AS NERLatency,
+    e9.T2SLatency AS T2SLatency,
+    e10.S2TLatency AS S2TLatency,
+    e10.similarChunks AS similarChunks
 FROM
-    event
-GROUP BY
-    messageId;
+    (
+        SELECT
+            messageId,
+            maxIf(timeTaken, event = 'E047') AS spellCheckLatency,
+            maxIf(timestamp, eventId = 'E032') AS timestamp
+        FROM
+            event
+        GROUP BY
+            messageId
+    ) AS e1
+    JOIN (
+        SELECT
+            messageId,
+            maxIf(userId, eventId = 'E032') AS userId,
+            maxIf(orgId, eventId = 'E032') AS orgId,
+            maxIf(botId, eventId = 'E032') AS botId,
+            maxIf(conversationId, eventId = 'E032') AS conversationId,
+            maxIf(audioUrl, eventId = 'E002') AS s2tInput,
+            maxIf(spellCorrectedText, eventId = 'E047') AS spellCorrectedText,
+            maxIf(text, eventId = 'E032') AS query,
+            maxIf(
+                text,
+                eventId = 'E007'
+                AND timeTaken > 0
+            ) AS finalQuery,
+            maxIf(
+                text,
+                eventId = 'E007'
+                AND timeTaken > 0
+            ) AS queryInEnglish,
+            maxIf(
+                text,
+                eventId = 'E008'
+                AND timeTaken > 0
+            ) AS coreferencedText,
+            maxIf(
+                queryClass,
+                eventId = 'E009'
+                AND timeTaken > 0
+            ) AS queryClass,
+            maxIf(
+                NER,
+                eventId = 'E011'
+                AND timeTaken > 0
+            ) AS NER,
+            groupArray(tuple(eventId, subEvent, error)) AS error,
+            maxIf(reaction, eventId = 'E023') AS reaction,
+            maxIf(timesAudioUsed, eventId = 'E015') AS timesAudioUsed,
+            maxIf(phoneNumber, eventId = 'E004') AS phoneNumber,
+            maxIf(district, eventId = 'E006') AS district,
+            maxIf(block, eventId = 'E006') AS block
+        FROM
+            event
+        GROUP BY
+            messageId
+    ) AS e2 ON e1.messageId = e2.messageId
+    JOIN (
+        SELECT
+            messageId,
+            maxIf(
+                timeTaken,
+                eventId = 'E005'
+                AND timeTaken > 0
+            ) AS getUserHistoryLatency
+        FROM
+            event
+        GROUP BY
+            messageId
+    ) AS e3 ON e1.messageId = e3.messageId
+    JOIN (
+        SELECT
+            messageId,
+            maxIf(
+                timeTaken,
+                eventId = 'E008'
+                AND timeTaken > 0
+            ) AS getNeuralCoreferenceLatency
+        FROM
+            event
+        GROUP BY
+            messageId
+    ) AS e4 ON e1.messageId = e4.messageId
+    JOIN (
+        SELECT
+            messageId,
+            maxIf(
+                timeTaken,
+                eventId = 'E009'
+                AND timeTaken > 0
+            ) AS clASsifiedQuestionLatency
+        FROM
+            event
+        GROUP BY
+            messageId
+    ) AS e5 ON e1.messageId = e5.messageId
+    JOIN (
+        SELECT
+            messageId,
+            maxIf(
+                timeTaken,
+                eventId = 'E010'
+                AND timeTaken > 0
+            ) AS getSimilarDocsLatency
+        FROM
+            event
+        GROUP BY
+            messageId
+    ) AS e6 ON e1.messageId = e6.messageId
+    JOIN (
+        SELECT
+            messageId,
+            maxIf(
+                timeTaken,
+                eventId = 'E012'
+                AND timeTaken > 0
+            ) AS getResponseLatency
+        FROM
+            event
+        GROUP BY
+            messageId
+    ) AS e7 ON e1.messageId = e7.messageId
+    JOIN (
+        SELECT
+            messageId,
+            maxIf(
+                timeTaken,
+                eventId = 'E011'
+                AND timeTaken > 0
+            ) AS NERLatency
+        FROM
+            event
+        GROUP BY
+            messageId
+    ) AS e8 ON e1.messageId = e8.messageId
+    JOIN (
+        SELECT
+            messageId,
+            maxIf(
+                timeTaken,
+                eventId = 'E045'
+                AND timeTaken > 0
+            ) AS T2SLatency
+        FROM
+            event
+        GROUP BY
+            messageId
+    ) AS e9 ON e1.messageId = e9.messageId
+    JOIN (
+        SELECT
+            messageId,
+            maxIf(
+                timeTaken,
+                eventId = 'E046'
+                AND timeTaken > 0
+            ) AS S2TLatency,
+            maxIf(similarChunks, eventId = 'E010') AS similarChunks
+        FROM
+            event
+        GROUP BY
+            messageId
+    ) AS e10 ON e1.messageId = e10.messageId;

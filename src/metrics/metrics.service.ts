@@ -264,6 +264,8 @@ export class MetricsService {
       } else {
         rangeClause += `\nORDER BY ${orderBy}`
       }
+    } else {
+      rangeClause += `\n ORDER BY timestamp DESC`
     }
     rangeClause += `\nLIMIT ${limit} OFFSET ${offset};`;
 		const query = selectClause + whereClause + rangeClause;
