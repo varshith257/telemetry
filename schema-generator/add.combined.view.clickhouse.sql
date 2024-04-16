@@ -4,6 +4,7 @@ ENGINE = MergeTree
 ORDER BY timestamp 
 SETTINGS allow_nullable_key = 1 AS
 SELECT
+    e1.messageId AS messageId,
     e1.timestamp AS timestamp,
     e1.spellCheckLatency AS spellCheckLatency,
     e2.userId AS userId,
@@ -17,6 +18,8 @@ SELECT
     e2.coreferencedText AS coreferencedText,
     e2.queryClass AS queryClass,
     e2.NER AS NER,
+    e2.response AS response,
+    e2.responseInEnglish AS responseInEnglish,
     e2.error AS error,
     e2.reaction AS reaction,
     e2.timesAudioUsed AS timesAudioUsed,
@@ -25,13 +28,27 @@ SELECT
     e2.block AS block,
     e3.getUserHistoryLatency AS getUserHistoryLatency,
     e4.getNeuralCoreferenceLatency AS getNeuralCoreferenceLatency,
-    e5.clASsifiedQuestionLatency AS clASsifiedQuestionLatency,
+    e5.classifiedQuestionLatency AS classifiedQuestionLatency,
     e6.getSimilarDocsLatency AS getSimilarDocsLatency,
     e7.getResponseLatency AS getResponseLatency,
     e8.NERLatency AS NERLatency,
     e9.T2SLatency AS T2SLatency,
     e10.S2TLatency AS S2TLatency,
-    e10.similarChunks AS similarChunks
+    e10.similarChunks AS similarChunks,
+    e11.detectedLanguage AS detectedLanguage,
+    e11.detectedLatency AS detectedLatency,
+    e12.translateInputLatency AS translateInputLatency,
+    COALESCE(spellCheckLatency, 0) +
+    COALESCE(getUserHistoryLatency, 0) +
+    COALESCE(getNeuralCoreferenceLatency, 0) +
+    COALESCE(classifiedQuestionLatency, 0) +
+    COALESCE(getSimilarDocsLatency, 0) +
+    COALESCE(getResponseLatency, 0) +
+    COALESCE(NERLatency, 0) +
+    COALESCE(T2SLatency, 0) +
+    COALESCE(S2TLatency, 0) +
+    COALESCE(detectedLatency, 0) +
+    COALESCE(translateInputLatency, 0) AS totalLatency
 FROM
     (
         SELECT
@@ -49,6 +66,7 @@ FROM
             maxIf(userId, eventId = 'E032') AS userId,
             maxIf(orgId, eventId = 'E032') AS orgId,
             maxIf(botId, eventId = 'E032') AS botId,
+            maxIf(audioFileName, eventId = 'E002') as audioFileName,
             maxIf(conversationId, eventId = 'E032') AS conversationId,
             maxIf(audioUrl, eventId = 'E002') AS s2tInput,
             maxIf(spellCorrectedText, eventId = 'E047') AS spellCorrectedText,
@@ -78,6 +96,16 @@ FROM
                 eventId = 'E011'
                 AND timeTaken > 0
             ) AS NER,
+            maxIf(
+                response,
+                eventId = 'E012'
+                AND timeTaken > 0
+            ) AS response,
+            maxIf(
+                textInEnglish, 
+                eventId = 'E012'
+                AND timeTaken > 0
+            ) AS responseInEnglish,
             groupArray(tuple(eventId, subEvent, error)) AS error,
             maxIf(reaction, eventId = 'E023') AS reaction,
             maxIf(timesAudioUsed, eventId = 'E015') AS timesAudioUsed,
@@ -122,7 +150,7 @@ FROM
                 timeTaken,
                 eventId = 'E009'
                 AND timeTaken > 0
-            ) AS clASsifiedQuestionLatency
+            ) AS classifiedQuestionLatency
         FROM
             event
         GROUP BY
@@ -193,4 +221,32 @@ FROM
             event
         GROUP BY
             messageId
-    ) AS e10 ON e1.messageId = e10.messageId;
+    ) AS e10 ON e1.messageId = e10.messageId
+    JOIN (
+        SELECT
+            messageId,
+            maxIf(
+                timeTaken,
+                eventId = 'E047'
+            ) AS detectedLatency,
+            maxIf(language, eventId = 'E010') AS detectedLanguage
+        FROM
+            event
+        GROUP BY
+            messageId
+    ) AS e11 ON e1.messageId = e11.messageId
+    JOIN (
+        SELECT
+            messageId,
+            maxIf(
+                timeTaken,
+                eventId = 'E007'
+                AND timeTaken > 0
+            ) AS translateInputLatency,
+            maxIf(similarChunks, eventId = 'E010') AS similarChunks
+        FROM
+            event
+        GROUP BY
+            messageId
+    ) AS e12 ON e1.messageId = e12.messageId;
+ 
