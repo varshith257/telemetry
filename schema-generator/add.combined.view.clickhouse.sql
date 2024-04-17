@@ -80,7 +80,7 @@ FROM
             maxIf(conversationId, eventId = 'E032') AS conversationId,
             maxIf(spellCorrectedText, eventId = 'E047') AS spellCorrectedText,
             maxIf(text, eventId = 'E032') AS query,
-            maxIf(timestamp, eventId = 'E033') AS responseAt,
+            maxIf(timestamp, eventId = 'E017') AS responseAt,
             maxIf(
                 prompt, 
                 eventId = 'E012'
