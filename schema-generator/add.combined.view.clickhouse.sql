@@ -115,7 +115,7 @@ FROM
             maxIf(reactionType, eventId = 'E023') AS reactionType,
             maxIf(reactionText, eventId = 'E023') AS reactionText,
             maxIf(timesAudioUsed, eventId = 'E015') AS timesAudioUsed,
-            maxIf(phoneNumber, eventId = 'E032 ') AS phoneNumber,
+            maxIf(phoneNumber, eventId = 'E032') AS phoneNumber,
             maxIf(district, eventId = 'E006') AS district,
             maxIf(block, eventId = 'E006') AS block
         FROM

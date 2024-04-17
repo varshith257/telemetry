@@ -8,8 +8,8 @@ import { Reflector } from "@nestjs/core";
 export const NoAuth = () => SetMetadata('ignoreAuth', true);
 
 export type UserData = {
-    id: string;
     orgId: string;
+    botId: string;
     role: UserRole;
     verified: boolean;
 }
@@ -44,47 +44,21 @@ export class AddUserDetails implements NestInterceptor {
         if (ignoreAuth) return next.handle();
 
         const req = context.switchToHttp().getRequest();
-        const authToken = req.headers['authorization'];
-        if (!authToken) {
+        console.log(req.headers)
+        const botId = req.headers['botid'];
+        const orgId = req.headers['orgid'];
+        console.log(botId);
+        console.log(orgId);
+        if (!botId || !orgId) {
             throw new UnauthorizedException();
         }
+
         let userData;
-        if (this.isAdminToken(authToken)) {
-            const reqData = (req.method === HTTPMethod.POST ? req.body.userData : req.query) ?? {};
-            userData = {};
-            userData.id = reqData.ownerId;
-            userData.orgId = reqData.orgId;
-            userData.role = UserRole.SUPER_ADMIN;
-            userData.verified = true;
-        }
-        else {
-            userData = await fetch(`${this.configService.get<string>('AUTH_SERVICE_URL')}/org/validate`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': authToken,
-                },
-            })
-            .then((resp) => {
-                if (!resp.ok) {
-                    throw new UnauthorizedException();
-                }
-                else {
-                    return resp.json();
-                }
-            })
-            .then((resp) => {
-                return resp.result;
-            })
-            .catch((err) => {
-                console.log(err);
-                throw new UnauthorizedException();
-            });
-            if (!userData) {
-                throw new UnauthorizedException();
-            }
-        }
-        req.body = req.body ?? {};
+        userData = {};
+        userData.botId = botId;
+        userData.orgId = orgId;
+        userData.role = UserRole.SUPER_ADMIN;
+        userData.verified = true;        
         req.body.userData = userData;
         return next.handle();
     }
