@@ -277,10 +277,6 @@
                     "type": "string",
                     "format": "uuid"
                 },
-                "userId ": {
-                    "type": "string",
-                    "format": "uuid"
-                },
                 "orgId ": {
                     "type": "string",
                     "format": "uuid"
@@ -293,32 +289,19 @@
                     "type": "string",
                     "format": "uuid"
                 },
-                "text ": {
-                    "type": "string"
-                },
                 "timeTaken ": {
                     "type": "number"
                 },
-                "phoneNumber ": {
-                    "type": "string"
-                },
-                "queryId ": {
-                    "type": "string",
-                    "format": "uuid"
-                },
-                "textInEnglish ": {
+                "did ": {
                     "type": "string"
                 }
             },
             "required": [
                 "botId",
-                "userId",
                 "orgId",
                 "messageId",
-                "text",
                 "timeTaken",
-                "queryId",
-                "textInEnglish"
+                "did"
             ],
             "description": "Fetching user history at inbound"
         }
@@ -816,7 +799,6 @@
                 "userId",
                 "orgId",
                 "messageId",
-                "text",
                 "transformerId"
             ],
             "description": "llm - transformer"
@@ -1412,7 +1394,7 @@
         "eventProperties": {
             "eventId": "E023",
             "eventName": "userQueryInbound",
-            "subEventName": "userQuery"
+            "subEventName": "reactionEvent"
         },
         "eventSchema": {
             "$schema": "http://json-schema.org/draft-07/schema#",
@@ -1434,29 +1416,22 @@
                     "type": "string",
                     "format": "uuid"
                 },
-                "text ": {
-                    "type": "string"
-                },
-                "createdAt ": {
-                    "type": "number"
-                },
                 "did ": {
                     "type": "string"
                 },
-                "feedback ": {
+                "reactionType ": {
                     "type": "string"
                 },
-                "reaction ": {
-                    "type": "number"
+                "reactionText ": {
+                    "type": "string"
                 }
             },
             "required": [
                 "botId",
                 "orgId",
-                "conversationId",
                 "messageId",
-                "createdAt",
-                "did"
+                "did",
+                "reactionType"
             ],
             "description": "A user sent a feedback on a message"
         }
@@ -2645,11 +2620,8 @@
                 "botId",
                 "userId",
                 "orgId",
-                "conversationId",
                 "messageId",
-                "text",
-                "timeTaken",
-                "language"
+                "text"
             ],
             "description": "Time taken in detecting latency"
         }

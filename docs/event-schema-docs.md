@@ -265,10 +265,6 @@ When is it generated: Fetching user history at inbound
             "type": "string",
             "format": "uuid"
         },
-        "userId ": {
-            "type": "string",
-            "format": "uuid"
-        },
         "orgId ": {
             "type": "string",
             "format": "uuid"
@@ -281,32 +277,19 @@ When is it generated: Fetching user history at inbound
             "type": "string",
             "format": "uuid"
         },
-        "text ": {
-            "type": "string"
-        },
         "timeTaken ": {
             "type": "number"
         },
-        "phoneNumber ": {
-            "type": "string"
-        },
-        "queryId ": {
-            "type": "string",
-            "format": "uuid"
-        },
-        "textInEnglish ": {
+        "did ": {
             "type": "string"
         }
     },
     "required": [
         "botId",
-        "userId",
         "orgId",
         "messageId",
-        "text",
         "timeTaken",
-        "queryId",
-        "textInEnglish"
+        "did"
     ],
     "description": "Fetching user history at inbound"
 }
@@ -783,7 +766,6 @@ When is it generated: llm - transformer
         "userId",
         "orgId",
         "messageId",
-        "text",
         "transformerId"
     ],
     "description": "llm - transformer"
@@ -1384,7 +1366,7 @@ When is it generated: A registration request failed
     "description": "A registration request failed"
 }
 ```
-### userQuery
+### reactionEvent
 When is it generated: A user sent a feedback on a message
 ```json
 {
@@ -1407,29 +1389,22 @@ When is it generated: A user sent a feedback on a message
             "type": "string",
             "format": "uuid"
         },
-        "text ": {
-            "type": "string"
-        },
-        "createdAt ": {
-            "type": "number"
-        },
         "did ": {
             "type": "string"
         },
-        "feedback ": {
+        "reactionType ": {
             "type": "string"
         },
-        "reaction ": {
-            "type": "number"
+        "reactionText ": {
+            "type": "string"
         }
     },
     "required": [
         "botId",
         "orgId",
-        "conversationId",
         "messageId",
-        "createdAt",
-        "did"
+        "did",
+        "reactionType"
     ],
     "description": "A user sent a feedback on a message"
 }
@@ -2517,11 +2492,8 @@ When is it generated: Time taken in detecting latency
         "botId",
         "userId",
         "orgId",
-        "conversationId",
         "messageId",
-        "text",
-        "timeTaken",
-        "language"
+        "text"
     ],
     "description": "Time taken in detecting latency"
 }
