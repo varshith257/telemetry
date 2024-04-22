@@ -6,6 +6,7 @@ import {
   NestFastifyApplication,
 } from '@nestjs/platform-fastify';
 import * as multipart from 'fastify-multipart';
+import { DocumentBuilder, SwaggerDocumentOptions, SwaggerModule } from '@nestjs/swagger';
 
 
 async function bootstrap() {
@@ -15,12 +16,27 @@ async function bootstrap() {
   );
   // bind pipes and interceptors
   await app.register(multipart);
-  // app.useGlobalInterceptors(new ResponseFormatInterceptor()); // response-formatting out of the box
   new ValidationPipe({
     transform: true,
   });
   app.enableCors();
+  
+  const config = new DocumentBuilder()
+    .setTitle('Telemetry')
+    .setDescription('APIs for telemetry')
+    .setVersion('1.0')
+    .addTag('telemetry')
+    .addBearerAuth()
+    .build();
+
+  const options: SwaggerDocumentOptions = {
+    operationIdFactory: (controllerKey: string, methodKey: string) => methodKey,
+  };
+
+  const document = SwaggerModule.createDocument(app, config, options);
+  SwaggerModule.setup('api', app, document);
+  
   // start the server
-  await app.listen(3000);
+  await app.listen(3000, '0.0.0.0');
 }
 bootstrap();

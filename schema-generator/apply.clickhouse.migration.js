@@ -54,7 +54,7 @@ async function main() {
   //   format: 'json'
   // });
   // const client = new clickhouse.ClickHouse({
-  //   host: 'https://clickhouse.devops.bhasai.samagra.io/',
+  //   host: 'https://clickhouse.staging.bhasai.samagra.io/',
   //   database: "default",
   //   basicAuth: {
   //     username: "default",
@@ -62,7 +62,9 @@ async function main() {
   //   },
   //   format: 'json'
   // });
-  runSQLFile('clickhouse.migration.sql', client);
+  runSQLFile('01.clickhouse.migration.sql', client);
+  // runSQLFile('02.clickhouse.migration.sql', client);
+  // runSQLFile('add.combined.view.clickhouse.sql', client)
 }
 
 main()

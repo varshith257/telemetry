@@ -36,13 +36,15 @@
                 "audioId ": {
                     "type": "string",
                     "format": "uuid"
+                },
+                "language ": {
+                    "type": "string"
                 }
             },
             "required": [
                 "botId",
                 "userId",
-                "orgId",
-                "audioUrl"
+                "orgId"
             ],
             "description": "BFF received audio from a bot"
         }
@@ -77,6 +79,9 @@
                     "type": "string",
                     "format": "uuid"
                 },
+                "audioFileName ": {
+                    "type": "string"
+                },
                 "audioUrl ": {
                     "type": "string",
                     "format": "url"
@@ -105,6 +110,9 @@
                 },
                 "createdAt ": {
                     "type": "number"
+                },
+                "language ": {
+                    "type": "string"
                 }
             },
             "required": [
@@ -112,11 +120,7 @@
                 "userId",
                 "orgId",
                 "messageId",
-                "audioUrl",
-                "text",
-                "spellCorrectedText",
                 "timeTaken",
-                "spellCheckTimeTaken",
                 "createdAt"
             ],
             "description": "Audio is converted to text from audio"
@@ -273,10 +277,6 @@
                     "type": "string",
                     "format": "uuid"
                 },
-                "userId ": {
-                    "type": "string",
-                    "format": "uuid"
-                },
                 "orgId ": {
                     "type": "string",
                     "format": "uuid"
@@ -289,32 +289,19 @@
                     "type": "string",
                     "format": "uuid"
                 },
-                "text ": {
-                    "type": "string"
-                },
                 "timeTaken ": {
                     "type": "number"
                 },
-                "phoneNumber ": {
-                    "type": "string"
-                },
-                "queryId ": {
-                    "type": "string",
-                    "format": "uuid"
-                },
-                "textInEnglish ": {
+                "did ": {
                     "type": "string"
                 }
             },
             "required": [
                 "botId",
-                "userId",
                 "orgId",
                 "messageId",
-                "text",
                 "timeTaken",
-                "queryId",
-                "textInEnglish"
+                "did"
             ],
             "description": "Fetching user history at inbound"
         }
@@ -352,6 +339,9 @@
                 "text ": {
                     "type": "string"
                 },
+                "error ": {
+                    "type": "string"
+                },
                 "timeTaken ": {
                     "type": "number"
                 },
@@ -364,6 +354,12 @@
                 },
                 "district ": {
                     "type": "string"
+                },
+                "eventLog ": {
+                    "type": "string"
+                },
+                "transformerId ": {
+                    "type": "string"
                 }
             },
             "required": [
@@ -372,9 +368,7 @@
                 "orgId",
                 "messageId",
                 "text",
-                "queryId",
-                "block",
-                "district"
+                "transformerId"
             ],
             "description": "Fetching user info - transformer"
         }
@@ -412,6 +406,12 @@
                 "text ": {
                     "type": "string"
                 },
+                "error ": {
+                    "type": "string"
+                },
+                "timeTaken ": {
+                    "type": "number"
+                },
                 "phoneNumber ": {
                     "type": "string"
                 },
@@ -424,6 +424,12 @@
                 },
                 "textInEnglish ": {
                     "type": "string"
+                },
+                "eventLog ": {
+                    "type": "string"
+                },
+                "transformerId ": {
+                    "type": "string"
                 }
             },
             "required": [
@@ -432,8 +438,7 @@
                 "orgId",
                 "messageId",
                 "text",
-                "queryId",
-                "textInEnglish"
+                "transformerId"
             ],
             "description": "translate - transformer"
         }
@@ -471,6 +476,9 @@
                 "text ": {
                     "type": "string"
                 },
+                "error ": {
+                    "type": "string"
+                },
                 "timeTaken ": {
                     "type": "number"
                 },
@@ -486,6 +494,12 @@
                 },
                 "coreferencedText ": {
                     "type": "string"
+                },
+                "eventLog ": {
+                    "type": "string"
+                },
+                "transformerId ": {
+                    "type": "string"
                 }
             },
             "required": [
@@ -494,9 +508,7 @@
                 "orgId",
                 "messageId",
                 "text",
-                "timeTaken",
-                "queryId",
-                "textInEnglish"
+                "transformerId"
             ],
             "description": "nuralCoref - transformer"
         }
@@ -534,6 +546,9 @@
                 "text ": {
                     "type": "string"
                 },
+                "error ": {
+                    "type": "string"
+                },
                 "timeTaken ": {
                     "type": "number"
                 },
@@ -549,6 +564,12 @@
                 },
                 "queryClass ": {
                     "type": "string"
+                },
+                "eventLog ": {
+                    "type": "string"
+                },
+                "transformerId ": {
+                    "type": "string"
                 }
             },
             "required": [
@@ -557,9 +578,7 @@
                 "orgId",
                 "messageId",
                 "text",
-                "timeTaken",
-                "queryId",
-                "textInEnglish"
+                "transformerId"
             ],
             "description": "classifier - transformer"
         }
@@ -597,6 +616,9 @@
                 "text ": {
                     "type": "string"
                 },
+                "error ": {
+                    "type": "string"
+                },
                 "timeTaken ": {
                     "type": "number"
                 },
@@ -612,6 +634,12 @@
                 },
                 "similarChunks ": {
                     "type": "object"
+                },
+                "eventLog ": {
+                    "type": "string"
+                },
+                "transformerId ": {
+                    "type": "string"
                 }
             },
             "required": [
@@ -620,9 +648,7 @@
                 "orgId",
                 "messageId",
                 "text",
-                "timeTaken",
-                "queryId",
-                "textInEnglish"
+                "transformerId"
             ],
             "description": "retieveDocs - transformer"
         }
@@ -660,6 +686,9 @@
                 "text ": {
                     "type": "string"
                 },
+                "error ": {
+                    "type": "string"
+                },
                 "timeTaken ": {
                     "type": "number"
                 },
@@ -675,6 +704,12 @@
                 },
                 "NER ": {
                     "type": "object"
+                },
+                "eventLog ": {
+                    "type": "string"
+                },
+                "transformerId ": {
+                    "type": "string"
                 }
             },
             "required": [
@@ -683,10 +718,7 @@
                 "orgId",
                 "messageId",
                 "text",
-                "timeTaken",
-                "queryId",
-                "textInEnglish",
-                "NER"
+                "transformerId"
             ],
             "description": "ner - transformer"
         }
@@ -724,6 +756,9 @@
                 "text ": {
                     "type": "string"
                 },
+                "error ": {
+                    "type": "string"
+                },
                 "timeTaken ": {
                     "type": "number"
                 },
@@ -742,6 +777,21 @@
                 },
                 "response ": {
                     "type": "string"
+                },
+                "eventLog ": {
+                    "type": "string"
+                },
+                "transformerId ": {
+                    "type": "string"
+                },
+                "prompt ": {
+                    "type": "string"
+                },
+                "translatedResponse ": {
+                    "type": "string"
+                },
+                "streamStartLatency ": {
+                    "type": "number"
                 }
             },
             "required": [
@@ -749,10 +799,7 @@
                 "userId",
                 "orgId",
                 "messageId",
-                "text",
-                "timeTaken",
-                "queryId",
-                "textInEnglish"
+                "transformerId"
             ],
             "description": "llm - transformer"
         }
@@ -761,7 +808,7 @@
         "eventProperties": {
             "eventId": "E013",
             "eventName": "userQuery",
-            "subEventName": "translateOutput"
+            "subEventName": "userQuery"
         },
         "eventSchema": {
             "$schema": "http://json-schema.org/draft-07/schema#",
@@ -790,6 +837,9 @@
                 "text ": {
                     "type": "string"
                 },
+                "error ": {
+                    "type": "string"
+                },
                 "timeTaken ": {
                     "type": "number"
                 },
@@ -808,6 +858,12 @@
                 },
                 "response ": {
                     "type": "string"
+                },
+                "eventLog ": {
+                    "type": "string"
+                },
+                "transformerId ": {
+                    "type": "string"
                 }
             },
             "required": [
@@ -816,9 +872,8 @@
                 "orgId",
                 "messageId",
                 "text",
-                "queryId",
-                "textInEnglish",
-                "response"
+                "response",
+                "transformerId"
             ],
             "description": "translate - transformer"
         }
@@ -827,7 +882,7 @@
         "eventProperties": {
             "eventId": "E014",
             "eventName": "userQuery",
-            "subEventName": "textToSpeech"
+            "subEventName": "userQuery"
         },
         "eventSchema": {
             "$schema": "http://json-schema.org/draft-07/schema#",
@@ -852,6 +907,9 @@
                 "messageId ": {
                     "type": "string",
                     "format": "uuid"
+                },
+                "audioFileName ": {
+                    "type": "string"
                 },
                 "audioUrl ": {
                     "type": "string",
@@ -864,6 +922,9 @@
                 "text ": {
                     "type": "string"
                 },
+                "error ": {
+                    "type": "string"
+                },
                 "timeTaken ": {
                     "type": "number"
                 },
@@ -882,6 +943,9 @@
                 },
                 "response ": {
                     "type": "string"
+                },
+                "language ": {
+                    "type": "string"
                 }
             },
             "required": [
@@ -889,11 +953,9 @@
                 "userId",
                 "orgId",
                 "messageId",
-                "audioUrl",
                 "text",
                 "timeTaken",
                 "queryId",
-                "textInEnglish",
                 "response"
             ],
             "description": "textToSpeech - transformer"
@@ -903,7 +965,7 @@
         "eventProperties": {
             "eventId": "E015",
             "eventName": "userQuery",
-            "subEventName": "audioPlayed"
+            "subEventName": "userQuery"
         },
         "eventSchema": {
             "$schema": "http://json-schema.org/draft-07/schema#",
@@ -937,10 +999,6 @@
                 },
                 "phoneNumber ": {
                     "type": "string"
-                },
-                "queryId ": {
-                    "type": "string",
-                    "format": "uuid"
                 },
                 "responseInEnglish ": {
                     "type": "string"
@@ -954,17 +1012,62 @@
                 "userId",
                 "orgId",
                 "messageId",
-                "text",
-                "queryId"
+                "text"
             ],
-            "description": "When user plays audio at app"
+            "description": "When user plays audio at app (timesAudioUsed)"
         }
     },
     {
         "eventProperties": {
             "eventId": "E016",
             "eventName": "userQuery",
-            "subEventName": "responseReceivedAtApp"
+            "subEventName": "userQuery"
+        },
+        "eventSchema": {
+            "$schema": "http://json-schema.org/draft-07/schema#",
+            "type": "object",
+            "properties": {
+                "botId ": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "userId ": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "orgId ": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "conversationId ": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "messageId ": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "error ": {
+                    "type": "string"
+                },
+                "errorRate ": {
+                    "type": "number"
+                }
+            },
+            "required": [
+                "botId",
+                "userId",
+                "orgId",
+                "messageId"
+            ],
+            "description": "When an error is occured during query process"
+        }
+    },
+    {
+        "eventProperties": {
+            "eventId": "E017",
+            "eventName": "userQuery",
+            "subEventName": "userQuery"
         },
         "eventSchema": {
             "$schema": "http://json-schema.org/draft-07/schema#",
@@ -999,10 +1102,6 @@
                 "phoneNumber ": {
                     "type": "string"
                 },
-                "queryId ": {
-                    "type": "string",
-                    "format": "uuid"
-                },
                 "responseInEnglish ": {
                     "type": "string"
                 },
@@ -1016,17 +1115,16 @@
                 "orgId",
                 "messageId",
                 "text",
-                "timeTaken",
-                "queryId"
+                "timeTaken"
             ],
-            "description": "When user gets the response at app"
+            "description": "When user gets the response at app (responseAt)"
         }
     },
     {
         "eventProperties": {
-            "eventId": "E017",
+            "eventId": "E018",
             "eventName": "userQueryInbound",
-            "subEventName": "outgoingMessage"
+            "subEventName": "userQuery"
         },
         "eventSchema": {
             "$schema": "http://json-schema.org/draft-07/schema#",
@@ -1083,9 +1181,9 @@
     },
     {
         "eventProperties": {
-            "eventId": "E018",
+            "eventId": "E019",
             "eventName": "userQueryInbound",
-            "subEventName": "convertXmsgFailed"
+            "subEventName": "userQuery"
         },
         "eventSchema": {
             "$schema": "http://json-schema.org/draft-07/schema#",
@@ -1138,9 +1236,9 @@
     },
     {
         "eventProperties": {
-            "eventId": "E019",
+            "eventId": "E020",
             "eventName": "userQueryInbound",
-            "subEventName": "convertMsgFailed"
+            "subEventName": "userQuery"
         },
         "eventSchema": {
             "$schema": "http://json-schema.org/draft-07/schema#",
@@ -1186,9 +1284,9 @@
     },
     {
         "eventProperties": {
-            "eventId": "E020",
+            "eventId": "E021",
             "eventName": "userQueryInbound",
-            "subEventName": "registrationRequest"
+            "subEventName": "userQuery"
         },
         "eventSchema": {
             "$schema": "http://json-schema.org/draft-07/schema#",
@@ -1240,9 +1338,9 @@
     },
     {
         "eventProperties": {
-            "eventId": "E021",
+            "eventId": "E022",
             "eventName": "userQueryInbound",
-            "subEventName": "registrationFailed"
+            "subEventName": "userQuery"
         },
         "eventSchema": {
             "$schema": "http://json-schema.org/draft-07/schema#",
@@ -1294,9 +1392,9 @@
     },
     {
         "eventProperties": {
-            "eventId": "E022",
+            "eventId": "E023",
             "eventName": "userQueryInbound",
-            "subEventName": "feedbackRequest"
+            "subEventName": "reactionEvent"
         },
         "eventSchema": {
             "$schema": "http://json-schema.org/draft-07/schema#",
@@ -1318,35 +1416,31 @@
                     "type": "string",
                     "format": "uuid"
                 },
-                "text ": {
-                    "type": "string"
-                },
-                "createdAt ": {
-                    "type": "number"
-                },
                 "did ": {
                     "type": "string"
                 },
-                "feedback ": {
+                "reactionType ": {
+                    "type": "string"
+                },
+                "reactionText ": {
                     "type": "string"
                 }
             },
             "required": [
                 "botId",
                 "orgId",
-                "conversationId",
                 "messageId",
-                "createdAt",
-                "did"
+                "did",
+                "reactionType"
             ],
             "description": "A user sent a feedback on a message"
         }
     },
     {
         "eventProperties": {
-            "eventId": "E023",
+            "eventId": "E024",
             "eventName": "userQueryInbound",
-            "subEventName": "messageRead"
+            "subEventName": "userQuery"
         },
         "eventSchema": {
             "$schema": "http://json-schema.org/draft-07/schema#",
@@ -1394,72 +1488,9 @@
     },
     {
         "eventProperties": {
-            "eventId": "E024",
-            "eventName": "AI-Tools",
-            "subEventName": "speechToText"
-        },
-        "eventSchema": {
-            "$schema": "http://json-schema.org/draft-07/schema#",
-            "type": "object",
-            "properties": {
-                "botId ": {
-                    "type": "string",
-                    "format": "uuid"
-                },
-                "userId ": {
-                    "type": "string",
-                    "format": "uuid"
-                },
-                "orgId ": {
-                    "type": "string",
-                    "format": "uuid"
-                },
-                "conversationId ": {
-                    "type": "string",
-                    "format": "uuid"
-                },
-                "messageId ": {
-                    "type": "string",
-                    "format": "uuid"
-                },
-                "audioUrl ": {
-                    "type": "string",
-                    "format": "url"
-                },
-                "audioId ": {
-                    "type": "string",
-                    "format": "uuid"
-                },
-                "text ": {
-                    "type": "string"
-                },
-                "error ": {
-                    "type": "string"
-                },
-                "timeTaken ": {
-                    "type": "number"
-                },
-                "createdAt ": {
-                    "type": "number"
-                },
-                "queryId ": {
-                    "type": "string",
-                    "format": "uuid"
-                }
-            },
-            "required": [
-                "audioUrl",
-                "text",
-                "timeTaken"
-            ],
-            "description": "On return of this API call"
-        }
-    },
-    {
-        "eventProperties": {
             "eventId": "E025",
             "eventName": "AI-Tools",
-            "subEventName": "textToSpeech"
+            "subEventName": "userQuery"
         },
         "eventSchema": {
             "$schema": "http://json-schema.org/draft-07/schema#",
@@ -1522,6 +1553,69 @@
         "eventProperties": {
             "eventId": "E026",
             "eventName": "AI-Tools",
+            "subEventName": "userQuery"
+        },
+        "eventSchema": {
+            "$schema": "http://json-schema.org/draft-07/schema#",
+            "type": "object",
+            "properties": {
+                "botId ": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "userId ": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "orgId ": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "conversationId ": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "messageId ": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "audioUrl ": {
+                    "type": "string",
+                    "format": "url"
+                },
+                "audioId ": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "text ": {
+                    "type": "string"
+                },
+                "error ": {
+                    "type": "string"
+                },
+                "timeTaken ": {
+                    "type": "number"
+                },
+                "createdAt ": {
+                    "type": "number"
+                },
+                "queryId ": {
+                    "type": "string",
+                    "format": "uuid"
+                }
+            },
+            "required": [
+                "audioUrl",
+                "text",
+                "timeTaken"
+            ],
+            "description": "On return of this API call"
+        }
+    },
+    {
+        "eventProperties": {
+            "eventId": "E027",
+            "eventName": "AI-Tools",
             "subEventName": "translate"
         },
         "eventSchema": {
@@ -1578,7 +1672,7 @@
     },
     {
         "eventProperties": {
-            "eventId": "E027",
+            "eventId": "E028",
             "eventName": "AI-Tools",
             "subEventName": "transliterate"
         },
@@ -1636,41 +1730,15 @@
     },
     {
         "eventProperties": {
-            "eventId": "E028",
-            "eventName": "datasetInjestion",
-            "subEventName": "todo"
-        },
-        "eventSchema": {
-            "$schema": "http://json-schema.org/draft-07/schema#",
-            "type": "object",
-            "properties": {
-                "userId ": {
-                    "type": "string",
-                    "format": "uuid"
-                },
-                "orgId ": {
-                    "type": "string",
-                    "format": "uuid"
-                }
-            },
-            "required": [
-                "userId",
-                "orgId"
-            ],
-            "description": "todo"
-        }
-    },
-    {
-        "eventProperties": {
             "eventId": "E029",
             "eventName": "datasetInjestion",
-            "subEventName": "todo"
+            "subEventName": "translationDictionary"
         },
         "eventSchema": {
             "$schema": "http://json-schema.org/draft-07/schema#",
             "type": "object",
             "properties": {
-                "userId ": {
+                "botId ": {
                     "type": "string",
                     "format": "uuid"
                 },
@@ -1680,23 +1748,23 @@
                 }
             },
             "required": [
-                "userId",
+                "botId",
                 "orgId"
             ],
-            "description": "todo"
+            "description": "migration of data"
         }
     },
     {
         "eventProperties": {
             "eventId": "E030",
             "eventName": "datasetInjestion",
-            "subEventName": "todo"
+            "subEventName": "officials"
         },
         "eventSchema": {
             "$schema": "http://json-schema.org/draft-07/schema#",
             "type": "object",
             "properties": {
-                "userId ": {
+                "botId ": {
                     "type": "string",
                     "format": "uuid"
                 },
@@ -1706,23 +1774,23 @@
                 }
             },
             "required": [
-                "userId",
+                "botId",
                 "orgId"
             ],
-            "description": "todo"
+            "description": "migration of data"
         }
     },
     {
         "eventProperties": {
             "eventId": "E031",
-            "eventName": "datasetInjestion",
-            "subEventName": "todo"
+            "eventName": "documentService",
+            "subEventName": "document"
         },
         "eventSchema": {
             "$schema": "http://json-schema.org/draft-07/schema#",
             "type": "object",
             "properties": {
-                "userId ": {
+                "botId ": {
                     "type": "string",
                     "format": "uuid"
                 },
@@ -1732,95 +1800,15 @@
                 }
             },
             "required": [
-                "userId",
+                "botId",
                 "orgId"
             ],
-            "description": "todo"
+            "description": "migration of data"
         }
     },
     {
         "eventProperties": {
             "eventId": "E032",
-            "eventName": "documentService",
-            "subEventName": "todo"
-        },
-        "eventSchema": {
-            "$schema": "http://json-schema.org/draft-07/schema#",
-            "type": "object",
-            "properties": {
-                "userId ": {
-                    "type": "string",
-                    "format": "uuid"
-                },
-                "orgId ": {
-                    "type": "string",
-                    "format": "uuid"
-                }
-            },
-            "required": [
-                "userId",
-                "orgId"
-            ],
-            "description": "todo"
-        }
-    },
-    {
-        "eventProperties": {
-            "eventId": "E033",
-            "eventName": "documentService",
-            "subEventName": "todo"
-        },
-        "eventSchema": {
-            "$schema": "http://json-schema.org/draft-07/schema#",
-            "type": "object",
-            "properties": {
-                "userId ": {
-                    "type": "string",
-                    "format": "uuid"
-                },
-                "orgId ": {
-                    "type": "string",
-                    "format": "uuid"
-                }
-            },
-            "required": [
-                "userId",
-                "orgId"
-            ],
-            "description": "todo"
-        }
-    },
-    {
-        "eventProperties": {
-            "eventId": "E034",
-            "eventName": "documentService",
-            "subEventName": "todo"
-        },
-        "eventSchema": {
-            "$schema": "http://json-schema.org/draft-07/schema#",
-            "type": "object",
-            "properties": {},
-            "required": [],
-            "description": "todo"
-        }
-    },
-    {
-        "eventProperties": {
-            "eventId": "E035",
-            "eventName": "documentService",
-            "subEventName": "todo"
-        },
-        "eventSchema": {
-            "$schema": "http://json-schema.org/draft-07/schema#",
-            "type": "object",
-            "properties": {},
-            "required": [],
-            "description": "todo"
-        }
-    },
-    {
-        "eventProperties": {
-            "eventId": "E036",
             "eventName": "messageQuery",
             "subEventName": "messageSent"
         },
@@ -1867,17 +1855,18 @@
             "required": [
                 "botId",
                 "userId",
+                "orgId",
                 "conversationId",
                 "messageId",
                 "text",
                 "createdAt"
             ],
-            "description": "When user sends a message"
+            "description": "When user sends a message (send phoneNumber also)"
         }
     },
     {
         "eventProperties": {
-            "eventId": "E037",
+            "eventId": "E033",
             "eventName": "messageQuery",
             "subEventName": "messageReceived"
         },
@@ -1930,12 +1919,711 @@
             "required": [
                 "botId",
                 "userId",
+                "orgId",
                 "conversationId",
                 "messageId",
                 "text",
                 "timeTaken"
             ],
             "description": "When user receives back a response for sent message"
+        }
+    },
+    {
+        "eventProperties": {
+            "eventId": "E034",
+            "eventName": "search",
+            "subEventName": "fuzzy search"
+        },
+        "eventSchema": {
+            "$schema": "http://json-schema.org/draft-07/schema#",
+            "type": "object",
+            "properties": {
+                "botId ": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "orgId ": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "conversationId ": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "messageId ": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "error ": {
+                    "type": "string"
+                },
+                "timeTaken ": {
+                    "type": "number"
+                },
+                "datasetId ": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "question ": {
+                    "type": "string"
+                },
+                "field": {
+                    "type": "string"
+                },
+                "threshold ": {
+                    "type": "number"
+                },
+                "result ": {
+                    "type": "object"
+                },
+                "requestId ": {
+                    "type": "string",
+                    "format": "uuid"
+                }
+            },
+            "required": [
+                "botId",
+                "orgId",
+                "timeTaken",
+                "datasetId",
+                "question",
+                "field",
+                "threshold",
+                "result"
+            ],
+            "description": "On return of this API call"
+        }
+    },
+    {
+        "eventProperties": {
+            "eventId": "E035",
+            "eventName": "search",
+            "subEventName": "vector search"
+        },
+        "eventSchema": {
+            "$schema": "http://json-schema.org/draft-07/schema#",
+            "type": "object",
+            "properties": {
+                "botId ": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "orgId ": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "conversationId ": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "messageId ": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "error ": {
+                    "type": "string"
+                },
+                "timeTaken ": {
+                    "type": "number"
+                },
+                "datasetId ": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "question ": {
+                    "type": "string"
+                },
+                "field": {
+                    "type": "string"
+                },
+                "result ": {
+                    "type": "object"
+                },
+                "requestId ": {
+                    "type": "string",
+                    "format": "uuid"
+                }
+            },
+            "required": [
+                "botId",
+                "orgId",
+                "timeTaken",
+                "datasetId",
+                "question",
+                "field",
+                "result"
+            ],
+            "description": "On return of this API call"
+        }
+    },
+    {
+        "eventProperties": {
+            "eventId": "E036",
+            "eventName": "search",
+            "subEventName": "execute-query "
+        },
+        "eventSchema": {
+            "$schema": "http://json-schema.org/draft-07/schema#",
+            "type": "object",
+            "properties": {
+                "botId ": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "orgId ": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "conversationId ": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "messageId ": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "error ": {
+                    "type": "string"
+                },
+                "timeTaken ": {
+                    "type": "number"
+                },
+                "datasetId ": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "sqlQuery ": {
+                    "type": "string"
+                },
+                "result ": {
+                    "type": "object"
+                },
+                "requestId ": {
+                    "type": "string",
+                    "format": "uuid"
+                }
+            },
+            "required": [
+                "botId",
+                "orgId",
+                "timeTaken",
+                "datasetId",
+                "sqlQuery",
+                "result"
+            ],
+            "description": "On return of this API call"
+        }
+    },
+    {
+        "eventProperties": {
+            "eventId": "E037",
+            "eventName": "Data Insertion",
+            "subEventName": "create schema"
+        },
+        "eventSchema": {
+            "$schema": "http://json-schema.org/draft-07/schema#",
+            "type": "object",
+            "properties": {
+                "botId ": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "orgId ": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "conversationId ": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "messageId ": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "error ": {
+                    "type": "string"
+                },
+                "timeTaken ": {
+                    "type": "number"
+                },
+                "requestId ": {
+                    "type": "string",
+                    "format": "uuid"
+                }
+            },
+            "required": [
+                "botId",
+                "orgId",
+                "timeTaken"
+            ],
+            "description": "On return of this API call"
+        }
+    },
+    {
+        "eventProperties": {
+            "eventId": "E038",
+            "eventName": "Data Insertion",
+            "subEventName": "insertDataset"
+        },
+        "eventSchema": {
+            "$schema": "http://json-schema.org/draft-07/schema#",
+            "type": "object",
+            "properties": {
+                "botId ": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "orgId ": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "conversationId ": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "messageId ": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "error ": {
+                    "type": "string"
+                },
+                "timeTaken ": {
+                    "type": "number"
+                },
+                "schemaId ": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "requestId ": {
+                    "type": "string",
+                    "format": "uuid"
+                }
+            },
+            "required": [
+                "botId",
+                "orgId",
+                "timeTaken",
+                "schemaId"
+            ],
+            "description": "On return of this API call"
+        }
+    },
+    {
+        "eventProperties": {
+            "eventId": "E039",
+            "eventName": "documentService",
+            "subEventName": "upload"
+        },
+        "eventSchema": {
+            "$schema": "http://json-schema.org/draft-07/schema#",
+            "type": "object",
+            "properties": {
+                "botId ": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "orgId ": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "conversationId ": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "messageId ": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "error ": {
+                    "type": "string"
+                },
+                "timeTaken ": {
+                    "type": "number"
+                },
+                "question ": {
+                    "type": "string"
+                },
+                "result ": {
+                    "type": "object"
+                },
+                "documentId ": {
+                    "type": "array"
+                },
+                "requestId ": {
+                    "type": "string",
+                    "format": "uuid"
+                }
+            },
+            "required": [
+                "botId",
+                "orgId",
+                "question",
+                "result"
+            ],
+            "description": "On return of this API call"
+        }
+    },
+    {
+        "eventProperties": {
+            "eventId": "E040",
+            "eventName": "documentService",
+            "subEventName": "retrieve"
+        },
+        "eventSchema": {
+            "$schema": "http://json-schema.org/draft-07/schema#",
+            "type": "object",
+            "properties": {
+                "botId ": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "orgId ": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "conversationId ": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "messageId ": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "error ": {
+                    "type": "string"
+                },
+                "timeTaken ": {
+                    "type": "number"
+                },
+                "sqlQuery ": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "botId",
+                "orgId",
+                "sqlQuery"
+            ],
+            "description": "On return of this API call"
+        }
+    },
+    {
+        "eventProperties": {
+            "eventId": "E041",
+            "eventName": "Transformer Execution ",
+            "subEventName": "DEFAULT_TRANSFORMER_START_EVENT"
+        },
+        "eventSchema": {
+            "$schema": "http://json-schema.org/draft-07/schema#",
+            "type": "object",
+            "properties": {
+                "botId ": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "orgId ": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "messageId ": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "error ": {
+                    "type": "string"
+                },
+                "transformerId ": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "botId",
+                "orgId",
+                "messageId",
+                "transformerId"
+            ],
+            "description": "When the transformer execution begins  "
+        }
+    },
+    {
+        "eventProperties": {
+            "eventId": "E042",
+            "eventName": "Transformer Execution ",
+            "subEventName": "DEFAULT_TRANSFORMER_END_EVENT"
+        },
+        "eventSchema": {
+            "$schema": "http://json-schema.org/draft-07/schema#",
+            "type": "object",
+            "properties": {
+                "botId ": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "orgId ": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "messageId ": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "error ": {
+                    "type": "string"
+                },
+                "timeTaken ": {
+                    "type": "number"
+                },
+                "transformerId ": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "botId",
+                "orgId",
+                "transformerId"
+            ],
+            "description": "When the transformer execution completes"
+        }
+    },
+    {
+        "eventProperties": {
+            "eventId": "E043",
+            "eventName": "userQuery",
+            "subEventName": "detectLanguage"
+        },
+        "eventSchema": {
+            "$schema": "http://json-schema.org/draft-07/schema#",
+            "type": "object",
+            "properties": {
+                "botId ": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "orgId ": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "conversationId ": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "messageId ": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "timeTaken ": {
+                    "type": "number"
+                },
+                "language ": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "botId",
+                "orgId",
+                "language"
+            ],
+            "description": ""
+        }
+    },
+    {
+        "eventProperties": {
+            "eventId": "E044",
+            "eventName": "micAction",
+            "subEventName": "micTap"
+        },
+        "eventSchema": {
+            "$schema": "http://json-schema.org/draft-07/schema#",
+            "type": "object",
+            "properties": {
+                "botId ": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "userId ": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "orgId ": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "conversationId ": {
+                    "type": "string",
+                    "format": "uuid"
+                }
+            },
+            "required": [
+                "botId",
+                "userId",
+                "orgId",
+                "conversationId"
+            ],
+            "description": "When user taps on mic to speak something"
+        }
+    },
+    {
+        "eventProperties": {
+            "eventId": "E045",
+            "eventName": "aiToolProxyToolLatency",
+            "subEventName": "t2sLatency"
+        },
+        "eventSchema": {
+            "$schema": "http://json-schema.org/draft-07/schema#",
+            "type": "object",
+            "properties": {
+                "botId ": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "userId ": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "orgId ": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "conversationId ": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "messageId ": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "audioUrl ": {
+                    "type": "string",
+                    "format": "url"
+                },
+                "text ": {
+                    "type": "string"
+                },
+                "error ": {
+                    "type": "string"
+                },
+                "timeTaken ": {
+                    "type": "number"
+                },
+                "createdAt ": {
+                    "type": "number"
+                }
+            },
+            "required": [
+                "botId",
+                "userId",
+                "orgId",
+                "conversationId",
+                "messageId",
+                "text",
+                "timeTaken"
+            ],
+            "description": "Time taken by T2S API"
+        }
+    },
+    {
+        "eventProperties": {
+            "eventId": "E046",
+            "eventName": "aiToolProxyToolLatency",
+            "subEventName": "s2tLatency"
+        },
+        "eventSchema": {
+            "$schema": "http://json-schema.org/draft-07/schema#",
+            "type": "object",
+            "properties": {
+                "botId ": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "userId ": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "orgId ": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "conversationId ": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "messageId ": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "text ": {
+                    "type": "string"
+                },
+                "error ": {
+                    "type": "string"
+                },
+                "timeTaken ": {
+                    "type": "number"
+                },
+                "createdAt ": {
+                    "type": "number"
+                }
+            },
+            "required": [
+                "botId",
+                "userId",
+                "orgId",
+                "conversationId",
+                "messageId",
+                "timeTaken"
+            ],
+            "description": "Time taken by S2T API"
+        }
+    },
+    {
+        "eventProperties": {
+            "eventId": "E047",
+            "eventName": "aiToolProxyToolLatency",
+            "subEventName": "detectedLatency"
+        },
+        "eventSchema": {
+            "$schema": "http://json-schema.org/draft-07/schema#",
+            "type": "object",
+            "properties": {
+                "botId ": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "userId ": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "orgId ": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "conversationId ": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "messageId ": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "text ": {
+                    "type": "string"
+                },
+                "timeTaken ": {
+                    "type": "number"
+                },
+                "language ": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "botId",
+                "userId",
+                "orgId",
+                "messageId",
+                "text"
+            ],
+            "description": "Time taken in detecting latency"
         }
     }
 ]

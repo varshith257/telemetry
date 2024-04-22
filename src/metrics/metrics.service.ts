@@ -1,10 +1,11 @@
-import { Injectable, Logger } from "@nestjs/common";
+import { Injectable, Logger, UnauthorizedException } from "@nestjs/common";
 import Ajv, { ValidateFunction } from "ajv";
 import addFormats from "ajv-formats";
 import { PrismaService } from "src/prisma/prisma.service";
 import { MetricsV1Dto } from "./dto/metrics.v1.dto";
 import { ClickHouseClient, createClient } from "@clickhouse/client";
 import { UpdateSchemaDto } from "./dto/update.schema.dto";
+import { UserData, UserRole } from "src/interceptors/addUserDetails.interceptor";
 
 @Injectable()
 export class MetricsService {
@@ -112,7 +113,7 @@ export class MetricsService {
       };
     });
     await this.clickhouse.insert({
-      table: `${process.env.CLICKHOUSE_TABLENAME}`,
+      table: `event`,
       values: formattedEventData,
       format: 'JSONEachRow'
     });
@@ -151,5 +152,68 @@ export class MetricsService {
       message: 'Created/Updated Event schema',
       data: schema,
     }
+  }
+
+  async combinedView(
+    userData: UserData,
+    limit: number, 
+    page: number, 
+    orderBy?: string, 
+    order?: string,
+    filter?: any,
+  ) {
+    if (!(userData.role == UserRole.ORG_ADMIN || userData.role == UserRole.OWNER || userData.role == UserRole.SUPER_ADMIN)) {
+      throw new UnauthorizedException();
+    }
+    let selectClause = '';
+		let whereClause = '';
+		let rangeClause = '';
+
+		selectClause += `SELECT * FROM combined_data`;
+    
+    const offset = limit * (page - 1);
+
+		whereClause = `\nWHERE botId='${userData.botId}'`;
+    if (filter) {
+      for(const column of Object.keys(filter)) {
+        whereClause += `\nAND ${column}='${filter[column]}'`
+      }
+    }
+
+    if (orderBy) {
+      if (order) {
+        rangeClause += `\nORDER BY ${orderBy} ${order}`
+      } else {
+        rangeClause += `\nORDER BY ${orderBy}`
+      }
+    } else {
+      rangeClause += `\n ORDER BY timestamp DESC`
+    }
+    rangeClause += `\nLIMIT ${limit} OFFSET ${offset};`;
+		const query = selectClause + whereClause + rangeClause;
+    console.log(query);
+    const content = await this.clickhouse.query({
+      query: query,
+      format: 'JSONEachRow'
+    });
+    const selectQueryResponse = await content.json();
+
+    // getting count
+    const countQuery = await this.clickhouse.query({
+      query: `SELECT COUNT(*) FROM combined_data` + whereClause,
+    });
+    const countQueryJsonRes = await countQuery.json();
+    const count = countQueryJsonRes['data'][0]['count()'];
+    
+    const totalPages = Math.ceil(count / limit);
+    return Response.json({
+      pagination: {
+        page: page,
+        perPage: limit,
+        totalPages: totalPages,
+        totalCount: +count
+      },
+      data: selectQueryResponse
+    }, { status: 200 })
   }
 }

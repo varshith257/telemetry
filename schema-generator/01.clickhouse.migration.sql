@@ -1,4 +1,4 @@
-CREATE TABLE IF NOT EXISTS events
+CREATE TABLE IF NOT EXISTS event
 (
 	generator String,
 	version String,
@@ -23,6 +23,7 @@ CREATE TABLE IF NOT EXISTS events
 	orgId Nullable(UUID),
 	conversationId Nullable(UUID),
 	messageId Nullable(UUID),
+	audioFileName Nullable(String),
 	audioUrl Nullable(String),
 	audioId Nullable(UUID),
 	text Nullable(String),
@@ -48,7 +49,25 @@ CREATE TABLE IF NOT EXISTS events
 	feedback Nullable(String),
 	reaction Nullable(UInt32),
 	timesAudioUsed Nullable(UInt32),
-	outputText Nullable(String)
+	outputText Nullable(String),
+	errorRate Nullable(UInt32),
+	schemaId Nullable(UUID),
+	datasetId Nullable(UUID),
+	question Nullable(String),
+	field Nullable(String),
+	threshold Nullable(UInt32),
+	sqlQuery Nullable(String),
+	result Nullable(String),
+	documentId Nullable(String),
+	requestId Nullable(UUID),
+	eventLog Nullable(String),
+	transformerId Nullable(String),
+	language Nullable(String),
+	prompt Nullable(String),
+	translatedResponse Nullable(String),
+	streamStartLatency Nullable(UInt32),
+	reactionType Nullable(String),
+	reactionText Nullable(String)
 )
 ENGINE = MergeTree
 ORDER BY timestamp;
