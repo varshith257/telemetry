@@ -294,6 +294,9 @@
                 },
                 "did ": {
                     "type": "string"
+                },
+                "userHistory ": {
+                    "type": "string"
                 }
             },
             "required": [

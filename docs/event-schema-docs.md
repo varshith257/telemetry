@@ -282,6 +282,9 @@ When is it generated: Fetching user history at inbound
         },
         "did ": {
             "type": "string"
+        },
+        "userHistory ": {
+            "type": "string"
         }
     },
     "required": [
