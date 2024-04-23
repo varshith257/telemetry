@@ -14,6 +14,7 @@ async function bootstrap() {
     AppModule,
     new FastifyAdapter(),
   );
+
   // bind pipes and interceptors
   await app.register(multipart);
   new ValidationPipe({
@@ -36,7 +37,6 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, config, options);
   SwaggerModule.setup('api', app, document);
   
-  // start the server
   await app.listen(3000, '0.0.0.0');
 }
 bootstrap();
