@@ -93,6 +93,7 @@ export class MetricsService {
     const validator = this.validateMap.get(eventData.eventId);
     validator(eventData.eventData)
     if (validator.errors !== null) {
+      validator.errors[0]['eventId'] = eventData.eventId;
       return {
         error: true,
         errorList: validator.errors
