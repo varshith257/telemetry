@@ -1,0 +1,7 @@
+# Why not use Posthog or other telemetry services?
+
+Other telemetry services often specialize in collecting specific types of data or metrics relevant to their intended use cases. In contrast, wide telemetry events aim to capture a broad range of data points from diverse sources, providing a more comprehensive view of system behavior.
+
+While telemetry services like PostHog provide insights based on the data they collect, they may lack the ability to contextualize these insights with a diverse set of data points. Wide telemetry events enable deeper contextual understanding by capturing a broader range of telemetry data, facilitating better-informed decision-making and problem-solving.
+
+Telemetry services are typically designed to address specific use cases or domains, which may limit their flexibility and scalability for accommodating diverse data sources and evolving requirements. Wide telemetry events offer greater flexibility and scalability by capturing a wide range of data points from various sources, making them adaptable to different use cases and scalable to handle growing data volumes. (For example, there is no such key that we receive from event for getting specific metrics like `classifyQuestionLatency`, `getSimilarDocsLatency`. But thorugh open telemetry we have enough context about the system through defined events, that we are able to get these latency values from `timetaken` key that we receive from events)

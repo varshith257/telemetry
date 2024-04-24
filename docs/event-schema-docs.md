@@ -1,42 +1,47 @@
 # Event Data
+
 These are auto-generated schema specification through CSV
+
 ## speechToText
+
 ### receivedAudio
+
 When is it generated: BFF received audio from a bot
+
 ```json
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "type": "object",
     "properties": {
-        "botId ": {
+        "botId": {
             "type": "string",
             "format": "uuid"
         },
-        "userId ": {
+        "userId": {
             "type": "string",
             "format": "uuid"
         },
-        "orgId ": {
+        "orgId": {
             "type": "string",
             "format": "uuid"
         },
-        "conversationId ": {
+        "conversationId": {
             "type": "string",
             "format": "uuid"
         },
-        "messageId ": {
+        "messageId": {
             "type": "string",
             "format": "uuid"
         },
-        "audioUrl ": {
+        "audioUrl": {
             "type": "string",
             "format": "url"
         },
-        "audioId ": {
+        "audioId": {
             "type": "string",
             "format": "uuid"
         },
-        "language ": {
+        "language": {
             "type": "string"
         }
     },
@@ -48,66 +53,73 @@ When is it generated: BFF received audio from a bot
     "description": "BFF received audio from a bot"
 }
 ```
+
 ### speechToTextResponse
+
 When is it generated: Audio is converted to text from audio
+
 ```json
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "type": "object",
     "properties": {
-        "botId ": {
+        "botId": {
             "type": "string",
             "format": "uuid"
         },
-        "userId ": {
+        "userId": {
             "type": "string",
             "format": "uuid"
         },
-        "orgId ": {
+        "orgId": {
             "type": "string",
             "format": "uuid"
         },
-        "conversationId ": {
+        "conversationId": {
             "type": "string",
             "format": "uuid"
         },
-        "messageId ": {
+        "messageId": {
             "type": "string",
             "format": "uuid"
         },
-        "audioFileName ": {
+        "audioFileName": {
             "type": "string"
         },
-        "audioUrl ": {
+        "audioUrl": {
             "type": "string",
             "format": "url"
         },
-        "audioId ": {
+        "audioId": {
             "type": "string",
             "format": "uuid"
         },
-        "text ": {
+        "text": {
             "type": "string"
         },
-        "spellCorrectedText ": {
+        "spellCorrectedText": {
             "type": "string"
         },
-        "error ": {
+        "error": {
             "type": "string"
         },
-        "timeTaken ": {
+        "timeTaken": {
             "type": "number"
         },
-        "spellCheckTimeTaken ": {
+        "spellCheckTimeTaken": {
             "type": "number"
         },
-        "phoneNumber ": {
+        "phoneNumber": {
             "type": "string"
         },
-        "createdAt ": {
+        "createdAt": {
             "type": "number"
         },
-        "language ": {
+        "queryId": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "language": {
             "type": "string"
         }
     },
@@ -122,63 +134,66 @@ When is it generated: Audio is converted to text from audio
     "description": "Audio is converted to text from audio"
 }
 ```
+
 ### mapQueryIdToAudio
+
 When is it generated: AudioId is mapped to QueryId
+
 ```json
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "type": "object",
     "properties": {
-        "botId ": {
+        "botId": {
             "type": "string",
             "format": "uuid"
         },
-        "userId ": {
+        "userId": {
             "type": "string",
             "format": "uuid"
         },
-        "orgId ": {
+        "orgId": {
             "type": "string",
             "format": "uuid"
         },
-        "conversationId ": {
+        "conversationId": {
             "type": "string",
             "format": "uuid"
         },
-        "messageId ": {
+        "messageId": {
             "type": "string",
             "format": "uuid"
         },
-        "audioUrl ": {
+        "audioUrl": {
             "type": "string",
             "format": "url"
         },
-        "audioId ": {
+        "audioId": {
             "type": "string",
             "format": "uuid"
         },
-        "text ": {
+        "text": {
             "type": "string"
         },
-        "spellCorrectedText ": {
+        "spellCorrectedText": {
             "type": "string"
         },
-        "error ": {
+        "error": {
             "type": "string"
         },
-        "timeTaken ": {
+        "timeTaken": {
             "type": "number"
         },
-        "spellCheckTimeTaken ": {
+        "spellCheckTimeTaken": {
             "type": "number"
         },
-        "phoneNumber ": {
+        "phoneNumber": {
             "type": "string"
         },
-        "createdAt ": {
+        "createdAt": {
             "type": "number"
         },
-        "queryId ": {
+        "queryId": {
             "type": "string",
             "format": "uuid"
         }
@@ -199,47 +214,51 @@ When is it generated: AudioId is mapped to QueryId
     "description": "AudioId is mapped to QueryId"
 }
 ```
+
 ## userQuery
+
 ### incomingMessage
+
 When is it generated: User sent a message to a bot
+
 ```json
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "type": "object",
     "properties": {
-        "botId ": {
+        "botId": {
             "type": "string",
             "format": "uuid"
         },
-        "userId ": {
+        "userId": {
             "type": "string",
             "format": "uuid"
         },
-        "orgId ": {
+        "orgId": {
             "type": "string",
             "format": "uuid"
         },
-        "conversationId ": {
+        "conversationId": {
             "type": "string",
             "format": "uuid"
         },
-        "messageId ": {
+        "messageId": {
             "type": "string",
             "format": "uuid"
         },
-        "text ": {
+        "text": {
             "type": "string"
         },
-        "mediaIds ": {
+        "mediaIds": {
             "type": "array"
         },
-        "phoneNumber ": {
+        "phoneNumber": {
             "type": "string"
         },
-        "createdAt ": {
+        "createdAt": {
             "type": "number"
         },
-        "did ": {
+        "did": {
             "type": "string"
         }
     },
@@ -254,36 +273,39 @@ When is it generated: User sent a message to a bot
     "description": "User sent a message to a bot"
 }
 ```
+
 ### userHistory
+
 When is it generated: Fetching user history at inbound
+
 ```json
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "type": "object",
     "properties": {
-        "botId ": {
+        "botId": {
             "type": "string",
             "format": "uuid"
         },
-        "orgId ": {
+        "orgId": {
             "type": "string",
             "format": "uuid"
         },
-        "conversationId ": {
+        "conversationId": {
             "type": "string",
             "format": "uuid"
         },
-        "messageId ": {
+        "messageId": {
             "type": "string",
             "format": "uuid"
         },
-        "timeTaken ": {
+        "timeTaken": {
             "type": "number"
         },
-        "did ": {
+        "did": {
             "type": "string"
         },
-        "userHistory ": {
+        "userHistory": {
             "type": "string"
         }
     },
@@ -297,56 +319,59 @@ When is it generated: Fetching user history at inbound
     "description": "Fetching user history at inbound"
 }
 ```
+
 ### userInfo
+
 When is it generated: Fetching user info - transformer
+
 ```json
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "type": "object",
     "properties": {
-        "botId ": {
+        "botId": {
             "type": "string",
             "format": "uuid"
         },
-        "userId ": {
+        "userId": {
             "type": "string",
             "format": "uuid"
         },
-        "orgId ": {
+        "orgId": {
             "type": "string",
             "format": "uuid"
         },
-        "conversationId ": {
+        "conversationId": {
             "type": "string",
             "format": "uuid"
         },
-        "messageId ": {
+        "messageId": {
             "type": "string",
             "format": "uuid"
         },
-        "text ": {
+        "text": {
             "type": "string"
         },
-        "error ": {
+        "error": {
             "type": "string"
         },
-        "timeTaken ": {
+        "timeTaken": {
             "type": "number"
         },
-        "queryId ": {
+        "queryId": {
             "type": "string",
             "format": "uuid"
         },
-        "block ": {
+        "block": {
             "type": "string"
         },
-        "district ": {
+        "district": {
             "type": "string"
         },
-        "eventLog ": {
+        "eventLog": {
             "type": "string"
         },
-        "transformerId ": {
+        "transformerId": {
             "type": "string"
         }
     },
@@ -361,59 +386,62 @@ When is it generated: Fetching user info - transformer
     "description": "Fetching user info - transformer"
 }
 ```
+
 ### translateInput
+
 When is it generated: translate - transformer
+
 ```json
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "type": "object",
     "properties": {
-        "botId ": {
+        "botId": {
             "type": "string",
             "format": "uuid"
         },
-        "userId ": {
+        "userId": {
             "type": "string",
             "format": "uuid"
         },
-        "orgId ": {
+        "orgId": {
             "type": "string",
             "format": "uuid"
         },
-        "conversationId ": {
+        "conversationId": {
             "type": "string",
             "format": "uuid"
         },
-        "messageId ": {
+        "messageId": {
             "type": "string",
             "format": "uuid"
         },
-        "text ": {
+        "text": {
             "type": "string"
         },
-        "error ": {
+        "error": {
             "type": "string"
         },
-        "timeTaken ": {
+        "timeTaken": {
             "type": "number"
         },
-        "phoneNumber ": {
+        "phoneNumber": {
             "type": "string"
         },
-        "queryId ": {
+        "queryId": {
             "type": "string",
             "format": "uuid"
         },
-        "userManagementUrl ": {
+        "userManagementUrl": {
             "type": "string"
         },
-        "textInEnglish ": {
+        "textInEnglish": {
             "type": "string"
         },
-        "eventLog ": {
+        "eventLog": {
             "type": "string"
         },
-        "transformerId ": {
+        "transformerId": {
             "type": "string"
         }
     },
@@ -428,59 +456,62 @@ When is it generated: translate - transformer
     "description": "translate - transformer"
 }
 ```
+
 ### nuralCoreference
+
 When is it generated: nuralCoref - transformer
+
 ```json
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "type": "object",
     "properties": {
-        "botId ": {
+        "botId": {
             "type": "string",
             "format": "uuid"
         },
-        "userId ": {
+        "userId": {
             "type": "string",
             "format": "uuid"
         },
-        "orgId ": {
+        "orgId": {
             "type": "string",
             "format": "uuid"
         },
-        "conversationId ": {
+        "conversationId": {
             "type": "string",
             "format": "uuid"
         },
-        "messageId ": {
+        "messageId": {
             "type": "string",
             "format": "uuid"
         },
-        "text ": {
+        "text": {
             "type": "string"
         },
-        "error ": {
+        "error": {
             "type": "string"
         },
-        "timeTaken ": {
+        "timeTaken": {
             "type": "number"
         },
-        "phoneNumber ": {
+        "phoneNumber": {
             "type": "string"
         },
-        "queryId ": {
+        "queryId": {
             "type": "string",
             "format": "uuid"
         },
-        "textInEnglish ": {
+        "textInEnglish": {
             "type": "string"
         },
-        "coreferencedText ": {
+        "coreferencedText": {
             "type": "string"
         },
-        "eventLog ": {
+        "eventLog": {
             "type": "string"
         },
-        "transformerId ": {
+        "transformerId": {
             "type": "string"
         }
     },
@@ -495,59 +526,62 @@ When is it generated: nuralCoref - transformer
     "description": "nuralCoref - transformer"
 }
 ```
+
 ### classifyQuestion
+
 When is it generated: classifier - transformer
+
 ```json
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "type": "object",
     "properties": {
-        "botId ": {
+        "botId": {
             "type": "string",
             "format": "uuid"
         },
-        "userId ": {
+        "userId": {
             "type": "string",
             "format": "uuid"
         },
-        "orgId ": {
+        "orgId": {
             "type": "string",
             "format": "uuid"
         },
-        "conversationId ": {
+        "conversationId": {
             "type": "string",
             "format": "uuid"
         },
-        "messageId ": {
+        "messageId": {
             "type": "string",
             "format": "uuid"
         },
-        "text ": {
+        "text": {
             "type": "string"
         },
-        "error ": {
+        "error": {
             "type": "string"
         },
-        "timeTaken ": {
+        "timeTaken": {
             "type": "number"
         },
-        "phoneNumber ": {
+        "phoneNumber": {
             "type": "string"
         },
-        "queryId ": {
+        "queryId": {
             "type": "string",
             "format": "uuid"
         },
-        "textInEnglish ": {
+        "textInEnglish": {
             "type": "string"
         },
-        "queryClass ": {
+        "queryClass": {
             "type": "string"
         },
-        "eventLog ": {
+        "eventLog": {
             "type": "string"
         },
-        "transformerId ": {
+        "transformerId": {
             "type": "string"
         }
     },
@@ -562,59 +596,62 @@ When is it generated: classifier - transformer
     "description": "classifier - transformer"
 }
 ```
+
 ### retreiveSimilarChunks
+
 When is it generated: retieveDocs - transformer
+
 ```json
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "type": "object",
     "properties": {
-        "botId ": {
+        "botId": {
             "type": "string",
             "format": "uuid"
         },
-        "userId ": {
+        "userId": {
             "type": "string",
             "format": "uuid"
         },
-        "orgId ": {
+        "orgId": {
             "type": "string",
             "format": "uuid"
         },
-        "conversationId ": {
+        "conversationId": {
             "type": "string",
             "format": "uuid"
         },
-        "messageId ": {
+        "messageId": {
             "type": "string",
             "format": "uuid"
         },
-        "text ": {
+        "text": {
             "type": "string"
         },
-        "error ": {
+        "error": {
             "type": "string"
         },
-        "timeTaken ": {
+        "timeTaken": {
             "type": "number"
         },
-        "phoneNumber ": {
+        "phoneNumber": {
             "type": "string"
         },
-        "queryId ": {
+        "queryId": {
             "type": "string",
             "format": "uuid"
         },
-        "textInEnglish ": {
+        "textInEnglish": {
             "type": "string"
         },
-        "similarChunks ": {
+        "similarChunks": {
             "type": "object"
         },
-        "eventLog ": {
+        "eventLog": {
             "type": "string"
         },
-        "transformerId ": {
+        "transformerId": {
             "type": "string"
         }
     },
@@ -629,59 +666,62 @@ When is it generated: retieveDocs - transformer
     "description": "retieveDocs - transformer"
 }
 ```
+
 ### NER
+
 When is it generated: ner - transformer
+
 ```json
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "type": "object",
     "properties": {
-        "botId ": {
+        "botId": {
             "type": "string",
             "format": "uuid"
         },
-        "userId ": {
+        "userId": {
             "type": "string",
             "format": "uuid"
         },
-        "orgId ": {
+        "orgId": {
             "type": "string",
             "format": "uuid"
         },
-        "conversationId ": {
+        "conversationId": {
             "type": "string",
             "format": "uuid"
         },
-        "messageId ": {
+        "messageId": {
             "type": "string",
             "format": "uuid"
         },
-        "text ": {
+        "text": {
             "type": "string"
         },
-        "error ": {
+        "error": {
             "type": "string"
         },
-        "timeTaken ": {
+        "timeTaken": {
             "type": "number"
         },
-        "phoneNumber ": {
+        "phoneNumber": {
             "type": "string"
         },
-        "queryId ": {
+        "queryId": {
             "type": "string",
             "format": "uuid"
         },
-        "textInEnglish ": {
+        "textInEnglish": {
             "type": "string"
         },
-        "NER ": {
+        "NER": {
             "type": "object"
         },
-        "eventLog ": {
+        "eventLog": {
             "type": "string"
         },
-        "transformerId ": {
+        "transformerId": {
             "type": "string"
         }
     },
@@ -696,71 +736,74 @@ When is it generated: ner - transformer
     "description": "ner - transformer"
 }
 ```
+
 ### llmResponse
+
 When is it generated: llm - transformer
+
 ```json
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "type": "object",
     "properties": {
-        "botId ": {
+        "botId": {
             "type": "string",
             "format": "uuid"
         },
-        "userId ": {
+        "userId": {
             "type": "string",
             "format": "uuid"
         },
-        "orgId ": {
+        "orgId": {
             "type": "string",
             "format": "uuid"
         },
-        "conversationId ": {
+        "conversationId": {
             "type": "string",
             "format": "uuid"
         },
-        "messageId ": {
+        "messageId": {
             "type": "string",
             "format": "uuid"
         },
-        "text ": {
+        "text": {
             "type": "string"
         },
-        "error ": {
+        "error": {
             "type": "string"
         },
-        "timeTaken ": {
+        "timeTaken": {
             "type": "number"
         },
-        "phoneNumber ": {
+        "phoneNumber": {
             "type": "string"
         },
-        "queryId ": {
+        "queryId": {
             "type": "string",
             "format": "uuid"
         },
-        "textInEnglish ": {
+        "textInEnglish": {
             "type": "string"
         },
-        "responseInEnglish ": {
+        "responseInEnglish": {
             "type": "string"
         },
-        "response ": {
+        "response": {
             "type": "string"
         },
-        "eventLog ": {
+        "eventLog": {
             "type": "string"
         },
-        "transformerId ": {
+        "transformerId": {
             "type": "string"
         },
-        "prompt ": {
+        "prompt": {
             "type": "string"
         },
-        "translatedResponse ": {
+        "translatedResponse": {
             "type": "string"
         },
-        "streamStartLatency ": {
+        "streamStartLatency": {
             "type": "number"
         }
     },
@@ -774,62 +817,65 @@ When is it generated: llm - transformer
     "description": "llm - transformer"
 }
 ```
+
 ### userQuery
+
 When is it generated: translate - transformer
+
 ```json
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "type": "object",
     "properties": {
-        "botId ": {
+        "botId": {
             "type": "string",
             "format": "uuid"
         },
-        "userId ": {
+        "userId": {
             "type": "string",
             "format": "uuid"
         },
-        "orgId ": {
+        "orgId": {
             "type": "string",
             "format": "uuid"
         },
-        "conversationId ": {
+        "conversationId": {
             "type": "string",
             "format": "uuid"
         },
-        "messageId ": {
+        "messageId": {
             "type": "string",
             "format": "uuid"
         },
-        "text ": {
+        "text": {
             "type": "string"
         },
-        "error ": {
+        "error": {
             "type": "string"
         },
-        "timeTaken ": {
+        "timeTaken": {
             "type": "number"
         },
-        "phoneNumber ": {
+        "phoneNumber": {
             "type": "string"
         },
-        "queryId ": {
+        "queryId": {
             "type": "string",
             "format": "uuid"
         },
-        "textInEnglish ": {
+        "textInEnglish": {
             "type": "string"
         },
-        "responseInEnglish ": {
+        "responseInEnglish": {
             "type": "string"
         },
-        "response ": {
+        "response": {
             "type": "string"
         },
-        "eventLog ": {
+        "eventLog": {
             "type": "string"
         },
-        "transformerId ": {
+        "transformerId": {
             "type": "string"
         }
     },
@@ -845,70 +891,73 @@ When is it generated: translate - transformer
     "description": "translate - transformer"
 }
 ```
+
 ### userQuery
+
 When is it generated: textToSpeech - transformer
+
 ```json
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "type": "object",
     "properties": {
-        "botId ": {
+        "botId": {
             "type": "string",
             "format": "uuid"
         },
-        "userId ": {
+        "userId": {
             "type": "string",
             "format": "uuid"
         },
-        "orgId ": {
+        "orgId": {
             "type": "string",
             "format": "uuid"
         },
-        "conversationId ": {
+        "conversationId": {
             "type": "string",
             "format": "uuid"
         },
-        "messageId ": {
+        "messageId": {
             "type": "string",
             "format": "uuid"
         },
-        "audioFileName ": {
+        "audioFileName": {
             "type": "string"
         },
-        "audioUrl ": {
+        "audioUrl": {
             "type": "string",
             "format": "url"
         },
-        "audioId ": {
+        "audioId": {
             "type": "string",
             "format": "uuid"
         },
-        "text ": {
+        "text": {
             "type": "string"
         },
-        "error ": {
+        "error": {
             "type": "string"
         },
-        "timeTaken ": {
+        "timeTaken": {
             "type": "number"
         },
-        "phoneNumber ": {
+        "phoneNumber": {
             "type": "string"
         },
-        "queryId ": {
+        "queryId": {
             "type": "string",
             "format": "uuid"
         },
-        "textInEnglish ": {
+        "textInEnglish": {
             "type": "string"
         },
-        "responseInEnglish ": {
+        "responseInEnglish": {
             "type": "string"
         },
-        "response ": {
+        "response": {
             "type": "string"
         },
-        "language ": {
+        "language": {
             "type": "string"
         }
     },
@@ -925,46 +974,49 @@ When is it generated: textToSpeech - transformer
     "description": "textToSpeech - transformer"
 }
 ```
+
 ### userQuery
+
 When is it generated: When user plays audio at app (timesAudioUsed)
+
 ```json
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "type": "object",
     "properties": {
-        "botId ": {
+        "botId": {
             "type": "string",
             "format": "uuid"
         },
-        "userId ": {
+        "userId": {
             "type": "string",
             "format": "uuid"
         },
-        "orgId ": {
+        "orgId": {
             "type": "string",
             "format": "uuid"
         },
-        "conversationId ": {
+        "conversationId": {
             "type": "string",
             "format": "uuid"
         },
-        "messageId ": {
+        "messageId": {
             "type": "string",
             "format": "uuid"
         },
-        "text ": {
+        "text": {
             "type": "string"
         },
-        "timeTaken ": {
+        "timeTaken": {
             "type": "number"
         },
-        "phoneNumber ": {
+        "phoneNumber": {
             "type": "string"
         },
-        "responseInEnglish ": {
+        "responseInEnglish": {
             "type": "string"
         },
-        "timesAudioUsed ": {
+        "timesAudioUsed": {
             "type": "number"
         }
     },
@@ -978,37 +1030,40 @@ When is it generated: When user plays audio at app (timesAudioUsed)
     "description": "When user plays audio at app (timesAudioUsed)"
 }
 ```
+
 ### userQuery
+
 When is it generated: When an error is occured during query process
+
 ```json
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "type": "object",
     "properties": {
-        "botId ": {
+        "botId": {
             "type": "string",
             "format": "uuid"
         },
-        "userId ": {
+        "userId": {
             "type": "string",
             "format": "uuid"
         },
-        "orgId ": {
+        "orgId": {
             "type": "string",
             "format": "uuid"
         },
-        "conversationId ": {
+        "conversationId": {
             "type": "string",
             "format": "uuid"
         },
-        "messageId ": {
+        "messageId": {
             "type": "string",
             "format": "uuid"
         },
-        "error ": {
+        "error": {
             "type": "string"
         },
-        "errorRate ": {
+        "errorRate": {
             "type": "number"
         }
     },
@@ -1021,46 +1076,49 @@ When is it generated: When an error is occured during query process
     "description": "When an error is occured during query process"
 }
 ```
+
 ### userQuery
+
 When is it generated: When user gets the response at app (responseAt)
+
 ```json
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "type": "object",
     "properties": {
-        "botId ": {
+        "botId": {
             "type": "string",
             "format": "uuid"
         },
-        "userId ": {
+        "userId": {
             "type": "string",
             "format": "uuid"
         },
-        "orgId ": {
+        "orgId": {
             "type": "string",
             "format": "uuid"
         },
-        "conversationId ": {
+        "conversationId": {
             "type": "string",
             "format": "uuid"
         },
-        "messageId ": {
+        "messageId": {
             "type": "string",
             "format": "uuid"
         },
-        "text ": {
+        "text": {
             "type": "string"
         },
-        "timeTaken ": {
+        "timeTaken": {
             "type": "number"
         },
-        "phoneNumber ": {
+        "phoneNumber": {
             "type": "string"
         },
-        "responseInEnglish ": {
+        "responseInEnglish": {
             "type": "string"
         },
-        "response ": {
+        "response": {
             "type": "string"
         }
     },
@@ -1075,33 +1133,36 @@ When is it generated: When user gets the response at app (responseAt)
     "description": "When user gets the response at app (responseAt)"
 }
 ```
+
 ### detectLanguage
-When is it generated: 
+
+When is it generated:
+
 ```json
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "type": "object",
     "properties": {
-        "botId ": {
+        "botId": {
             "type": "string",
             "format": "uuid"
         },
-        "orgId ": {
+        "orgId": {
             "type": "string",
             "format": "uuid"
         },
-        "conversationId ": {
+        "conversationId": {
             "type": "string",
             "format": "uuid"
         },
-        "messageId ": {
+        "messageId": {
             "type": "string",
             "format": "uuid"
         },
-        "timeTaken ": {
+        "timeTaken": {
             "type": "number"
         },
-        "language ": {
+        "language": {
             "type": "string"
         }
     },
@@ -1113,47 +1174,51 @@ When is it generated:
     "description": ""
 }
 ```
+
 ## userQueryInbound
+
 ### userQuery
+
 When is it generated: A message was sent to user
+
 ```json
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "type": "object",
     "properties": {
-        "botId ": {
+        "botId": {
             "type": "string",
             "format": "uuid"
         },
-        "userId ": {
+        "userId": {
             "type": "string",
             "format": "uuid"
         },
-        "orgId ": {
+        "orgId": {
             "type": "string",
             "format": "uuid"
         },
-        "conversationId ": {
+        "conversationId": {
             "type": "string",
             "format": "uuid"
         },
-        "messageId ": {
+        "messageId": {
             "type": "string",
             "format": "uuid"
         },
-        "text ": {
+        "text": {
             "type": "string"
         },
-        "mediaIds ": {
+        "mediaIds": {
             "type": "array"
         },
-        "timeTaken ": {
+        "timeTaken": {
             "type": "number"
         },
-        "createdAt ": {
+        "createdAt": {
             "type": "number"
         },
-        "did ": {
+        "did": {
             "type": "string"
         }
     },
@@ -1170,43 +1235,46 @@ When is it generated: A message was sent to user
     "description": "A message was sent to user"
 }
 ```
+
 ### userQuery
+
 When is it generated: XMessage to raw message conversion failed
+
 ```json
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "type": "object",
     "properties": {
-        "botId ": {
+        "botId": {
             "type": "string",
             "format": "uuid"
         },
-        "userId ": {
+        "userId": {
             "type": "string",
             "format": "uuid"
         },
-        "orgId ": {
+        "orgId": {
             "type": "string",
             "format": "uuid"
         },
-        "conversationId ": {
+        "conversationId": {
             "type": "string",
             "format": "uuid"
         },
-        "messageId ": {
+        "messageId": {
             "type": "string",
             "format": "uuid"
         },
-        "text ": {
+        "text": {
             "type": "string"
         },
-        "mediaIds ": {
+        "mediaIds": {
             "type": "array"
         },
-        "createdAt ": {
+        "createdAt": {
             "type": "number"
         },
-        "did ": {
+        "did": {
             "type": "string"
         }
     },
@@ -1222,39 +1290,42 @@ When is it generated: XMessage to raw message conversion failed
     "description": "XMessage to raw message conversion failed"
 }
 ```
+
 ### userQuery
+
 When is it generated: Raw message conversion to XMessage failed
+
 ```json
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "type": "object",
     "properties": {
-        "botId ": {
+        "botId": {
             "type": "string",
             "format": "uuid"
         },
-        "orgId ": {
+        "orgId": {
             "type": "string",
             "format": "uuid"
         },
-        "conversationId ": {
+        "conversationId": {
             "type": "string",
             "format": "uuid"
         },
-        "messageId ": {
+        "messageId": {
             "type": "string",
             "format": "uuid"
         },
-        "text ": {
+        "text": {
             "type": "string"
         },
-        "mediaIds ": {
+        "mediaIds": {
             "type": "array"
         },
-        "createdAt ": {
+        "createdAt": {
             "type": "number"
         },
-        "did ": {
+        "did": {
             "type": "string"
         }
     },
@@ -1267,42 +1338,45 @@ When is it generated: Raw message conversion to XMessage failed
     "description": "Raw message conversion to XMessage failed"
 }
 ```
+
 ### userQuery
+
 When is it generated: A registration request was sent to the bot
+
 ```json
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "type": "object",
     "properties": {
-        "botId ": {
+        "botId": {
             "type": "string",
             "format": "uuid"
         },
-        "orgId ": {
+        "orgId": {
             "type": "string",
             "format": "uuid"
         },
-        "conversationId ": {
+        "conversationId": {
             "type": "string",
             "format": "uuid"
         },
-        "messageId ": {
+        "messageId": {
             "type": "string",
             "format": "uuid"
         },
-        "text ": {
+        "text": {
             "type": "string"
         },
-        "mediaIds ": {
+        "mediaIds": {
             "type": "array"
         },
-        "createdAt ": {
+        "createdAt": {
             "type": "number"
         },
-        "did ": {
+        "did": {
             "type": "string"
         },
-        "userManagementUrl ": {
+        "userManagementUrl": {
             "type": "string"
         }
     },
@@ -1318,42 +1392,45 @@ When is it generated: A registration request was sent to the bot
     "description": "A registration request was sent to the bot"
 }
 ```
+
 ### userQuery
+
 When is it generated: A registration request failed
+
 ```json
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "type": "object",
     "properties": {
-        "botId ": {
+        "botId": {
             "type": "string",
             "format": "uuid"
         },
-        "orgId ": {
+        "orgId": {
             "type": "string",
             "format": "uuid"
         },
-        "conversationId ": {
+        "conversationId": {
             "type": "string",
             "format": "uuid"
         },
-        "messageId ": {
+        "messageId": {
             "type": "string",
             "format": "uuid"
         },
-        "text ": {
+        "text": {
             "type": "string"
         },
-        "mediaIds ": {
+        "mediaIds": {
             "type": "array"
         },
-        "createdAt ": {
+        "createdAt": {
             "type": "number"
         },
-        "did ": {
+        "did": {
             "type": "string"
         },
-        "userManagementUrl ": {
+        "userManagementUrl": {
             "type": "string"
         }
     },
@@ -1369,36 +1446,39 @@ When is it generated: A registration request failed
     "description": "A registration request failed"
 }
 ```
+
 ### reactionEvent
+
 When is it generated: A user sent a feedback on a message
+
 ```json
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "type": "object",
     "properties": {
-        "botId ": {
+        "botId": {
             "type": "string",
             "format": "uuid"
         },
-        "orgId ": {
+        "orgId": {
             "type": "string",
             "format": "uuid"
         },
-        "conversationId ": {
+        "conversationId": {
             "type": "string",
             "format": "uuid"
         },
-        "messageId ": {
+        "messageId": {
             "type": "string",
             "format": "uuid"
         },
-        "did ": {
+        "did": {
             "type": "string"
         },
-        "reactionType ": {
+        "reactionType": {
             "type": "string"
         },
-        "reactionText ": {
+        "reactionText": {
             "type": "string"
         }
     },
@@ -1412,39 +1492,42 @@ When is it generated: A user sent a feedback on a message
     "description": "A user sent a feedback on a message"
 }
 ```
+
 ### userQuery
+
 When is it generated: User read the message sent by a bot
+
 ```json
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "type": "object",
     "properties": {
-        "botId ": {
+        "botId": {
             "type": "string",
             "format": "uuid"
         },
-        "orgId ": {
+        "orgId": {
             "type": "string",
             "format": "uuid"
         },
-        "conversationId ": {
+        "conversationId": {
             "type": "string",
             "format": "uuid"
         },
-        "messageId ": {
+        "messageId": {
             "type": "string",
             "format": "uuid"
         },
-        "text ": {
+        "text": {
             "type": "string"
         },
-        "mediaIds ": {
+        "mediaIds": {
             "type": "array"
         },
-        "createdAt ": {
+        "createdAt": {
             "type": "number"
         },
-        "did ": {
+        "did": {
             "type": "string"
         }
     },
@@ -1459,55 +1542,59 @@ When is it generated: User read the message sent by a bot
     "description": "User read the message sent by a bot"
 }
 ```
+
 ## AI-Tools
+
 ### userQuery
+
 When is it generated: On return of this API call
+
 ```json
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "type": "object",
     "properties": {
-        "botId ": {
+        "botId": {
             "type": "string",
             "format": "uuid"
         },
-        "userId ": {
+        "userId": {
             "type": "string",
             "format": "uuid"
         },
-        "orgId ": {
+        "orgId": {
             "type": "string",
             "format": "uuid"
         },
-        "conversationId ": {
+        "conversationId": {
             "type": "string",
             "format": "uuid"
         },
-        "messageId ": {
+        "messageId": {
             "type": "string",
             "format": "uuid"
         },
-        "audioUrl ": {
+        "audioUrl": {
             "type": "string",
             "format": "url"
         },
-        "audioId ": {
+        "audioId": {
             "type": "string",
             "format": "uuid"
         },
-        "text ": {
+        "text": {
             "type": "string"
         },
-        "error ": {
+        "error": {
             "type": "string"
         },
-        "timeTaken ": {
+        "timeTaken": {
             "type": "number"
         },
-        "createdAt ": {
+        "createdAt": {
             "type": "number"
         },
-        "queryId ": {
+        "queryId": {
             "type": "string",
             "format": "uuid"
         }
@@ -1520,54 +1607,57 @@ When is it generated: On return of this API call
     "description": "On return of this API call"
 }
 ```
+
 ### userQuery
+
 When is it generated: On return of this API call
+
 ```json
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "type": "object",
     "properties": {
-        "botId ": {
+        "botId": {
             "type": "string",
             "format": "uuid"
         },
-        "userId ": {
+        "userId": {
             "type": "string",
             "format": "uuid"
         },
-        "orgId ": {
+        "orgId": {
             "type": "string",
             "format": "uuid"
         },
-        "conversationId ": {
+        "conversationId": {
             "type": "string",
             "format": "uuid"
         },
-        "messageId ": {
+        "messageId": {
             "type": "string",
             "format": "uuid"
         },
-        "audioUrl ": {
+        "audioUrl": {
             "type": "string",
             "format": "url"
         },
-        "audioId ": {
+        "audioId": {
             "type": "string",
             "format": "uuid"
         },
-        "text ": {
+        "text": {
             "type": "string"
         },
-        "error ": {
+        "error": {
             "type": "string"
         },
-        "timeTaken ": {
+        "timeTaken": {
             "type": "number"
         },
-        "createdAt ": {
+        "createdAt": {
             "type": "number"
         },
-        "queryId ": {
+        "queryId": {
             "type": "string",
             "format": "uuid"
         }
@@ -1580,50 +1670,53 @@ When is it generated: On return of this API call
     "description": "On return of this API call"
 }
 ```
+
 ### translate
+
 When is it generated: On return of this API call
+
 ```json
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "type": "object",
     "properties": {
-        "botId ": {
+        "botId": {
             "type": "string",
             "format": "uuid"
         },
-        "userId ": {
+        "userId": {
             "type": "string",
             "format": "uuid"
         },
-        "orgId ": {
+        "orgId": {
             "type": "string",
             "format": "uuid"
         },
-        "conversationId ": {
+        "conversationId": {
             "type": "string",
             "format": "uuid"
         },
-        "messageId ": {
+        "messageId": {
             "type": "string",
             "format": "uuid"
         },
-        "text ": {
+        "text": {
             "type": "string"
         },
-        "error ": {
+        "error": {
             "type": "string"
         },
-        "timeTaken ": {
+        "timeTaken": {
             "type": "number"
         },
-        "createdAt ": {
+        "createdAt": {
             "type": "number"
         },
-        "queryId ": {
+        "queryId": {
             "type": "string",
             "format": "uuid"
         },
-        "outputText ": {
+        "outputText": {
             "type": "string"
         }
     },
@@ -1635,50 +1728,53 @@ When is it generated: On return of this API call
     "description": "On return of this API call"
 }
 ```
+
 ### transliterate
+
 When is it generated: On return of this API call
+
 ```json
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "type": "object",
     "properties": {
-        "botId ": {
+        "botId": {
             "type": "string",
             "format": "uuid"
         },
-        "userId ": {
+        "userId": {
             "type": "string",
             "format": "uuid"
         },
-        "orgId ": {
+        "orgId": {
             "type": "string",
             "format": "uuid"
         },
-        "conversationId ": {
+        "conversationId": {
             "type": "string",
             "format": "uuid"
         },
-        "messageId ": {
+        "messageId": {
             "type": "string",
             "format": "uuid"
         },
-        "text ": {
+        "text": {
             "type": "string"
         },
-        "error ": {
+        "error": {
             "type": "string"
         },
-        "timeTaken ": {
+        "timeTaken": {
             "type": "number"
         },
-        "createdAt ": {
+        "createdAt": {
             "type": "number"
         },
-        "queryId ": {
+        "queryId": {
             "type": "string",
             "format": "uuid"
         },
-        "outputText ": {
+        "outputText": {
             "type": "string"
         }
     },
@@ -1690,19 +1786,23 @@ When is it generated: On return of this API call
     "description": "On return of this API call"
 }
 ```
+
 ## datasetInjestion
+
 ### translationDictionary
+
 When is it generated: migration of data
+
 ```json
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "type": "object",
     "properties": {
-        "botId ": {
+        "botId": {
             "type": "string",
             "format": "uuid"
         },
-        "orgId ": {
+        "orgId": {
             "type": "string",
             "format": "uuid"
         }
@@ -1714,18 +1814,21 @@ When is it generated: migration of data
     "description": "migration of data"
 }
 ```
+
 ### officials
+
 When is it generated: migration of data
+
 ```json
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "type": "object",
     "properties": {
-        "botId ": {
+        "botId": {
             "type": "string",
             "format": "uuid"
         },
-        "orgId ": {
+        "orgId": {
             "type": "string",
             "format": "uuid"
         }
@@ -1737,19 +1840,23 @@ When is it generated: migration of data
     "description": "migration of data"
 }
 ```
+
 ## documentService
+
 ### document
+
 When is it generated: migration of data
+
 ```json
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "type": "object",
     "properties": {
-        "botId ": {
+        "botId": {
             "type": "string",
             "format": "uuid"
         },
-        "orgId ": {
+        "orgId": {
             "type": "string",
             "format": "uuid"
         }
@@ -1761,45 +1868,48 @@ When is it generated: migration of data
     "description": "migration of data"
 }
 ```
+
 ### upload
+
 When is it generated: On return of this API call
+
 ```json
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "type": "object",
     "properties": {
-        "botId ": {
+        "botId": {
             "type": "string",
             "format": "uuid"
         },
-        "orgId ": {
+        "orgId": {
             "type": "string",
             "format": "uuid"
         },
-        "conversationId ": {
+        "conversationId": {
             "type": "string",
             "format": "uuid"
         },
-        "messageId ": {
+        "messageId": {
             "type": "string",
             "format": "uuid"
         },
-        "error ": {
+        "error": {
             "type": "string"
         },
-        "timeTaken ": {
+        "timeTaken": {
             "type": "number"
         },
-        "question ": {
+        "question": {
             "type": "string"
         },
-        "result ": {
+        "result": {
             "type": "object"
         },
-        "documentId ": {
+        "documentId": {
             "type": "array"
         },
-        "requestId ": {
+        "requestId": {
             "type": "string",
             "format": "uuid"
         }
@@ -1813,36 +1923,39 @@ When is it generated: On return of this API call
     "description": "On return of this API call"
 }
 ```
+
 ### retrieve
+
 When is it generated: On return of this API call
+
 ```json
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "type": "object",
     "properties": {
-        "botId ": {
+        "botId": {
             "type": "string",
             "format": "uuid"
         },
-        "orgId ": {
+        "orgId": {
             "type": "string",
             "format": "uuid"
         },
-        "conversationId ": {
+        "conversationId": {
             "type": "string",
             "format": "uuid"
         },
-        "messageId ": {
+        "messageId": {
             "type": "string",
             "format": "uuid"
         },
-        "error ": {
+        "error": {
             "type": "string"
         },
-        "timeTaken ": {
+        "timeTaken": {
             "type": "number"
         },
-        "sqlQuery ": {
+        "sqlQuery": {
             "type": "string"
         }
     },
@@ -1854,47 +1967,51 @@ When is it generated: On return of this API call
     "description": "On return of this API call"
 }
 ```
+
 ## messageQuery
+
 ### messageSent
+
 When is it generated: When user sends a message (send phoneNumber also)
+
 ```json
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "type": "object",
     "properties": {
-        "botId ": {
+        "botId": {
             "type": "string",
             "format": "uuid"
         },
-        "userId ": {
+        "userId": {
             "type": "string",
             "format": "uuid"
         },
-        "orgId ": {
+        "orgId": {
             "type": "string",
             "format": "uuid"
         },
-        "conversationId ": {
+        "conversationId": {
             "type": "string",
             "format": "uuid"
         },
-        "messageId ": {
+        "messageId": {
             "type": "string",
             "format": "uuid"
         },
-        "text ": {
+        "text": {
             "type": "string"
         },
-        "error ": {
+        "error": {
             "type": "string"
         },
-        "phoneNumber ": {
+        "phoneNumber": {
             "type": "string"
         },
-        "createdAt ": {
+        "createdAt": {
             "type": "number"
         },
-        "textInEnglish ": {
+        "textInEnglish": {
             "type": "string"
         }
     },
@@ -1910,52 +2027,55 @@ When is it generated: When user sends a message (send phoneNumber also)
     "description": "When user sends a message (send phoneNumber also)"
 }
 ```
+
 ### messageReceived
+
 When is it generated: When user receives back a response for sent message
+
 ```json
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "type": "object",
     "properties": {
-        "botId ": {
+        "botId": {
             "type": "string",
             "format": "uuid"
         },
-        "userId ": {
+        "userId": {
             "type": "string",
             "format": "uuid"
         },
-        "orgId ": {
+        "orgId": {
             "type": "string",
             "format": "uuid"
         },
-        "conversationId ": {
+        "conversationId": {
             "type": "string",
             "format": "uuid"
         },
-        "messageId ": {
+        "messageId": {
             "type": "string",
             "format": "uuid"
         },
-        "text ": {
+        "text": {
             "type": "string"
         },
-        "error ": {
+        "error": {
             "type": "string"
         },
-        "timeTaken ": {
+        "timeTaken": {
             "type": "number"
         },
-        "phoneNumber ": {
+        "phoneNumber": {
             "type": "string"
         },
-        "createdAt ": {
+        "createdAt": {
             "type": "number"
         },
-        "textInEnglish ": {
+        "textInEnglish": {
             "type": "string"
         },
-        "responseInEnglish ": {
+        "responseInEnglish": {
             "type": "string"
         }
     },
@@ -1971,53 +2091,57 @@ When is it generated: When user receives back a response for sent message
     "description": "When user receives back a response for sent message"
 }
 ```
+
 ## search
+
 ### fuzzy search
+
 When is it generated: On return of this API call
+
 ```json
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "type": "object",
     "properties": {
-        "botId ": {
+        "botId": {
             "type": "string",
             "format": "uuid"
         },
-        "orgId ": {
+        "orgId": {
             "type": "string",
             "format": "uuid"
         },
-        "conversationId ": {
+        "conversationId": {
             "type": "string",
             "format": "uuid"
         },
-        "messageId ": {
+        "messageId": {
             "type": "string",
             "format": "uuid"
         },
-        "error ": {
+        "error": {
             "type": "string"
         },
-        "timeTaken ": {
+        "timeTaken": {
             "type": "number"
         },
-        "datasetId ": {
+        "datasetId": {
             "type": "string",
             "format": "uuid"
         },
-        "question ": {
+        "question": {
             "type": "string"
         },
         "field": {
             "type": "string"
         },
-        "threshold ": {
+        "threshold": {
             "type": "number"
         },
-        "result ": {
+        "result": {
             "type": "object"
         },
-        "requestId ": {
+        "requestId": {
             "type": "string",
             "format": "uuid"
         }
@@ -2035,49 +2159,52 @@ When is it generated: On return of this API call
     "description": "On return of this API call"
 }
 ```
+
 ### vector search
+
 When is it generated: On return of this API call
+
 ```json
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "type": "object",
     "properties": {
-        "botId ": {
+        "botId": {
             "type": "string",
             "format": "uuid"
         },
-        "orgId ": {
+        "orgId": {
             "type": "string",
             "format": "uuid"
         },
-        "conversationId ": {
+        "conversationId": {
             "type": "string",
             "format": "uuid"
         },
-        "messageId ": {
+        "messageId": {
             "type": "string",
             "format": "uuid"
         },
-        "error ": {
+        "error": {
             "type": "string"
         },
-        "timeTaken ": {
+        "timeTaken": {
             "type": "number"
         },
-        "datasetId ": {
+        "datasetId": {
             "type": "string",
             "format": "uuid"
         },
-        "question ": {
+        "question": {
             "type": "string"
         },
         "field": {
             "type": "string"
         },
-        "result ": {
+        "result": {
             "type": "object"
         },
-        "requestId ": {
+        "requestId": {
             "type": "string",
             "format": "uuid"
         }
@@ -2094,46 +2221,49 @@ When is it generated: On return of this API call
     "description": "On return of this API call"
 }
 ```
-### execute-query 
+
+### execute-query
+
 When is it generated: On return of this API call
+
 ```json
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "type": "object",
     "properties": {
-        "botId ": {
+        "botId": {
             "type": "string",
             "format": "uuid"
         },
-        "orgId ": {
+        "orgId": {
             "type": "string",
             "format": "uuid"
         },
-        "conversationId ": {
+        "conversationId": {
             "type": "string",
             "format": "uuid"
         },
-        "messageId ": {
+        "messageId": {
             "type": "string",
             "format": "uuid"
         },
-        "error ": {
+        "error": {
             "type": "string"
         },
-        "timeTaken ": {
+        "timeTaken": {
             "type": "number"
         },
-        "datasetId ": {
+        "datasetId": {
             "type": "string",
             "format": "uuid"
         },
-        "sqlQuery ": {
+        "sqlQuery": {
             "type": "string"
         },
-        "result ": {
+        "result": {
             "type": "object"
         },
-        "requestId ": {
+        "requestId": {
             "type": "string",
             "format": "uuid"
         }
@@ -2149,37 +2279,41 @@ When is it generated: On return of this API call
     "description": "On return of this API call"
 }
 ```
+
 ## Data Insertion
+
 ### create schema
+
 When is it generated: On return of this API call
+
 ```json
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "type": "object",
     "properties": {
-        "botId ": {
+        "botId": {
             "type": "string",
             "format": "uuid"
         },
-        "orgId ": {
+        "orgId": {
             "type": "string",
             "format": "uuid"
         },
-        "conversationId ": {
+        "conversationId": {
             "type": "string",
             "format": "uuid"
         },
-        "messageId ": {
+        "messageId": {
             "type": "string",
             "format": "uuid"
         },
-        "error ": {
+        "error": {
             "type": "string"
         },
-        "timeTaken ": {
+        "timeTaken": {
             "type": "number"
         },
-        "requestId ": {
+        "requestId": {
             "type": "string",
             "format": "uuid"
         }
@@ -2192,40 +2326,43 @@ When is it generated: On return of this API call
     "description": "On return of this API call"
 }
 ```
+
 ### insertDataset
+
 When is it generated: On return of this API call
+
 ```json
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "type": "object",
     "properties": {
-        "botId ": {
+        "botId": {
             "type": "string",
             "format": "uuid"
         },
-        "orgId ": {
+        "orgId": {
             "type": "string",
             "format": "uuid"
         },
-        "conversationId ": {
+        "conversationId": {
             "type": "string",
             "format": "uuid"
         },
-        "messageId ": {
+        "messageId": {
             "type": "string",
             "format": "uuid"
         },
-        "error ": {
+        "error": {
             "type": "string"
         },
-        "timeTaken ": {
+        "timeTaken": {
             "type": "number"
         },
-        "schemaId ": {
+        "schemaId": {
             "type": "string",
             "format": "uuid"
         },
-        "requestId ": {
+        "requestId": {
             "type": "string",
             "format": "uuid"
         }
@@ -2239,30 +2376,34 @@ When is it generated: On return of this API call
     "description": "On return of this API call"
 }
 ```
-## Transformer Execution 
+
+## Transformer Execution
+
 ### DEFAULT_TRANSFORMER_START_EVENT
-When is it generated: When the transformer execution begins  
+
+When is it generated: When the transformer execution begins
+
 ```json
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "type": "object",
     "properties": {
-        "botId ": {
+        "botId": {
             "type": "string",
             "format": "uuid"
         },
-        "orgId ": {
+        "orgId": {
             "type": "string",
             "format": "uuid"
         },
-        "messageId ": {
+        "messageId": {
             "type": "string",
             "format": "uuid"
         },
-        "error ": {
+        "error": {
             "type": "string"
         },
-        "transformerId ": {
+        "transformerId": {
             "type": "string"
         }
     },
@@ -2275,32 +2416,35 @@ When is it generated: When the transformer execution begins
     "description": "When the transformer execution begins  "
 }
 ```
+
 ### DEFAULT_TRANSFORMER_END_EVENT
+
 When is it generated: When the transformer execution completes
+
 ```json
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "type": "object",
     "properties": {
-        "botId ": {
+        "botId": {
             "type": "string",
             "format": "uuid"
         },
-        "orgId ": {
+        "orgId": {
             "type": "string",
             "format": "uuid"
         },
-        "messageId ": {
+        "messageId": {
             "type": "string",
             "format": "uuid"
         },
-        "error ": {
+        "error": {
             "type": "string"
         },
-        "timeTaken ": {
+        "timeTaken": {
             "type": "number"
         },
-        "transformerId ": {
+        "transformerId": {
             "type": "string"
         }
     },
@@ -2312,27 +2456,31 @@ When is it generated: When the transformer execution completes
     "description": "When the transformer execution completes"
 }
 ```
+
 ## micAction
+
 ### micTap
+
 When is it generated: When user taps on mic to speak something
+
 ```json
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "type": "object",
     "properties": {
-        "botId ": {
+        "botId": {
             "type": "string",
             "format": "uuid"
         },
-        "userId ": {
+        "userId": {
             "type": "string",
             "format": "uuid"
         },
-        "orgId ": {
+        "orgId": {
             "type": "string",
             "format": "uuid"
         },
-        "conversationId ": {
+        "conversationId": {
             "type": "string",
             "format": "uuid"
         }
@@ -2346,48 +2494,52 @@ When is it generated: When user taps on mic to speak something
     "description": "When user taps on mic to speak something"
 }
 ```
+
 ## aiToolProxyToolLatency
+
 ### t2sLatency
+
 When is it generated: Time taken by T2S API
+
 ```json
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "type": "object",
     "properties": {
-        "botId ": {
+        "botId": {
             "type": "string",
             "format": "uuid"
         },
-        "userId ": {
+        "userId": {
             "type": "string",
             "format": "uuid"
         },
-        "orgId ": {
+        "orgId": {
             "type": "string",
             "format": "uuid"
         },
-        "conversationId ": {
+        "conversationId": {
             "type": "string",
             "format": "uuid"
         },
-        "messageId ": {
+        "messageId": {
             "type": "string",
             "format": "uuid"
         },
-        "audioUrl ": {
+        "audioUrl": {
             "type": "string",
             "format": "url"
         },
-        "text ": {
+        "text": {
             "type": "string"
         },
-        "error ": {
+        "error": {
             "type": "string"
         },
-        "timeTaken ": {
+        "timeTaken": {
             "type": "number"
         },
-        "createdAt ": {
+        "createdAt": {
             "type": "number"
         }
     },
@@ -2403,43 +2555,46 @@ When is it generated: Time taken by T2S API
     "description": "Time taken by T2S API"
 }
 ```
+
 ### s2tLatency
+
 When is it generated: Time taken by S2T API
+
 ```json
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "type": "object",
     "properties": {
-        "botId ": {
+        "botId": {
             "type": "string",
             "format": "uuid"
         },
-        "userId ": {
+        "userId": {
             "type": "string",
             "format": "uuid"
         },
-        "orgId ": {
+        "orgId": {
             "type": "string",
             "format": "uuid"
         },
-        "conversationId ": {
+        "conversationId": {
             "type": "string",
             "format": "uuid"
         },
-        "messageId ": {
+        "messageId": {
             "type": "string",
             "format": "uuid"
         },
-        "text ": {
+        "text": {
             "type": "string"
         },
-        "error ": {
+        "error": {
             "type": "string"
         },
-        "timeTaken ": {
+        "timeTaken": {
             "type": "number"
         },
-        "createdAt ": {
+        "createdAt": {
             "type": "number"
         }
     },
@@ -2454,40 +2609,43 @@ When is it generated: Time taken by S2T API
     "description": "Time taken by S2T API"
 }
 ```
+
 ### detectedLatency
+
 When is it generated: Time taken in detecting latency
+
 ```json
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "type": "object",
     "properties": {
-        "botId ": {
+        "botId": {
             "type": "string",
             "format": "uuid"
         },
-        "userId ": {
+        "userId": {
             "type": "string",
             "format": "uuid"
         },
-        "orgId ": {
+        "orgId": {
             "type": "string",
             "format": "uuid"
         },
-        "conversationId ": {
+        "conversationId": {
             "type": "string",
             "format": "uuid"
         },
-        "messageId ": {
+        "messageId": {
             "type": "string",
             "format": "uuid"
         },
-        "text ": {
+        "text": {
             "type": "string"
         },
-        "timeTaken ": {
+        "timeTaken": {
             "type": "number"
         },
-        "language ": {
+        "language": {
             "type": "string"
         }
     },

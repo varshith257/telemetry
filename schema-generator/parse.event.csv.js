@@ -1,24 +1,26 @@
 const fs = require('fs');
 const csv = require('csv-parser');
 
-// import { csvToAjvTypeMapping } from './csv.ajv.type.mapping';
-// import { csvToClickhouseTypeMapping } from './csv.clickhouse.type.mapping';
-
 const csvToAjvTypeMapping = JSON.parse(fs.readFileSync('./csv.ajv.type.mapping.json'));
 const csvToClickhouseTypeMapping = JSON.parse(fs.readFileSync('./csv.clickhouse.type.mapping.json'));
-
 
 const schemaDraft = "http://json-schema.org/draft-07/schema#";
 
 let header = null;
 const schemaList = [];
 let lastEventName = '';
-const HEADER_START_INDEX = 8;
+let eventDataHeaderStartIndex;
+
+const UNAVAILABLE_MAPPING_CODE = 9;
 
 fs.createReadStream('events.csv')
   .pipe(csv())
   .on('data', (row) => {
-    if (!header) header = Object.keys(row);
+    if (!header) {
+        header = Object.keys(row);
+        const indexOfEventIdColumn = header.indexOf('eventId');
+        eventDataHeaderStartIndex = indexOfEventIdColumn + 1;
+    }
     if (row['eventName'] === '') {
         row['eventName'] = lastEventName;
     }
@@ -37,7 +39,7 @@ fs.createReadStream('events.csv')
     };
 
     const keys = Object.keys(row)
-    for (let i = HEADER_START_INDEX; i < keys.length; i++) {
+    for (let i = eventDataHeaderStartIndex; i < keys.length; i++) {
         if (row[keys[i]] === '') continue;
         let key = keys[i].split('|')[0];
         let dataType = keys[i].split('|')[1];
@@ -45,7 +47,15 @@ fs.createReadStream('events.csv')
         if (value.trim().toLowerCase() === 'required') {
             schema.required.push(key.trim());
         }
-        schema.properties[key] = csvToAjvTypeMapping[dataType.trim().toLowerCase()];
+        schema.properties[key.trim()] = csvToAjvTypeMapping[dataType.trim().toLowerCase()];
+        if (!schema.properties[key.trim()]) {
+            console.error(`Mapping does not exists for ${dataType.trim().toLowerCase()} type in csv.ajv.type.mapping.json`);
+            process.exit(UNAVAILABLE_MAPPING_CODE);
+        }
+        if (!csvToClickhouseTypeMapping[dataType.trim().toLowerCase()]) {
+            console.error(`Mapping does not exists for ${dataType.trim().toLowerCase()} type in csv.clickhouse.type.mapping.json`);
+            process.exit(UNAVAILABLE_MAPPING_CODE);
+        }
     }
     schemaList.push({
         eventProperties: {
@@ -136,7 +146,7 @@ function generateMigrationSql(headers, version) {
     sql = sql + `\tdeviceType Nullable(String),\n`
     sql = sql + `\tplatform Nullable(String),\n`
     sql = sql + `\tip String`
-    for (let i = HEADER_START_INDEX; i < headers.length; i++) {
+    for (let i = eventDataHeaderStartIndex; i < headers.length; i++) {
         sql = sql + `,\n`
         const field = headers[i].split('|')[0].trim();
         const type = headers[i].split('|')[1].trim();
