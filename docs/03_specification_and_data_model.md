@@ -31,7 +31,7 @@ In section we'll dive into how the Event CSV is structured, and how the `parse.e
 
 #### Event CSV Structure
 **CSV Header & Example event**
-|eventName|subEventName|When is it generated|...|eventId|botId \|uuid|orgId \|uuid|createdAt \|unix-time|question \|string|prompt  \|string|response \|string|
+|eventName|subEventName|When is it generated|...|eventId|botId\|uuid|orgId\|uuid|createdAt\|unix-time|question\|string|prompt \|string|response\|string|
 |-|-|-|-|-|-|-|-|-|-|-|
 |userQuery|messageSent|When user sends a message|...|E001|Requried|Required|Required|Required|Optional||||
 

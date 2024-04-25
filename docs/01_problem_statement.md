@@ -17,7 +17,8 @@ Traditional telemetry systems focus on specific metrics or narrow aspects of sys
 - Ability to create custom views/cubes from data and store (auto update) them ✅
 
 ## What did we evaluate?
-- Posthog - everyone knows and loves
+- Posthog
+    - PostHog is a widely recognized and appreciated analytics platform known for its user-friendly interface and powerful features, catering to various businesses' needs. It offers robust tracking, insightful insights, and seamless integration capabilities, making it a top choice among users.
 - Scuba
     - “The basic idea of Scuba is extremely simple and doesn’t require a glossary page for people to grasp. It operates with Wide Events. Wide Event is just a collection of fields with names and values, pretty much like a json document. If you need to record some information - whether it’s the current state of the system, or an event caused by an API call, background job or whatever - you can just write some Wide Event to Scuba.”[1]
 
@@ -52,6 +53,17 @@ By capturing a wide range of telemetry events, the system can provide more conte
 Wide telemetry events can be tailored to different use cases and requirements, providing greater flexibility and adaptability compared to traditional telemetry approaches. This allows organizations to capture the specific data points that are most relevant to their unique needs.
 
 Another benefit is the Materialized view. These can store precomputed results of queries, which can significantly reduce the time and resources required to access and analyze telemetry data. This can be particularly advantageous in scenarios where real-time querying of raw telemetry data is not feasible due to performance constraints.
+
+## Use Cases
+1. Debugging
+    - Any service can send events, in whatever state it is in. And provide relevant data packets along with it. This can help in debugging of wrong service behaviour. Example, in case of BHASAI, we were able to track LLM response by figuring out what prompts we are sendind to the model, through debugging panel on admin, which lists down data from a MV.
+2. Usage Analytics
+    - Through wide events, usage for any service can be figured our for any user. Over any period of time. Example for such in case of BHASAI is, how many time did the user query reach the LLM for response.
+3. Performance monitoring
+    - Preformance for any service can be tracked. Example, this can be helpful in figuring out if any module/service is taking more time than it should to provide with results or process data. This can be tracked at a service level, and even at an implementation level.
+4. User Journey Tracking
+    - Wide events allows us to capture user initiated events, and through those event, we can track user's journey throughout the application. Idea here is to use `sessionId` to track user journey.
+
 
 References
 1. [Wide Events](https://isburmistrov.substack.com/p/all-you-need-is-wide-events-not-metrics)

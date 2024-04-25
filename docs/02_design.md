@@ -1,16 +1,5 @@
 # Design
 
-## Use Cases
-1. Debugging
-    - Any service can send events, in whatever state it is in. And provide relevant data packets along with it. This can help in debugging of wrong service behaviour. Example, in case of BHASAI, we were able to track LLM response by figuring out what prompts we are sendind to the model, through debugging panel on admin, which lists down data from a MV.
-2. Usage Analytics
-    - Through wide events, usage for any service can be figured our for any user. Over any period of time. Example for such in case of BHASAI is, how many time did the user query reach the LLM for response.
-3. Performance monitoring
-    - Preformance for any service can be tracked. Example, this can be helpful in figuring out if any module/service is taking more time than it should to provide with results or process data. This can be tracked at a service level, and even at an implementation level.
-4. User Journey Tracking
-    - Wide events allows us to capture user initiated events, and through those event, we can track user's journey throughout the application. Idea here is to use `sessionId` to track user journey.
-
-
 ## Design Diagram
 ![design](./assets/telemetry-design.drawio.svg)
 
