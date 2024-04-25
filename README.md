@@ -1,5 +1,4 @@
-# About
-This services let's you create 
+# SLICE
 
 ## Project Setup
 Follow these instructions to setup the project.

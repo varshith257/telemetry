@@ -1,4 +1,4 @@
-## Problem Statement: Why even need this telemetry service?
+# Problem Statement: Why even need this telemetry service?
 
 ![](./assets/image.png)
 
@@ -9,19 +9,19 @@ Traditional telemetry systems focus on specific metrics or narrow aspects of sys
 - Charts and graphs connected with DSL ❌
 - Ability to create custom views/cubes from data and store (auto update) them ⁉️
 
-**What do the users want?**
+## What do the users want?
 - Simple schema for data - ideally flat ✅
 - Simple storage format - CSVs are the best ✅
 - SQL for querying data  ✅
 - Charts, Graphs connected with SQL ✅
 - Ability to create custom views/cubes from data and store (auto update) them ✅
 
-**What did we evaluate?**
+## What did we evaluate?
 - Posthog - everyone knows and loves
 - Scuba
     - “The basic idea of Scuba is extremely simple and doesn’t require a glossary page for people to grasp. It operates with Wide Events. Wide Event is just a collection of fields with names and values, pretty much like a json document. If you need to record some information - whether it’s the current state of the system, or an event caused by an API call, background job or whatever - you can just write some Wide Event to Scuba.”[1]
 
-**Wide Events**
+## Wide Events
 As a specification, we found that “Wide telemetry events” are a perfect fit for our usecase. Wide telemetry events aim to collect a broad range of data points, providing a more comprehensive view of system behavior.
 
 A wide telemetry event looks something like

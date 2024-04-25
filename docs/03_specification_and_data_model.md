@@ -1,19 +1,6 @@
-# Telemetry Service Documentation
+## Event Specification
 
-## Overview
-
-Welcome to the documentation for our telemetry service! Our telemetry service is designed to capture, parse, and store telemetry events efficiently for analysis and monitoring purposes. This guide will walk you through the setup, and usage of our telemetry service, including details on the event CSV parser and SQL generation process.
-
-### Design
-Telemetry Design
-![](./assets/telemetry-design.drawio.svg)
-
-#### About Design
-On project startup, `./setup.sh` runs which internally runs 3 scripts, which parses CSV, generate event schema and updated Postgres with updated event schema, and generate SQL to update clickhouse table.
-Telemetry listens for events on `/metrics/v1/save`, then passes the list of events to `AJV Validator`, which then pulls up the schema for events from Postgres DB, and validated the events received. In case of success, `AJV Validator` return `201` and passes on the data to get processed ahead. In case events doesn't satisfy schema, `AJV Validator` then returns `400` along with errors, according to the index of events receved by it.
-Now, we have schema validated events. We then process this data ahead, flatten it out as reuquired by the clickhouse, and then save the events to clickhouse.
-
-## V1 Specification
+###  V1 Specification
 These fields are common for every event. The table below describes the fields for v1 specification for telemetry API.
 | Field Name       | Type      | Requirement | Example                      | Description                                                                                               |
 |------------------|-----------|-------------|------------------------------|-----------------------------------------------------------------------------------------------------------|
@@ -42,15 +29,16 @@ How the eventData is formatted, is explained ahead.
 ## Event CSV Parser
 In section we'll dive into how the Event CSV is structured, and how the `parse.event.csv.js` script uses this CSV to generate event schema, and `SQL` to create table in `clickhouse`. 
 
-### Event CSV Structure
-CSV Header & Example event
-|eventName|subEventName|When is it generated|...|eventId|botId \|uuid|orgId \|uuid|createdAt \|unix-time|question \|string|prompt  \|string|
-|-|-|-|-|-|-|-|-|-|-|
-|userQuery|messageSent|When user sends a message|...|E001|Requried|Required|Required|Required|Optional||
+#### Event CSV Structure
+**CSV Header & Example event**
+|eventName|subEventName|When is it generated|...|eventId|botId \|uuid|orgId \|uuid|createdAt \|unix-time|question \|string|prompt  \|string|response \|string|
+|-|-|-|-|-|-|-|-|-|-|-|
+|userQuery|messageSent|When user sends a message|...|E001|Requried|Required|Required|Required|Optional||||
 
 
 CSV is divided in to two parts. 
 First, this part which holds information about the event. There can be any number of columns here, which can be used to describe the field. The first division goes upto `eventId`, which is unique for each event. This is helpful in describing the event, documenting about it, which can help other developers get context on what the event is about.
+
 Second, this part holds the key and it's type. These are the actual keys to be sent in the request body of telemetry `save` API. Using these keys and their type represented as `Key|Type` in CSV header (example `orgId|uuid`), we generate event schema that is validated by `AJV`, and `SQL` to create `clickhouse` table.
 
 `Key|Type` column for any event can have 3 values, `Required`, `Optional`, _`BLANK`_.
@@ -58,7 +46,7 @@ Second, this part holds the key and it's type. These are the actual keys to be s
 `Optional`: If any column have this value, event body `CAN` have this key inside of it's `eventData` object. In case it's not present, data is still stored to clickhouse.
 _`BLANK`_: For now, this behaved the same as `Optional`.
 
-### Event CSV Parser
+#### Event CSV Parser
 Parser expects a CSV with name `events.csv` inside of `<project-root>/schema-generator` folder. And then parses it, to generate event schema and `SQL` to create `clickhouse` table. Only `eventId` & `Key|Type` columns of the CSV are relevant here. To create schema json & create table SQL, we need Type mappings for `AJV` & `Clickhouse`. Type mapping is different for `AJV` & `Clickhouse`. For this we have these two mappings files.
 CSV Type <> AJV Type path: `schema-generator/csv.ajv.type.mapping.json`
 ```json
@@ -167,23 +155,143 @@ ENGINE = MergeTree
 ORDER BY timestamp;
 ```
 
-## Setup Guide
+## Data Model
+Clickhouse data types used
+1. `UInt32` - Used to store any interger. Example, latency.
+2. `String` - This stores anything string. Can be stringified JSON, array of strings.
+3. `UUID` - Helps in faster querying compared to string.
+4. `DateTime` - stores fields with date and time.
 
-Start with the events in CSV following the structure explained above. Save it as `events.csv` inside of `<project-root>/schema-generator`, as `parse.event.csv.js` looks for this file there. 
-Setup project ENVs
+## API
+Endpoint:
+```
+POST /metrics/v1/save
+```
+
+Example curl for E001 defined above.
 ```sh
-CLICKHOUSE_HOST=""
-CLICKHOUSE_DB=""
-CLICKHOUSE_USER=""
-CLICKHOUSE_PASSWORD=""
-DATABASE_URL="postgresql://johndoe:randompassword@localhost:7654/mydb?schema=public"
-DATABASE_USERNAME="johndoe"
-DATABASE_PASSWORD="randompassword"
-DATABASE_NAME="mydb"
-DATABASE_PORT="5432"
+curl --location '<telemetry-service-url>/metrics/v1/save' \
+--header 'Content-Type: application/json' \
+--data '[
+    {
+        "generator": "akai",
+        "version": "0.0.1",
+        "timestamp": "1713943647",
+        "actorId": "<actor-id>",
+        "actorType": "user",
+        "sessionId": "<session-id>",
+        "deviceId": "<device-id",
+        "env": "prod",
+        "eventId": "E001",
+        "event": "speechToText",
+        "subEvent": "receivedAudio",
+        "timeElapsed": 45270
+        "eventData": {
+          "botId": "550e8400-e29b-41d4-a716-446655440000",
+          "orgId": "550e8400-e29b-41d4-a716-446655440000",
+          "createdAt": "https://www2.cs.uic.edu/~i101/SoundFiles/BabyElephantWalk60.wav",
+          "question": "How to grow wheat?",
+          "prompt": "Some prompt"
+        }
+    },
+    {
+        "generator": "akai",
+        "version": "0.0.1",
+        "timestamp": "1713943647",
+        "actorId": "<actor-id>",
+        "actorType": "user",
+        "sessionId": "<session-id>",
+        "deviceId": "<device-id",
+        "env": "prod",
+        "eventId": "E001",
+        "event": "speechToText",
+        "subEvent": "receivedAudio",
+        "timeElapsed": 45270
+        "eventData": {
+          "botId": "550e8400-e29b-41d4-a716-446655440000",
+          "orgId": "550e8400-e29b-41d4-a716-446655440000",
+          "createdAt": "https://www2.cs.uic.edu/~i101/SoundFiles/BabyElephantWalk60.wav",
+          "question": "How to grow wheat?"
+        }
+    }
+]'
+
+Success Response:
+```json
+{
+    "error": false,
+    "message": "Metric stored successfully"
+}
 ```
 
-Start this service using
+Failure Response (in case `eventData` does not satisfies the schema defined [here](event-schema-docs.md)): 
+```sh
+# Request curl
+curl --location '<telemetry-service-url>/metrics/v1/save' \
+--header 'Content-Type: application/json' \
+--data '[
+    {
+        "generator": "akai",
+        "version": "0.0.1",
+        "timestamp": "1713943647",
+        "actorId": "<actor-id>",
+        "actorType": "user",
+        "sessionId": "<session-id>",
+        "deviceId": "<device-id",
+        "env": "prod",
+        "eventId": "E001",
+        "event": "speechToText",
+        "subEvent": "receivedAudio",
+        "timeElapsed": 45270
+        "eventData": {
+          "botId": "550e8400-e29b-41d4-a716-446655440000",
+          "orgId": "550e8400-e29b-41d4-a716-446655440000",
+          "createdAt": "https://www2.cs.uic.edu/~i101/SoundFiles/BabyElephantWalk60.wav",
+          "question": "How to grow wheat?",
+          "prompt": "Some prompt"
+        }
+    },
+    {
+        "generator": "akai",
+        "version": "0.0.1",
+        "timestamp": "1713943647",
+        "actorId": "<actor-id>",
+        "actorType": "user",
+        "sessionId": "<session-id>",
+        "deviceId": "<device-id",
+        "env": "prod",
+        "eventId": "E001",
+        "event": "speechToText",
+        "subEvent": "receivedAudio",
+        "timeElapsed": 45270
+        "eventData": {
+          "botId": "not-in-uuid-format",
+          "orgId": "550e8400-e29b-41d4-a716-446655440000",
+          "createdAt": "https://www2.cs.uic.edu/~i101/SoundFiles/BabyElephantWalk60.wav",
+          "question": "How to grow wheat?",
+          "prompt": "Some prompt"
+        }
+    }
+]'
+
+# botId in second eventData object is not in UUID format, and therefore will fail to POST this request
+# Response
+{
+    "error": true,
+    "message": "Request body does not satisfies the schema",
+    "errorData": {
+        "1": [
+            {
+                "instancePath": "/botId",
+                "schemaPath": "#/properties/botId/format",
+                "keyword": "format",
+                "params": {
+                    "format": "uuid"
+                },
+                "message": "must match format \"uuid\""
+            }
+        ]
+    }
+}
 ```
-npm run start:prod
-```
+
