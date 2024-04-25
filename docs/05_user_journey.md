@@ -1,7 +1,7 @@
 ## User Journey
 
 ### Adding an event
-ollowing the CSV format explained [here](./03_specification_and_data_model.md#event-csv-parser). Taking same CSV structure as before.
+Following the CSV format explained [here](./03_specification_and_data_model.md#event-csv-parser). Taking same CSV structure as before.
 |eventName|subEventName|When is it generated|...|eventId|botId \|uuid|orgId \|uuid|createdAt \|unix-time|question \|string|prompt  \|string|response \|string|
 |-|-|-|-|-|-|-|-|-|-|-|
 |userQuery|messageSent|When user sends a message|...|E001|Requried|Required|Required|Required|Optional|||
