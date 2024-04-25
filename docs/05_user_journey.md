@@ -12,7 +12,7 @@ Our updated CSV would look like
 |eventName|subEventName|When is it generated|...|eventId|botId\|uuid|orgId\|uuid|createdAt\|unix-time|question\|string|prompt\|string|response\|string|
 |-|-|-|-|-|-|-|-|-|-|-|
 |userQuery|messageSent|When user sends a message|...|E001|Requried|Required|Required|Required|Optional||
-|userQuery|messageReceived|When received a message|...|E001|Requried|Required|Required|Required||Required|
+|userQuery|messageReceived|When received a message|...|E002|Requried|Required|Required|Required||Required|
 
 Save this as CSV, and paste it to path `<project-root>/schema-generator`. Restarting the project will reflect the changes made to event schema.
 
