@@ -1,6 +1,6 @@
-# Event Specification
+## Event Specification
 
-## V1 Specification
+###  V1 Specification
 These fields are common for every event. The table below describes the fields for v1 specification for telemetry API.
 | Field Name       | Type      | Requirement | Example                      | Description                                                                                               |
 |------------------|-----------|-------------|------------------------------|-----------------------------------------------------------------------------------------------------------|
@@ -26,10 +26,10 @@ These fields are common for every event. The table below describes the fields fo
 
 How the eventData is formatted, is explained ahead.
 
-# Event CSV Parser
+## Event CSV Parser
 In section we'll dive into how the Event CSV is structured, and how the `parse.event.csv.js` script uses this CSV to generate event schema, and `SQL` to create table in `clickhouse`. 
 
-### Event CSV Structure
+#### Event CSV Structure
 CSV Header & Example event
 |eventName|subEventName|When is it generated|...|eventId|botId \|uuid|orgId \|uuid|createdAt \|unix-time|question \|string|prompt  \|string|response \|string|
 |-|-|-|-|-|-|-|-|-|-|-|
@@ -45,7 +45,7 @@ Second, this part holds the key and it's type. These are the actual keys to be s
 `Optional`: If any column have this value, event body `CAN` have this key inside of it's `eventData` object. In case it's not present, data is still stored to clickhouse.
 _`BLANK`_: For now, this behaved the same as `Optional`.
 
-### Event CSV Parser
+#### Event CSV Parser
 Parser expects a CSV with name `events.csv` inside of `<project-root>/schema-generator` folder. And then parses it, to generate event schema and `SQL` to create `clickhouse` table. Only `eventId` & `Key|Type` columns of the CSV are relevant here. To create schema json & create table SQL, we need Type mappings for `AJV` & `Clickhouse`. Type mapping is different for `AJV` & `Clickhouse`. For this we have these two mappings files.
 CSV Type <> AJV Type path: `schema-generator/csv.ajv.type.mapping.json`
 ```json
@@ -154,7 +154,7 @@ ENGINE = MergeTree
 ORDER BY timestamp;
 ```
 
-# API
+## API
 Endpoint:
 ```
 POST /metrics/v1/save
@@ -286,3 +286,4 @@ curl --location '<telemetry-service-url>/metrics/v1/save' \
     }
 }
 ```
+

@@ -1,8 +1,7 @@
-# User Journey
+## User Journey
 
-## Adding an event
-
-Following the CSV format explained [here](./05_event_specificatoin.md#event-csv-structure). Taking same CSV structure as before.
+### Adding an event
+ollowing the CSV format explained [here](./03_specification_and_data_model.md#event-csv-parser). Taking same CSV structure as before.
 |eventName|subEventName|When is it generated|...|eventId|botId \|uuid|orgId \|uuid|createdAt \|unix-time|question \|string|prompt  \|string|response \|string|
 |-|-|-|-|-|-|-|-|-|-|-|
 |userQuery|messageSent|When user sends a message|...|E001|Requried|Required|Required|Required|Optional|||
@@ -17,7 +16,8 @@ Our updated CSV would look like
 
 Save this as CSV, and paste it to path `<project-root>/schema-generator`. Restarting the project will reflect the changes made to event schema.
 
-## View an Event
-** Message Journey on superset & admin **
+### View an Event
+Tracking though Superset
 
-## Post Processing and event
+### Post Processing an event
+MV created on clickhouse
