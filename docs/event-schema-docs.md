@@ -1,13 +1,8 @@
 # Event Data
-
 These are auto-generated schema specification through CSV
-
 ## speechToText
-
 ### receivedAudio
-
 When is it generated: BFF received audio from a bot
-
 ```json
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
@@ -53,11 +48,8 @@ When is it generated: BFF received audio from a bot
     "description": "BFF received audio from a bot"
 }
 ```
-
 ### speechToTextResponse
-
 When is it generated: Audio is converted to text from audio
-
 ```json
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
@@ -134,11 +126,8 @@ When is it generated: Audio is converted to text from audio
     "description": "Audio is converted to text from audio"
 }
 ```
-
 ### mapQueryIdToAudio
-
 When is it generated: AudioId is mapped to QueryId
-
 ```json
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
@@ -214,13 +203,9 @@ When is it generated: AudioId is mapped to QueryId
     "description": "AudioId is mapped to QueryId"
 }
 ```
-
 ## userQuery
-
 ### incomingMessage
-
 When is it generated: User sent a message to a bot
-
 ```json
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
@@ -273,11 +258,8 @@ When is it generated: User sent a message to a bot
     "description": "User sent a message to a bot"
 }
 ```
-
 ### userHistory
-
 When is it generated: Fetching user history at inbound
-
 ```json
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
@@ -319,11 +301,8 @@ When is it generated: Fetching user history at inbound
     "description": "Fetching user history at inbound"
 }
 ```
-
 ### userInfo
-
 When is it generated: Fetching user info - transformer
-
 ```json
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
@@ -386,11 +365,8 @@ When is it generated: Fetching user info - transformer
     "description": "Fetching user info - transformer"
 }
 ```
-
 ### translateInput
-
 When is it generated: translate - transformer
-
 ```json
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
@@ -456,11 +432,8 @@ When is it generated: translate - transformer
     "description": "translate - transformer"
 }
 ```
-
 ### nuralCoreference
-
 When is it generated: nuralCoref - transformer
-
 ```json
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
@@ -526,11 +499,8 @@ When is it generated: nuralCoref - transformer
     "description": "nuralCoref - transformer"
 }
 ```
-
 ### classifyQuestion
-
 When is it generated: classifier - transformer
-
 ```json
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
@@ -596,11 +566,8 @@ When is it generated: classifier - transformer
     "description": "classifier - transformer"
 }
 ```
-
 ### retreiveSimilarChunks
-
 When is it generated: retieveDocs - transformer
-
 ```json
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
@@ -646,7 +613,7 @@ When is it generated: retieveDocs - transformer
             "type": "string"
         },
         "similarChunks": {
-            "type": "object"
+            "type": "array"
         },
         "eventLog": {
             "type": "string"
@@ -666,11 +633,8 @@ When is it generated: retieveDocs - transformer
     "description": "retieveDocs - transformer"
 }
 ```
-
 ### NER
-
 When is it generated: ner - transformer
-
 ```json
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
@@ -716,7 +680,7 @@ When is it generated: ner - transformer
             "type": "string"
         },
         "NER": {
-            "type": "object"
+            "type": "array"
         },
         "eventLog": {
             "type": "string"
@@ -736,11 +700,8 @@ When is it generated: ner - transformer
     "description": "ner - transformer"
 }
 ```
-
 ### llmResponse
-
 When is it generated: llm - transformer
-
 ```json
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
@@ -798,7 +759,7 @@ When is it generated: llm - transformer
             "type": "string"
         },
         "prompt": {
-            "type": "string"
+            "type": "array"
         },
         "translatedResponse": {
             "type": "string"
@@ -817,11 +778,8 @@ When is it generated: llm - transformer
     "description": "llm - transformer"
 }
 ```
-
 ### userQuery
-
 When is it generated: translate - transformer
-
 ```json
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
@@ -891,11 +849,8 @@ When is it generated: translate - transformer
     "description": "translate - transformer"
 }
 ```
-
 ### userQuery
-
 When is it generated: textToSpeech - transformer
-
 ```json
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
@@ -974,11 +929,8 @@ When is it generated: textToSpeech - transformer
     "description": "textToSpeech - transformer"
 }
 ```
-
 ### userQuery
-
 When is it generated: When user plays audio at app (timesAudioUsed)
-
 ```json
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
@@ -1030,11 +982,8 @@ When is it generated: When user plays audio at app (timesAudioUsed)
     "description": "When user plays audio at app (timesAudioUsed)"
 }
 ```
-
 ### userQuery
-
 When is it generated: When an error is occured during query process
-
 ```json
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
@@ -1076,11 +1025,8 @@ When is it generated: When an error is occured during query process
     "description": "When an error is occured during query process"
 }
 ```
-
 ### userQuery
-
 When is it generated: When user gets the response at app (responseAt)
-
 ```json
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
@@ -1133,11 +1079,8 @@ When is it generated: When user gets the response at app (responseAt)
     "description": "When user gets the response at app (responseAt)"
 }
 ```
-
 ### detectLanguage
-
-When is it generated:
-
+When is it generated: 
 ```json
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
@@ -1174,13 +1117,9 @@ When is it generated:
     "description": ""
 }
 ```
-
 ## userQueryInbound
-
 ### userQuery
-
 When is it generated: A message was sent to user
-
 ```json
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
@@ -1235,11 +1174,8 @@ When is it generated: A message was sent to user
     "description": "A message was sent to user"
 }
 ```
-
 ### userQuery
-
 When is it generated: XMessage to raw message conversion failed
-
 ```json
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
@@ -1290,11 +1226,8 @@ When is it generated: XMessage to raw message conversion failed
     "description": "XMessage to raw message conversion failed"
 }
 ```
-
 ### userQuery
-
 When is it generated: Raw message conversion to XMessage failed
-
 ```json
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
@@ -1338,11 +1271,8 @@ When is it generated: Raw message conversion to XMessage failed
     "description": "Raw message conversion to XMessage failed"
 }
 ```
-
 ### userQuery
-
 When is it generated: A registration request was sent to the bot
-
 ```json
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
@@ -1392,11 +1322,8 @@ When is it generated: A registration request was sent to the bot
     "description": "A registration request was sent to the bot"
 }
 ```
-
 ### userQuery
-
 When is it generated: A registration request failed
-
 ```json
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
@@ -1446,11 +1373,8 @@ When is it generated: A registration request failed
     "description": "A registration request failed"
 }
 ```
-
 ### reactionEvent
-
 When is it generated: A user sent a feedback on a message
-
 ```json
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
@@ -1492,11 +1416,8 @@ When is it generated: A user sent a feedback on a message
     "description": "A user sent a feedback on a message"
 }
 ```
-
 ### userQuery
-
 When is it generated: User read the message sent by a bot
-
 ```json
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
@@ -1542,13 +1463,9 @@ When is it generated: User read the message sent by a bot
     "description": "User read the message sent by a bot"
 }
 ```
-
 ## AI-Tools
-
 ### userQuery
-
 When is it generated: On return of this API call
-
 ```json
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
@@ -1607,11 +1524,8 @@ When is it generated: On return of this API call
     "description": "On return of this API call"
 }
 ```
-
 ### userQuery
-
 When is it generated: On return of this API call
-
 ```json
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
@@ -1670,11 +1584,8 @@ When is it generated: On return of this API call
     "description": "On return of this API call"
 }
 ```
-
 ### translate
-
 When is it generated: On return of this API call
-
 ```json
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
@@ -1728,11 +1639,8 @@ When is it generated: On return of this API call
     "description": "On return of this API call"
 }
 ```
-
 ### transliterate
-
 When is it generated: On return of this API call
-
 ```json
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
@@ -1786,13 +1694,9 @@ When is it generated: On return of this API call
     "description": "On return of this API call"
 }
 ```
-
 ## datasetInjestion
-
 ### translationDictionary
-
 When is it generated: migration of data
-
 ```json
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
@@ -1814,11 +1718,8 @@ When is it generated: migration of data
     "description": "migration of data"
 }
 ```
-
 ### officials
-
 When is it generated: migration of data
-
 ```json
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
@@ -1840,13 +1741,9 @@ When is it generated: migration of data
     "description": "migration of data"
 }
 ```
-
 ## documentService
-
 ### document
-
 When is it generated: migration of data
-
 ```json
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
@@ -1868,11 +1765,8 @@ When is it generated: migration of data
     "description": "migration of data"
 }
 ```
-
 ### upload
-
 When is it generated: On return of this API call
-
 ```json
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
@@ -1923,11 +1817,8 @@ When is it generated: On return of this API call
     "description": "On return of this API call"
 }
 ```
-
 ### retrieve
-
 When is it generated: On return of this API call
-
 ```json
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
@@ -1967,13 +1858,9 @@ When is it generated: On return of this API call
     "description": "On return of this API call"
 }
 ```
-
 ## messageQuery
-
 ### messageSent
-
 When is it generated: When user sends a message (send phoneNumber also)
-
 ```json
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
@@ -2019,7 +1906,6 @@ When is it generated: When user sends a message (send phoneNumber also)
         "botId",
         "userId",
         "orgId",
-        "conversationId",
         "messageId",
         "text",
         "createdAt"
@@ -2027,11 +1913,8 @@ When is it generated: When user sends a message (send phoneNumber also)
     "description": "When user sends a message (send phoneNumber also)"
 }
 ```
-
 ### messageReceived
-
 When is it generated: When user receives back a response for sent message
-
 ```json
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
@@ -2083,7 +1966,6 @@ When is it generated: When user receives back a response for sent message
         "botId",
         "userId",
         "orgId",
-        "conversationId",
         "messageId",
         "text",
         "timeTaken"
@@ -2091,13 +1973,9 @@ When is it generated: When user receives back a response for sent message
     "description": "When user receives back a response for sent message"
 }
 ```
-
 ## search
-
 ### fuzzy search
-
 When is it generated: On return of this API call
-
 ```json
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
@@ -2159,11 +2037,8 @@ When is it generated: On return of this API call
     "description": "On return of this API call"
 }
 ```
-
 ### vector search
-
 When is it generated: On return of this API call
-
 ```json
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
@@ -2221,11 +2096,8 @@ When is it generated: On return of this API call
     "description": "On return of this API call"
 }
 ```
-
-### execute-query
-
+### execute-query 
 When is it generated: On return of this API call
-
 ```json
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
@@ -2279,13 +2151,9 @@ When is it generated: On return of this API call
     "description": "On return of this API call"
 }
 ```
-
 ## Data Insertion
-
 ### create schema
-
 When is it generated: On return of this API call
-
 ```json
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
@@ -2326,11 +2194,8 @@ When is it generated: On return of this API call
     "description": "On return of this API call"
 }
 ```
-
 ### insertDataset
-
 When is it generated: On return of this API call
-
 ```json
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
@@ -2376,13 +2241,9 @@ When is it generated: On return of this API call
     "description": "On return of this API call"
 }
 ```
-
-## Transformer Execution
-
+## Transformer Execution 
 ### DEFAULT_TRANSFORMER_START_EVENT
-
-When is it generated: When the transformer execution begins
-
+When is it generated: When the transformer execution begins  
 ```json
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
@@ -2416,11 +2277,8 @@ When is it generated: When the transformer execution begins
     "description": "When the transformer execution begins  "
 }
 ```
-
 ### DEFAULT_TRANSFORMER_END_EVENT
-
 When is it generated: When the transformer execution completes
-
 ```json
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
@@ -2456,13 +2314,9 @@ When is it generated: When the transformer execution completes
     "description": "When the transformer execution completes"
 }
 ```
-
 ## micAction
-
 ### micTap
-
 When is it generated: When user taps on mic to speak something
-
 ```json
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
@@ -2494,13 +2348,9 @@ When is it generated: When user taps on mic to speak something
     "description": "When user taps on mic to speak something"
 }
 ```
-
 ## aiToolProxyToolLatency
-
 ### t2sLatency
-
 When is it generated: Time taken by T2S API
-
 ```json
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
@@ -2555,11 +2405,8 @@ When is it generated: Time taken by T2S API
     "description": "Time taken by T2S API"
 }
 ```
-
 ### s2tLatency
-
 When is it generated: Time taken by S2T API
-
 ```json
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
@@ -2609,11 +2456,8 @@ When is it generated: Time taken by S2T API
     "description": "Time taken by S2T API"
 }
 ```
-
 ### detectedLatency
-
 When is it generated: Time taken in detecting latency
-
 ```json
 {
     "$schema": "http://json-schema.org/draft-07/schema#",

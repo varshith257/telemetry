@@ -640,7 +640,7 @@
                     "type": "string"
                 },
                 "similarChunks": {
-                    "type": "object"
+                    "type": "array"
                 },
                 "eventLog": {
                     "type": "string"
@@ -710,7 +710,7 @@
                     "type": "string"
                 },
                 "NER": {
-                    "type": "object"
+                    "type": "array"
                 },
                 "eventLog": {
                     "type": "string"
@@ -792,7 +792,7 @@
                     "type": "string"
                 },
                 "prompt": {
-                    "type": "string"
+                    "type": "array"
                 },
                 "translatedResponse": {
                     "type": "string"
@@ -1863,7 +1863,6 @@
                 "botId",
                 "userId",
                 "orgId",
-                "conversationId",
                 "messageId",
                 "text",
                 "createdAt"
@@ -1927,7 +1926,6 @@
                 "botId",
                 "userId",
                 "orgId",
-                "conversationId",
                 "messageId",
                 "text",
                 "timeTaken"
