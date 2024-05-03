@@ -44,11 +44,8 @@ export class AddUserDetails implements NestInterceptor {
         if (ignoreAuth) return next.handle();
 
         const req = context.switchToHttp().getRequest();
-        console.log(req.headers)
         const botId = req.headers['botid'];
         const orgId = req.headers['orgid'];
-        console.log(botId);
-        console.log(orgId);
         if (!botId || !orgId) {
             throw new UnauthorizedException();
         }

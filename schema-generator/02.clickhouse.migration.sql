@@ -1,3 +1,2 @@
 ALTER TABLE event
-ADD COLUMN reactionType Nullable(String) AFTER streamStartLatency,
-ADD COLUMN reactionText Nullable(String) AFTER reactionType;
+ADD COLUMN userHistory Nullable(String) AFTER reactionText;

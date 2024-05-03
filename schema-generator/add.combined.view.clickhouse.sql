@@ -34,6 +34,7 @@ SELECT
     e2.phoneNumber AS phoneNumber,
     e2.district AS district,
     e2.block AS block,
+    e2.streamStartLatency as streamStartLatency,
     e3.getUserHistoryLatency AS getUserHistoryLatency,
     e4.getNeuralCoreferenceLatency AS getNeuralCoreferenceLatency,
     e5.classifyQuestionLatency AS classifyQuestionLatency,
@@ -62,7 +63,7 @@ FROM
     (
         SELECT
             messageId,
-            maxIf(timeTaken, event = 'E047') AS spellCheckLatency,
+            maxIf(timeTaken, event = 'E002') AS spellCheckLatency,
             maxIf(timestamp, eventId = 'E032') AS timestamp,
             maxIf(text, eventId = 'E002') AS s2tOutput
         FROM
@@ -78,9 +79,10 @@ FROM
             maxIf(botId, eventId = 'E032') AS botId,
             maxIf(audioFileName, eventId = 'E002') as s2tInput,
             maxIf(conversationId, eventId = 'E032') AS conversationId,
-            maxIf(spellCorrectedText, eventId = 'E047') AS spellCorrectedText,
+            maxIf(spellCorrectedText, eventId = 'E002') AS spellCorrectedText,
             maxIf(text, eventId = 'E032') AS query,
             maxIf(timestamp, eventId = 'E017') AS responseAt,
+            maxIf(streamStartLatency, eventId = 'E012') as streamStartLatency,
             maxIf(
                 prompt, 
                 eventId = 'E012'
@@ -263,3 +265,16 @@ FROM
         GROUP BY
             messageId
     ) AS e12 ON e1.messageId = e12.messageId;
+
+CREATE MATERIALIZED VIEW IF NOT EXISTS mic_tap_view
+REFRESH EVERY 5 SECONDS 
+ENGINE = MergeTree
+ORDER BY sessionId 
+SETTINGS allow_nullable_key = 1 AS
+SELECT
+    sessionId,
+    COUNTIf(eventId = 'E044') AS count
+FROM
+    event
+GROUP BY
+    sessionId;

@@ -9,35 +9,35 @@
             "$schema": "http://json-schema.org/draft-07/schema#",
             "type": "object",
             "properties": {
-                "botId ": {
+                "botId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "userId ": {
+                "userId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "orgId ": {
+                "orgId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "conversationId ": {
+                "conversationId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "messageId ": {
+                "messageId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "audioUrl ": {
+                "audioUrl": {
                     "type": "string",
                     "format": "url"
                 },
-                "audioId ": {
+                "audioId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "language ": {
+                "language": {
                     "type": "string"
                 }
             },
@@ -59,59 +59,63 @@
             "$schema": "http://json-schema.org/draft-07/schema#",
             "type": "object",
             "properties": {
-                "botId ": {
+                "botId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "userId ": {
+                "userId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "orgId ": {
+                "orgId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "conversationId ": {
+                "conversationId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "messageId ": {
+                "messageId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "audioFileName ": {
+                "audioFileName": {
                     "type": "string"
                 },
-                "audioUrl ": {
+                "audioUrl": {
                     "type": "string",
                     "format": "url"
                 },
-                "audioId ": {
+                "audioId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "text ": {
+                "text": {
                     "type": "string"
                 },
-                "spellCorrectedText ": {
+                "spellCorrectedText": {
                     "type": "string"
                 },
-                "error ": {
+                "error": {
                     "type": "string"
                 },
-                "timeTaken ": {
+                "timeTaken": {
                     "type": "number"
                 },
-                "spellCheckTimeTaken ": {
+                "spellCheckTimeTaken": {
                     "type": "number"
                 },
-                "phoneNumber ": {
+                "phoneNumber": {
                     "type": "string"
                 },
-                "createdAt ": {
+                "createdAt": {
                     "type": "number"
                 },
-                "language ": {
+                "queryId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "language": {
                     "type": "string"
                 }
             },
@@ -136,56 +140,56 @@
             "$schema": "http://json-schema.org/draft-07/schema#",
             "type": "object",
             "properties": {
-                "botId ": {
+                "botId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "userId ": {
+                "userId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "orgId ": {
+                "orgId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "conversationId ": {
+                "conversationId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "messageId ": {
+                "messageId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "audioUrl ": {
+                "audioUrl": {
                     "type": "string",
                     "format": "url"
                 },
-                "audioId ": {
+                "audioId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "text ": {
+                "text": {
                     "type": "string"
                 },
-                "spellCorrectedText ": {
+                "spellCorrectedText": {
                     "type": "string"
                 },
-                "error ": {
+                "error": {
                     "type": "string"
                 },
-                "timeTaken ": {
+                "timeTaken": {
                     "type": "number"
                 },
-                "spellCheckTimeTaken ": {
+                "spellCheckTimeTaken": {
                     "type": "number"
                 },
-                "phoneNumber ": {
+                "phoneNumber": {
                     "type": "string"
                 },
-                "createdAt ": {
+                "createdAt": {
                     "type": "number"
                 },
-                "queryId ": {
+                "queryId": {
                     "type": "string",
                     "format": "uuid"
                 }
@@ -216,39 +220,39 @@
             "$schema": "http://json-schema.org/draft-07/schema#",
             "type": "object",
             "properties": {
-                "botId ": {
+                "botId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "userId ": {
+                "userId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "orgId ": {
+                "orgId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "conversationId ": {
+                "conversationId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "messageId ": {
+                "messageId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "text ": {
+                "text": {
                     "type": "string"
                 },
-                "mediaIds ": {
+                "mediaIds": {
                     "type": "array"
                 },
-                "phoneNumber ": {
+                "phoneNumber": {
                     "type": "string"
                 },
-                "createdAt ": {
+                "createdAt": {
                     "type": "number"
                 },
-                "did ": {
+                "did": {
                     "type": "string"
                 }
             },
@@ -273,26 +277,29 @@
             "$schema": "http://json-schema.org/draft-07/schema#",
             "type": "object",
             "properties": {
-                "botId ": {
+                "botId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "orgId ": {
+                "orgId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "conversationId ": {
+                "conversationId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "messageId ": {
+                "messageId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "timeTaken ": {
+                "timeTaken": {
                     "type": "number"
                 },
-                "did ": {
+                "did": {
+                    "type": "string"
+                },
+                "userHistory": {
                     "type": "string"
                 }
             },
@@ -316,49 +323,49 @@
             "$schema": "http://json-schema.org/draft-07/schema#",
             "type": "object",
             "properties": {
-                "botId ": {
+                "botId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "userId ": {
+                "userId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "orgId ": {
+                "orgId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "conversationId ": {
+                "conversationId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "messageId ": {
+                "messageId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "text ": {
+                "text": {
                     "type": "string"
                 },
-                "error ": {
+                "error": {
                     "type": "string"
                 },
-                "timeTaken ": {
+                "timeTaken": {
                     "type": "number"
                 },
-                "queryId ": {
+                "queryId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "block ": {
+                "block": {
                     "type": "string"
                 },
-                "district ": {
+                "district": {
                     "type": "string"
                 },
-                "eventLog ": {
+                "eventLog": {
                     "type": "string"
                 },
-                "transformerId ": {
+                "transformerId": {
                     "type": "string"
                 }
             },
@@ -383,52 +390,52 @@
             "$schema": "http://json-schema.org/draft-07/schema#",
             "type": "object",
             "properties": {
-                "botId ": {
+                "botId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "userId ": {
+                "userId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "orgId ": {
+                "orgId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "conversationId ": {
+                "conversationId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "messageId ": {
+                "messageId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "text ": {
+                "text": {
                     "type": "string"
                 },
-                "error ": {
+                "error": {
                     "type": "string"
                 },
-                "timeTaken ": {
+                "timeTaken": {
                     "type": "number"
                 },
-                "phoneNumber ": {
+                "phoneNumber": {
                     "type": "string"
                 },
-                "queryId ": {
+                "queryId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "userManagementUrl ": {
+                "userManagementUrl": {
                     "type": "string"
                 },
-                "textInEnglish ": {
+                "textInEnglish": {
                     "type": "string"
                 },
-                "eventLog ": {
+                "eventLog": {
                     "type": "string"
                 },
-                "transformerId ": {
+                "transformerId": {
                     "type": "string"
                 }
             },
@@ -453,52 +460,52 @@
             "$schema": "http://json-schema.org/draft-07/schema#",
             "type": "object",
             "properties": {
-                "botId ": {
+                "botId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "userId ": {
+                "userId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "orgId ": {
+                "orgId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "conversationId ": {
+                "conversationId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "messageId ": {
+                "messageId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "text ": {
+                "text": {
                     "type": "string"
                 },
-                "error ": {
+                "error": {
                     "type": "string"
                 },
-                "timeTaken ": {
+                "timeTaken": {
                     "type": "number"
                 },
-                "phoneNumber ": {
+                "phoneNumber": {
                     "type": "string"
                 },
-                "queryId ": {
+                "queryId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "textInEnglish ": {
+                "textInEnglish": {
                     "type": "string"
                 },
-                "coreferencedText ": {
+                "coreferencedText": {
                     "type": "string"
                 },
-                "eventLog ": {
+                "eventLog": {
                     "type": "string"
                 },
-                "transformerId ": {
+                "transformerId": {
                     "type": "string"
                 }
             },
@@ -523,52 +530,52 @@
             "$schema": "http://json-schema.org/draft-07/schema#",
             "type": "object",
             "properties": {
-                "botId ": {
+                "botId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "userId ": {
+                "userId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "orgId ": {
+                "orgId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "conversationId ": {
+                "conversationId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "messageId ": {
+                "messageId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "text ": {
+                "text": {
                     "type": "string"
                 },
-                "error ": {
+                "error": {
                     "type": "string"
                 },
-                "timeTaken ": {
+                "timeTaken": {
                     "type": "number"
                 },
-                "phoneNumber ": {
+                "phoneNumber": {
                     "type": "string"
                 },
-                "queryId ": {
+                "queryId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "textInEnglish ": {
+                "textInEnglish": {
                     "type": "string"
                 },
-                "queryClass ": {
+                "queryClass": {
                     "type": "string"
                 },
-                "eventLog ": {
+                "eventLog": {
                     "type": "string"
                 },
-                "transformerId ": {
+                "transformerId": {
                     "type": "string"
                 }
             },
@@ -593,52 +600,52 @@
             "$schema": "http://json-schema.org/draft-07/schema#",
             "type": "object",
             "properties": {
-                "botId ": {
+                "botId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "userId ": {
+                "userId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "orgId ": {
+                "orgId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "conversationId ": {
+                "conversationId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "messageId ": {
+                "messageId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "text ": {
+                "text": {
                     "type": "string"
                 },
-                "error ": {
+                "error": {
                     "type": "string"
                 },
-                "timeTaken ": {
+                "timeTaken": {
                     "type": "number"
                 },
-                "phoneNumber ": {
+                "phoneNumber": {
                     "type": "string"
                 },
-                "queryId ": {
+                "queryId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "textInEnglish ": {
+                "textInEnglish": {
                     "type": "string"
                 },
-                "similarChunks ": {
-                    "type": "object"
+                "similarChunks": {
+                    "type": "array"
                 },
-                "eventLog ": {
+                "eventLog": {
                     "type": "string"
                 },
-                "transformerId ": {
+                "transformerId": {
                     "type": "string"
                 }
             },
@@ -663,52 +670,52 @@
             "$schema": "http://json-schema.org/draft-07/schema#",
             "type": "object",
             "properties": {
-                "botId ": {
+                "botId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "userId ": {
+                "userId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "orgId ": {
+                "orgId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "conversationId ": {
+                "conversationId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "messageId ": {
+                "messageId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "text ": {
+                "text": {
                     "type": "string"
                 },
-                "error ": {
+                "error": {
                     "type": "string"
                 },
-                "timeTaken ": {
+                "timeTaken": {
                     "type": "number"
                 },
-                "phoneNumber ": {
+                "phoneNumber": {
                     "type": "string"
                 },
-                "queryId ": {
+                "queryId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "textInEnglish ": {
+                "textInEnglish": {
                     "type": "string"
                 },
-                "NER ": {
-                    "type": "object"
+                "NER": {
+                    "type": "array"
                 },
-                "eventLog ": {
+                "eventLog": {
                     "type": "string"
                 },
-                "transformerId ": {
+                "transformerId": {
                     "type": "string"
                 }
             },
@@ -733,64 +740,64 @@
             "$schema": "http://json-schema.org/draft-07/schema#",
             "type": "object",
             "properties": {
-                "botId ": {
+                "botId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "userId ": {
+                "userId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "orgId ": {
+                "orgId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "conversationId ": {
+                "conversationId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "messageId ": {
+                "messageId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "text ": {
+                "text": {
                     "type": "string"
                 },
-                "error ": {
+                "error": {
                     "type": "string"
                 },
-                "timeTaken ": {
+                "timeTaken": {
                     "type": "number"
                 },
-                "phoneNumber ": {
+                "phoneNumber": {
                     "type": "string"
                 },
-                "queryId ": {
+                "queryId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "textInEnglish ": {
+                "textInEnglish": {
                     "type": "string"
                 },
-                "responseInEnglish ": {
+                "responseInEnglish": {
                     "type": "string"
                 },
-                "response ": {
+                "response": {
                     "type": "string"
                 },
-                "eventLog ": {
+                "eventLog": {
                     "type": "string"
                 },
-                "transformerId ": {
+                "transformerId": {
                     "type": "string"
                 },
-                "prompt ": {
+                "prompt": {
+                    "type": "array"
+                },
+                "translatedResponse": {
                     "type": "string"
                 },
-                "translatedResponse ": {
-                    "type": "string"
-                },
-                "streamStartLatency ": {
+                "streamStartLatency": {
                     "type": "number"
                 }
             },
@@ -814,55 +821,55 @@
             "$schema": "http://json-schema.org/draft-07/schema#",
             "type": "object",
             "properties": {
-                "botId ": {
+                "botId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "userId ": {
+                "userId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "orgId ": {
+                "orgId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "conversationId ": {
+                "conversationId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "messageId ": {
+                "messageId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "text ": {
+                "text": {
                     "type": "string"
                 },
-                "error ": {
+                "error": {
                     "type": "string"
                 },
-                "timeTaken ": {
+                "timeTaken": {
                     "type": "number"
                 },
-                "phoneNumber ": {
+                "phoneNumber": {
                     "type": "string"
                 },
-                "queryId ": {
+                "queryId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "textInEnglish ": {
+                "textInEnglish": {
                     "type": "string"
                 },
-                "responseInEnglish ": {
+                "responseInEnglish": {
                     "type": "string"
                 },
-                "response ": {
+                "response": {
                     "type": "string"
                 },
-                "eventLog ": {
+                "eventLog": {
                     "type": "string"
                 },
-                "transformerId ": {
+                "transformerId": {
                     "type": "string"
                 }
             },
@@ -888,63 +895,63 @@
             "$schema": "http://json-schema.org/draft-07/schema#",
             "type": "object",
             "properties": {
-                "botId ": {
+                "botId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "userId ": {
+                "userId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "orgId ": {
+                "orgId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "conversationId ": {
+                "conversationId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "messageId ": {
+                "messageId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "audioFileName ": {
+                "audioFileName": {
                     "type": "string"
                 },
-                "audioUrl ": {
+                "audioUrl": {
                     "type": "string",
                     "format": "url"
                 },
-                "audioId ": {
+                "audioId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "text ": {
+                "text": {
                     "type": "string"
                 },
-                "error ": {
+                "error": {
                     "type": "string"
                 },
-                "timeTaken ": {
+                "timeTaken": {
                     "type": "number"
                 },
-                "phoneNumber ": {
+                "phoneNumber": {
                     "type": "string"
                 },
-                "queryId ": {
+                "queryId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "textInEnglish ": {
+                "textInEnglish": {
                     "type": "string"
                 },
-                "responseInEnglish ": {
+                "responseInEnglish": {
                     "type": "string"
                 },
-                "response ": {
+                "response": {
                     "type": "string"
                 },
-                "language ": {
+                "language": {
                     "type": "string"
                 }
             },
@@ -971,39 +978,39 @@
             "$schema": "http://json-schema.org/draft-07/schema#",
             "type": "object",
             "properties": {
-                "botId ": {
+                "botId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "userId ": {
+                "userId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "orgId ": {
+                "orgId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "conversationId ": {
+                "conversationId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "messageId ": {
+                "messageId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "text ": {
+                "text": {
                     "type": "string"
                 },
-                "timeTaken ": {
+                "timeTaken": {
                     "type": "number"
                 },
-                "phoneNumber ": {
+                "phoneNumber": {
                     "type": "string"
                 },
-                "responseInEnglish ": {
+                "responseInEnglish": {
                     "type": "string"
                 },
-                "timesAudioUsed ": {
+                "timesAudioUsed": {
                     "type": "number"
                 }
             },
@@ -1027,30 +1034,30 @@
             "$schema": "http://json-schema.org/draft-07/schema#",
             "type": "object",
             "properties": {
-                "botId ": {
+                "botId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "userId ": {
+                "userId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "orgId ": {
+                "orgId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "conversationId ": {
+                "conversationId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "messageId ": {
+                "messageId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "error ": {
+                "error": {
                     "type": "string"
                 },
-                "errorRate ": {
+                "errorRate": {
                     "type": "number"
                 }
             },
@@ -1073,39 +1080,39 @@
             "$schema": "http://json-schema.org/draft-07/schema#",
             "type": "object",
             "properties": {
-                "botId ": {
+                "botId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "userId ": {
+                "userId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "orgId ": {
+                "orgId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "conversationId ": {
+                "conversationId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "messageId ": {
+                "messageId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "text ": {
+                "text": {
                     "type": "string"
                 },
-                "timeTaken ": {
+                "timeTaken": {
                     "type": "number"
                 },
-                "phoneNumber ": {
+                "phoneNumber": {
                     "type": "string"
                 },
-                "responseInEnglish ": {
+                "responseInEnglish": {
                     "type": "string"
                 },
-                "response ": {
+                "response": {
                     "type": "string"
                 }
             },
@@ -1130,39 +1137,39 @@
             "$schema": "http://json-schema.org/draft-07/schema#",
             "type": "object",
             "properties": {
-                "botId ": {
+                "botId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "userId ": {
+                "userId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "orgId ": {
+                "orgId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "conversationId ": {
+                "conversationId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "messageId ": {
+                "messageId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "text ": {
+                "text": {
                     "type": "string"
                 },
-                "mediaIds ": {
+                "mediaIds": {
                     "type": "array"
                 },
-                "timeTaken ": {
+                "timeTaken": {
                     "type": "number"
                 },
-                "createdAt ": {
+                "createdAt": {
                     "type": "number"
                 },
-                "did ": {
+                "did": {
                     "type": "string"
                 }
             },
@@ -1189,36 +1196,36 @@
             "$schema": "http://json-schema.org/draft-07/schema#",
             "type": "object",
             "properties": {
-                "botId ": {
+                "botId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "userId ": {
+                "userId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "orgId ": {
+                "orgId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "conversationId ": {
+                "conversationId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "messageId ": {
+                "messageId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "text ": {
+                "text": {
                     "type": "string"
                 },
-                "mediaIds ": {
+                "mediaIds": {
                     "type": "array"
                 },
-                "createdAt ": {
+                "createdAt": {
                     "type": "number"
                 },
-                "did ": {
+                "did": {
                     "type": "string"
                 }
             },
@@ -1244,32 +1251,32 @@
             "$schema": "http://json-schema.org/draft-07/schema#",
             "type": "object",
             "properties": {
-                "botId ": {
+                "botId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "orgId ": {
+                "orgId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "conversationId ": {
+                "conversationId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "messageId ": {
+                "messageId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "text ": {
+                "text": {
                     "type": "string"
                 },
-                "mediaIds ": {
+                "mediaIds": {
                     "type": "array"
                 },
-                "createdAt ": {
+                "createdAt": {
                     "type": "number"
                 },
-                "did ": {
+                "did": {
                     "type": "string"
                 }
             },
@@ -1292,35 +1299,35 @@
             "$schema": "http://json-schema.org/draft-07/schema#",
             "type": "object",
             "properties": {
-                "botId ": {
+                "botId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "orgId ": {
+                "orgId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "conversationId ": {
+                "conversationId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "messageId ": {
+                "messageId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "text ": {
+                "text": {
                     "type": "string"
                 },
-                "mediaIds ": {
+                "mediaIds": {
                     "type": "array"
                 },
-                "createdAt ": {
+                "createdAt": {
                     "type": "number"
                 },
-                "did ": {
+                "did": {
                     "type": "string"
                 },
-                "userManagementUrl ": {
+                "userManagementUrl": {
                     "type": "string"
                 }
             },
@@ -1346,35 +1353,35 @@
             "$schema": "http://json-schema.org/draft-07/schema#",
             "type": "object",
             "properties": {
-                "botId ": {
+                "botId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "orgId ": {
+                "orgId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "conversationId ": {
+                "conversationId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "messageId ": {
+                "messageId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "text ": {
+                "text": {
                     "type": "string"
                 },
-                "mediaIds ": {
+                "mediaIds": {
                     "type": "array"
                 },
-                "createdAt ": {
+                "createdAt": {
                     "type": "number"
                 },
-                "did ": {
+                "did": {
                     "type": "string"
                 },
-                "userManagementUrl ": {
+                "userManagementUrl": {
                     "type": "string"
                 }
             },
@@ -1400,29 +1407,29 @@
             "$schema": "http://json-schema.org/draft-07/schema#",
             "type": "object",
             "properties": {
-                "botId ": {
+                "botId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "orgId ": {
+                "orgId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "conversationId ": {
+                "conversationId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "messageId ": {
+                "messageId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "did ": {
+                "did": {
                     "type": "string"
                 },
-                "reactionType ": {
+                "reactionType": {
                     "type": "string"
                 },
-                "reactionText ": {
+                "reactionText": {
                     "type": "string"
                 }
             },
@@ -1446,32 +1453,32 @@
             "$schema": "http://json-schema.org/draft-07/schema#",
             "type": "object",
             "properties": {
-                "botId ": {
+                "botId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "orgId ": {
+                "orgId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "conversationId ": {
+                "conversationId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "messageId ": {
+                "messageId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "text ": {
+                "text": {
                     "type": "string"
                 },
-                "mediaIds ": {
+                "mediaIds": {
                     "type": "array"
                 },
-                "createdAt ": {
+                "createdAt": {
                     "type": "number"
                 },
-                "did ": {
+                "did": {
                     "type": "string"
                 }
             },
@@ -1496,47 +1503,47 @@
             "$schema": "http://json-schema.org/draft-07/schema#",
             "type": "object",
             "properties": {
-                "botId ": {
+                "botId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "userId ": {
+                "userId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "orgId ": {
+                "orgId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "conversationId ": {
+                "conversationId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "messageId ": {
+                "messageId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "audioUrl ": {
+                "audioUrl": {
                     "type": "string",
                     "format": "url"
                 },
-                "audioId ": {
+                "audioId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "text ": {
+                "text": {
                     "type": "string"
                 },
-                "error ": {
+                "error": {
                     "type": "string"
                 },
-                "timeTaken ": {
+                "timeTaken": {
                     "type": "number"
                 },
-                "createdAt ": {
+                "createdAt": {
                     "type": "number"
                 },
-                "queryId ": {
+                "queryId": {
                     "type": "string",
                     "format": "uuid"
                 }
@@ -1559,47 +1566,47 @@
             "$schema": "http://json-schema.org/draft-07/schema#",
             "type": "object",
             "properties": {
-                "botId ": {
+                "botId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "userId ": {
+                "userId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "orgId ": {
+                "orgId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "conversationId ": {
+                "conversationId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "messageId ": {
+                "messageId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "audioUrl ": {
+                "audioUrl": {
                     "type": "string",
                     "format": "url"
                 },
-                "audioId ": {
+                "audioId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "text ": {
+                "text": {
                     "type": "string"
                 },
-                "error ": {
+                "error": {
                     "type": "string"
                 },
-                "timeTaken ": {
+                "timeTaken": {
                     "type": "number"
                 },
-                "createdAt ": {
+                "createdAt": {
                     "type": "number"
                 },
-                "queryId ": {
+                "queryId": {
                     "type": "string",
                     "format": "uuid"
                 }
@@ -1622,43 +1629,43 @@
             "$schema": "http://json-schema.org/draft-07/schema#",
             "type": "object",
             "properties": {
-                "botId ": {
+                "botId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "userId ": {
+                "userId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "orgId ": {
+                "orgId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "conversationId ": {
+                "conversationId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "messageId ": {
+                "messageId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "text ": {
+                "text": {
                     "type": "string"
                 },
-                "error ": {
+                "error": {
                     "type": "string"
                 },
-                "timeTaken ": {
+                "timeTaken": {
                     "type": "number"
                 },
-                "createdAt ": {
+                "createdAt": {
                     "type": "number"
                 },
-                "queryId ": {
+                "queryId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "outputText ": {
+                "outputText": {
                     "type": "string"
                 }
             },
@@ -1680,43 +1687,43 @@
             "$schema": "http://json-schema.org/draft-07/schema#",
             "type": "object",
             "properties": {
-                "botId ": {
+                "botId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "userId ": {
+                "userId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "orgId ": {
+                "orgId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "conversationId ": {
+                "conversationId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "messageId ": {
+                "messageId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "text ": {
+                "text": {
                     "type": "string"
                 },
-                "error ": {
+                "error": {
                     "type": "string"
                 },
-                "timeTaken ": {
+                "timeTaken": {
                     "type": "number"
                 },
-                "createdAt ": {
+                "createdAt": {
                     "type": "number"
                 },
-                "queryId ": {
+                "queryId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "outputText ": {
+                "outputText": {
                     "type": "string"
                 }
             },
@@ -1738,11 +1745,11 @@
             "$schema": "http://json-schema.org/draft-07/schema#",
             "type": "object",
             "properties": {
-                "botId ": {
+                "botId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "orgId ": {
+                "orgId": {
                     "type": "string",
                     "format": "uuid"
                 }
@@ -1764,11 +1771,11 @@
             "$schema": "http://json-schema.org/draft-07/schema#",
             "type": "object",
             "properties": {
-                "botId ": {
+                "botId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "orgId ": {
+                "orgId": {
                     "type": "string",
                     "format": "uuid"
                 }
@@ -1790,11 +1797,11 @@
             "$schema": "http://json-schema.org/draft-07/schema#",
             "type": "object",
             "properties": {
-                "botId ": {
+                "botId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "orgId ": {
+                "orgId": {
                     "type": "string",
                     "format": "uuid"
                 }
@@ -1816,39 +1823,39 @@
             "$schema": "http://json-schema.org/draft-07/schema#",
             "type": "object",
             "properties": {
-                "botId ": {
+                "botId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "userId ": {
+                "userId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "orgId ": {
+                "orgId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "conversationId ": {
+                "conversationId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "messageId ": {
+                "messageId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "text ": {
+                "text": {
                     "type": "string"
                 },
-                "error ": {
+                "error": {
                     "type": "string"
                 },
-                "phoneNumber ": {
+                "phoneNumber": {
                     "type": "string"
                 },
-                "createdAt ": {
+                "createdAt": {
                     "type": "number"
                 },
-                "textInEnglish ": {
+                "textInEnglish": {
                     "type": "string"
                 }
             },
@@ -1856,7 +1863,6 @@
                 "botId",
                 "userId",
                 "orgId",
-                "conversationId",
                 "messageId",
                 "text",
                 "createdAt"
@@ -1874,45 +1880,45 @@
             "$schema": "http://json-schema.org/draft-07/schema#",
             "type": "object",
             "properties": {
-                "botId ": {
+                "botId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "userId ": {
+                "userId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "orgId ": {
+                "orgId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "conversationId ": {
+                "conversationId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "messageId ": {
+                "messageId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "text ": {
+                "text": {
                     "type": "string"
                 },
-                "error ": {
+                "error": {
                     "type": "string"
                 },
-                "timeTaken ": {
+                "timeTaken": {
                     "type": "number"
                 },
-                "phoneNumber ": {
+                "phoneNumber": {
                     "type": "string"
                 },
-                "createdAt ": {
+                "createdAt": {
                     "type": "number"
                 },
-                "textInEnglish ": {
+                "textInEnglish": {
                     "type": "string"
                 },
-                "responseInEnglish ": {
+                "responseInEnglish": {
                     "type": "string"
                 }
             },
@@ -1920,7 +1926,6 @@
                 "botId",
                 "userId",
                 "orgId",
-                "conversationId",
                 "messageId",
                 "text",
                 "timeTaken"
@@ -1938,45 +1943,45 @@
             "$schema": "http://json-schema.org/draft-07/schema#",
             "type": "object",
             "properties": {
-                "botId ": {
+                "botId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "orgId ": {
+                "orgId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "conversationId ": {
+                "conversationId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "messageId ": {
+                "messageId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "error ": {
+                "error": {
                     "type": "string"
                 },
-                "timeTaken ": {
+                "timeTaken": {
                     "type": "number"
                 },
-                "datasetId ": {
+                "datasetId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "question ": {
+                "question": {
                     "type": "string"
                 },
                 "field": {
                     "type": "string"
                 },
-                "threshold ": {
+                "threshold": {
                     "type": "number"
                 },
-                "result ": {
+                "result": {
                     "type": "object"
                 },
-                "requestId ": {
+                "requestId": {
                     "type": "string",
                     "format": "uuid"
                 }
@@ -2004,42 +2009,42 @@
             "$schema": "http://json-schema.org/draft-07/schema#",
             "type": "object",
             "properties": {
-                "botId ": {
+                "botId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "orgId ": {
+                "orgId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "conversationId ": {
+                "conversationId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "messageId ": {
+                "messageId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "error ": {
+                "error": {
                     "type": "string"
                 },
-                "timeTaken ": {
+                "timeTaken": {
                     "type": "number"
                 },
-                "datasetId ": {
+                "datasetId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "question ": {
+                "question": {
                     "type": "string"
                 },
                 "field": {
                     "type": "string"
                 },
-                "result ": {
+                "result": {
                     "type": "object"
                 },
-                "requestId ": {
+                "requestId": {
                     "type": "string",
                     "format": "uuid"
                 }
@@ -2066,39 +2071,39 @@
             "$schema": "http://json-schema.org/draft-07/schema#",
             "type": "object",
             "properties": {
-                "botId ": {
+                "botId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "orgId ": {
+                "orgId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "conversationId ": {
+                "conversationId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "messageId ": {
+                "messageId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "error ": {
+                "error": {
                     "type": "string"
                 },
-                "timeTaken ": {
+                "timeTaken": {
                     "type": "number"
                 },
-                "datasetId ": {
+                "datasetId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "sqlQuery ": {
+                "sqlQuery": {
                     "type": "string"
                 },
-                "result ": {
+                "result": {
                     "type": "object"
                 },
-                "requestId ": {
+                "requestId": {
                     "type": "string",
                     "format": "uuid"
                 }
@@ -2124,29 +2129,29 @@
             "$schema": "http://json-schema.org/draft-07/schema#",
             "type": "object",
             "properties": {
-                "botId ": {
+                "botId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "orgId ": {
+                "orgId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "conversationId ": {
+                "conversationId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "messageId ": {
+                "messageId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "error ": {
+                "error": {
                     "type": "string"
                 },
-                "timeTaken ": {
+                "timeTaken": {
                     "type": "number"
                 },
-                "requestId ": {
+                "requestId": {
                     "type": "string",
                     "format": "uuid"
                 }
@@ -2169,33 +2174,33 @@
             "$schema": "http://json-schema.org/draft-07/schema#",
             "type": "object",
             "properties": {
-                "botId ": {
+                "botId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "orgId ": {
+                "orgId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "conversationId ": {
+                "conversationId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "messageId ": {
+                "messageId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "error ": {
+                "error": {
                     "type": "string"
                 },
-                "timeTaken ": {
+                "timeTaken": {
                     "type": "number"
                 },
-                "schemaId ": {
+                "schemaId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "requestId ": {
+                "requestId": {
                     "type": "string",
                     "format": "uuid"
                 }
@@ -2219,38 +2224,38 @@
             "$schema": "http://json-schema.org/draft-07/schema#",
             "type": "object",
             "properties": {
-                "botId ": {
+                "botId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "orgId ": {
+                "orgId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "conversationId ": {
+                "conversationId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "messageId ": {
+                "messageId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "error ": {
+                "error": {
                     "type": "string"
                 },
-                "timeTaken ": {
+                "timeTaken": {
                     "type": "number"
                 },
-                "question ": {
+                "question": {
                     "type": "string"
                 },
-                "result ": {
+                "result": {
                     "type": "object"
                 },
-                "documentId ": {
+                "documentId": {
                     "type": "array"
                 },
-                "requestId ": {
+                "requestId": {
                     "type": "string",
                     "format": "uuid"
                 }
@@ -2274,29 +2279,29 @@
             "$schema": "http://json-schema.org/draft-07/schema#",
             "type": "object",
             "properties": {
-                "botId ": {
+                "botId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "orgId ": {
+                "orgId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "conversationId ": {
+                "conversationId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "messageId ": {
+                "messageId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "error ": {
+                "error": {
                     "type": "string"
                 },
-                "timeTaken ": {
+                "timeTaken": {
                     "type": "number"
                 },
-                "sqlQuery ": {
+                "sqlQuery": {
                     "type": "string"
                 }
             },
@@ -2318,22 +2323,22 @@
             "$schema": "http://json-schema.org/draft-07/schema#",
             "type": "object",
             "properties": {
-                "botId ": {
+                "botId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "orgId ": {
+                "orgId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "messageId ": {
+                "messageId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "error ": {
+                "error": {
                     "type": "string"
                 },
-                "transformerId ": {
+                "transformerId": {
                     "type": "string"
                 }
             },
@@ -2356,25 +2361,25 @@
             "$schema": "http://json-schema.org/draft-07/schema#",
             "type": "object",
             "properties": {
-                "botId ": {
+                "botId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "orgId ": {
+                "orgId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "messageId ": {
+                "messageId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "error ": {
+                "error": {
                     "type": "string"
                 },
-                "timeTaken ": {
+                "timeTaken": {
                     "type": "number"
                 },
-                "transformerId ": {
+                "transformerId": {
                     "type": "string"
                 }
             },
@@ -2396,26 +2401,26 @@
             "$schema": "http://json-schema.org/draft-07/schema#",
             "type": "object",
             "properties": {
-                "botId ": {
+                "botId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "orgId ": {
+                "orgId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "conversationId ": {
+                "conversationId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "messageId ": {
+                "messageId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "timeTaken ": {
+                "timeTaken": {
                     "type": "number"
                 },
-                "language ": {
+                "language": {
                     "type": "string"
                 }
             },
@@ -2437,19 +2442,19 @@
             "$schema": "http://json-schema.org/draft-07/schema#",
             "type": "object",
             "properties": {
-                "botId ": {
+                "botId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "userId ": {
+                "userId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "orgId ": {
+                "orgId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "conversationId ": {
+                "conversationId": {
                     "type": "string",
                     "format": "uuid"
                 }
@@ -2473,40 +2478,40 @@
             "$schema": "http://json-schema.org/draft-07/schema#",
             "type": "object",
             "properties": {
-                "botId ": {
+                "botId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "userId ": {
+                "userId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "orgId ": {
+                "orgId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "conversationId ": {
+                "conversationId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "messageId ": {
+                "messageId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "audioUrl ": {
+                "audioUrl": {
                     "type": "string",
                     "format": "url"
                 },
-                "text ": {
+                "text": {
                     "type": "string"
                 },
-                "error ": {
+                "error": {
                     "type": "string"
                 },
-                "timeTaken ": {
+                "timeTaken": {
                     "type": "number"
                 },
-                "createdAt ": {
+                "createdAt": {
                     "type": "number"
                 }
             },
@@ -2532,36 +2537,36 @@
             "$schema": "http://json-schema.org/draft-07/schema#",
             "type": "object",
             "properties": {
-                "botId ": {
+                "botId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "userId ": {
+                "userId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "orgId ": {
+                "orgId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "conversationId ": {
+                "conversationId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "messageId ": {
+                "messageId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "text ": {
+                "text": {
                     "type": "string"
                 },
-                "error ": {
+                "error": {
                     "type": "string"
                 },
-                "timeTaken ": {
+                "timeTaken": {
                     "type": "number"
                 },
-                "createdAt ": {
+                "createdAt": {
                     "type": "number"
                 }
             },
@@ -2586,33 +2591,33 @@
             "$schema": "http://json-schema.org/draft-07/schema#",
             "type": "object",
             "properties": {
-                "botId ": {
+                "botId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "userId ": {
+                "userId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "orgId ": {
+                "orgId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "conversationId ": {
+                "conversationId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "messageId ": {
+                "messageId": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "text ": {
+                "text": {
                     "type": "string"
                 },
-                "timeTaken ": {
+                "timeTaken": {
                     "type": "number"
                 },
-                "language ": {
+                "language": {
                     "type": "string"
                 }
             },
