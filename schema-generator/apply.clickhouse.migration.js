@@ -63,7 +63,7 @@ async function main() {
   //   format: 'json'
   // });
   runSQLFile('01.clickhouse.migration.sql', client);
-  // runSQLFile('02.clickhouse.migration.sql', client);
+  runSQLFile('02.clickhouse.migration.sql', client);
   // runSQLFile('add.combined.view.clickhouse.sql', client)
 }
 
