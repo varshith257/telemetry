@@ -640,7 +640,7 @@
                     "type": "string"
                 },
                 "similarChunks": {
-                    "type": "array"
+                    "type": "object"
                 },
                 "eventLog": {
                     "type": "string"
@@ -710,7 +710,7 @@
                     "type": "string"
                 },
                 "NER": {
-                    "type": "array"
+                    "type": "object"
                 },
                 "eventLog": {
                     "type": "string"
@@ -792,7 +792,7 @@
                     "type": "string"
                 },
                 "prompt": {
-                    "type": "array"
+                    "type": "object"
                 },
                 "translatedResponse": {
                     "type": "string"
@@ -1100,9 +1100,6 @@
                     "type": "string",
                     "format": "uuid"
                 },
-                "text": {
-                    "type": "string"
-                },
                 "timeTaken": {
                     "type": "number"
                 },
@@ -1121,7 +1118,6 @@
                 "userId",
                 "orgId",
                 "messageId",
-                "text",
                 "timeTaken"
             ],
             "description": "When user gets the response at app (responseAt)"
@@ -2629,6 +2625,46 @@
                 "text"
             ],
             "description": "Time taken in detecting latency"
+        }
+    },
+    {
+        "eventProperties": {
+            "eventId": "E048",
+            "eventName": "NBMCBotTelemetry",
+            "subEventName": "userQuery"
+        },
+        "eventSchema": {
+            "$schema": "http://json-schema.org/draft-07/schema#",
+            "type": "object",
+            "properties": {
+                "botId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "messageId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "timeTaken": {
+                    "type": "number"
+                },
+                "did": {
+                    "type": "string"
+                },
+                "response": {
+                    "type": "string"
+                },
+                "question": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "botId",
+                "messageId",
+                "did",
+                "question"
+            ],
+            "description": "Every time user interacts with the bot (phone number, question, answer, time)"
         }
     }
 ]

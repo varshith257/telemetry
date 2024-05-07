@@ -14,6 +14,7 @@ SELECT
     e2.userId AS userId,
     e2.orgId AS orgId,
     e2.botId AS botId,
+    e2.sessionId AS sessionId,
     e2.s2tInput AS s2tInput,
     e2.conversationId AS conversationId,
     e2.query AS query,
@@ -83,6 +84,7 @@ FROM
             maxIf(text, eventId = 'E032') AS query,
             maxIf(timestamp, eventId = 'E017') AS responseAt,
             maxIf(streamStartLatency, eventId = 'E012') as streamStartLatency,
+            maxIf(sessionId, eventId = 'E032') as sessionId,
             maxIf(
                 prompt, 
                 eventId = 'E012'
@@ -273,8 +275,10 @@ ORDER BY sessionId
 SETTINGS allow_nullable_key = 1 AS
 SELECT
     sessionId,
+    timestamp,
     COUNTIf(eventId = 'E044') AS count
 FROM
     event
+WHERE sessionId IS NOT NULL
 GROUP BY
-    sessionId;
+    sessionId, timestamp;
