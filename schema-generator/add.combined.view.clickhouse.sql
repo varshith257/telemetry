@@ -1,4 +1,5 @@
 DROP TABLE IF EXISTS combined_data;
+DROP TABLE IF EXISTS mic_tap_view;
 
 SET allow_experimental_refreshable_materialized_view = 1;
 
@@ -29,8 +30,8 @@ SELECT
     e2.NER AS NER,
     e2.response AS response,
     e2.error AS error,
-    e2.reactionType AS reactionType,
-    e2.reactionText AS reactionText,
+    e13.reactionType AS reactionType,
+    e13.reactionText AS reactionText,
     e2.timesAudioUsed AS timesAudioUsed,
     e2.phoneNumber AS phoneNumber,
     e2.district AS district,
@@ -116,8 +117,6 @@ FROM
                 AND timeTaken > 0
             ) AS response,
             groupArray(tuple(eventId, subEvent, error)) AS error,
-            maxIf(reactionType, eventId = 'E023') AS reactionType,
-            maxIf(reactionText, eventId = 'E023') AS reactionText,
             maxIf(timesAudioUsed, eventId = 'E015') AS timesAudioUsed,
             maxIf(phoneNumber, eventId = 'E032') AS phoneNumber,
             maxIf(district, eventId = 'E006') AS district,
@@ -134,11 +133,7 @@ FROM
                 timeTaken,
                 eventId = 'E005'
                 AND timeTaken > 0
-            ) AS getUserHistoryLatency,
-            maxIf(
-                text,
-                eventId = 'E023'
-            ) AS reactionText
+            ) AS getUserHistoryLatency
         FROM
             event
         GROUP BY
@@ -266,7 +261,26 @@ FROM
             event
         GROUP BY
             messageId
-    ) AS e12 ON e1.messageId = e12.messageId;
+    ) AS e12 ON e1.messageId = e12.messageId
+    JOIN (
+        SELECT 
+            maxIf(
+                replyId,
+                eventId = 'E033'
+            ) AS replyId,
+            maxIf(
+                if (messageId = replyId AND eventId = 'E023', reactionType, NULL),
+                messageId = replyId AND eventId = 'E023'
+            ) AS reactionType,
+            maxIf(
+                if(messageId = replyId AND eventId = 'E023', reactionText, NULL),
+                messageId = replyId AND eventId = 'E023'
+            ) AS reactionText
+        FROM
+            event
+        GROUP BY
+            replyId
+    ) AS e13 ON e1.messageId = e13.replyId;
 
 CREATE MATERIALIZED VIEW IF NOT EXISTS mic_tap_view
 REFRESH EVERY 5 SECONDS 
