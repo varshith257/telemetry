@@ -1,4 +1,5 @@
 DROP TABLE IF EXISTS combined_data;
+DROP TABLE IF EXISTS mic_tap_view;
 
 SET allow_experimental_refreshable_materialized_view = 1;
 
@@ -29,8 +30,6 @@ SELECT
     e2.NER AS NER,
     e2.response AS response,
     e2.error AS error,
-    e2.reactionType AS reactionType,
-    e2.reactionText AS reactionText,
     e2.timesAudioUsed AS timesAudioUsed,
     e2.phoneNumber AS phoneNumber,
     e2.district AS district,
@@ -116,8 +115,6 @@ FROM
                 AND timeTaken > 0
             ) AS response,
             groupArray(tuple(eventId, subEvent, error)) AS error,
-            maxIf(reactionType, eventId = 'E023') AS reactionType,
-            maxIf(reactionText, eventId = 'E023') AS reactionText,
             maxIf(timesAudioUsed, eventId = 'E015') AS timesAudioUsed,
             maxIf(phoneNumber, eventId = 'E032') AS phoneNumber,
             maxIf(district, eventId = 'E006') AS district,
@@ -134,11 +131,7 @@ FROM
                 timeTaken,
                 eventId = 'E005'
                 AND timeTaken > 0
-            ) AS getUserHistoryLatency,
-            maxIf(
-                text,
-                eventId = 'E023'
-            ) AS reactionText
+            ) AS getUserHistoryLatency
         FROM
             event
         GROUP BY
