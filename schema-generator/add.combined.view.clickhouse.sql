@@ -1,5 +1,6 @@
 DROP TABLE IF EXISTS combined_data;
 DROP TABLE IF EXISTS mic_tap_view;
+DROP TABLE IF EXISTS feedback_view;
 
 SET allow_experimental_refreshable_materialized_view = 1;
 
@@ -34,6 +35,8 @@ SELECT
     e2.phoneNumber AS phoneNumber,
     e2.district AS district,
     e2.block AS block,
+    e2.reactionType AS reactionType,
+    e2.reactionText AS reactionText,
     e2.streamStartLatency as streamStartLatency,
     e3.getUserHistoryLatency AS getUserHistoryLatency,
     e4.getNeuralCoreferenceLatency AS getNeuralCoreferenceLatency,
@@ -115,6 +118,8 @@ FROM
                 AND timeTaken > 0
             ) AS response,
             groupArray(tuple(eventId, subEvent, error)) AS error,
+            maxIf(reactionType, eventId = 'E023') AS reactionType,
+            maxIf(reactionText, eventId = 'E023') AS reactionText,
             maxIf(timesAudioUsed, eventId = 'E015') AS timesAudioUsed,
             maxIf(phoneNumber, eventId = 'E032') AS phoneNumber,
             maxIf(district, eventId = 'E006') AS district,
@@ -275,3 +280,37 @@ FROM
 WHERE sessionId IS NOT NULL
 GROUP BY
     sessionId, timestamp;
+
+CREATE MATERIALIZED VIEW IF NOT EXISTS feedback_view
+REFRESH EVERY 5 SECONDS 
+ENGINE = MergeTree
+ORDER BY timestamp 
+SETTINGS allow_nullable_key = 1 AS
+SELECT
+    toUUID(ee1.replyId) AS messageId,
+    ee2.reactionText AS reactionText,
+    ee2.reactionType AS reactionType,
+    ee2.timestamp AS timestamp
+FROM
+(
+    SELECT
+        DISTINCT messageId,
+        replyId
+    FROM
+        event
+    WHERE
+        eventId = 'E033'
+    AND 
+        replyId IS NOT NULL
+) AS ee1
+JOIN (
+    SELECT
+        messageId,
+        reactionText,
+        reactionType,
+        timestamp
+    FROM
+        event
+    WHERE
+        eventId = 'E023'
+) AS ee2 ON ee1.messageId = ee2.messageId;
