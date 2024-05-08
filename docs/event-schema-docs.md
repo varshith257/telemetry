@@ -613,7 +613,7 @@ When is it generated: retieveDocs - transformer
             "type": "string"
         },
         "similarChunks": {
-            "type": "array"
+            "type": "object"
         },
         "eventLog": {
             "type": "string"
@@ -680,7 +680,7 @@ When is it generated: ner - transformer
             "type": "string"
         },
         "NER": {
-            "type": "array"
+            "type": "object"
         },
         "eventLog": {
             "type": "string"
@@ -759,7 +759,7 @@ When is it generated: llm - transformer
             "type": "string"
         },
         "prompt": {
-            "type": "array"
+            "type": "object"
         },
         "translatedResponse": {
             "type": "string"
@@ -1052,9 +1052,6 @@ When is it generated: When user gets the response at app (responseAt)
             "type": "string",
             "format": "uuid"
         },
-        "text": {
-            "type": "string"
-        },
         "timeTaken": {
             "type": "number"
         },
@@ -1073,7 +1070,6 @@ When is it generated: When user gets the response at app (responseAt)
         "userId",
         "orgId",
         "messageId",
-        "text",
         "timeTaken"
     ],
     "description": "When user gets the response at app (responseAt)"
@@ -2501,5 +2497,43 @@ When is it generated: Time taken in detecting latency
         "text"
     ],
     "description": "Time taken in detecting latency"
+}
+```
+## NBMCBotTelemetry
+### userQuery
+When is it generated: Every time user interacts with the bot (phone number, question, answer, time)
+```json
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "properties": {
+        "botId": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "messageId": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "timeTaken": {
+            "type": "number"
+        },
+        "did": {
+            "type": "string"
+        },
+        "response": {
+            "type": "string"
+        },
+        "question": {
+            "type": "string"
+        }
+    },
+    "required": [
+        "botId",
+        "messageId",
+        "did",
+        "question"
+    ],
+    "description": "Every time user interacts with the bot (phone number, question, answer, time)"
 }
 ```

@@ -12,7 +12,7 @@ export class MetricsService {
   constructor(
     private readonly prismaService: PrismaService,
   ) {
-    this.ajv = new Ajv();
+    this.ajv = new Ajv({removeAdditional: 'all'});
     addFormats(this.ajv);
     this.clickhouse = createClient({
       host: process.env.CLICKHOUSE_HOST,
@@ -104,7 +104,7 @@ export class MetricsService {
       errorList: []
     }
   }
-  
+
   async processData(eventDataList: MetricsV1Dto[]) {
     const formattedEventData = eventDataList.map((event) => {
       const { eventData, ...otherMetric } = event;
