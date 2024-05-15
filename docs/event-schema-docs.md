@@ -2525,16 +2525,10 @@ When is it generated: Every time user interacts with the bot (phone number, ques
         "did": {
             "type": "string"
         },
-        "textInEnglish": {
-            "type": "string"
-        },
         "response": {
             "type": "string"
         },
         "question": {
-            "type": "string"
-        },
-        "translatedResponse": {
             "type": "string"
         }
     },
@@ -2542,49 +2536,8 @@ When is it generated: Every time user interacts with the bot (phone number, ques
         "botId",
         "messageId",
         "did",
-        "textInEnglish",
-        "question",
-        "translatedResponse"
+        "question"
     ],
     "description": "Every time user interacts with the bot (phone number, question, answer, time)"
-}
-```
-## OutboundResponse
-### outboundResponse
-When is it generated: Sent by outbound when response message is received
-```json
-{
-    "$schema": "http://json-schema.org/draft-07/schema#",
-    "type": "object",
-    "properties": {
-        "botId": {
-            "type": "string",
-            "format": "uuid"
-        },
-        "orgId": {
-            "type": "string",
-            "format": "uuid"
-        },
-        "messageId": {
-            "type": "string",
-            "format": "uuid"
-        },
-        "audioUrl": {
-            "type": "string",
-            "format": "url"
-        },
-        "text": {
-            "type": "string"
-        },
-        "did": {
-            "type": "string"
-        }
-    },
-    "required": [
-        "botId",
-        "messageId",
-        "did"
-    ],
-    "description": "Sent by outbound when response message is received"
 }
 ```
