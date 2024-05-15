@@ -46,4 +46,5 @@
 45,aiToolProxyToolLatency,t2sLatency,Time taken by T2S API,,,<PWA>,E045,Required,Required,Required,Required,Required,,Optional,,Required,,,Optional,Required,,,Requried,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 46,,s2tLatency,Time taken by S2T API,,,<PWA>,E046,Required,Required,Required,Required,Required,,,,Optional,,,Optional,Required,,,Requried,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 47,,detectedLatency,Time taken in detecting latency,,,AI-Tools-Proxy,E047,Required,Required,Required,Optional,Required,,,,Required,,,,Optional,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Optional,,,,,,,
-48,NBMCBotTelemetry,userQuery,"Every time user interacts with the bot (phone number, question, answer, time)",,,Transformer,E048,Required,,,,Required,,,,,,,,Optional,,,,,Required,,,,,,,,,,Optional,,,,,,,,Required,,,,,,,,,,,,,,,,
+48,NBMCBotTelemetry,userQuery,"Every time user interacts with the bot (phone number, question, answer, time)",,,Transformer,E048,Required,,,,Required,,,,,,,,Optional,,,,,Required,,Required,,,,,,,,Optional,,,,,,,,Required,,,,,,,,,,,Required,,,,,
+50,OutboundResponse,outboundResponse,Sent by outbound when response message is received,,,Outbound,E049,Required,,Optional,,Required,,Optional,,Optional,,,,,,,,,Required,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Optional
