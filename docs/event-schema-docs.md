@@ -613,7 +613,7 @@ When is it generated: retieveDocs - transformer
             "type": "string"
         },
         "similarChunks": {
-            "type": "object"
+            "type": "array"
         },
         "eventLog": {
             "type": "string"
@@ -680,7 +680,7 @@ When is it generated: ner - transformer
             "type": "string"
         },
         "NER": {
-            "type": "object"
+            "type": "array"
         },
         "eventLog": {
             "type": "string"
@@ -759,7 +759,7 @@ When is it generated: llm - transformer
             "type": "string"
         },
         "prompt": {
-            "type": "object"
+            "type": "array"
         },
         "translatedResponse": {
             "type": "string"
@@ -1956,6 +1956,9 @@ When is it generated: When user receives back a response for sent message
         },
         "responseInEnglish": {
             "type": "string"
+        },
+        "replyId": {
+            "type": "string"
         }
     },
     "required": [
@@ -1964,7 +1967,8 @@ When is it generated: When user receives back a response for sent message
         "orgId",
         "messageId",
         "text",
-        "timeTaken"
+        "timeTaken",
+        "replyId"
     ],
     "description": "When user receives back a response for sent message"
 }
@@ -2521,10 +2525,16 @@ When is it generated: Every time user interacts with the bot (phone number, ques
         "did": {
             "type": "string"
         },
+        "textInEnglish": {
+            "type": "string"
+        },
         "response": {
             "type": "string"
         },
         "question": {
+            "type": "string"
+        },
+        "translatedResponse": {
             "type": "string"
         }
     },
@@ -2532,8 +2542,52 @@ When is it generated: Every time user interacts with the bot (phone number, ques
         "botId",
         "messageId",
         "did",
-        "question"
+        "textInEnglish",
+        "question",
+        "translatedResponse"
     ],
     "description": "Every time user interacts with the bot (phone number, question, answer, time)"
+}
+```
+## OutboundResponse
+### outboundResponse
+When is it generated: Sent by outbound when response message is received
+```json
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "properties": {
+        "botId": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "orgId": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "messageId": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "audioUrl": {
+            "type": "string",
+            "format": "url"
+        },
+        "text": {
+            "type": "string"
+        },
+        "did": {
+            "type": "string"
+        },
+        "replyId": {
+            "type": "string"
+        }
+    },
+    "required": [
+        "botId",
+        "messageId",
+        "did"
+    ],
+    "description": "Sent by outbound when response message is received"
 }
 ```

@@ -32,6 +32,7 @@
     "@nestjs/platform-fastify": "^10.3.0",
     "@nestjs/swagger": "^7.3.1",
     "@nestjs/throttler": "^5.1.2",
+    "@nestjs/terminus": "^10.1.1",
     "@prisma/client": "^5.10.2",
     "@samagra-x/stencil": "^0.0.6",
     "@types/multer": "^1.4.11",

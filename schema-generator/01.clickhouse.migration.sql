@@ -68,7 +68,8 @@ CREATE TABLE IF NOT EXISTS event
 	streamStartLatency Nullable(UInt32),
 	reactionType Nullable(String),
 	reactionText Nullable(String),
-	userHistory Nullable(String)
+	userHistory Nullable(String),
+	replyId Nullable(String)
 )
 ENGINE = MergeTree
 ORDER BY timestamp;
