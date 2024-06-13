@@ -799,6 +799,9 @@
                 },
                 "streamStartLatency": {
                     "type": "number"
+                },
+                "responseType": {
+                    "type": "string"
                 }
             },
             "required": [
