@@ -766,6 +766,9 @@ When is it generated: llm - transformer
         },
         "streamStartLatency": {
             "type": "number"
+        },
+        "responseType": {
+            "type": "string"
         }
     },
     "required": [
