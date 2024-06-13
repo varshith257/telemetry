@@ -1,27 +1,37 @@
-import { Body, Controller, Get, ParseArrayPipe, Post, Query, Req, UseInterceptors } from "@nestjs/common";
+import { Body, Controller, ParseArrayPipe, Post, UseInterceptors } from "@nestjs/common";
 import { MetricsService } from "./metrics.service";
 import { MetricsV1Dto } from "./dto/metrics.v1.dto";
 import { UpdateSchemaDto } from "./dto/update.schema.dto";
 import { SkipThrottle } from "@nestjs/throttler/dist/throttler.decorator";
-import { AddUserDetails, NoAuth } from "src/interceptors/addUserDetails.interceptor";
+import { AddUserDetails } from "src/interceptors/addUserDetails.interceptor";
 import { GetCombinedData } from "./dto/get.combined.data.dto";
+import { EventPattern, Payload } from "@nestjs/microservices";
+import { TELEMETRY_QUEUE } from "src/constants";
 
 @SkipThrottle()
-@UseInterceptors(AddUserDetails)
 @Controller('/metrics/v1')
 export class MetricsV1Controller {
   constructor(private readonly metricsService: MetricsService) { }
 
   @Post('save')
-  @NoAuth()
   async saveMetrics(
-    @Body(new ParseArrayPipe({ items: MetricsV1Dto })) 
-    metricList: MetricsV1Dto[]
+    // @Body(new ParseArrayPipe({ items: MetricsV1Dto })) 
+    // metricList: MetricsV1Dto[]
+    @Body() metricList: MetricsV1Dto[]
   ) {
-    return await this.metricsService.saveMetrics(metricList);
+    this.metricsService.saveMetrics(metricList);
+    return {
+      
+    }
+  }
+
+  @EventPattern(TELEMETRY_QUEUE)
+  async handleEvent(@Payload() data: any) {
+    console.log('Received data:', data);
   }
 
   @Post('update-schema')
+  @UseInterceptors(AddUserDetails)
   async updateSchema(
     @Body() updateSchemaDto: UpdateSchemaDto
   ) {
@@ -29,6 +39,7 @@ export class MetricsV1Controller {
   }
 
   @Post('combined-view')
+  @UseInterceptors(AddUserDetails)
   async getCombinedView(
     @Body() queryBody: GetCombinedData
   ) {

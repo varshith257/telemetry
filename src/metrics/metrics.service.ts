@@ -1,4 +1,4 @@
-import { Injectable, Logger, UnauthorizedException } from "@nestjs/common";
+import { Inject, Injectable, Logger, OnModuleInit, UnauthorizedException } from "@nestjs/common";
 import Ajv, { ValidateFunction } from "ajv";
 import addFormats from "ajv-formats";
 import { PrismaService } from "src/prisma/prisma.service";
@@ -6,11 +6,20 @@ import { MetricsV1Dto } from "./dto/metrics.v1.dto";
 import { ClickHouseClient, createClient } from "@clickhouse/client";
 import { UpdateSchemaDto } from "./dto/update.schema.dto";
 import { UserData, UserRole } from "src/interceptors/addUserDetails.interceptor";
+import { TELEMETRY_BROKER, TELEMETRY_QUEUE } from "src/constants";
+import { ClientProxy } from "@nestjs/microservices";
+import { Worker, isMainThread, parentPort, workerData } from 'worker_threads';
+import { IsArray, ValidateNested, validateOrReject } from "class-validator";
+import { Type } from "class-transformer";
+
+global.threadEventQueue = [];
+global.workers = 0;
 
 @Injectable()
-export class MetricsService {
+export class MetricsService implements OnModuleInit {
   constructor(
     private readonly prismaService: PrismaService,
+    @Inject(TELEMETRY_BROKER) private readonly telemetryBroker: ClientProxy
   ) {
     this.ajv = new Ajv({removeAdditional: 'all'});
     addFormats(this.ajv);
@@ -22,6 +31,22 @@ export class MetricsService {
     });
     this.validateMap = new Map();
     this.updateValidateMap(true);
+  }
+
+  private eventQueue: MetricsV1Dto[] = [];
+  private readonly queueSizeLimit = 10000;
+  private intervalId: NodeJS.Timeout;
+
+  private startQueueProcessing() {
+    this.intervalId = setInterval(() => {
+      console.log('workers', global.workers);
+      console.log('inQueue', global.threadEventQueue.length);
+      this.processQueue();
+    }, 500);
+  }
+  
+  async onModuleInit() {
+    this.startQueueProcessing();
   }
   
   private ajv: Ajv;
@@ -55,33 +80,44 @@ export class MetricsService {
     return obj;
   }
 
-  async saveMetrics(eventData: MetricsV1Dto[]) {
-    let isRequestValid = true;
-    let errorData = {};
-    await this.updateValidateMap(false);
-    for (let i = 0; i < eventData.length; i++) {
-      eventData[i] = this.removeNullKeys(eventData[i]);
-      const validationResponse = await this.validateEventData(eventData[i]);
-      if (validationResponse.error) {
-        isRequestValid = false;
-        errorData[`${i}`] = validationResponse.errorList;
-      }
-    }
-    if (!isRequestValid) {
-      const response = {
-        error: true,
-        message: 'Request body does not satisfies the schema',
-        errorData: errorData
-      }
-      this.logger.error(response);
-      return Response.json(response, { status: 400 });
-    }
-    this.processData(eventData);
-    return Response.json({
-      error: false,
-      message: 'Metric stored succesfully'
-    }, { status: 200 })
+  async saveMetrics(eventData: any[]) {
+    global.workers++;
+    const worker = new Worker(__filename, {
+      workerData: eventData
+    });
+    worker.on('message', (validatedData) => {
+      global.threadEventQueue.push(...validatedData)
+    })
+    
   }
+
+  // async saveMetrics(eventData: MetricsV1Dto[]) {
+  //   // let isRequestValid = true;
+  //   // let errorData = {};
+  //   // await this.updateValidateMap(false);
+  //   // for (let i = 0; i < eventData.length; i++) {
+  //   //   eventData[i] = this.removeNullKeys(eventData[i]);
+  //   //   const validationResponse = await this.validateEventData(eventData[i]);
+  //   //   if (validationResponse.error) {
+  //   //     isRequestValid = false;
+  //   //     errorData[`${i}`] = validationResponse.errorList;
+  //   //   }
+  //   // }
+  //   // if (!isRequestValid) {
+  //   //   const response = {
+  //   //     error: true,
+  //   //     message: 'Request body does not satisfies the schema',
+  //   //     errorData: errorData
+  //   //   }
+  //   //   this.logger.error(response);
+  //   //   return Response.json(response, { status: 400 });
+  //   // }
+  //   this.processData(eventData);
+  //   return Response.json({
+  //     error: false,
+  //     message: 'Metric stored succesfully'
+  //   }, { status: 200 })
+  // }
   
   async validateEventData(eventData: MetricsV1Dto) {
     if (!this.validateMap.has(eventData.eventId)) {
@@ -105,19 +141,85 @@ export class MetricsService {
     }
   }
 
+  // async processData(eventDataList: MetricsV1Dto[]) {
+  //   const formattedEventData = eventDataList.map((event) => {
+  //     const { eventData, ...otherMetric } = event;
+  //     return { 
+  //       ...otherMetric,
+  //       ...eventData,
+  //     };
+  //   });
+  //   this.clickhouse.insert({
+  //     table: `event`,
+  //     values: formattedEventData,
+  //     format: 'JSONEachRow'
+  //   });
+  // }
+
   async processData(eventDataList: MetricsV1Dto[]) {
-    const formattedEventData = eventDataList.map((event) => {
+    this.eventQueue.push(...eventDataList);
+    if (this.eventQueue.length >= this.queueSizeLimit) {
+      this.processQueue();
+    }
+    // eventDataList.forEach(async (event) =>  await this.telemetryBroker.send(TELEMETRY_QUEUE, event));
+  }
+
+  // private async processQueue() {
+  //   if (this.eventQueue.length === 0) {
+  //     return;
+  //   }
+
+  //   const eventsToProcess = [...this.eventQueue];
+  //   this.eventQueue = [];
+
+  //   const formattedEventData = eventsToProcess.map((event) => {
+  //     const { eventData, ...otherMetric } = event;
+  //     return { 
+  //       ...otherMetric,
+  //       ...eventData,
+  //     };
+  //   });
+
+  //   try {
+  //     this.clickhouse.insert({
+  //       table: `event`,
+  //       values: formattedEventData,
+  //       format: 'JSONEachRow'
+  //     });
+  //   } catch (error) {
+  //     console.error('Failed to insert data into ClickHouse:', error);
+  //     // In case of failure, re-add the events back to the queue
+  //     this.eventQueue.unshift(...eventsToProcess);
+  //   }
+  // }
+
+  private async processQueue() {
+    if (global.threadEventQueue.length === 0) {
+      return;
+    }
+
+    const eventsToProcess = [...global.threadEventQueue];
+    global.threadEventQueue = [];
+
+    const formattedEventData = eventsToProcess.map((event) => {
       const { eventData, ...otherMetric } = event;
       return { 
         ...otherMetric,
         ...eventData,
       };
     });
-    await this.clickhouse.insert({
-      table: `event`,
-      values: formattedEventData,
-      format: 'JSONEachRow'
-    });
+
+    try {
+      this.clickhouse.insert({
+        table: `event`,
+        values: formattedEventData,
+        format: 'JSONEachRow'
+      });
+    } catch (error) {
+      console.error('Failed to insert data into ClickHouse:', error);
+      // In case of failure, re-add the events back to the queue
+      global.threadEventQueue.unshift(...eventsToProcess);
+    }
   }
 
   async updateSchema(updateSchemaDto: UpdateSchemaDto) {
@@ -217,4 +319,35 @@ export class MetricsService {
       data: selectQueryResponse
     }, { status: 200 })
   }
+}
+
+export class EventDto {
+  @IsArray()
+  @ValidateNested({ each: true })
+  @Type(() => MetricsV1Dto)
+  events: MetricsV1Dto
+}
+
+if (!isMainThread) {
+  const events = workerData;
+
+  (async () => {
+    try {
+      const eventDto = new EventDto();
+      eventDto.events = events;
+
+      await validateOrReject(eventDto);
+      parentPort.postMessage(events);
+      // global.threadEventQueue.push(...events);
+      global.workers--;
+      process.exit();
+    } catch (err) {
+      console.log('Error validating data: ', err);
+      global.workers--;
+      process.exit();
+    } finally {
+      global.workers--;
+      process.exit();
+    }
+  })();
 }

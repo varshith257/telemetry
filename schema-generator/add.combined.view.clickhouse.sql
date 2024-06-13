@@ -67,7 +67,7 @@ FROM
         SELECT
             messageId,
             maxIf(timeTaken, event = 'E002') AS spellCheckLatency,
-            maxIf(timestamp, eventId = 'E032') AS timestamp,
+            maxIf(timestamp, eventId = 'E005') AS timestamp,
             maxIf(text, eventId = 'E002') AS s2tOutput
         FROM
             event
