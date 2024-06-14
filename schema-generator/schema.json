@@ -37,6 +37,9 @@
                     "type": "string",
                     "format": "uuid"
                 },
+                "createdAt": {
+                    "type": "number"
+                },
                 "language": {
                     "type": "string"
                 }
@@ -124,8 +127,7 @@
                 "userId",
                 "orgId",
                 "messageId",
-                "timeTaken",
-                "createdAt"
+                "timeTaken"
             ],
             "description": "Audio is converted to text from audio"
         }
@@ -204,7 +206,6 @@
                 "spellCorrectedText",
                 "timeTaken",
                 "spellCheckTimeTaken",
-                "createdAt",
                 "queryId"
             ],
             "description": "AudioId is mapped to QueryId"
@@ -261,8 +262,7 @@
                 "userId",
                 "orgId",
                 "messageId",
-                "text",
-                "createdAt"
+                "text"
             ],
             "description": "User sent a message to a bot"
         }
@@ -294,6 +294,9 @@
                     "format": "uuid"
                 },
                 "timeTaken": {
+                    "type": "number"
+                },
+                "createdAt": {
                     "type": "number"
                 },
                 "did": {
@@ -350,6 +353,9 @@
                     "type": "string"
                 },
                 "timeTaken": {
+                    "type": "number"
+                },
+                "createdAt": {
                     "type": "number"
                 },
                 "queryId": {
@@ -422,6 +428,9 @@
                 "phoneNumber": {
                     "type": "string"
                 },
+                "createdAt": {
+                    "type": "number"
+                },
                 "queryId": {
                     "type": "string",
                     "format": "uuid"
@@ -491,6 +500,9 @@
                 },
                 "phoneNumber": {
                     "type": "string"
+                },
+                "createdAt": {
+                    "type": "number"
                 },
                 "queryId": {
                     "type": "string",
@@ -562,6 +574,9 @@
                 "phoneNumber": {
                     "type": "string"
                 },
+                "createdAt": {
+                    "type": "number"
+                },
                 "queryId": {
                     "type": "string",
                     "format": "uuid"
@@ -631,6 +646,9 @@
                 },
                 "phoneNumber": {
                     "type": "string"
+                },
+                "createdAt": {
+                    "type": "number"
                 },
                 "queryId": {
                     "type": "string",
@@ -702,6 +720,9 @@
                 "phoneNumber": {
                     "type": "string"
                 },
+                "createdAt": {
+                    "type": "number"
+                },
                 "queryId": {
                     "type": "string",
                     "format": "uuid"
@@ -771,6 +792,9 @@
                 },
                 "phoneNumber": {
                     "type": "string"
+                },
+                "createdAt": {
+                    "type": "number"
                 },
                 "queryId": {
                     "type": "string",
@@ -855,6 +879,9 @@
                 },
                 "phoneNumber": {
                     "type": "string"
+                },
+                "createdAt": {
+                    "type": "number"
                 },
                 "queryId": {
                     "type": "string",
@@ -941,6 +968,9 @@
                 "phoneNumber": {
                     "type": "string"
                 },
+                "createdAt": {
+                    "type": "number"
+                },
                 "queryId": {
                     "type": "string",
                     "format": "uuid"
@@ -1010,6 +1040,9 @@
                 "phoneNumber": {
                     "type": "string"
                 },
+                "createdAt": {
+                    "type": "number"
+                },
                 "responseInEnglish": {
                     "type": "string"
                 },
@@ -1060,6 +1093,9 @@
                 "error": {
                     "type": "string"
                 },
+                "createdAt": {
+                    "type": "number"
+                },
                 "errorRate": {
                     "type": "number"
                 }
@@ -1108,6 +1144,9 @@
                 },
                 "phoneNumber": {
                     "type": "string"
+                },
+                "createdAt": {
+                    "type": "number"
                 },
                 "responseInEnglish": {
                     "type": "string"
@@ -1179,7 +1218,6 @@
                 "conversationId",
                 "messageId",
                 "timeTaken",
-                "createdAt",
                 "did"
             ],
             "description": "A message was sent to user"
@@ -1234,7 +1272,6 @@
                 "orgId",
                 "conversationId",
                 "messageId",
-                "createdAt",
                 "did"
             ],
             "description": "XMessage to raw message conversion failed"
@@ -1282,7 +1319,6 @@
             "required": [
                 "botId",
                 "orgId",
-                "createdAt",
                 "did"
             ],
             "description": "Raw message conversion to XMessage failed"
@@ -1335,7 +1371,6 @@
                 "orgId",
                 "conversationId",
                 "messageId",
-                "createdAt",
                 "did",
                 "userManagementUrl"
             ],
@@ -1389,7 +1424,6 @@
                 "orgId",
                 "conversationId",
                 "messageId",
-                "createdAt",
                 "did",
                 "userManagementUrl"
             ],
@@ -1421,6 +1455,9 @@
                 "messageId": {
                     "type": "string",
                     "format": "uuid"
+                },
+                "createdAt": {
+                    "type": "number"
                 },
                 "did": {
                     "type": "string"
@@ -1486,7 +1523,6 @@
                 "orgId",
                 "conversationId",
                 "messageId",
-                "createdAt",
                 "did"
             ],
             "description": "User read the message sent by a bot"
@@ -1751,6 +1787,9 @@
                 "orgId": {
                     "type": "string",
                     "format": "uuid"
+                },
+                "createdAt": {
+                    "type": "number"
                 }
             },
             "required": [
@@ -1777,6 +1816,9 @@
                 "orgId": {
                     "type": "string",
                     "format": "uuid"
+                },
+                "createdAt": {
+                    "type": "number"
                 }
             },
             "required": [
@@ -1803,6 +1845,9 @@
                 "orgId": {
                     "type": "string",
                     "format": "uuid"
+                },
+                "createdAt": {
+                    "type": "number"
                 }
             },
             "required": [
@@ -1863,8 +1908,7 @@
                 "userId",
                 "orgId",
                 "messageId",
-                "text",
-                "createdAt"
+                "text"
             ],
             "description": "When user sends a message (send phoneNumber also)"
         }
@@ -1968,6 +2012,9 @@
                 "timeTaken": {
                     "type": "number"
                 },
+                "createdAt": {
+                    "type": "number"
+                },
                 "datasetId": {
                     "type": "string",
                     "format": "uuid"
@@ -2034,6 +2081,9 @@
                 "timeTaken": {
                     "type": "number"
                 },
+                "createdAt": {
+                    "type": "number"
+                },
                 "datasetId": {
                     "type": "string",
                     "format": "uuid"
@@ -2096,6 +2146,9 @@
                 "timeTaken": {
                     "type": "number"
                 },
+                "createdAt": {
+                    "type": "number"
+                },
                 "datasetId": {
                     "type": "string",
                     "format": "uuid"
@@ -2154,6 +2207,9 @@
                 "timeTaken": {
                     "type": "number"
                 },
+                "createdAt": {
+                    "type": "number"
+                },
                 "requestId": {
                     "type": "string",
                     "format": "uuid"
@@ -2197,6 +2253,9 @@
                     "type": "string"
                 },
                 "timeTaken": {
+                    "type": "number"
+                },
+                "createdAt": {
                     "type": "number"
                 },
                 "schemaId": {
@@ -2247,6 +2306,9 @@
                     "type": "string"
                 },
                 "timeTaken": {
+                    "type": "number"
+                },
+                "createdAt": {
                     "type": "number"
                 },
                 "question": {
@@ -2304,6 +2366,9 @@
                 "timeTaken": {
                     "type": "number"
                 },
+                "createdAt": {
+                    "type": "number"
+                },
                 "sqlQuery": {
                     "type": "string"
                 }
@@ -2340,6 +2405,9 @@
                 },
                 "error": {
                     "type": "string"
+                },
+                "createdAt": {
+                    "type": "number"
                 },
                 "transformerId": {
                     "type": "string"
@@ -2380,6 +2448,9 @@
                     "type": "string"
                 },
                 "timeTaken": {
+                    "type": "number"
+                },
+                "createdAt": {
                     "type": "number"
                 },
                 "transformerId": {
@@ -2423,6 +2494,9 @@
                 "timeTaken": {
                     "type": "number"
                 },
+                "createdAt": {
+                    "type": "number"
+                },
                 "language": {
                     "type": "string"
                 }
@@ -2460,6 +2534,9 @@
                 "conversationId": {
                     "type": "string",
                     "format": "uuid"
+                },
+                "createdAt": {
+                    "type": "number"
                 }
             },
             "required": [
@@ -2620,6 +2697,9 @@
                 "timeTaken": {
                     "type": "number"
                 },
+                "createdAt": {
+                    "type": "number"
+                },
                 "language": {
                     "type": "string"
                 }
@@ -2653,6 +2733,9 @@
                     "format": "uuid"
                 },
                 "timeTaken": {
+                    "type": "number"
+                },
+                "createdAt": {
                     "type": "number"
                 },
                 "did": {
@@ -2710,6 +2793,9 @@
                 },
                 "text": {
                     "type": "string"
+                },
+                "createdAt": {
+                    "type": "number"
                 },
                 "did": {
                     "type": "string"
