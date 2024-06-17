@@ -1,4 +1,4 @@
-import { Body, Controller, ParseArrayPipe, Post, UseInterceptors } from "@nestjs/common";
+import { Body, Controller, Header, Post, Req, UseInterceptors } from "@nestjs/common";
 import { MetricsService } from "./metrics.service";
 import { MetricsV1Dto } from "./dto/metrics.v1.dto";
 import { UpdateSchemaDto } from "./dto/update.schema.dto";
@@ -21,7 +21,8 @@ export class MetricsV1Controller {
   ) {
     this.metricsService.saveMetrics(metricList);
     return {
-      
+      error: false,
+      message: 'Started Processing Event'
     }
   }
 
@@ -39,15 +40,21 @@ export class MetricsV1Controller {
   }
 
   @Post('combined-view')
-  @UseInterceptors(AddUserDetails)
+  // @UseInterceptors(AddUserDetails)
   async getCombinedView(
-    @Body() queryBody: GetCombinedData
+    @Body() queryBody: GetCombinedData,
+    @Req() reqBody: Request
   ) {
     console.log(queryBody)
+    const headers: any = reqBody.headers
+    const botId = headers.botid;
+    const orgId = headers.orgid;
     return await this.metricsService.combinedView(
       (queryBody as any).userData,
       queryBody.perPage, 
       queryBody.page, 
+      botId,
+      orgId,
       queryBody.sortBy,
       queryBody.sort?.toUpperCase(),
       queryBody.filter

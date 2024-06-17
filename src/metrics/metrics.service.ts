@@ -1,4 +1,4 @@
-import { Inject, Injectable, Logger, OnModuleInit, UnauthorizedException } from "@nestjs/common";
+import { Inject, Injectable, Logger, OnModuleDestroy, OnModuleInit, UnauthorizedException } from "@nestjs/common";
 import Ajv, { ValidateFunction } from "ajv";
 import addFormats from "ajv-formats";
 import { PrismaService } from "src/prisma/prisma.service";
@@ -11,12 +11,29 @@ import { ClientProxy } from "@nestjs/microservices";
 import { Worker, isMainThread, parentPort, workerData } from 'worker_threads';
 import { IsArray, ValidateNested, validateOrReject } from "class-validator";
 import { Type } from "class-transformer";
+import * as os from 'os';
 
-global.threadEventQueue = [];
-global.workers = 0;
+export class EventDto {
+  @IsArray()
+  @ValidateNested({ each: true })
+  @Type(() => MetricsV1Dto)
+  events: MetricsV1Dto
+}
 
 @Injectable()
-export class MetricsService implements OnModuleInit {
+export class MetricsService implements OnModuleInit, OnModuleDestroy {
+  private eventQueue: any[] = [];
+  private errorQueueList: any[] = [];
+  private totalPostCalls = 0;
+  private responseFromWorkers = 0;
+  private readonly queueSizeLimit = 10000;
+  private intervalId: NodeJS.Timeout;
+  private workers: Worker[] = [];
+  private ajv: Ajv;
+  private validateMap: Map<string, ValidateFunction>;
+  private clickhouse: ClickHouseClient;
+  private logger = new Logger(MetricsService.name);
+  
   constructor(
     private readonly prismaService: PrismaService,
     @Inject(TELEMETRY_BROKER) private readonly telemetryBroker: ClientProxy
@@ -33,26 +50,36 @@ export class MetricsService implements OnModuleInit {
     this.updateValidateMap(true);
   }
 
-  private eventQueue: MetricsV1Dto[] = [];
-  private readonly queueSizeLimit = 10000;
-  private intervalId: NodeJS.Timeout;
-
   private startQueueProcessing() {
     this.intervalId = setInterval(() => {
-      console.log('workers', global.workers);
-      console.log('inQueue', global.threadEventQueue.length);
+      console.log(`Queue Size: ${this.eventQueue.length}\t\t|\t\tPost Calls: ${this.totalPostCalls}\t\t|\t\tResponse from workers: ${this.responseFromWorkers}\t\t|\t\tError Queue Size: ${this.errorQueueList.length}`);
       this.processQueue();
     }, 500);
   }
-  
+
   async onModuleInit() {
+    const eventSchema = await this.prismaService.eventSchemaV1.findMany();
+    for (let i = 0; i < os.cpus().length; i++) {
+      const worker = new Worker(`${__dirname}/worker.js`, {
+        workerData: {
+          eventSchema: eventSchema
+        }
+      });
+      worker.on('message', (data) => this.handleWorkerMessage(data));
+      this.workers.push(worker);
+    }
     this.startQueueProcessing();
   }
-  
-  private ajv: Ajv;
-  private validateMap: Map<string, ValidateFunction>;
-  private clickhouse: ClickHouseClient;
-  private logger = new Logger(MetricsService.name);
+
+  onModuleDestroy() {
+    this.workers.forEach(worker => worker.terminate());
+  }
+
+  async handleWorkerMessage(data: any) {
+    this.eventQueue.push(...data.validatedData)
+    this.errorQueueList.push(...data.errorData)
+    this.responseFromWorkers++;
+  }
 
   async updateValidateMap(force: boolean) {
     const schemeSchema = await this.prismaService.eventSchemaV1.findMany();
@@ -80,45 +107,12 @@ export class MetricsService implements OnModuleInit {
     return obj;
   }
 
-  async saveMetrics(eventData: any[]) {
-    global.workers++;
-    const worker = new Worker(__filename, {
-      workerData: eventData
-    });
-    worker.on('message', (validatedData) => {
-      global.threadEventQueue.push(...validatedData)
-    })
-    
+  async saveMetrics(body: any[]) {
+    this.workers[this.totalPostCalls % os.cpus().length].postMessage(body);
+    this.totalPostCalls++;
   }
 
-  // async saveMetrics(eventData: MetricsV1Dto[]) {
-  //   // let isRequestValid = true;
-  //   // let errorData = {};
-  //   // await this.updateValidateMap(false);
-  //   // for (let i = 0; i < eventData.length; i++) {
-  //   //   eventData[i] = this.removeNullKeys(eventData[i]);
-  //   //   const validationResponse = await this.validateEventData(eventData[i]);
-  //   //   if (validationResponse.error) {
-  //   //     isRequestValid = false;
-  //   //     errorData[`${i}`] = validationResponse.errorList;
-  //   //   }
-  //   // }
-  //   // if (!isRequestValid) {
-  //   //   const response = {
-  //   //     error: true,
-  //   //     message: 'Request body does not satisfies the schema',
-  //   //     errorData: errorData
-  //   //   }
-  //   //   this.logger.error(response);
-  //   //   return Response.json(response, { status: 400 });
-  //   // }
-  //   this.processData(eventData);
-  //   return Response.json({
-  //     error: false,
-  //     message: 'Metric stored succesfully'
-  //   }, { status: 200 })
-  // }
-  
+
   async validateEventData(eventData: MetricsV1Dto) {
     if (!this.validateMap.has(eventData.eventId)) {
       return {
@@ -141,66 +135,18 @@ export class MetricsService implements OnModuleInit {
     }
   }
 
-  // async processData(eventDataList: MetricsV1Dto[]) {
-  //   const formattedEventData = eventDataList.map((event) => {
-  //     const { eventData, ...otherMetric } = event;
-  //     return { 
-  //       ...otherMetric,
-  //       ...eventData,
-  //     };
-  //   });
-  //   this.clickhouse.insert({
-  //     table: `event`,
-  //     values: formattedEventData,
-  //     format: 'JSONEachRow'
-  //   });
-  // }
-
   async processData(eventDataList: MetricsV1Dto[]) {
     this.eventQueue.push(...eventDataList);
     if (this.eventQueue.length >= this.queueSizeLimit) {
       this.processQueue();
     }
-    // eventDataList.forEach(async (event) =>  await this.telemetryBroker.send(TELEMETRY_QUEUE, event));
   }
 
-  // private async processQueue() {
-  //   if (this.eventQueue.length === 0) {
-  //     return;
-  //   }
-
-  //   const eventsToProcess = [...this.eventQueue];
-  //   this.eventQueue = [];
-
-  //   const formattedEventData = eventsToProcess.map((event) => {
-  //     const { eventData, ...otherMetric } = event;
-  //     return { 
-  //       ...otherMetric,
-  //       ...eventData,
-  //     };
-  //   });
-
-  //   try {
-  //     this.clickhouse.insert({
-  //       table: `event`,
-  //       values: formattedEventData,
-  //       format: 'JSONEachRow'
-  //     });
-  //   } catch (error) {
-  //     console.error('Failed to insert data into ClickHouse:', error);
-  //     // In case of failure, re-add the events back to the queue
-  //     this.eventQueue.unshift(...eventsToProcess);
-  //   }
-  // }
-
   private async processQueue() {
-    if (global.threadEventQueue.length === 0) {
-      return;
-    }
-
-    const eventsToProcess = [...global.threadEventQueue];
-    global.threadEventQueue = [];
-
+    if (this.eventQueue.length === 0) return;
+    const eventsToProcess = [...this.eventQueue];
+    this.eventQueue = [];
+    
     const formattedEventData = eventsToProcess.map((event) => {
       const { eventData, ...otherMetric } = event;
       return { 
@@ -217,8 +163,7 @@ export class MetricsService implements OnModuleInit {
       });
     } catch (error) {
       console.error('Failed to insert data into ClickHouse:', error);
-      // In case of failure, re-add the events back to the queue
-      global.threadEventQueue.unshift(...eventsToProcess);
+      this.eventQueue.unshift(...eventsToProcess);
     }
   }
 
@@ -261,22 +206,21 @@ export class MetricsService implements OnModuleInit {
     userData: UserData,
     limit: number, 
     page: number, 
+    botId: string,
+    orgId: string,
     orderBy?: string, 
     order?: string,
-    filter?: any,
+    filter?: any
   ) {
-    if (!(userData.role == UserRole.ORG_ADMIN || userData.role == UserRole.OWNER || userData.role == UserRole.SUPER_ADMIN)) {
-      throw new UnauthorizedException();
-    }
     let selectClause = '';
 		let whereClause = '';
 		let rangeClause = '';
 
-		selectClause += `SELECT * FROM combined_data`;
+		selectClause += `SELECT * FROM combined_data_v1`;
     
     const offset = limit * (page - 1);
 
-		whereClause = `\nWHERE botId='${userData.botId}'`;
+		whereClause = `\nWHERE botId='${botId}'`;
     if (filter) {
       for(const column of Object.keys(filter)) {
         whereClause += `\nAND ${column}='${filter[column]}'`
@@ -290,25 +234,44 @@ export class MetricsService implements OnModuleInit {
         rangeClause += `\nORDER BY ${orderBy}`
       }
     } else {
-      rangeClause += `\n ORDER BY timestamp DESC`
+      rangeClause += `\n ORDER BY e_timestamp DESC`
     }
     rangeClause += `\nLIMIT ${limit} OFFSET ${offset};`;
 		const query = selectClause + whereClause + rangeClause;
     console.log(query);
-    const content = await this.clickhouse.query({
-      query: query,
-      format: 'JSONEachRow'
-    });
-    const selectQueryResponse = await content.json();
 
-    // getting count
-    const countQuery = await this.clickhouse.query({
-      query: `SELECT COUNT(*) FROM combined_data` + whereClause,
-    });
+     let content; 
+    try {
+      content = await this.clickhouse.query({
+        query: query,
+        format: 'JSONEachRow'
+      });
+    } catch (err) {
+      console.error(err)
+    }
+    
+    const selectQueryResponse: any[] = await content.json();
+
+    let countQuery;
+    try {
+      // getting count
+      countQuery = await this.clickhouse.query({
+        query: `SELECT COUNT(*) FROM combined_data_v1` + whereClause,
+      });
+    } catch (err) {
+      console.error(err)
+    }
     const countQueryJsonRes = await countQuery.json();
     const count = countQueryJsonRes['data'][0]['count()'];
     
     const totalPages = Math.ceil(count / limit);
+    selectQueryResponse.map((res) => {
+      const { e_timestamp, ...rest } = res;
+      return {
+        ...rest,
+        timestamp: e_timestamp
+      }
+    })
     return Response.json({
       pagination: {
         page: page,
@@ -319,35 +282,4 @@ export class MetricsService implements OnModuleInit {
       data: selectQueryResponse
     }, { status: 200 })
   }
-}
-
-export class EventDto {
-  @IsArray()
-  @ValidateNested({ each: true })
-  @Type(() => MetricsV1Dto)
-  events: MetricsV1Dto
-}
-
-if (!isMainThread) {
-  const events = workerData;
-
-  (async () => {
-    try {
-      const eventDto = new EventDto();
-      eventDto.events = events;
-
-      await validateOrReject(eventDto);
-      parentPort.postMessage(events);
-      // global.threadEventQueue.push(...events);
-      global.workers--;
-      process.exit();
-    } catch (err) {
-      console.log('Error validating data: ', err);
-      global.workers--;
-      process.exit();
-    } finally {
-      global.workers--;
-      process.exit();
-    }
-  })();
 }
