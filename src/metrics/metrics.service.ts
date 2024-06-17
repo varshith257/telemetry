@@ -52,8 +52,9 @@ export class MetricsService implements OnModuleInit, OnModuleDestroy {
 
   private startQueueProcessing() {
     this.intervalId = setInterval(() => {
-      console.log(`Queue Size: ${this.eventQueue.length}\t\t|\t\tPost Calls: ${this.totalPostCalls}\t\t|\t\tResponse from workers: ${this.responseFromWorkers}\t\t|\t\tError Queue Size: ${this.errorQueueList.length}`);
+      // console.log(`Queue Size: ${this.eventQueue.length}\t\t|\t\tPost Calls: ${this.totalPostCalls}\t\t|\t\tResponse from workers: ${this.responseFromWorkers}\t\t|\t\tError Queue Size: ${this.errorQueueList.length}`);
       this.processQueue();
+      this.processErrorQueue();
     }, 500);
   }
 
@@ -165,6 +166,12 @@ export class MetricsService implements OnModuleInit, OnModuleDestroy {
       console.error('Failed to insert data into ClickHouse:', error);
       this.eventQueue.unshift(...eventsToProcess);
     }
+  }
+
+  private async processErrorQueue() {
+    if (this.errorQueueList.length === 0) return;
+    console.error(this.errorQueueList);
+    this.errorQueueList = []
   }
 
   async updateSchema(updateSchemaDto: UpdateSchemaDto) {

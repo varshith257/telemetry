@@ -40,7 +40,7 @@ export class MetricsV1Controller {
   }
 
   @Post('combined-view')
-  // @UseInterceptors(AddUserDetails)
+  @UseInterceptors(AddUserDetails)
   async getCombinedView(
     @Body() queryBody: GetCombinedData,
     @Req() reqBody: Request
