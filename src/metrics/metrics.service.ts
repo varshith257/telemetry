@@ -34,12 +34,11 @@ export class MetricsService implements OnModuleInit, OnModuleDestroy {
   private validateMap: Map<string, ValidateFunction>;
   private clickhouse: ClickHouseClient;
   private logger = new Logger(MetricsService.name);
-  
+
   constructor(
-    private readonly prismaService: PrismaService,
-    @Inject(TELEMETRY_BROKER) private readonly telemetryBroker: ClientProxy
+    private readonly prismaService: PrismaService  
   ) {
-    this.ajv = new Ajv({removeAdditional: 'all'});
+    this.ajv = new Ajv({ removeAdditional: 'all' });
     addFormats(this.ajv);
     this.clickhouse = createClient({
       host: process.env.CLICKHOUSE_HOST,
@@ -149,10 +148,10 @@ export class MetricsService implements OnModuleInit, OnModuleDestroy {
     if (this.eventQueue.length === 0) return;
     const eventsToProcess = [...this.eventQueue];
     this.eventQueue = [];
-    
+
     const formattedEventData = eventsToProcess.map((event) => {
       const { eventData, ...otherMetric } = event;
-      return { 
+      return {
         ...otherMetric,
         ...eventData,
       };
@@ -195,7 +194,7 @@ export class MetricsService implements OnModuleInit, OnModuleDestroy {
           schema: updateSchemaDto.schema
         }
       })
-    } catch(error) {
+    } catch (error) {
       this.logger.error(error);
       return {
         error: true,
@@ -213,25 +212,25 @@ export class MetricsService implements OnModuleInit, OnModuleDestroy {
 
   async combinedView(
     userData: UserData,
-    limit: number, 
-    page: number, 
+    limit: number,
+    page: number,
     botId: string,
     orgId: string,
-    orderBy?: string, 
+    orderBy?: string,
     order?: string,
     filter?: any
   ) {
     let selectClause = '';
-		let whereClause = '';
-		let rangeClause = '';
+    let whereClause = '';
+    let rangeClause = '';
 
-		selectClause += `SELECT * FROM combined_data_v1`;
-    
+    selectClause += `SELECT * FROM combined_data_v1`;
+
     const offset = limit * (page - 1);
 
-		whereClause = `\nWHERE botId='${botId}'`;
+    whereClause = `\nWHERE botId='${botId}'`;
     if (filter) {
-      for(const column of Object.keys(filter)) {
+      for (const column of Object.keys(filter)) {
         whereClause += `\nAND ${column}='${filter[column]}'`
       }
     }
@@ -246,10 +245,10 @@ export class MetricsService implements OnModuleInit, OnModuleDestroy {
       rangeClause += `\n ORDER BY e_timestamp DESC`
     }
     rangeClause += `\nLIMIT ${limit} OFFSET ${offset};`;
-		const query = selectClause + whereClause + rangeClause;
+    const query = selectClause + whereClause + rangeClause;
     console.log(query);
 
-     let content; 
+    let content;
     try {
       content = await this.clickhouse.query({
         query: query,
@@ -258,7 +257,7 @@ export class MetricsService implements OnModuleInit, OnModuleDestroy {
     } catch (err) {
       console.error(err)
     }
-    
+
     const selectQueryResponse: any[] = await content.json();
 
     let countQuery;
@@ -272,7 +271,7 @@ export class MetricsService implements OnModuleInit, OnModuleDestroy {
     }
     const countQueryJsonRes = await countQuery.json();
     const count = countQueryJsonRes['data'][0]['count()'];
-    
+
     const totalPages = Math.ceil(count / limit);
     selectQueryResponse.map((res) => {
       const { e_timestamp, ...rest } = res;
@@ -292,6 +291,19 @@ export class MetricsService implements OnModuleInit, OnModuleDestroy {
     }, { status: 200 })
   }
 
+  async listTables(botId: string) {
+    try {
+      const tableList = await this.prismaService.materializedViewMapping.findMany({
+        where: {
+          bot_id: botId
+        }
+      })
+      return tableList;
+    } catch(err) {
+      throw new BadRequestException('No tables found for given botId', err)
+    }
+  }
+
   async getTableSchema(tableName: string) {
     try {
       const query = `DESCRIBE TABLE ${tableName};`;
@@ -309,7 +321,7 @@ export class MetricsService implements OnModuleInit, OnModuleDestroy {
         }
       })
       return schema;
-    } catch(err) {
+    } catch (err) {
       console.error(err)
       throw new HttpException('Wrong table name, or table doesn\'t exists', 400);
     }
@@ -321,34 +333,60 @@ export class MetricsService implements OnModuleInit, OnModuleDestroy {
       throw new BadRequestException('The query must create a Materialized View and contain only one statement.');
     }
     const tableNameMatch = sqlQuery.match(/CREATE MATERIALIZED VIEW\s+(\S+)/i);
-    console.log(tableNameMatch[1])
     if (!tableNameMatch || tableNameMatch[1].length < 3) {
-      throw new BadRequestException('The query format is invalid. Should be like CREATE MATERIALIZED VIEW <TABLE_NAME>');
+      throw new BadRequestException('The query format is invalid. Should be like CREATE MATERIALIZED VIEW <VIEW_NAME>');
+    }
+    const tableResponse = await this.prismaService.materializedViewMapping.findMany({
+      where: {
+        tableName: tableNameMatch[1]
+      }
+    })
+    if (tableResponse && tableResponse.length !== 0) {
+      throw new BadRequestException(`Table with name ${tableNameMatch[1]} already exists.`)
+    }
+    try {
+      const res = await this.clickhouse.query({
+        query: 'SET allow_experimental_refreshable_materialized_view = 1;'
+      });
+      console.log(await res.json())
+      await this.clickhouse.query({
+        query: cleanedQuery
+      });
+      await this.prismaService.materializedViewMapping.create({
+        data: {
+          bot_id: botId,
+          org_id: orgId,
+          tableName: tableNameMatch[1]
+        }
+      })
+    } catch (err) {
+      console.log('Not able to create MV', err);
+      throw new BadRequestException(err);
     }
     return tableNameMatch[1];
   }
 
   async getTableData(
     tableName: string,
-    limit: number, 
-    page: number, 
+    limit: number,
+    page: number,
     botId: string,
     orgId: string,
-    orderBy?: string, 
+    orderBy?: string,
     order?: string,
     filter?: any
   ) {
     let selectClause = '';
-		let whereClause = '';
-		let rangeClause = '';
+    let whereClause = '';
+    let rangeClause = '';
 
-		selectClause += `SELECT * FROM ${tableName}`;
-    
+    selectClause += `SELECT * FROM ${tableName}`;
+
     const offset = limit * (page - 1);
 
-		whereClause = `\nWHERE botId='${botId}'`;
+    whereClause = `\nWHERE botId='${botId}'`;
     if (filter) {
-      for(const column of Object.keys(filter)) {
+      for (const column of Object.keys(filter)) {
         whereClause += `\nAND ${column}='${filter[column]}'`
       }
     }
@@ -359,14 +397,12 @@ export class MetricsService implements OnModuleInit, OnModuleDestroy {
       } else {
         rangeClause += `\nORDER BY ${orderBy}`
       }
-    } else {
-      rangeClause += `\n ORDER BY e_timestamp DESC`
     }
     rangeClause += `\nLIMIT ${limit} OFFSET ${offset};`;
-		const query = selectClause + whereClause + rangeClause;
+    const query = selectClause + whereClause + rangeClause;
     console.log(query);
 
-     let content; 
+    let content;
     try {
       content = await this.clickhouse.query({
         query: query,
@@ -375,7 +411,7 @@ export class MetricsService implements OnModuleInit, OnModuleDestroy {
     } catch (err) {
       console.error(err)
     }
-    
+
     const selectQueryResponse: any[] = await content.json();
 
     let countQuery;
@@ -389,7 +425,7 @@ export class MetricsService implements OnModuleInit, OnModuleDestroy {
     }
     const countQueryJsonRes = await countQuery.json();
     const count = countQueryJsonRes['data'][0]['count()'];
-    
+
     const totalPages = Math.ceil(count / limit);
     selectQueryResponse.map((res) => {
       const { e_timestamp, ...rest } = res;
@@ -398,6 +434,7 @@ export class MetricsService implements OnModuleInit, OnModuleDestroy {
         timestamp: e_timestamp
       }
     })
+    const schema = await this.getTableSchema(tableName);
     return Response.json({
       pagination: {
         page: page,
@@ -405,7 +442,8 @@ export class MetricsService implements OnModuleInit, OnModuleDestroy {
         totalPages: totalPages,
         totalCount: +count
       },
-      data: selectQueryResponse
+      data: selectQueryResponse,
+      schema: schema
     }, { status: 200 })
   }
 }

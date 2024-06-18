@@ -77,4 +77,35 @@ export class MetricsV1Controller {
     const orgId = headers.orgid;
     return await this.metricsService.createMaterializedView(createMVDto.sqlQuery, botId, orgId)
   }
+
+  @Post('mv/getTableData/:tableName')
+  async getTableData(
+    @Param('tableName') tableName: string,
+    @Body() queryBody: GetCombinedData,
+    @Req() reqBody: Request
+  ) {
+    console.log(queryBody)
+    const headers: any = reqBody.headers
+    const botId = headers.botid;
+    const orgId = headers.orgid;
+    return await this.metricsService.getTableData(
+      tableName,
+      queryBody.perPage, 
+      queryBody.page, 
+      botId,
+      orgId,
+      queryBody.sortBy,
+      queryBody.sort?.toUpperCase(),
+      queryBody.filter
+    )
+  }
+
+  @Get('mv/getTables')
+  async listTables(
+    @Req() reqBody: Request
+  ) {
+    const headers: any = reqBody.headers
+    const botId = headers.botid;
+    return await this.metricsService.listTables(botId);
+  }
 }

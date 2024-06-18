@@ -22,9 +22,9 @@ model EventSchemaV1 {
 }
 
 model MaterializedViewMapping {
-  id Int @id @default(autoincrement())
-  bot_id String
-  org_id String
-  tableName String
+  id         Int      @id @default(autoincrement())
+  bot_id     String
+  org_id     String
+  tableName  String
   created_at DateTime @default(now())
 }
