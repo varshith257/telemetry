@@ -1,4 +1,4 @@
-import { Body, Controller, Header, Post, Req, UseInterceptors } from "@nestjs/common";
+import { Body, Controller, Get, Header, Param, Post, Req, UseInterceptors } from "@nestjs/common";
 import { MetricsService } from "./metrics.service";
 import { MetricsV1Dto } from "./dto/metrics.v1.dto";
 import { UpdateSchemaDto } from "./dto/update.schema.dto";
@@ -7,6 +7,7 @@ import { AddUserDetails } from "src/interceptors/addUserDetails.interceptor";
 import { GetCombinedData } from "./dto/get.combined.data.dto";
 import { EventPattern, Payload } from "@nestjs/microservices";
 import { TELEMETRY_QUEUE } from "src/constants";
+import { CreateMVDto } from "./dto/mv.dto";
 
 @SkipThrottle()
 @Controller('/metrics/v1')
@@ -59,5 +60,21 @@ export class MetricsV1Controller {
       queryBody.sort?.toUpperCase(),
       queryBody.filter
     )
+  }
+
+  @Get('mv/getSchema/:tableName')
+  async getMVSchema(@Param('tableName') tableName: string) {
+    return await this.metricsService.getTableSchema(tableName);
+  }
+
+  @Post('mv/create')
+  async createMaterializedView(
+    @Body() createMVDto: CreateMVDto,
+    @Req() reqBody: Request
+  ) {
+    const headers: any = reqBody.headers
+    const botId = headers.botid;
+    const orgId = headers.orgid;
+    return await this.metricsService.createMaterializedView(createMVDto.sqlQuery, botId, orgId)
   }
 }

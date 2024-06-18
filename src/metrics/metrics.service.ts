@@ -1,4 +1,4 @@
-import { Inject, Injectable, Logger, OnModuleDestroy, OnModuleInit, UnauthorizedException } from "@nestjs/common";
+import { BadRequestException, HttpException, Inject, Injectable, Logger, OnModuleDestroy, OnModuleInit, UnauthorizedException } from "@nestjs/common";
 import Ajv, { ValidateFunction } from "ajv";
 import addFormats from "ajv-formats";
 import { PrismaService } from "src/prisma/prisma.service";
@@ -12,6 +12,7 @@ import { Worker, isMainThread, parentPort, workerData } from 'worker_threads';
 import { IsArray, ValidateNested, validateOrReject } from "class-validator";
 import { Type } from "class-transformer";
 import * as os from 'os';
+import { identify } from 'sql-query-identifier';
 
 export class EventDto {
   @IsArray()
@@ -109,7 +110,8 @@ export class MetricsService implements OnModuleInit, OnModuleDestroy {
   }
 
   async saveMetrics(body: any[]) {
-    this.workers[this.totalPostCalls % os.cpus().length].postMessage(body);
+    // this.workers[this.totalPostCalls % os.cpus().length].postMessage(body);
+    this.workers[0].postMessage(body);
     this.totalPostCalls++;
   }
 
@@ -264,6 +266,123 @@ export class MetricsService implements OnModuleInit, OnModuleDestroy {
       // getting count
       countQuery = await this.clickhouse.query({
         query: `SELECT COUNT(*) FROM combined_data_v1` + whereClause,
+      });
+    } catch (err) {
+      console.error(err)
+    }
+    const countQueryJsonRes = await countQuery.json();
+    const count = countQueryJsonRes['data'][0]['count()'];
+    
+    const totalPages = Math.ceil(count / limit);
+    selectQueryResponse.map((res) => {
+      const { e_timestamp, ...rest } = res;
+      return {
+        ...rest,
+        timestamp: e_timestamp
+      }
+    })
+    return Response.json({
+      pagination: {
+        page: page,
+        perPage: limit,
+        totalPages: totalPages,
+        totalCount: +count
+      },
+      data: selectQueryResponse
+    }, { status: 200 })
+  }
+
+  async getTableSchema(tableName: string) {
+    try {
+      const query = `DESCRIBE TABLE ${tableName};`;
+      console.log(query)
+      const result = await this.clickhouse.query({
+        query: query
+      });
+      const schema: any = await result.json();
+      console.log(schema);
+      schema.data.map((item) => {
+        const nullablePattern = /^Nullable\((.*)\)$/;
+        const match = item.type.match(nullablePattern);
+        if (match) {
+          item.type = match[1]
+        }
+      })
+      return schema;
+    } catch(err) {
+      console.error(err)
+      throw new HttpException('Wrong table name, or table doesn\'t exists', 400);
+    }
+  }
+
+  async createMaterializedView(sqlQuery: string, botId: string, orgId: string) {
+    const cleanedQuery = sqlQuery.trim().toUpperCase();
+    if (!cleanedQuery.startsWith('CREATE MATERIALIZED VIEW') || !cleanedQuery.includes(';', 1)) {
+      throw new BadRequestException('The query must create a Materialized View and contain only one statement.');
+    }
+    const tableNameMatch = sqlQuery.match(/CREATE MATERIALIZED VIEW\s+(\S+)/i);
+    console.log(tableNameMatch[1])
+    if (!tableNameMatch || tableNameMatch[1].length < 3) {
+      throw new BadRequestException('The query format is invalid. Should be like CREATE MATERIALIZED VIEW <TABLE_NAME>');
+    }
+    return tableNameMatch[1];
+  }
+
+  async getTableData(
+    tableName: string,
+    limit: number, 
+    page: number, 
+    botId: string,
+    orgId: string,
+    orderBy?: string, 
+    order?: string,
+    filter?: any
+  ) {
+    let selectClause = '';
+		let whereClause = '';
+		let rangeClause = '';
+
+		selectClause += `SELECT * FROM ${tableName}`;
+    
+    const offset = limit * (page - 1);
+
+		whereClause = `\nWHERE botId='${botId}'`;
+    if (filter) {
+      for(const column of Object.keys(filter)) {
+        whereClause += `\nAND ${column}='${filter[column]}'`
+      }
+    }
+
+    if (orderBy) {
+      if (order) {
+        rangeClause += `\nORDER BY ${orderBy} ${order}`
+      } else {
+        rangeClause += `\nORDER BY ${orderBy}`
+      }
+    } else {
+      rangeClause += `\n ORDER BY e_timestamp DESC`
+    }
+    rangeClause += `\nLIMIT ${limit} OFFSET ${offset};`;
+		const query = selectClause + whereClause + rangeClause;
+    console.log(query);
+
+     let content; 
+    try {
+      content = await this.clickhouse.query({
+        query: query,
+        format: 'JSONEachRow'
+      });
+    } catch (err) {
+      console.error(err)
+    }
+    
+    const selectQueryResponse: any[] = await content.json();
+
+    let countQuery;
+    try {
+      // getting count
+      countQuery = await this.clickhouse.query({
+        query: `SELECT COUNT(*) FROM ${tableName}` + whereClause,
       });
     } catch (err) {
       console.error(err)
