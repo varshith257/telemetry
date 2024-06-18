@@ -109,8 +109,8 @@ export class MetricsService implements OnModuleInit, OnModuleDestroy {
   }
 
   async saveMetrics(body: any[]) {
-    // this.workers[this.totalPostCalls % os.cpus().length].postMessage(body);
-    this.workers[0].postMessage(body);
+    this.workers[this.totalPostCalls % os.cpus().length].postMessage(body);
+    // this.workers[0].postMessage(body);
     this.totalPostCalls++;
   }
 
@@ -236,6 +236,7 @@ export class MetricsService implements OnModuleInit, OnModuleDestroy {
     }
 
     if (orderBy) {
+      if (orderBy = 'timestamp') orderBy = 'e_timestamp';
       if (order) {
         rangeClause += `\nORDER BY ${orderBy} ${order}`
       } else {
