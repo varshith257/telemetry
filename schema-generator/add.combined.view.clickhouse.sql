@@ -70,7 +70,10 @@ FROM
     COALESCE(detectedLatency, 0) +
     COALESCE(translateInputLatency, 0) AS totalLatency,
     maxIf(similarChunks, eventId = 'E010') AS similarChunks,
-    maxIf(prompt, eventId = 'E012' AND timeTaken > 0) AS prompt
+    maxIf(prompt, eventId = 'E012' AND timeTaken > 0) AS prompt,
+    maxIf(responseType, eventId = 'E012' AND timeTaken > 0) AS responseType,
+    maxIf(isGuided, eventId = 'E012' AND timeTaken > 0) AS isGuided,
+    maxIf(isFlowEnd, eventId = 'E012' AND timeTaken > 0) AS isFlowEnd
 FROM
     event
 where messageId is not null
