@@ -77,32 +77,3 @@ function convertToOTelTelemetry(
 }
 
 export { OTelEvent, InternalTelemetryEvent, convertToOTelTelemetry };
-
-// // Example internal telemetry event
-// const internalTelemetryEvent: InternalTelemetryEvent = {
-//   generator: 'akai',
-//   version: '0.0.1',
-//   timestamp: 1713943647,
-//   actorId: '123456',
-//   actorType: 'user',
-//   env: 'prod',
-//   eventId: 'E001',
-//   event: 'speechToText',
-//   subEvent: 'receivedAudio',
-//   eventData: {
-//     botId: '550e8400-e29b-41d4-a716-446655440000',
-//     orgId: '550e8400-e29b-41d4-a716-446655440000',
-//     createdAt: 1713943647,
-//     audioUrl: 'https://www2.cs.uic.edu/~i101/SoundFiles/BabyElephantWalk60.wav',
-//     audioId: '550e8400-e29b-41d4-a716-446655440000',
-//     language: 'en',
-//     conversationId: '550e8400-e29b-41d4-a716-446655440000',
-//     messageId: '550e8400-e29b-41d4-a716-446655440000',
-//   },
-// };
-
-// // Convert to simplified OTEL traces schema
-// const otelEvent: OTelEvent = convertToOTelTelemetry(internalTelemetryEvent);
-
-// // Print converted event
-// console.log(JSON.stringify(otelEvent, null, 2));
