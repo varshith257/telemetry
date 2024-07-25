@@ -41,6 +41,10 @@ interface OTelEvent {
 function convertToOTelTelemetry(
   internalEvent: InternalTelemetryEvent,
 ): OTelEvent {
+  if (!internalEvent) {
+    throw new Error('Missing required fields in internal telemetry event');
+  }
+
   // OTEL event structure
   const otelEvent: OTelEvent = {
     resource: {
@@ -70,6 +74,9 @@ function convertToOTelTelemetry(
 
   for (const key in eventData) {
     if (eventData.hasOwnProperty(key)) {
+      if (eventData[key] === undefined || eventData[key] === null) {
+        throw new Error(`Invalid data: ${key} is undefined or null`);
+      }
       otelEvent.events[0].attributes[key] = eventData[key];
     }
   }
