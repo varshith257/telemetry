@@ -1,7 +1,7 @@
 import { ClickHouseClient, createClient } from '@clickhouse/client';
 import { Injectable } from '@nestjs/common';
 import { HealthCheckError, HealthCheckResult, HealthCheckService, HealthIndicator, HealthIndicatorResult } from '@nestjs/terminus';
-import { PrismaService } from 'src/prisma/prisma.service';
+import { PrismaService } from '../prisma/prisma.service';
 
 @Injectable()
 export class HealthService extends HealthIndicator {
