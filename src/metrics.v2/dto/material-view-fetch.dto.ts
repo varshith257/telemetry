@@ -98,7 +98,6 @@ export class GetMaterialViewRequestBody {
         description: 'Bot ID to Fetch Records Of'
     })
     @IsStringOrStringArray({message : 'Bot ID Must Be A String Or An Array Of Strings'})
-    @IsString({ each: true, message: 'Bot ID Must Be A String' })
     bot_ids: string | string[] = 'asd';
 
     @ApiProperty({

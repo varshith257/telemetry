@@ -55,7 +55,7 @@ export class MetricsV2Service {
 				format: 'JSONEachRow'
 			});
 		} catch (err) {
-			console.error(err)
+			this.logger.error(err)
 			return Response.json({
 				success: false,
 				message: 'Error while fetching data from base'
