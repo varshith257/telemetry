@@ -9,7 +9,7 @@ export class MetricsV2Controller {
 
     @Post('mv-data')
     @UsePipes(new ValidationPipe({ transform: true }))
-    // @UseInterceptors(AddUserDetails)
+    @UseInterceptors(AddUserDetails)
     async getCombinedView(
         @Body() queryRequestBody: GetMaterialViewRequestBody,
         @Req() reqBody: Request
