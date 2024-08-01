@@ -105,7 +105,7 @@ export class GetMaterialViewRequestBody {
         example: 'timestamp',
     })
     @IsOptional()
-    sortBy: string = 'timestamp';
+    sort_by: string = 'timestamp';
 
     @IsIn(['asc', 'desc'])
     @ApiProperty({
