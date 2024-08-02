@@ -30,29 +30,58 @@ export class MetricsV2Service {
 		let whereClause = '';
 		let orderClause = '';
 		let limiters = '';
+		let params = {};
 
-		selectClause += `SELECT * FROM ${materialViewRequest.material_view} `;
+		selectClause += `SELECT * FROM {table:Identifier} `;
+		params["table"] = materialViewRequest.material_view;
 
 		const offset = materialViewRequest.per_page * (materialViewRequest.page - 1);
 		const limit = materialViewRequest.per_page;
-		whereClause = `\nWHERE botId ${typeof (materialViewRequest.bot_ids) === 'string' ? `= '${materialViewRequest.bot_ids}'` : `in (${materialViewRequest.bot_ids.join(',')})`}`;
+		params["limit"] = limit;
+		params["offset"] = offset;
 
+		// whereClause = `\nWHERE botId ${typeof (materialViewRequest.bot_ids) === 'string' ? `= ?` : `in (${materialViewRequest.bot_ids.map(() => '?').join(', ')})`}`;
+		if(typeof materialViewRequest.bot_ids === 'string') {
+			whereClause = `\nWHERE botId = {botId: UUID}`;
+			params["botId"] = materialViewRequest.bot_ids;
+		}
+		else {
+			whereClause = `\nWHERE botId in (`;
+			for (let i = 0; i < materialViewRequest.bot_ids.length; i++) {
+				whereClause += `'{botId${i}: UUID}', `;
+				params[`botId${i}`] = materialViewRequest.bot_ids[i];
+			}
+			whereClause += ')';
+		}
 		if (materialViewRequest.dynamic_filters.length > 0) {
-			whereClause += WhereClauseHelperFunction.whereClauseBuilder(materialViewRequest.dynamic_filters);
+			let whereBuilderData = WhereClauseHelperFunction.whereClauseBuilder(materialViewRequest.dynamic_filters);
+			whereClause += whereBuilderData.whereStatement;
+			params = { ...params, ...whereBuilderData.params };
 		}
 
-		if (materialViewRequest.sortBy) {
-			orderClause = `\nORDER BY ${materialViewRequest.sortBy == 'timestamp' ? 'e_timestamp' : materialViewRequest.sortBy} ${materialViewRequest.sort}`;
+		if (materialViewRequest.sort_by) {
+			orderClause = `\nORDER BY {orderColumn: Identifier} {order: String}`;
+			params["orderColumn"] = materialViewRequest.sort_by == 'timestamp' ? 'e_timestamp' : materialViewRequest.sort_by;
+			params["order"] = materialViewRequest.sort;
 		}
 
-		limiters += `\nLIMIT ${limit} OFFSET ${offset};`;
+		limiters += `\nLIMIT {limit: UInt8} OFFSET {offset: UInt8};`;
+		params["limit"] = limit;
+		params["offset"] = offset;
+
 		const query = selectClause + whereClause + orderClause + limiters;
-
+		return Response.json({
+			data : {
+				query : query,
+				params : params
+			}
+		}, { status: 200 })
 		let content;
 		try {
 			content = await this.clickhouse.query({
 				query: query,
-				format: 'JSONEachRow'
+				format: 'JSONEachRow',
+				query_params: params
 			});
 		} catch (err) {
 			this.logger.error(err)
@@ -68,7 +97,8 @@ export class MetricsV2Service {
 		try {
 			// getting count
 			countQuery = await this.clickhouse.query({
-				query: `SELECT COUNT(*) FROM ${materialViewRequest.material_view} ` + WhereClauseHelperFunction.whereClauseBuilder(materialViewRequest.dynamic_filters) + `;`,
+				query: `SELECT COUNT(*) FROM {table: Identifier} ` + whereClause + ';',
+				query_params: params,
 			});
 		} catch (err) {
 			console.error(err)
