@@ -107,14 +107,14 @@ export class GetMaterialViewRequestBody {
     @IsOptional()
     sort_by: string = 'timestamp';
 
-    @IsIn(['asc', 'desc'])
+    @IsIn(['ASC', 'DESC'])
     @ApiProperty({
         description: 'Order to sort column provided in sortBy',
-        example: 'asc',
-        default: 'desc'
+        example: 'ASC',
+        default: 'DESC'
     })
     @IsOptional()
-    sort: string = 'desc';
+    sort: string = 'DESC';
 
     @ApiProperty({
         description: 'Dynamic Filters To Apply On Data',
