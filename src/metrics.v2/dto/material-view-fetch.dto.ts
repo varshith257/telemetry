@@ -161,6 +161,4 @@ export class GetMaterialViewRequestBody {
     })
     @IsOptional()
     stream: boolean = false
-
-
 }

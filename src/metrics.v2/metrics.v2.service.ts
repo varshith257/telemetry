@@ -37,23 +37,17 @@ export class MetricsV2Service {
 		let params = {};
 		let outputFormat = 'json'
 		const stream = materialViewRequest.stream
-
-		console.log(1)
 		
 		outputFormat = materialViewRequest.download? 'csv':'json';
 		selectClause += `SELECT * FROM {table:Identifier} `;
 		params["table"] = materialViewRequest.material_view;
-
-		console.log(2)
 
 		const offset = materialViewRequest.per_page * (materialViewRequest.page - 1);
 		const limit = materialViewRequest.per_page;
 		params["limit"] = limit;
 		params["offset"] = offset;
 
-		console.log(3)
-
-		// whereClause = `\nWHERE botId ${typeof (materialViewRequest.bot_ids) === 'string' ? `= ?` :`in (${materialViewRequest.bot_ids.map(() => '?').join(', ')})`}`;
+		// whereClause = `\nWHERE botId ${typeof (materialViewRequest.bot_ids) === 'string' ? `= ?` : `in (${materialViewRequest.bot_ids.map(() => '?').join(', ')})`}`;
 		if(typeof materialViewRequest.bot_ids === 'string') {
 			whereClause = `\nWHERE botId = {botId: String}`;
 			params["botId"] = materialViewRequest.bot_ids;
@@ -72,8 +66,6 @@ export class MetricsV2Service {
 			params = { ...params, ...whereBuilderData.params };
 		}
 
-		console.log(4)
-
 		if (materialViewRequest.sort_by) {
 			orderClause = `\nORDER BY {orderColumn: String} ${materialViewRequest.sort}`;
 			params["orderColumn"] = materialViewRequest.sort_by == 'timestamp' ? 'e_timestamp' : materialViewRequest.sort_by;
@@ -82,8 +74,6 @@ export class MetricsV2Service {
 		limiters += `\nLIMIT 10 OFFSET 0;`;
 		params["limit"] = limit;
 		params["offset"] = offset;
-
-		console.log(5)
 
 		const query = selectClause + whereClause + orderClause + limiters;
 
@@ -108,7 +98,6 @@ export class MetricsV2Service {
 			  res.send(data);
 			}
 		  }
-
 		let content;
 		try {
 			content = await this.clickhouse.query({
