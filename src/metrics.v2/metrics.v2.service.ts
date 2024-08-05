@@ -7,6 +7,7 @@ import { GetMaterialViewRequestBody } from './dto/material-view-fetch.dto';
 import * as WhereClauseHelperFunction from './supportFunctions/whereClauseBuilder';
 import { Readable } from 'stream';
 import { Response as ExpressResponse } from 'express';
+import { createThrottlerProviders } from '@nestjs/throttler/dist/throttler.providers';
 
 @Injectable()
 export class MetricsV2Service {
@@ -35,10 +36,11 @@ export class MetricsV2Service {
 		let limiters = '';
 		let params = {};
 		let outputFormat = 'json'
+		const stream = materialViewRequest.stream
 
 		console.log(1)
 		
-		outputFormat = materialViewRequest.output_format
+		outputFormat = materialViewRequest.download? 'csv':'json';
 		selectClause += `SELECT * FROM {table:Identifier} `;
 		params["table"] = materialViewRequest.material_view;
 
@@ -86,35 +88,26 @@ export class MetricsV2Service {
 		const query = selectClause + whereClause + orderClause + limiters;
 
 		if (outputFormat === 'csv') {
-			console.log("[QUERY]", query)
-			console.log("[PARAMS]", params)
-            const result = await this.clickhouse.query({
-                query: query,
-				query_params: params,
-                format: 'CSV'
-            });
+			console.log('[QUERY]', query);
+			console.log('[PARAMS]', params);
+		
+			const result = await this.clickhouse.query({
+			  query: query,
+			  query_params: params,
+			  format: 'CSV'
+			});
+		
+			if (stream) {
+			//   result.stream().pipe(res);
+			res.status(501).send('Streaming not implemented');
 
-            const stream = result.stream();
-            let csvData = '';
-
-            stream.on('readable', () => {
-                let chunk;
-                while (null !== (chunk = stream.read())) {
-                    csvData += chunk;
-                }
-            });
-
-            stream.on('end', () => {
-                res.header('Content-Type', 'text/csv');
-                res.attachment('data.csv');
-                res.send(csvData);
-            });
-
-            stream.on('error', (err) => {
-                console.error('Stream error:', err);
-                res.status(500).send('An error occurred while processing the CSV data.');
-            });
-        }
+			} else {
+			  const data = await result.text();
+			  res.header('Content-Disposition', 'attachment; filename="debugging_data.csv"');
+			  res.header('Content-Type', 'text/csv');
+			  res.send(data);
+			}
+		  }
 
 		let content;
 		try {

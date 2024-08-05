@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseInterceptors, Req, UsePipes, ValidationPipe, Query, Res } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, UseInterceptors, Req, UsePipes, ValidationPipe, Res } from '@nestjs/common';
 import { MetricsV2Service } from './metrics.v2.service';
 import { AddUserDetails } from 'src/interceptors/addUserDetails.interceptor';
 import { GetMaterialViewRequestBody } from './dto/material-view-fetch.dto';
