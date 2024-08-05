@@ -42,13 +42,13 @@ export class MetricsV2Service {
 
 		// whereClause = `\nWHERE botId ${typeof (materialViewRequest.bot_ids) === 'string' ? `= ?` : `in (${materialViewRequest.bot_ids.map(() => '?').join(', ')})`}`;
 		if(typeof materialViewRequest.bot_ids === 'string') {
-			whereClause = `\nWHERE botId = {botId: UUID}`;
+			whereClause = `\nWHERE botId = {botId: String}`;
 			params["botId"] = materialViewRequest.bot_ids;
 		}
 		else {
 			whereClause = `\nWHERE botId in (`;
 			for (let i = 0; i < materialViewRequest.bot_ids.length; i++) {
-				whereClause += `'{botId${i}: UUID}', `;
+				whereClause += `{botId${i}: String},`;
 				params[`botId${i}`] = materialViewRequest.bot_ids[i];
 			}
 			whereClause += ')';
@@ -60,28 +60,21 @@ export class MetricsV2Service {
 		}
 
 		if (materialViewRequest.sort_by) {
-			orderClause = `\nORDER BY {orderColumn: Identifier} {order: String}`;
+			orderClause = `\nORDER BY {orderColumn: String} ${materialViewRequest.sort}`;
 			params["orderColumn"] = materialViewRequest.sort_by == 'timestamp' ? 'e_timestamp' : materialViewRequest.sort_by;
-			params["order"] = materialViewRequest.sort;
 		}
 
-		limiters += `\nLIMIT {limit: UInt8} OFFSET {offset: UInt8};`;
+		limiters += `\nLIMIT 10 OFFSET 0;`;
 		params["limit"] = limit;
 		params["offset"] = offset;
 
 		const query = selectClause + whereClause + orderClause + limiters;
-		return Response.json({
-			data : {
-				query : query,
-				params : params
-			}
-		}, { status: 200 })
 		let content;
 		try {
 			content = await this.clickhouse.query({
 				query: query,
 				format: 'JSONEachRow',
-				query_params: params
+				query_params: params,
 			});
 		} catch (err) {
 			this.logger.error(err)
@@ -99,17 +92,16 @@ export class MetricsV2Service {
 			countQuery = await this.clickhouse.query({
 				query: `SELECT COUNT(*) FROM {table: Identifier} ` + whereClause + ';',
 				query_params: params,
+				format: 'JSONCompact'
 			});
 		} catch (err) {
-			console.error(err)
 			return Response.json({
 				success: false,
 				message: 'Error while fetching data from count'
 			}, { status: 500 })
 		}
 		const countQueryJsonRes = await countQuery.json();
-		const count = countQueryJsonRes['data'][0]['count()'];
-
+		const count = countQueryJsonRes["data"][0];
 
 		const totalPages = Math.ceil(count / limit);
 		selectQueryResponse.map((res) => {
