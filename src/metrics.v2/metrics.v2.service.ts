@@ -1,14 +1,16 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { UserData } from 'src/interceptors/addUserDetails.interceptor';
-import { ClickHouseClient } from '@clickhouse/client';
+import { ClickHouseClient, Row } from '@clickhouse/client';
 import * as Clickhouse from '@clickhouse/client'
 import { PrismaService } from '../prisma/prisma.service';
 import { GetMaterialViewRequestBody } from './dto/material-view-fetch.dto';
 import * as WhereClauseHelperFunction from './supportFunctions/whereClauseBuilder';
+import { Readable } from 'stream';
+import { Response as ExpressResponse } from 'express';
 
 @Injectable()
 export class MetricsV2Service {
-	private clickhouse: ClickHouseClient;
+	private clickhouse: ClickHouseClient<Readable>;
 	private logger = new Logger(MetricsV2Service.name);
 
 	constructor(
@@ -24,31 +26,40 @@ export class MetricsV2Service {
 
 	async getMaterialViewData(
 		userData: UserData,
-		materialViewRequest: GetMaterialViewRequestBody
+		materialViewRequest: GetMaterialViewRequestBody,
+		res: ExpressResponse
 	) {
 		let selectClause = '';
 		let whereClause = '';
 		let orderClause = '';
 		let limiters = '';
 		let params = {};
+		let outputFormat = 'json'
 
+		console.log(1)
+		
+		outputFormat = materialViewRequest.output_format
 		selectClause += `SELECT * FROM {table:Identifier} `;
 		params["table"] = materialViewRequest.material_view;
+
+		console.log(2)
 
 		const offset = materialViewRequest.per_page * (materialViewRequest.page - 1);
 		const limit = materialViewRequest.per_page;
 		params["limit"] = limit;
 		params["offset"] = offset;
 
-		// whereClause = `\nWHERE botId ${typeof (materialViewRequest.bot_ids) === 'string' ? `= ?` : `in (${materialViewRequest.bot_ids.map(() => '?').join(', ')})`}`;
+		console.log(3)
+
+		// whereClause = `\nWHERE botId ${typeof (materialViewRequest.bot_ids) === 'string' ? `= ?` :`in (${materialViewRequest.bot_ids.map(() => '?').join(', ')})`}`;
 		if(typeof materialViewRequest.bot_ids === 'string') {
-			whereClause = `\nWHERE botId = {botId: UUID}`;
+			whereClause = `\nWHERE botId = {botId:UUID}`;
 			params["botId"] = materialViewRequest.bot_ids;
 		}
 		else {
 			whereClause = `\nWHERE botId in (`;
 			for (let i = 0; i < materialViewRequest.bot_ids.length; i++) {
-				whereClause += `'{botId${i}: UUID}', `;
+				whereClause += `'{botId${i}:UUID}', `;
 				params[`botId${i}`] = materialViewRequest.bot_ids[i];
 			}
 			whereClause += ')';
@@ -59,23 +70,53 @@ export class MetricsV2Service {
 			params = { ...params, ...whereBuilderData.params };
 		}
 
+		console.log(4)
+
 		if (materialViewRequest.sort_by) {
-			orderClause = `\nORDER BY {orderColumn: Identifier} {order: String}`;
+			orderClause = `\nORDER BY {orderColumn:Identifier} {order:Identifier}`;
 			params["orderColumn"] = materialViewRequest.sort_by == 'timestamp' ? 'e_timestamp' : materialViewRequest.sort_by;
 			params["order"] = materialViewRequest.sort;
 		}
 
-		limiters += `\nLIMIT {limit: UInt8} OFFSET {offset: UInt8};`;
+		limiters += `\n;`;
 		params["limit"] = limit;
 		params["offset"] = offset;
 
+		console.log(5)
+
 		const query = selectClause + whereClause + orderClause + limiters;
-		return Response.json({
-			data : {
-				query : query,
-				params : params
-			}
-		}, { status: 200 })
+
+		if (outputFormat === 'csv') {
+			console.log("[QUERY]", query)
+			console.log("[PARAMS]", params)
+            const result = await this.clickhouse.query({
+                query: query,
+				query_params: params,
+                format: 'CSV'
+            });
+
+            const stream = result.stream();
+            let csvData = '';
+
+            stream.on('readable', () => {
+                let chunk;
+                while (null !== (chunk = stream.read())) {
+                    csvData += chunk;
+                }
+            });
+
+            stream.on('end', () => {
+                res.header('Content-Type', 'text/csv');
+                res.attachment('data.csv');
+                res.send(csvData);
+            });
+
+            stream.on('error', (err) => {
+                console.error('Stream error:', err);
+                res.status(500).send('An error occurred while processing the CSV data.');
+            });
+        }
+
 		let content;
 		try {
 			content = await this.clickhouse.query({
