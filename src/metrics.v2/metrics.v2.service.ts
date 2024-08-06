@@ -1,14 +1,17 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { UserData } from 'src/interceptors/addUserDetails.interceptor';
-import { ClickHouseClient } from '@clickhouse/client';
+import { ClickHouseClient, Row } from '@clickhouse/client';
 import * as Clickhouse from '@clickhouse/client'
 import { PrismaService } from '../prisma/prisma.service';
 import { GetMaterialViewRequestBody } from './dto/material-view-fetch.dto';
 import * as WhereClauseHelperFunction from './supportFunctions/whereClauseBuilder';
+import { Readable } from 'stream';
+import { Response as ExpressResponse } from 'express';
+import { createThrottlerProviders } from '@nestjs/throttler/dist/throttler.providers';
 
 @Injectable()
 export class MetricsV2Service {
-	private clickhouse: ClickHouseClient;
+	private clickhouse: ClickHouseClient<Readable>;
 	private logger = new Logger(MetricsV2Service.name);
 
 	constructor(
@@ -24,15 +27,24 @@ export class MetricsV2Service {
 
 	async getMaterialViewData(
 		userData: UserData,
-		materialViewRequest: GetMaterialViewRequestBody
+		materialViewRequest: GetMaterialViewRequestBody,
+		res: ExpressResponse
 	) {
 		let selectClause = '';
 		let whereClause = '';
 		let orderClause = '';
+		let cols = materialViewRequest.cols;
 		let limiters = '';
 		let params = {};
+		let outputFormat = 'json'
+		const stream = materialViewRequest.stream
+		outputFormat = materialViewRequest.download? 'csv':'json';
 
-		selectClause += `SELECT * FROM {table:Identifier} `;
+		const selectColumns = cols.length === 1 && cols[0] === '*' 
+		? '*' 
+		: cols.map(col => `"${col}"`).join(', ');
+
+		selectClause += `SELECT ${selectColumns} FROM {table:Identifier} `;
 		params["table"] = materialViewRequest.material_view;
 
 		const offset = materialViewRequest.per_page * (materialViewRequest.page - 1);
@@ -69,6 +81,25 @@ export class MetricsV2Service {
 		params["offset"] = offset;
 
 		const query = selectClause + whereClause + orderClause + limiters;
+
+		if (outputFormat === 'csv') {
+			const result = await this.clickhouse.query({
+			  query: query,
+			  query_params: params,
+			  format: 'CSVWithNames'
+			});
+		
+			if (stream) {
+			//   result.stream().pipe(res);
+			res.status(501).send('Streaming not implemented');
+
+			} else {
+			  const data = await result.text();
+			  res.header('Content-Disposition', `attachment; filename="debugging_view_${new Date().toLocaleString()}.csv"`);
+			  res.header('Content-Type', 'text/csv');
+			  res.send(data);
+			}
+		  }
 		let content;
 		try {
 			content = await this.clickhouse.query({

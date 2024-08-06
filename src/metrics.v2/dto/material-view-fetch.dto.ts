@@ -1,6 +1,6 @@
 // Import Class Validator and ApiProperty
 import { ApiProperty } from "@nestjs/swagger";
-import { IsIn, IsNumber, IsOptional, IsString, ValidateIf } from "class-validator";
+import { IsIn, IsNumber, IsOptional, IsString, IsBoolean, ValidateIf } from "class-validator";
 
 import {
     registerDecorator,
@@ -101,6 +101,15 @@ export class GetMaterialViewRequestBody {
     bot_ids: string | string[] = 'asd';
 
     @ApiProperty({
+        description: 'columns for which should be returned in the response',
+        example: {
+            "cols": ["e_timestamp", "botId"]
+        }
+    })
+    @IsOptional()
+    cols: string[] = ['*']
+
+    @ApiProperty({
         description: 'Column Name To Sort Data For',
         example: 'timestamp',
     })
@@ -139,4 +148,26 @@ export class GetMaterialViewRequestBody {
     @IsOptional()
     @IsIn(['combined_data_v1']) // Forcing Check to only allow one value
     material_view: string = 'combined_data_v1'
+
+    @IsBoolean()
+    @ApiProperty({
+        description: 'Mark as true to trigger download as csv',
+        example: {
+            'download': true
+        },
+        default: false
+    })
+    @IsOptional()
+    download: boolean = false
+
+    @IsBoolean()
+    @ApiProperty({
+        description: 'Mark as true to stream csv download',
+        example: {
+            'stream': true
+        },
+        default: false
+    })
+    @IsOptional()
+    stream: boolean = false
 }
