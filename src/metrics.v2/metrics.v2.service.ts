@@ -33,13 +33,18 @@ export class MetricsV2Service {
 		let selectClause = '';
 		let whereClause = '';
 		let orderClause = '';
+		let cols = materialViewRequest.cols;
 		let limiters = '';
 		let params = {};
 		let outputFormat = 'json'
 		const stream = materialViewRequest.stream
-		
 		outputFormat = materialViewRequest.download? 'csv':'json';
-		selectClause += `SELECT * FROM {table:Identifier} `;
+
+		const selectColumns = cols.length === 1 && cols[0] === '*' 
+		? '*' 
+		: cols.map(col => `"${col}"`).join(', ');
+
+		selectClause += `SELECT ${selectColumns} FROM {table:Identifier} `;
 		params["table"] = materialViewRequest.material_view;
 
 		const offset = materialViewRequest.per_page * (materialViewRequest.page - 1);
@@ -78,9 +83,6 @@ export class MetricsV2Service {
 		const query = selectClause + whereClause + orderClause + limiters;
 
 		if (outputFormat === 'csv') {
-			console.log('[QUERY]', query);
-			console.log('[PARAMS]', params);
-		
 			const result = await this.clickhouse.query({
 			  query: query,
 			  query_params: params,
@@ -93,7 +95,7 @@ export class MetricsV2Service {
 
 			} else {
 			  const data = await result.text();
-			  res.header('Content-Disposition', 'attachment; filename="debugging_data.csv"');
+			  res.header('Content-Disposition', `attachment; filename="debugging_view_${new Date().toLocaleString()}.csv"`);
 			  res.header('Content-Type', 'text/csv');
 			  res.send(data);
 			}

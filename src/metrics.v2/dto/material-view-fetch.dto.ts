@@ -101,6 +101,15 @@ export class GetMaterialViewRequestBody {
     bot_ids: string | string[] = 'asd';
 
     @ApiProperty({
+        description: 'columns for which should be returned in the response',
+        example: {
+            "cols": ["e_timestamp", "botId"]
+        }
+    })
+    @IsOptional()
+    cols: string[] = ['*']
+
+    @ApiProperty({
         description: 'Column Name To Sort Data For',
         example: 'timestamp',
     })
