@@ -86,7 +86,7 @@ export class MetricsV2Service {
 			const result = await this.clickhouse.query({
 			  query: query,
 			  query_params: params,
-			  format: 'CSV'
+			  format: 'CSVWithNames'
 			});
 		
 			if (stream) {
