@@ -67,8 +67,8 @@ export class MetricsV2Service {
 		}
 	
 		if (materialViewRequest.sort_by) {
-			orderClause = `\nORDER BY {orderColumn: Identifier} ${materialViewRequest.sort}`;
-			params["orderColumn"] = materialViewRequest.sort_by == 'timestamp' ? 'e_timestamp' : materialViewRequest.sort_by;
+			const sortByColumn = materialViewRequest.sort_by == 'timestamp' ? 'e_timestamp' : materialViewRequest.sort_by;  // #FIX: Add Some sort of column validation in this in future
+			orderClause = `\nORDER BY ${sortByColumn} ${materialViewRequest.sort}`; //{orderColumn: Identifier} this doesn't work as clickhoues treats column names differently in this case	
 		}
 	
 		limiters += `\nLIMIT {limit: UInt8} OFFSET {offset: UInt8};`;
@@ -102,7 +102,7 @@ export class MetricsV2Service {
 				});
 			} catch (err) {
 				this.logger.error(err);
-				return res.status(500).json({
+				return res.status(500).send({
 					success: false,
 					message: 'Error while fetching data from base'
 				});
@@ -119,7 +119,7 @@ export class MetricsV2Service {
 					format: 'JSONCompact'
 				});
 			} catch (err) {
-				return res.status(500).json({
+				return res.status(500).send({
 					success: false,
 					message: 'Error while fetching data from count'
 				});
