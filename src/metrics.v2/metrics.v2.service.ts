@@ -47,11 +47,6 @@ export class MetricsV2Service {
 		selectClause += `SELECT ${selectColumns} FROM {table:Identifier} `;
 		params["table"] = materialViewRequest.material_view;
 
-		const offset = materialViewRequest.per_page * (materialViewRequest.page - 1);
-		const limit = materialViewRequest.per_page;
-		params["limit"] = limit;
-		params["offset"] = offset;
-
 		// whereClause = `\nWHERE botId ${typeof (materialViewRequest.bot_ids) === 'string' ? `= ?` : `in (${materialViewRequest.bot_ids.map(() => '?').join(', ')})`}`;
 		if(typeof materialViewRequest.bot_ids === 'string') {
 			whereClause = `\nWHERE botId = {botId: String}`;
@@ -76,11 +71,16 @@ export class MetricsV2Service {
 			params["orderColumn"] = materialViewRequest.sort_by == 'timestamp' ? 'e_timestamp' : materialViewRequest.sort_by;
 		}
 
+		const offset = materialViewRequest.per_page ? materialViewRequest.per_page * (materialViewRequest.page - 1) : 0;
+		const limit = materialViewRequest.per_page ? materialViewRequest.per_page : 10;
+		params["limit"] = limit;
+		params["offset"] = offset;
+
 		limiters += `\nLIMIT 10 OFFSET 0;`;
 		params["limit"] = limit;
 		params["offset"] = offset;
 
-		const query = selectClause + whereClause + orderClause + (outputFormat === 'csv')?'\n;':limiters;
+		const query = selectClause + whereClause + orderClause + ((outputFormat === 'csv')?'\n;':limiters);
 
 		if (outputFormat === 'csv') {
 			const result = await this.clickhouse.query({
