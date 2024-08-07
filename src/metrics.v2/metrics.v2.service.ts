@@ -36,9 +36,8 @@ export class MetricsV2Service {
 		let cols = materialViewRequest.cols;
 		let limiters = '';
 		let params = {};
-		let outputFormat = 'json';
 		const stream = materialViewRequest.stream;
-		outputFormat = materialViewRequest.download ? 'csv' : 'json';
+		const outputFormat = materialViewRequest.download ? 'csv' : 'json';
 	
 		const selectColumns = cols.length === 1 && cols[0] === '*' ? '*' : cols.map(col => `"${col}"`).join(', ');
 	
@@ -59,7 +58,7 @@ export class MetricsV2Service {
 				whereClause += `{botId${i}: String},`;
 				params[`botId${i}`] = materialViewRequest.bot_ids[i];
 			}
-			whereClause = whereClause.slice(0, -1) + ')';  // remove trailing comma
+			whereClause = whereClause.slice(0, -1) + ')';
 		}
 		if (materialViewRequest.dynamic_filters.length > 0) {
 			let whereBuilderData = WhereClauseHelperFunction.whereClauseBuilder(materialViewRequest.dynamic_filters);
