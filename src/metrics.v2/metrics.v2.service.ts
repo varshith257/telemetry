@@ -39,7 +39,7 @@ export class MetricsV2Service {
 		const stream = materialViewRequest.stream;
 		const outputFormat = materialViewRequest.download ? 'csv' : 'json';
 	
-		const selectColumns = cols.length === 1 && cols[0] === '*' ? '*' : cols.map(col => `"${col}"`).join(', ');
+		const selectColumns = cols.length === 1 && cols.includes("*") ? '*' : cols.map(col => `"${col}"`).join(', ');
 	
 		selectClause += `SELECT ${selectColumns} FROM {table:Identifier} `;
 		params["table"] = materialViewRequest.material_view;
@@ -67,11 +67,11 @@ export class MetricsV2Service {
 		}
 	
 		if (materialViewRequest.sort_by) {
-			orderClause = `\nORDER BY {orderColumn: String} ${materialViewRequest.sort}`;
+			orderClause = `\nORDER BY {orderColumn: Identifier} ${materialViewRequest.sort}`;
 			params["orderColumn"] = materialViewRequest.sort_by == 'timestamp' ? 'e_timestamp' : materialViewRequest.sort_by;
 		}
 	
-		limiters += `\nLIMIT {limit: Int} OFFSET {offset: Int};`;
+		limiters += `\nLIMIT {limit: UInt8} OFFSET {offset: UInt8};`;
 	
 		if (outputFormat === 'csv') limiters = '\n;';
 	
@@ -90,7 +90,7 @@ export class MetricsV2Service {
 				const data = await result.text();
 				res.header('Content-Disposition', `attachment; filename="debugging_view_${new Date().toLocaleString()}.csv"`);
 				res.header('Content-Type', 'text/csv');
-				res.send(data);
+				return res.send(data);
 			}
 		} else {
 			let content;
@@ -102,11 +102,10 @@ export class MetricsV2Service {
 				});
 			} catch (err) {
 				this.logger.error(err);
-				res.status(500).json({
+				return res.status(500).json({
 					success: false,
 					message: 'Error while fetching data from base'
 				});
-				return;
 			}
 	
 			const selectQueryResponse = await content.json();
@@ -120,11 +119,10 @@ export class MetricsV2Service {
 					format: 'JSONCompact'
 				});
 			} catch (err) {
-				res.status(500).json({
+				return res.status(500).json({
 					success: false,
 					message: 'Error while fetching data from count'
 				});
-				return;
 			}
 	
 			const countQueryJsonRes = await countQuery.json();
@@ -139,7 +137,7 @@ export class MetricsV2Service {
 				};
 			});
 	
-			res.status(200).send({
+			return res.status(200).send({
 				success: true,
 				pagination: {
 					page: materialViewRequest.page,
