@@ -36,123 +36,120 @@ export class MetricsV2Service {
 		let cols = materialViewRequest.cols;
 		let limiters = '';
 		let params = {};
-		let outputFormat = 'json'
-		const stream = materialViewRequest.stream
-		outputFormat = materialViewRequest.download? 'csv':'json';
-
-		const selectColumns = cols.length === 1 && cols[0] === '*' 
-		? '*' 
-		: cols.map(col => `"${col}"`).join(', ');
-
+		const stream = materialViewRequest.stream;
+		const outputFormat = materialViewRequest.download ? 'csv' : 'json';
+	
+		const selectColumns = cols.length === 1 && cols.includes("*") ? '*' : cols.map(col => `"${col}"`).join(', ');
+	
 		selectClause += `SELECT ${selectColumns} FROM {table:Identifier} `;
 		params["table"] = materialViewRequest.material_view;
-
-		// whereClause = `\nWHERE botId ${typeof (materialViewRequest.bot_ids) === 'string' ? `= ?` : `in (${materialViewRequest.bot_ids.map(() => '?').join(', ')})`}`;
-		if(typeof materialViewRequest.bot_ids === 'string') {
+	
+		const offset = materialViewRequest.per_page ? materialViewRequest.per_page * (materialViewRequest.page - 1) : 0;
+		const limit = materialViewRequest.per_page ? materialViewRequest.per_page : 10;
+		params["limit"] = limit;
+		params["offset"] = offset;
+	
+		if (typeof materialViewRequest.bot_ids === 'string') {
 			whereClause = `\nWHERE botId = {botId: String}`;
 			params["botId"] = materialViewRequest.bot_ids;
-		}
-		else {
+		} else {
 			whereClause = `\nWHERE botId in (`;
 			for (let i = 0; i < materialViewRequest.bot_ids.length; i++) {
 				whereClause += `{botId${i}: String},`;
 				params[`botId${i}`] = materialViewRequest.bot_ids[i];
 			}
-			whereClause += ')';
+			whereClause = whereClause.slice(0, -1) + ')';
 		}
 		if (materialViewRequest.dynamic_filters.length > 0) {
 			let whereBuilderData = WhereClauseHelperFunction.whereClauseBuilder(materialViewRequest.dynamic_filters);
 			whereClause += whereBuilderData.whereStatement;
 			params = { ...params, ...whereBuilderData.params };
 		}
-
+	
 		if (materialViewRequest.sort_by) {
-			orderClause = `\nORDER BY {orderColumn: String} ${materialViewRequest.sort}`;
+			orderClause = `\nORDER BY {orderColumn: Identifier} ${materialViewRequest.sort}`;
 			params["orderColumn"] = materialViewRequest.sort_by == 'timestamp' ? 'e_timestamp' : materialViewRequest.sort_by;
 		}
-
-		const offset = materialViewRequest.per_page ? materialViewRequest.per_page * (materialViewRequest.page - 1) : 0;
-		const limit = materialViewRequest.per_page ? materialViewRequest.per_page : 10;
-		params["limit"] = limit;
-		params["offset"] = offset;
-
-		limiters += `\nLIMIT 10 OFFSET 0;`;
-		params["limit"] = limit;
-		params["offset"] = offset;
-
-		const query = selectClause + whereClause + orderClause + ((outputFormat === 'csv')?'\n;':limiters);
-
+	
+		limiters += `\nLIMIT {limit: UInt8} OFFSET {offset: UInt8};`;
+	
+		if (outputFormat === 'csv') limiters = '\n;';
+	
+		const query = selectClause + whereClause + orderClause + limiters;
+	
 		if (outputFormat === 'csv') {
 			const result = await this.clickhouse.query({
-			  query: query,
-			  query_params: params,
-			  format: 'CSVWithNames'
-			});
-		
-			if (stream) {
-			//   result.stream().pipe(res);
-			res.status(501).send('Streaming not implemented');
-
-			} else {
-			  const data = await result.text();
-			  res.header('Content-Disposition', `attachment; filename="debugging_view_${new Date().toLocaleString()}.csv"`);
-			  res.header('Content-Type', 'text/csv');
-			  res.send(data);
-			}
-		  }
-		let content;
-		try {
-			content = await this.clickhouse.query({
 				query: query,
-				format: 'JSONEachRow',
 				query_params: params,
+				format: 'CSVWithNames'
 			});
-		} catch (err) {
-			this.logger.error(err)
-			return Response.json({
-				success: false,
-				message: 'Error while fetching data from base'
-			}, { status: 500 })
-		}
-
-		const selectQueryResponse: any[] = await content.json();
-
-		let countQuery;
-		try {
-			// getting count
-			countQuery = await this.clickhouse.query({
-				query: `SELECT COUNT(*) FROM {table: Identifier} ` + whereClause + ';',
-				query_params: params,
-				format: 'JSONCompact'
-			});
-		} catch (err) {
-			return Response.json({
-				success: false,
-				message: 'Error while fetching data from count'
-			}, { status: 500 })
-		}
-		const countQueryJsonRes = await countQuery.json();
-		const count = countQueryJsonRes["data"][0];
-
-		const totalPages = Math.ceil(count / limit);
-		selectQueryResponse.map((res) => {
-			const { e_timestamp, ...rest } = res;
-			return {
-				...rest,
-				timestamp: e_timestamp
+	
+			if (stream) {
+				res.status(501).send('Streaming not implemented');
+			} else {
+				const data = await result.text();
+				res.header('Content-Disposition', `attachment; filename="debugging_view_${new Date().toLocaleString()}.csv"`);
+				res.header('Content-Type', 'text/csv');
+				return res.send(data);
 			}
-		})
-		return Response.json({
-			success: true,
-			pagination: {
-				page: materialViewRequest.page,
-				perPage: limit,
-				totalPages: totalPages,
-				totalCount: +count
-			},
-			data: selectQueryResponse
-		}, { status: 200 })
+		} else {
+			let content;
+			try {
+				content = await this.clickhouse.query({
+					query: query,
+					format: 'JSONEachRow',
+					query_params: params,
+				});
+			} catch (err) {
+				this.logger.error(err);
+				return res.status(500).json({
+					success: false,
+					message: 'Error while fetching data from base'
+				});
+			}
+	
+			const selectQueryResponse = await content.json();
+	
+			let countQuery;
+			try {
+				// getting count
+				countQuery = await this.clickhouse.query({
+					query: `SELECT COUNT(*) FROM {table: Identifier} ` + whereClause + ';',
+					query_params: params,
+					format: 'JSONCompact'
+				});
+			} catch (err) {
+				return res.status(500).json({
+					success: false,
+					message: 'Error while fetching data from count'
+				});
+			}
+	
+			const countQueryJsonRes = await countQuery.json();
+			const count = countQueryJsonRes["data"][0];
+	
+			const totalPages = Math.ceil(count / limit);
+			const formattedResponse = selectQueryResponse.map((res) => {
+				const { e_timestamp, ...rest } = res;
+				return {
+					...rest,
+					timestamp: e_timestamp
+				};
+			});
+	
+			return res.status(200).send({
+				success: true,
+				pagination: {
+					page: materialViewRequest.page,
+					perPage: limit,
+					totalPages: totalPages,
+					totalCount: +count
+				},
+				data: formattedResponse
+			});
+		}
 	}
+	
 	/**
 	 * Function to get columns of a material view
 	 * @param matrialView : Name of the material view
