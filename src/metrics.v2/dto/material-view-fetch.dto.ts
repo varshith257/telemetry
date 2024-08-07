@@ -79,6 +79,7 @@ export class DynamicFilter {
 
 export class GetMaterialViewRequestBody {
     @IsNumber()
+    @IsOptional()
     @ApiProperty({
         description: 'Page number to fetch data from',
         example: 1,
@@ -87,6 +88,7 @@ export class GetMaterialViewRequestBody {
     page: number = 1;
 
     @IsNumber()
+    @IsOptional()
     @ApiProperty({
         description: 'Number of records per page',
         example: 10,
