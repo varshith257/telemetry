@@ -80,7 +80,7 @@ export class MetricsV2Service {
 		params["limit"] = limit;
 		params["offset"] = offset;
 
-		const query = selectClause + whereClause + orderClause + limiters;
+		const query = selectClause + whereClause + orderClause + (outputFormat === 'csv')?'\n;':limiters;
 
 		if (outputFormat === 'csv') {
 			const result = await this.clickhouse.query({
