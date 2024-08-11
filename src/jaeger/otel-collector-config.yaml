@@ -1,0 +1,31 @@
+receivers:
+  otlp:
+    protocols:
+      # grpc:
+      #   endpoint: localhost:4328
+      http:
+        endpoint: localhost:4330
+
+processors:
+  batch:
+
+exporters:
+  otlp/jaeger:
+    endpoint: jaeger-all-in-one:14250
+  logging:
+    loglevel: debug
+
+extensions:
+  health_check:
+
+service:
+  extensions: [health_check]
+  pipelines:
+    traces:
+      receivers: [otlp]
+      processors: [batch]
+      exporters: [logging, otlp/jaeger]
+    metrics:
+      receivers: [otlp]
+      processors: [batch]
+      exporters: [logging, otlp/jaeger]
