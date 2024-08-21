@@ -1,22 +1,32 @@
 receivers:
   otlp:
     protocols:
-      # grpc:
-      #   endpoint: localhost:4328
+      grpc:
+        endpoint: '0.0.0.0:4318'
       http:
-        endpoint: localhost:4330
+        endpoint: '0.0.0.0:4317'
 
 processors:
   batch:
+    send_batch_size: 1024
+    timeout: 5s
 
 exporters:
+  zipkin:
+    endpoint: 'http://zipkin:9411/api/v2/spans'
   otlp/jaeger:
-    endpoint: jaeger-all-in-one:14250
+    endpoint: jaeger-all-in-one:4317
+    tls:
+      insecure: true
+
   logging:
     loglevel: debug
+    # sampling_initial: 1
+    # sampling_thereafter: 1
 
 extensions:
   health_check:
+    endpoint: localhost:13133
 
 service:
   extensions: [health_check]
@@ -24,8 +34,12 @@ service:
     traces:
       receivers: [otlp]
       processors: [batch]
-      exporters: [logging, otlp/jaeger]
+      exporters: [logging, zipkin, otlp/jaeger]
     metrics:
       receivers: [otlp]
       processors: [batch]
-      exporters: [logging, otlp/jaeger]
+      exporters: [logging]
+    logs:
+      receivers: [otlp]
+      processors: [batch]
+      exporters: [logging]

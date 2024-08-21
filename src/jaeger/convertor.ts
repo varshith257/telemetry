@@ -3,12 +3,13 @@ import axios from "axios";
 // Function to send OTEL event to the OTEL Collector
 async function sendToOTelCollector(otelEvent: OTelEvent) {
   try {
-    const url = 'http://localhost:4330/v1/traces';
+    const url = 'http://localhost:4317/v1/traces';
 
     await axios.post(url, otelEvent, {
       headers: {
         'Content-Type': 'application/json',
       },
+      timeout: 5000,
     });
 
     console.log('Event sent successfully');
