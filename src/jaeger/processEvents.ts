@@ -1,6 +1,8 @@
-import fs from 'fs';
-import path from 'path';
-import { convertToOTelTelemetry, InternalTelemetryEvent, OTelEvent } from './convertor';
+import {
+  convertToOTelTelemetry,
+  InternalTelemetryEvent,
+  OTelEvent,
+} from './convertor';
 
 // Example Event to Test Convertor Functionality - BFF received audio from a bot
 const receivedAudioEvent: InternalTelemetryEvent = {
@@ -12,6 +14,7 @@ const receivedAudioEvent: InternalTelemetryEvent = {
   env: 'production',
   eventId: 'event-67890',
   event: 'speechToText',
+  sessionId: '550e8400-e29b-41d4-a716-441234123541',
   subEvent: 'receivedAudio',
   eventData: {
     botId: 'bot-abc123',
@@ -36,6 +39,7 @@ const speechToTextResponseEvent: InternalTelemetryEvent = {
   env: 'production',
   eventId: 'event-67891',
   event: 'speechToTextResponse',
+  sessionId: '750e8400-e29s-51d5-a715-541234123545',
   subEvent: 'textGenerated',
   eventData: {
     botId: 'bot-abc123',
@@ -57,23 +61,10 @@ const speechToTextResponseEvent: InternalTelemetryEvent = {
   },
 };
 
-// // Function to save OTEL events to a JSON file
-// function saveEventToFile(event: OTelEvent, fileName: string) {
-//   try {
-//     const filePath = path.join(__dirname, 'logs', fileName || 'default-log.json');  // Default file name
-//     const eventData = JSON.stringify(event, null, 2);
-    
-//     fs.writeFileSync(filePath, eventData);
-//     console.log('Event saved successfully to', filePath);
-//   } catch (error) {
-//     console.error('Error saving event to file:', error);
-//   }
-// }
-
 (async () => {
   try {
-    const convertedReceivedAudioEvent = await convertToOTelTelemetry(receivedAudioEvent);
-    const convertedSpeechToTextResponseEvent = await convertToOTelTelemetry(speechToTextResponseEvent);
+    await convertToOTelTelemetry(receivedAudioEvent);
+    await convertToOTelTelemetry(speechToTextResponseEvent);
   } catch (error) {
     console.error('Error processing event:', error);
   }
